@@ -190,13 +190,13 @@ module.exports = ({ ENV }) => {
                     //     postcssModuleCompiler()
                     // ]
                 },
+                // {
+                //     test: /\.svg$/,
+                //     loader: "svg-sprite-loader",
+                //     include: [resolve("src/icons")]
+                // },
                 {
-                    test: /\.svg$/,
-                    loader: "svg-sprite-loader",
-                    include: [resolve("src/icons")]
-                },
-                {
-                    test: /\.(png|jpe?g|gif|ico)(\?.*)?$/,
+                    test: /\.(png|jpe?g|gif|ico|svg)(\?.*)?$/,
                     loader: "file-loader",
                     // exclude: [
                     //     resolve('..', "src/icons")
