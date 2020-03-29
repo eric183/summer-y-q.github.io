@@ -15,6 +15,8 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "babel-plugin-component": "^1.1.1",
     "gatsby": "^2.19.45",
     "gatsby-plugin-typography": "^2.4.1",
     "react": "^16.12.0",
