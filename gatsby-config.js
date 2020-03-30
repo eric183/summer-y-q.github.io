@@ -7,7 +7,8 @@ module.exports = {
 
     siteMetadata: {
         title: "你好",
-        about: "A develop & A named artist"
+        about: "A develop & A named artist",
+        author: "EricKuang"
     },
     plugins: [
         `gatsby-transformer-remark`,

@@ -44,7 +44,7 @@ export const query = graphql`
           id
           frontmatter {
             date
-            title
+			title
           }
           timeToRead
           html

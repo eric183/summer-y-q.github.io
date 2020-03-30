@@ -12,7 +12,8 @@ export default ({ children }) => {
         query {
             site {
                 siteMetadata {
-                    title
+                    title,
+                    author
                 }
             }
         }
@@ -20,12 +21,12 @@ export default ({ children }) => {
     return (
         <div style={{ margin: `3rem auto`, maxWidth: 650, padding: `0 1rem` }}>
             <header style={{ marginBottom: `1.5rem` }}>
-                <Link to="/" style={{ textShadow: `none`, backgroundImage: `none` }}>
-                    <h3 style={{ display: `inline` }}>{data.site.siteMetadata.title}</h3>
+                <Link to="/about" style={{ textShadow: `none`, backgroundImage: `none` }}>
+                    <h3 style={{ display: `inline` }}>{data.site.siteMetadata.author}</h3>
                 </Link>
                 <ul style={{ listStyle: `none`, float: `right` }}>
                     <ListLink to="/">Home</ListLink>
-                    <ListLink to="/about/">About</ListLink>
+                    {/* <ListLink to="/about/">About</ListLink> */}
                     <ListLink to="/contact/">Contact</ListLink>
                     <ListLink to="/file-system/">System</ListLink>
                 </ul>
