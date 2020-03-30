@@ -3,7 +3,7 @@ var plugins = [{
       options: {"plugins":[],"pathToConfigModule":"src/utils/typography"},
     },{
       plugin: require('D:/workspace/eric183.github.io/node_modules/gatsby-plugin-manifest/gatsby-ssr'),
-      options: {"plugins":[],"name":"GatsbyJS","short_name":"GatsbyJS","start_url":"/","background_color":"#6b37bf","theme_color":"#6b37bf","display":"standalone"},
+      options: {"plugins":[],"name":"GatsbyJS","short_name":"GatsbyJS","start_url":"/","background_color":"#6b37bf","theme_color":"#6b37bf","display":"standalone","icon":"D:\\workspace\\eric183.github.io/src/images/1585549790670.jpg"},
     }]
 // During bootstrap, we write requires at top of this file which looks like:
 // var plugins = [

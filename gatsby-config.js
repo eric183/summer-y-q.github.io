@@ -35,6 +35,7 @@ module.exports = {
                 theme_color: `#6b37bf`,
 
                 display: `standalone`,
+                icon: `${__dirname}/src/images/1585549790670.jpg`
             }
         }
     ],

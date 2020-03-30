@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{w2l6:function(n,t,u){"use strict";u.r(t);u("q1tI");var w=u("qKvR");t.default=function(){return Object(w.a)("div",null,"你要的页面不见了...")}}}]);
+//# sourceMappingURL=component---src-pages-404-js-fad848f608f4a00464b6.js.map
