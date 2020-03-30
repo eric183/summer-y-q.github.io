@@ -6,6 +6,7 @@ exports.components = {
   "component---src-pages-about-css-modules-js": () => import("./../src/pages/about-css-modules.js" /* webpackChunkName: "component---src-pages-about-css-modules-js" */),
   "component---src-pages-about-js": () => import("./../src/pages/about.js" /* webpackChunkName: "component---src-pages-about-js" */),
   "component---src-pages-contact-js": () => import("./../src/pages/contact.js" /* webpackChunkName: "component---src-pages-contact-js" */),
+  "component---src-pages-file-system-js": () => import("./../src/pages/file-system.js" /* webpackChunkName: "component---src-pages-file-system-js" */),
   "component---src-pages-index-js": () => import("./../src/pages/index.js" /* webpackChunkName: "component---src-pages-index-js" */)
 }
 
