@@ -4,7 +4,7 @@ import { graphql } from 'gatsby'
 
 export default (props) => {
     useEffect(()=> {
-        console.log(props);
+        // console.log(props);
     })
     
     return (
