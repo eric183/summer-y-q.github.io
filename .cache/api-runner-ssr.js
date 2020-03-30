@@ -1,9 +1,12 @@
 var plugins = [{
+      plugin: require('D:/workspace/eric183.github.io/node_modules/gatsby-plugin-transition-link/gatsby-ssr'),
+      options: {"plugins":[]},
+    },{
       plugin: require('D:/workspace/eric183.github.io/node_modules/gatsby-plugin-typography/gatsby-ssr'),
       options: {"plugins":[],"pathToConfigModule":"src/utils/typography"},
     },{
       plugin: require('D:/workspace/eric183.github.io/node_modules/gatsby-plugin-manifest/gatsby-ssr'),
-      options: {"plugins":[],"name":"GatsbyJS","short_name":"GatsbyJS","start_url":"/","background_color":"#6b37bf","theme_color":"#6b37bf","display":"standalone","icon":"D:\\workspace\\eric183.github.io/src/images/1585549790670.jpg"},
+      options: {"plugins":[],"name":"GatsbyJS","short_name":"GatsbyJS","start_url":"/","background_color":"#6b37bf","theme_color":"#6b37bf","display":"standalone","icon":"D:\\workspace\\eric183.github.io/src/images/head.jpg"},
     }]
 // During bootstrap, we write requires at top of this file which looks like:
 // var plugins = [
