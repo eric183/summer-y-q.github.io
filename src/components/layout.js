@@ -4,8 +4,8 @@ import AniLink from "gatsby-plugin-transition-link/AniLink"
 import { css } from '@emotion/core'
 import LayoutCss from './layout.module.css'
 import { globalHistory } from '@reach/router'
-import { Scrollbars } from 'react-custom-scrollbars';
-
+import { Scrollbars } from 'react-custom-scrollbars'
+import WebglCavas from './webgl-cavas';
 
 
 
@@ -39,6 +39,7 @@ export default ({children}) => {
     const { fontFamily } = data.site.siteMetadata;
     return (
         <Scrollbars style={{ width: '100%', height: '100vh' }}>
+
             <div  
                 style={{ 
                     minHeight: `100vh`, 
@@ -69,10 +70,10 @@ export default ({children}) => {
                     </Link> */}
 
                     {
-                        globalHistory.location.pathname != "/projects/" && (
+                        globalHistory.location.pathname != "/projects" && (
                             <ul style={{ listStyle: `none`, float: `right` }}>
                                 <ListLink to="/">Home</ListLink>
-                                <ListLink to="/projects/">Projects</ListLink>
+                                <ListLink to="/projects">Projects</ListLink>
                                 {/* <ListLink to="/contact/">Contact</ListLink> */}
                                 {/* <ListLink to="/file-system/">System</ListLink> */}
                             </ul>
@@ -82,6 +83,9 @@ export default ({children}) => {
                 </header>
                 {children}
             </div>
+
+
+            <WebglCavas />
         </Scrollbars>
     )
 }
