@@ -60,7 +60,7 @@ export default ({children}) => {
                         duration={0.5} 
                         direction={globalHistory.location.pathname == "/" ? "down" : "up"}
                         to={globalHistory.location.pathname == "/" ? "/about" : "/"}>
-                        <h3 style={{ display: `inline`, fontFamily: fontFamily  }}>{data.site.siteMetadata.author}</h3>
+                        <h3 style={{ display: `inline-block`, fontFamily: fontFamily, margin: 0 }}>{data.site.siteMetadata.author}</h3>
                     </AniLink>
 
                     {/* <Link to={globalHistory.location.pathname == "/" ? "/about" : "/"} style={{ textShadow: `none`, backgroundImage: `none` }}>

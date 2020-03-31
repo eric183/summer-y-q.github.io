@@ -1,1 +1,1 @@
-module.exports = require("D:\\workspace\\eric183.github.io\\src\\utils\\typography")
+module.exports = require("/Users/erickuang/Workspace/eric183.github.io/src/utils/typography")
