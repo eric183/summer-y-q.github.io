@@ -9,7 +9,8 @@ module.exports = {
         title: "你好",
         about: "A develop & A named artist",
         author: "EricKuang",
-        fontFamily: "'Spicy Rice', cursive",
+        // fontFamily: "'Spicy Rice', cursive",
+        fontFamily: "'Pacifico', cursive",
     },
     plugins: [
         `gatsby-plugin-transition-link`,
