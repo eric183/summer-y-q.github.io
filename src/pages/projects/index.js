@@ -3,6 +3,6 @@ import Layout from '../../components/layout'
 
 export default props => (
     <Layout>
-        nihao
+        你好
     </Layout>
 )

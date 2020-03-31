@@ -85,7 +85,7 @@ export default ({children}) => {
             </div>
 
 
-            <WebglCavas />
+            {/* <WebglCavas /> */}
         </Scrollbars>
     )
 }

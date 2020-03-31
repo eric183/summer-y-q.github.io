@@ -1,5 +1,5 @@
 /* @import url('https://fonts.googleapis.com/css?family=Spicy+Rice&display=swap'); */
-@import url('https://fonts.loli.net/css?family=Caveat|Pacifico&display=swap');
+@import url('https://fonts.loli.net/css?family=Caveat|Pacifico|ZCOOL+XiaoWei&display=swap');
 html {
     /* background-color: lavenderblush; */
     background-color: #F2F2F2;
@@ -8,6 +8,7 @@ html {
     color: #0D0D0D;
     /* font-family: 'Spicy Rice', cursive; */
     overflow: hidden;
+    font-family: 'ZCOOL XiaoWei', serif;
 }
 
 .tl-edges {
