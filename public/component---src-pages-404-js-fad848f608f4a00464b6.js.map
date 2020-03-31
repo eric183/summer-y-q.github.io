@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack:///./src/pages/404.js"],"names":[],"mappings":"2FAAA,iCAEe,4BACX","file":"component---src-pages-404-js-fad848f608f4a00464b6.js","sourcesContent":["import React from 'react';\r\n\r\nexport default () => (\r\n    <div>\r\n        你要的页面不见了...\r\n    </div>\r\n)"],"sourceRoot":""}

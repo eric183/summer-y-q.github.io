@@ -11,8 +11,11 @@ module.exports = {
         author: "EricKuang"
     },
     plugins: [
+        `gatsby-plugin-transition-link`,
         `gatsby-transformer-remark`,
         `gatsby-plugin-emotion`,
+
+
         {
             resolve: `gatsby-source-filesystem`,
             options: {
@@ -36,7 +39,7 @@ module.exports = {
                 theme_color: `#6b37bf`,
 
                 display: `standalone`,
-                icon: `${__dirname}/src/images/1585549790670.jpg`
+                icon: `${__dirname}/src/images/head.jpg`
             }
         }
     ],

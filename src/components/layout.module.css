@@ -1,0 +1,9 @@
+header a {
+    transition: all 0.2s;
+}
+
+header a:hover {
+    width: 28px !important;
+    height: 28px !important;
+
+}
