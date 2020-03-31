@@ -8,7 +8,8 @@ module.exports = {
     siteMetadata: {
         title: "你好",
         about: "A develop & A named artist",
-        author: "EricKuang"
+        author: "EricKuang",
+        fontFamily: "'Spicy Rice', cursive",
     },
     plugins: [
         `gatsby-plugin-transition-link`,

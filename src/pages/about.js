@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import Layout from '../components/layout'
 import { graphql } from 'gatsby'
+import TransitionLink from "gatsby-plugin-transition-link"
 
 export default (props) => {
     useEffect(()=> {
-        // console.log(props);
+        // console.log(globalHistory);
     })
     
     return (
@@ -32,7 +33,6 @@ export default (props) => {
 // `
 export const query = graphql`
   {
-      
     site {
       siteMetadata {
         about
