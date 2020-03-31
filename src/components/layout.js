@@ -4,8 +4,10 @@ import AniLink from "gatsby-plugin-transition-link/AniLink"
 import { css } from '@emotion/core'
 import LayoutCss from './layout.module.css'
 import { globalHistory } from '@reach/router'
-import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
-import 'simplebar/dist/simplebar.css';
+import { Scrollbars } from 'react-custom-scrollbars';
+
+
+
 
 
 const ListLink = props => (
@@ -36,35 +38,51 @@ export default ({children}) => {
     // console.log(globalHistory.location.pathname);
     const { fontFamily } = data.site.siteMetadata;
     return (
+        <Scrollbars style={{ width: '100%', height: '100vh' }}>
+            <div  
+                style={{ 
+                    minHeight: `100vh`, 
+                    margin: `3rem auto`, 
+                    height: `100%`, 
+                    maxWidth: 650, 
+                    padding: `0 1rem`, 
+                    overflow: 'hidden' 
+                }}>
 
-        <div dataSimplebar 
-            style={{ 
-                minHeight: `100vh`, 
-                margin: `3rem auto`, 
-                height: `100%`, 
-                maxWidth: 650, 
-                padding: `0 1rem`, 
-                overflow: 'hidden' 
-            }}>
 
 
+                    {/* // your content */}
+        
+                <header style={{ marginBottom: `1.5rem`, fontFamily: fontFamily }}>
 
-                {/* // your content */}
-       
-            <header style={{ marginBottom: `1.5rem`, fontFamily: fontFamily }}>
-                <Link to={globalHistory.location.pathname == "/" ? "/about" : "/"} style={{ textShadow: `none`, backgroundImage: `none` }}>
-                    <h3 style={{ display: `inline`, fontFamily: fontFamily  }}>{data.site.siteMetadata.author}</h3>
+                    <AniLink 
+                        swipe 
+                        duration={0.5} 
+                        direction={globalHistory.location.pathname == "/" ? "down" : "up"}
+                        to={globalHistory.location.pathname == "/" ? "/about" : "/"}>
+                        <h3 style={{ display: `inline`, fontFamily: fontFamily  }}>{data.site.siteMetadata.author}</h3>
+                    </AniLink>
 
-                </Link>
-                <ul style={{ listStyle: `none`, float: `right` }}>
-                    <ListLink to="/">Home</ListLink>
-                    <ListLink to="/projects/">Projects</ListLink>
-                    {/* <ListLink to="/contact/">Contact</ListLink> */}
-                    {/* <ListLink to="/file-system/">System</ListLink> */}
-                </ul>
-            </header>
-            {children}
-        </div>
+                    {/* <Link to={globalHistory.location.pathname == "/" ? "/about" : "/"} style={{ textShadow: `none`, backgroundImage: `none` }}>
+                        <h3 style={{ display: `inline`, fontFamily: fontFamily  }}>{data.site.siteMetadata.author}</h3>
+
+                    </Link> */}
+
+                    {
+                        globalHistory.location.pathname != "/projects/" && (
+                            <ul style={{ listStyle: `none`, float: `right` }}>
+                                <ListLink to="/">Home</ListLink>
+                                <ListLink to="/projects/">Projects</ListLink>
+                                {/* <ListLink to="/contact/">Contact</ListLink> */}
+                                {/* <ListLink to="/file-system/">System</ListLink> */}
+                            </ul>
+                        )
+                    }
+                
+                </header>
+                {children}
+            </div>
+        </Scrollbars>
     )
 }
 

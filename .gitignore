@@ -6,3 +6,6 @@ yarn.lock
 src/save
 # Local Netlify folder
 .netlify
+
+.cache
+.netlify

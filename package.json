@@ -28,6 +28,7 @@
     "git": "^0.1.5",
     "gsap": "^3.2.6",
     "react": "^16.12.0",
+    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.12.0",
     "react-typography": "^0.16.19",
     "sharp": "^0.25.2",

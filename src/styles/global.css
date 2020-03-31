@@ -6,7 +6,9 @@ html {
     /* overflow: hidden; */
     color: #0D0D0D;
     /* font-family: 'Spicy Rice', cursive; */
-
+    overflow: hidden;
 }
 
-
+.tl-edges {
+    overflow: hidden;
+}
