@@ -23,7 +23,7 @@ const ListLink = props => (
     </li>
 )
 
-export default ({children}) => {
+export default ({ children }) => {
     const data = useStaticQuery(graphql`
         query {
             site {

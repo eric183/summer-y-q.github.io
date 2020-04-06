@@ -8,14 +8,14 @@ import AniLink from "gatsby-plugin-transition-link/AniLink"
 // import  { bodyFontFamily } from '../utils/typography' 
 // Annie Use Your Telescope
 
-export default ({ data }) => {
+export default ({ data }) => {	
 
-	// console.log(bodyFontFamily);
+	// console.log(data);
 	return (
 
 			<Layout>
 
-				<h4>{data.allMarkdownRemark.totalCount} Posts</h4>
+				<h4>{data.site.siteMetadata.desc}</h4>
 
 					{data.allMarkdownRemark.edges.map(({ node }) => (
 					
@@ -30,7 +30,7 @@ export default ({ data }) => {
 										color: #bbb;
 										`}
 									>
-										— {node.frontmatter.date}
+										{/* — {node.frontmatter.date} */}
 									</span>
 								</h3>
 								<p>{node.excerpt}</p>
@@ -64,6 +64,17 @@ export const query = graphql`
         }
       }
       totalCount
-    }
+	}
+	site {
+	id
+	siteMetadata {
+			title
+			about
+			author
+			fontFamily
+			desc
+		}
+	}
+	
   }
 `

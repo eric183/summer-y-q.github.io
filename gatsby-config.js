@@ -11,6 +11,7 @@ module.exports = {
         author: "EricKuang",
         // fontFamily: "'Spicy Rice', cursive",
         fontFamily: "'Pacifico', cursive",
+        desc: "WAHT YOU WANT, WHAT YOU NEED"
     },
     plugins: [
         `gatsby-plugin-transition-link`,
