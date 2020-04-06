@@ -40,47 +40,51 @@ export default ({ children }) => {
     return (
         <Scrollbars style={{ width: '100%', height: '100vh' }}>
 
-            <div  
-                style={{ 
-                    minHeight: `100vh`, 
-                    margin: `3rem auto`, 
-                    height: `100%`, 
-                    maxWidth: 650, 
-                    padding: `0 1rem`, 
-                    overflow: 'hidden' 
+            <div
+                style={{
+                    minHeight: `100vh`,
+                    margin: `3rem auto`,
+                    height: `100%`,
+                    maxWidth: 650,
+                    padding: `0 1rem`,
+                    overflow: 'hidden'
                 }}>
 
 
 
-                    {/* // your content */}
-        
-                <header style={{ marginBottom: `1.5rem`, fontFamily: fontFamily }}>
+                {/* // your content */}
+                {
+                    globalHistory.location.pathname != "/projects" &&
+                    <header style={{ marginBottom: `1.5rem`, fontFamily: fontFamily }}>
 
-                    <AniLink 
-                        swipe 
-                        duration={0.5} 
-                        direction={globalHistory.location.pathname == "/" ? "down" : "up"}
-                        to={globalHistory.location.pathname == "/" ? "/about" : "/"}>
-                        <h3 style={{ display: `inline-block`, fontFamily: fontFamily, margin: 0, color: '#000' }}>{data.site.siteMetadata.author}</h3>
-                    </AniLink>
 
-                    {/* <Link to={globalHistory.location.pathname == "/" ? "/about" : "/"} style={{ textShadow: `none`, backgroundImage: `none` }}>
+
+                        <AniLink
+                            swipe
+                            duration={0.5}
+                            direction={globalHistory.location.pathname == "/" ? "down" : "up"}
+                            to={globalHistory.location.pathname == "/" ? "/about" : "/"}>
+                            <h3 style={{ display: `inline-block`, fontFamily: fontFamily, margin: 0, color: '#000' }}>{data.site.siteMetadata.author}</h3>
+                        </AniLink>
+
+                        {/* <Link to={globalHistory.location.pathname == "/" ? "/about" : "/"} style={{ textShadow: `none`, backgroundImage: `none` }}>
                         <h3 style={{ display: `inline`, fontFamily: fontFamily  }}>{data.site.siteMetadata.author}</h3>
 
                     </Link> */}
 
-                    {
-                        globalHistory.location.pathname != "/projects" && (
-                            <ul style={{ listStyle: `none`, float: `right`, fontFamily: `'Caveat', cursive`, fontSize: '15px' }}>
-                                <ListLink to="/">Home</ListLink>
-                                <ListLink to="/projects">Projects</ListLink>
-                                {/* <ListLink to="/contact/">Contact</ListLink> */}
-                                {/* <ListLink to="/file-system/">System</ListLink> */}
-                            </ul>
-                        )
-                    }
-                
-                </header>
+                        {
+                            globalHistory.location.pathname != "/projects" && (
+                                <ul style={{ listStyle: `none`, float: `right`, fontFamily: `'Caveat', cursive`, fontSize: '15px' }}>
+                                    <ListLink to="/">Home</ListLink>
+                                    <ListLink to="/projects">Projects</ListLink>
+                                    {/* <ListLink to="/contact/">Contact</ListLink> */}
+                                    {/* <ListLink to="/file-system/">System</ListLink> */}
+                                </ul>
+                            )
+                        }
+
+                    </header>
+                }
                 {children}
             </div>
 
