@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Fragment } from "react"
 import { Link } from 'gatsby'
 import Layout from '../components/layout'
 import { css } from '@emotion/core'
@@ -8,39 +8,45 @@ import AniLink from "gatsby-plugin-transition-link/AniLink"
 // import  { bodyFontFamily } from '../utils/typography' 
 // Annie Use Your Telescope
 
-export default ({ data }) => {	
+export default ({ data }) => {
 
 	// console.log(data);
 	return (
+		<Layout>
+			{/* <BlogContent data={data}></BlogContent> */}
+		</Layout>
+	)
+}
 
-			<Layout>
+const BlogContent = ({ data }) => {
 
-				<h4>{data.site.siteMetadata.desc}</h4>
+	return (
+		<Fragment>
+			<h4>{data.site.siteMetadata.desc}</h4>
 
-					{data.allMarkdownRemark.edges.map(({ node }) => (
-					
-						<AniLink key={node.id} swipe direction="down" duration={0.5} to={node.fields.slug}>
-						{/* Go to Page 4 */}
+			{data.allMarkdownRemark.edges.map(({ node }) => (
 
-							<div>
-								<h3>
-									{node.frontmatter.title}{" "}
-									<span
-										css={css`
-										color: #bbb;
-										`}
-									>
-										{/* — {node.frontmatter.date} */}
-									</span>
-								</h3>
-								<p>{node.excerpt}</p>
-							</div>
-						</AniLink>
+				<AniLink key={node.id} swipe direction="down" duration={0.5} to={node.fields.slug}>
+					{/* Go to Page 4 */}
 
-					))}
-				
-			</Layout>
+					<article>
+						<h3>
+							{node.frontmatter.title}{" "}
+							<span
+								css={css`
+					color: #bbb;
+					`}
+							>
+								{/* — {node.frontmatter.date} */}
+							</span>
+						</h3>
+						<p>{node.excerpt}</p>
+					</article>
+				</AniLink>
 
+			))}
+
+		</Fragment>
 	)
 }
 
