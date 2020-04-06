@@ -26,12 +26,12 @@ export default props => {
     
 
     return (
-        <TransitionState>
+        // <TransitionState>
             
-            {({ mount, transitionStatus }) => {
-            console.log(transitionStatus);
-            // console.log(mount);
-            return (
+        //     {({ mount, transitionStatus }) => {
+        //     console.log(transitionStatus);
+        //     // console.log(mount);
+        //     return (
                 <Layout>
                     <Box
                         className="box"
@@ -45,10 +45,10 @@ export default props => {
                 
                     </Box>
                 </Layout>
-            )
-            }}
+        //     )
+        //     }}
             
-        </TransitionState>
+        // </TransitionState>
     )
    
 }
