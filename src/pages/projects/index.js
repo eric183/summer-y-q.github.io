@@ -92,7 +92,7 @@ const TitleAnimate = posed.h3({
         // left: 0
     },
     visible: { 
-        color: "#fff",
+        color: "#000",
         left: "100px",
         top: "-30px",
         scale: 0.6

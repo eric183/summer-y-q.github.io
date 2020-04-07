@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 import { css } from '@emotion/core'
