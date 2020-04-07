@@ -32,13 +32,12 @@ const BlogContent = ({ data }) => {
 					<article>
 						<h3>
 							{node.frontmatter.title}{" "}
-							<span
+							{/* <span
 								css={css`
-					color: #bbb;
-					`}
-							>
-								{/* — {node.frontmatter.date} */}
-							</span>
+									color: #bbb;
+							`}>
+								— {node.frontmatter.date}
+							</span> */}
 						</h3>
 						<p>{node.excerpt}</p>
 					</article>

@@ -5,6 +5,7 @@ import { globalHistory } from '@reach/router'
 import { TransitionState } from "gatsby-plugin-transition-link";
 import posed from 'react-pose';
 import AniLink from "gatsby-plugin-transition-link/AniLink"
+import { gsap } from 'gsap';
 
 export default ({ data }) => {
     const [hasMount, setMount] = useState(false)
@@ -13,12 +14,18 @@ export default ({ data }) => {
         setTimeout(()=> {
             setMount(true);
         }, 0)
-        console.log('调用一次')
+        console.log('调用一次');
+
+        // gsap.to(document.body, {
+        //     backgroundColor: "red",
+        //     duration: 2
+
+        // });
     }, [])
 
 
     useEffect(()=> {
-        console.log(hasMount)
+        // console.log(hasMount)
 
 
         return ()=> {
@@ -36,23 +43,29 @@ export default ({ data }) => {
         //     // console.log(mount);
         //     return (
                 <Layout>
-                    <TitleAnimate
-                        pose={
-                            hasMount
-                                ? 'visible'
-                                : 'hidden'
-                            }
-                    >
+                   
+{/* 
+                    <AniLink 
 
-                        <AniLink 
+                        swipe 
+                        duration={0.5} 
+                        direction={globalHistory.location.pathname === "/" ? "down" : "up"}
+                        to={globalHistory.location.pathname === "/" ? "/about" : "/"}>
+                            <TitleAnimate
+                                style={{ position: 'fixed', display: `inline-block`, fontFamily: fontFamily }}
+                                withParent={false}
+                                pose={
+                                    hasMount
+                                        ? 'visible'
+                                        : 'hidden'
+                                    }
+                            >
+                                
+                                EricKuang
 
-                            swipe 
-                            duration={0.5} 
-                            direction={globalHistory.location.pathname === "/" ? "down" : "up"}
-                            to={globalHistory.location.pathname === "/" ? "/about" : "/"}>
-                            <h3 style={{ display: `inline-block`, fontFamily: fontFamily, margin: 0, color: '#000' }}>EricKuang</h3>
-                        </AniLink>
-                    </TitleAnimate>
+                            </TitleAnimate>
+                    </AniLink>
+                     */}
                     <Box
                         className="box"
                         pose={
@@ -61,6 +74,7 @@ export default ({ data }) => {
                                 : 'hidden'
                             }
                     >
+
                         你好
                 
                     </Box>
@@ -72,13 +86,18 @@ export default ({ data }) => {
     )
    
 }
-const TitleAnimate = posed.div({
-    hidden: {
-        x: 0,
+const TitleAnimate = posed.h3({
+    hidden: { 
+        color: "#000",
+        // left: 0
     },
-    visible: {
-        x: -90
-    }
+    visible: { 
+        color: "#fff",
+        left: "100px",
+        top: "-30px",
+        scale: 0.6
+    },
+    
 })
 
 const Box = posed.div({
