@@ -35,8 +35,7 @@ const BlogContent = ({ data }) => {
 							{node.frontmatter.title}{" "}
 							<span
 								css={css`
-					color: #bbb;
-					`}
+								color: #bbb;`}
 							>
 								{/* — {node.frontmatter.date} */}
 							</span>

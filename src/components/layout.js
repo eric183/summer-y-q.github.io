@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 import { css } from '@emotion/core'
 import LayoutCss from './layout.module.css'
 import { globalHistory } from '@reach/router'
-import { Scrollbars } from 'react-custom-scrollbars'
+// import { Scrollbars } from 'react-custom-scrollbars'
 import WebglCavas from './webgl-cavas';
 import SplitText from 'react-pose-text';
 import posed from "react-pose"
 import { TransitionState } from "gatsby-plugin-transition-link";
+
+import { useLax, useLaxElement } from 'use-lax';
+import lax from 'lax.js'
+import Scrollbar from 'smooth-scrollbar'
 
 
 
@@ -27,6 +31,7 @@ const ListLink = props => (
 )
 
 export default ({ children }) => {
+
     const data = useStaticQuery(graphql`
         query {
             site {
@@ -38,34 +43,65 @@ export default ({ children }) => {
             }
         }
     `)
+    const [hasLoad, setLoad] = useState(false);
+    const bindScroll = (willLeave) => {
+        lax.setup()
+        // document.addEventListener('scroll', function (x) {
+        //     // console.log(document.body.firstChild.scrollTop);
+        //     lax.update(document.body.scrollTop)
+        // }, false)
 
-    const [hasLoad, setLoad] = useState(false)
+        lax.update(document.body.scrollTop);
+
+
+        let scrollbar = Scrollbar.init(document.body);
+        // console.log(scrollbar.scrollTop); // 456
+
+        scrollbar.addListener((s)=> {
+            // console.log(console.log(s.offset.y))
+            if(s.offset.y == 'undefined') return;
+            lax.update(s.offset.y);
+        })
+
+        lax.update(scrollbar.scrollTop);
+
+        // if(willLeave) scrollbar.destroy();
+        
+    }
+
     useEffect(() => {
+        // console.log(globalHistory);
+      
+        // debugger;
+        bindScroll();
         setLoad(true);
+        // return ()=> { bindScroll(true) }
     }, [])
+
+
+
     // console.log(globalHistory.location.pathname);
     const { fontFamily } = data.site.siteMetadata;
     return (
-        <Scrollbars style={{ width: '100%', height: '100vh' }}>
+        // <Scrollbars style={{ width: '100%', height: '100vh' }}>
 
-            <DivContent
-                pose={
-                    (globalHistory.location.pathname == "/projects") && hasLoad ? 'transin' : 'transout'
-                }
-                className="layout-content"
-                css={css`
-                min-height: 100vh;
+        <div
+            pose={
+                (globalHistory.location.pathname == "/projects") && hasLoad ? 'transin' : 'transout'
+            }
+            className="layout-content"
+            css={css`
                 width: 100%;
-                overflow: hidden;
+                // overflow: hidden;
             `}>
 
 
 
-                {/* // your content */}
-                {/* {
+            {/* // your content */}
+            {/* {
                 globalHistory.location.pathname != "/projects" && */}
-                <header
-                    css={css`
+            <header
+                css={css`
                         margin: 1.5rem; 
                         font-family: ${fontFamily};
                         align-items: center;
@@ -74,55 +110,56 @@ export default ({ children }) => {
 
 
 
-                    <AniLink
-                        swipe
-                        duration={0.5}
-                        direction={globalHistory.location.pathname == "/" ? "down" : "up"}
-                        to={globalHistory.location.pathname == "/" ? "/about" : "/"}>
+                <AniLink
+                    swipe
+                    duration={0.5}
+                    direction={globalHistory.location.pathname == "/" ? "down" : "up"}
+                    to={globalHistory.location.pathname == "/" ? "/about" : "/"}>
 
 
 
-                        <h3
-                            css={css`
+                    <h3
+                        css={css`
                                 display: inline-block; 
                                 font-family: ${fontFamily}; 
                                 margin: 0; 
                                 color: ${ globalHistory.location.pathname == "/projects" ? '#000' : '#000'};
                             `}>
-                            <SplitText initialPose="exit" pose="enter" charPoses={globalHistory.location.pathname == "/projects" ? charPoses : false}>
-                                {data.site.siteMetadata.author}
-                            </SplitText>
-                        </h3>
-                    </AniLink>
+                        <SplitText initialPose="exit" pose="enter" charPoses={globalHistory.location.pathname == "/projects" ? charPoses : false}>
+                            {data.site.siteMetadata.author}
+                        </SplitText>
+                    </h3>
+                </AniLink>
 
-                    {/* <Link to={globalHistory.location.pathname == "/" ? "/about" : "/"} style={{ textShadow: `none`, backgroundImage: `none` }}>
+                {/* <Link to={globalHistory.location.pathname == "/" ? "/about" : "/"} style={{ textShadow: `none`, backgroundImage: `none` }}>
                     <h3 style={{ display: `inline`, fontFamily: fontFamily  }}>{data.site.siteMetadata.author}</h3>
 
                 </Link> */}
 
 
-                    <ul
-                        css={css`
+                <ul
+                    css={css`
                             marginBottom: 0;
                             listStyle: none;
                             float: right;
                             fontFamily: 'Caveat', cursive;
                             fontSize: 15px;
                         `}>
-                        <ListLink to="/">Home</ListLink>
-                        <ListLink to="/projects">Projects</ListLink>
-                        {/* <ListLink to="/contact/">Contact</ListLink> */}
-                        {/* <ListLink to="/file-system/">System</ListLink> */}
-                    </ul>
+                    <ListLink to="/">Home</ListLink>
+                    <ListLink to="/projects">Projects</ListLink>
+                    {/* <ListLink to="/contact/">Contact</ListLink> */}
+                    {/* <ListLink to="/file-system/">System</ListLink> */}
+                </ul>
 
 
-                </header>
+            </header>
 
-                {children}
-            </DivContent>
-
+            {children}
             {/* <WebglCavas /> */}
-        </Scrollbars>
+        </div>
+
+
+
     )
 }
 
