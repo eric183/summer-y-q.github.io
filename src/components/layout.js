@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 import { css } from '@emotion/core'
@@ -39,8 +39,9 @@ export default ({ children }) => {
         }
     `)
 
+    const [hasLoad, setLoad] = useState(false)
     useEffect(() => {
-        
+        setLoad(true);
     }, [])
     // console.log(globalHistory.location.pathname);
     const { fontFamily } = data.site.siteMetadata;
@@ -49,7 +50,7 @@ export default ({ children }) => {
 
             <DivContent
                 pose={
-                    globalHistory.location.pathname == "/projects" ? 'transin' : 'transout'
+                    (globalHistory.location.pathname == "/projects") && hasLoad ? 'transin' : 'transout'
                 }
                 className="layout-content"
                 css={css`
@@ -86,7 +87,7 @@ export default ({ children }) => {
                                 display: inline-block; 
                                 font-family: ${fontFamily}; 
                                 margin: 0; 
-                                color: #000;
+                                color: ${ globalHistory.location.pathname == "/projects" ? '#000' : '#000'};
                             `}>
                             <SplitText initialPose="exit" pose="enter" charPoses={globalHistory.location.pathname == "/projects" ? charPoses : false}>
                                 {data.site.siteMetadata.author}
@@ -132,21 +133,30 @@ const charPoses = {
         opacity: 1,
         y: 0,
         delay: ({ charIndex }) => charIndex * 30,
-        
+
     }
 };
 
 const DivContent = posed.div({
     // background: ${ globalHistory.location.pathname == "/projects" ? 'red' : '#fff' };
 
-    transin: { 
-        backgroundColor: 'red', 
+    transin: {
+        y: 0,
+        opacity: 1,
         delay: 300,
+        transition: {
+            y: { type: 'spring', stiffness: 1000, damping: 15 },
+            default: { duration: 300 }
+        }
         // beforeChildren: true,
         // staggerChildren: 5000,
 
     },
-    transout: { backgroundColor: '#fff' }
+    transout: {
+        y: 50,
+        opacity: 0,
+        transition: { duration: 150 }
+    }
 })
 
 // export const query = useStaticQuery(graphql`
