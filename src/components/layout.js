@@ -10,6 +10,9 @@ import SplitText from 'react-pose-text';
 import posed from "react-pose"
 import { TransitionState } from "gatsby-plugin-transition-link";
 
+import { useLax, useLaxElement } from 'use-lax';
+import lax from 'lax.js'
+
 
 
 
@@ -27,6 +30,7 @@ const ListLink = props => (
 )
 
 export default ({ children }) => {
+
     const data = useStaticQuery(graphql`
         query {
             site {
@@ -38,14 +42,29 @@ export default ({ children }) => {
             }
         }
     `)
+    
+	const bindScroll = () => {
+		lax.setup()
 
-    useEffect(() => {
-        
+		document.addEventListener('scroll', function(x) {
+		  lax.update(window.scrollY)
+		}, false)
+	
+		lax.update(window.scrollY);
+
+    }
+    
+	useEffect(() => {
+		// console.log(globalHistory);
+		bindScroll();
     }, [])
+    
+
+
     // console.log(globalHistory.location.pathname);
     const { fontFamily } = data.site.siteMetadata;
     return (
-        <Scrollbars style={{ width: '100%', height: '100vh' }}>
+        // <Scrollbars style={{ width: '100%', height: '100vh' }}>
 
             <DivContent
                 pose={
@@ -53,7 +72,7 @@ export default ({ children }) => {
                 }
                 className="layout-content"
                 css={css`
-                min-height: 100vh;
+                height: 100vh;
                 width: 100%;
                 overflow: hidden;
             `}>
@@ -118,10 +137,11 @@ export default ({ children }) => {
                 </header>
 
                 {children}
+                            {/* <WebglCavas /> */}
             </DivContent>
 
-            {/* <WebglCavas /> */}
-        </Scrollbars>
+
+
     )
 }
 
