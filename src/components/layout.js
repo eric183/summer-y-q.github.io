@@ -72,7 +72,6 @@ export default ({ children }) => {
                 }
                 className="layout-content"
                 css={css`
-                height: 100vh;
                 width: 100%;
                 overflow: hidden;
             `}>
