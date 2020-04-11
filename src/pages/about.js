@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import Layout from '../components/layout'
+import AniBlock from '../components/ani-block'
+
 import { graphql } from 'gatsby'
 import TransitionLink from "gatsby-plugin-transition-link"
 import { css } from "@emotion/core"
@@ -11,8 +13,8 @@ export default (props) => {
 		<Layout>
 			<div className="scroll-content" css={css`height: 100%; width: 100%;`}>
 				<h1 className="lax" data-lax-preset="fadeInOut" style={{ margin: 0 }}>About me</h1>
-				<p className="lax" data-lax-opacity="0 1, vh 0">Look at me goooooo!</p>
-
+				<p className="lax" data-lax-translate-x="0 0, vh 1200">Look at me goooooo!</p>
+				<AniBlock />
 				<p>{props.data.site.siteMetadata.about}</p>
 				<h1>About me</h1>
 				<p>{props.data.site.siteMetadata.about}</p>
@@ -30,14 +32,7 @@ export default (props) => {
 				<p className="lax" data-lax-preset="spin fadeInOut">{props.data.site.siteMetadata.about}</p>
 				<h1>About me</h1>
 				<p>{props.data.site.siteMetadata.about}</p>
-				<h1>About me</h1>
-				<p>{props.data.site.siteMetadata.about}</p> <h1>About me</h1>
-				<p>{props.data.site.siteMetadata.about}</p> <h1>About me</h1>
-				<p>{props.data.site.siteMetadata.about}</p> <h1>About me</h1>
-				<p>{props.data.site.siteMetadata.about}</p> <h1>About me</h1>
-				<p>{props.data.site.siteMetadata.about}</p> <h1>About me</h1>
-				<p>{props.data.site.siteMetadata.about}</p> <h1>About me</h1>
-				<p>{props.data.site.siteMetadata.about}</p>
+		
 			</div>
 
 		</Layout>
