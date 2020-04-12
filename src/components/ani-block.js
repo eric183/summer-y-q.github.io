@@ -1,7 +1,15 @@
 import React from 'react'
 
-export default () => {
+export default (props) => {
+
+    // var aniVal = props.data.aniVal;
+
+    // var data = "data"
+    // console.log(aniVal);
+
     return (
-        <div>你好呀</div>
+        <div {...props} >
+            {props.children}
+        </div>
     )
 }

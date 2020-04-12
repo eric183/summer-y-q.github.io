@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../../components/layout'
+import AniBlock from '../../components/ani-block'
 
 import { globalHistory } from '@reach/router'
 import { TransitionState } from "gatsby-plugin-transition-link";
@@ -36,53 +37,68 @@ export default ({ data }) => {
     const { fontFamily } = data.site.siteMetadata;
 
     return (
-        // <TransitionState>
+    
+        <Layout>
+            {/* @ { defaultVal, startScrollVal, } */}
+            <AniBlock className="lax" data-lax-translate-x="500 120, vh 20">
+                <h3>了不起哦</h3>
+                <p>我是正文</p>
+            </AniBlock>
             
-        //     {({ mount, transitionStatus }) => {
-        //     console.log(transitionStatus);
-        //     // console.log(mount);
-        //     return (
-                <Layout>
-                   
-{/* 
-                    <AniLink 
-
-                        swipe 
-                        duration={0.5} 
-                        direction={globalHistory.location.pathname === "/" ? "down" : "up"}
-                        to={globalHistory.location.pathname === "/" ? "/about" : "/"}>
-                            <TitleAnimate
-                                style={{ position: 'fixed', display: `inline-block`, fontFamily: fontFamily }}
-                                withParent={false}
-                                pose={
-                                    hasMount
-                                        ? 'visible'
-                                        : 'hidden'
-                                    }
-                            >
-                                
-                                EricKuang
-
-                            </TitleAnimate>
-                    </AniLink>
-                     */}
-                    <Box
-                        className="box"
-                        pose={
-                            hasMount
-                                ? 'visible'
-                                : 'hidden'
-                            }
-                    >
-
-                        {/* 你好 */}
-                
-                    </Box>
-                </Layout>
-        //     )
-        //     }}
+            <AniBlock className="lax" data-lax-translate-x="0 0, vh 1200">
+                <h3>了不起哦</h3>
+                <p>我是正文</p>
+            </AniBlock>
             
-        // </TransitionState>
+            
+            <AniBlock className="lax" data-lax-translate-x="0 0, vh 1200">
+                <h3>了不起哦</h3>
+                <p>我是正文</p>
+            </AniBlock>
+            
+            <AniBlock className="lax" data-lax-translate-x="0 0, vh 1200">
+                <h3>了不起哦</h3>
+                <p>我是正文</p>
+            </AniBlock>
+            
+            <AniBlock className="lax" data-lax-translate-x="500 200, vh 500">
+                <h3>了不起哦</h3>
+                <p>我是正文</p>
+            </AniBlock>
+            
+            <AniBlock className="lax" data-lax-translate-x="500 200, vh 1200">
+                <h3>了不起哦</h3>
+                <p>我是正文</p>
+            </AniBlock>
+            
+            <AniBlock className="lax" data-lax-translate-x="0 0, vh 1200">
+                <h3>了不起哦</h3>
+                <p>我是正文</p>
+            </AniBlock>
+            
+            <AniBlock className="lax" data-lax-translate-x="0 0, vh 1200">
+                <h3>了不起哦</h3>
+                <p>我是正文</p>
+            </AniBlock>
+            
+            <AniBlock className="lax" data-lax-translate-x="0 0, vh 1200">
+                <h3>了不起哦</h3>
+                <p>我是正文</p>
+            </AniBlock>
+            
+            <AniBlock className="lax" data-lax-translate-x="0 0, vh 1200">
+                <h3>了不起哦</h3>
+                <p>我是正文</p>
+            </AniBlock>
+            
+            <AniBlock className="lax" data-lax-translate-x="0 0, vh 1200">
+                <h3>了不起哦</h3>
+                <p>我是正文</p>
+            </AniBlock>
+            
+            
+        </Layout>
+    
     )
    
 }

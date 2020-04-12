@@ -61,12 +61,13 @@ export default ({ children }) => {
             // console.log(console.log(s.offset.y))
             if(s.offset.y == 'undefined') return;
             lax.update(s.offset.y);
+            console.log(s.offset.y);
+
         })
 
         lax.update(scrollbar.scrollTop);
 
         // if(willLeave) scrollbar.destroy();
-        
     }
 
     useEffect(() => {
