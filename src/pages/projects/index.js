@@ -40,62 +40,60 @@ export default ({ data }) => {
     
         <Layout>
             {/* @ { defaultVal, startScrollVal, } */}
-            <AniBlock className="lax" data-lax-translate-x="500 120, vh 20">
+            {/* <AniBlock className="lax" data-lax-bg-pos-x="0 -500, 100 100"> */}
+            <AniBlock className="lax" data-lax-opacity="0 1, elh 0">
+                深业泰然大厦数字展厅
+            </AniBlock>
+            
+            <AniBlock className="lax" data-lax-preset="fadeInOut">
                 <h3>了不起哦</h3>
                 <p>我是正文</p>
             </AniBlock>
             
-            <AniBlock className="lax" data-lax-translate-x="0 0, vh 1200">
+            <AniBlock className="lax" data-lax-preset="fadeInOut">
+                <h3>了不起哦</h3>
+                <p>我是正文</p>
+            </AniBlock>
+            
+            <AniBlock className="lax" data-lax-preset="fadeInOut">
+                <h3>了不起哦</h3>
+                <p>我是正文</p>
+            </AniBlock>
+            
+            <AniBlock className="lax" data-lax-preset="fadeInOut">
+                <h3  data-lax-translate-x="0, 0, vh, 200">了不起哦ooooooo</h3>
+                <p>我是正文</p>
+            </AniBlock>
+            
+            <AniBlock className="lax" data-lax-preset="fadeInOut">
+                <h3>了不起哦</h3>
+                <p>我是正文</p>
+            </AniBlock>
+            
+            <AniBlock className="lax" data-lax-opacity="0 1, 800 0" data-lax-translate-x="0 -300, 800 500">
+                <h3>了不起哦噢噢噢噢噢噢噢噢</h3>
+                <p>我是正文</p>
+            </AniBlock>
+            
+            <AniBlock className="lax" data-lax-preset="fadeInOut">
+                <h3>了不起哦</h3>
+                <p>我是正文</p>
+            </AniBlock>
+            <AniBlock className="lax" data-lax-preset="linger fadeInOut">
+                <h3>了不起哦</h3>
+                <p>我是正文</p>
+            </AniBlock>
+            <AniBlock className="lax" data-lax-preset="fadeInOut">
+                <h3>了不起哦</h3>
+                <p>我是正文</p>
+            </AniBlock>
+            <AniBlock className="lax" data-lax-preset="linger fadeInOut">
                 <h3>了不起哦</h3>
                 <p>我是正文</p>
             </AniBlock>
             
             
-            <AniBlock className="lax" data-lax-translate-x="0 0, vh 1200">
-                <h3>了不起哦</h3>
-                <p>我是正文</p>
-            </AniBlock>
-            
-            <AniBlock className="lax" data-lax-translate-x="0 0, vh 1200">
-                <h3>了不起哦</h3>
-                <p>我是正文</p>
-            </AniBlock>
-            
-            <AniBlock className="lax" data-lax-translate-x="500 200, vh 500">
-                <h3>了不起哦</h3>
-                <p>我是正文</p>
-            </AniBlock>
-            
-            <AniBlock className="lax" data-lax-translate-x="500 200, vh 1200">
-                <h3>了不起哦</h3>
-                <p>我是正文</p>
-            </AniBlock>
-            
-            <AniBlock className="lax" data-lax-translate-x="0 0, vh 1200">
-                <h3>了不起哦</h3>
-                <p>我是正文</p>
-            </AniBlock>
-            
-            <AniBlock className="lax" data-lax-translate-x="0 0, vh 1200">
-                <h3>了不起哦</h3>
-                <p>我是正文</p>
-            </AniBlock>
-            
-            <AniBlock className="lax" data-lax-translate-x="0 0, vh 1200">
-                <h3>了不起哦</h3>
-                <p>我是正文</p>
-            </AniBlock>
-            
-            <AniBlock className="lax" data-lax-translate-x="0 0, vh 1200">
-                <h3>了不起哦</h3>
-                <p>我是正文</p>
-            </AniBlock>
-            
-            <AniBlock className="lax" data-lax-translate-x="0 0, vh 1200">
-                <h3>了不起哦</h3>
-                <p>我是正文</p>
-            </AniBlock>
-            
+          
             
         </Layout>
     
