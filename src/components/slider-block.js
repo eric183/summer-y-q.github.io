@@ -6,6 +6,7 @@ import './slider-block.module.css';
 
 export default (props) => {
     const CalRef = useRef(null);
+    debugger;
     useEffect(()=> {
         var mySwiper = new Swiper(CalRef.current, { 
             effect: 'flip',
@@ -24,6 +25,10 @@ export default (props) => {
             //     disableOnInteraction: false,
             // },
         });
+        return () => {
+            // debugger;
+            mySwiper.destroy();
+        }
     }, [])
 
     return (

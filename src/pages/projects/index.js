@@ -38,7 +38,8 @@ export default ({ data }) => {
 
 
         return ()=> {
-            console.log('取消调用')
+            // console.log('取消调用')
+            // debugger;
         }
     }, [hasMount])
     
