@@ -142,7 +142,13 @@ export default ({ data }) => {
                             深业泰然智慧楼宇展厅 2.0(BPR)
                         </h3>
                 </AniBlock>
-                <AniBlock className="lax center-block" css={css`width: 50%; height: 100%`} >
+                <AniBlock 
+                    className="lax center-block" 
+                    css={css`
+                        width: 50%; 
+                        height: 100%;
+                            
+                    `}>
                     <SliderBlock 
                         height="80%"
                         imgList={[
@@ -155,10 +161,13 @@ export default ({ data }) => {
                 </AniBlock>
             </section>
             <section css={css`height: 500px;`}>
-                <AniBlock className="lax center-block" css={css`width: 50%; height: 100%`} >
+                <AniBlock className="lax center-block" css={css`width: 50%; height: 100%;`} >
                     <SliderBlock 
                         height="80%"
                         imgList={[
+                            '/scene/wx_1.png',
+                            '/scene/wx_2.jpg',
+                            '/scene/wx_3.png',
                             '/scene/admin_ipad_1.png',
                             '/scene/admin_ipad_2.png',
                             '/scene/admin_ipad_3.png',
@@ -173,85 +182,57 @@ export default ({ data }) => {
                     css={css`
                         width: 50%;
                         height: 100%;                  
+                        flex-flow: column;   
+                        justify-content: center;       
                     `} >
 
                         <h3 css={css`color: #fff; width: 100%; text-align: center;`}>
                             运营楼管平台iPad移动端                        
                         </h3>
+                        <h3 css={css`color: #fff; width: 100%; text-align: center;`}>
+                            楼管门禁小程序
+                        </h3>
                 </AniBlock>
-                
             </section>
-          
-
-            {/* <section css={css`height: 500px; background-color: #000;`}>
+            <section css={css`height: 500px;`}>
                 <AniBlock 
                     className="lax center-block" 
-                    data-lax-opacity="0 1, elh 0"
+                    // data-lax-opacity="0 1, elh 0"
                     css={css`
                         width: 50%;
                         height: 100%;                  
+                        flex-flow: column;   
+                        justify-content: center;       
                     `} >
 
                         <h3 css={css`color: #fff; width: 100%; text-align: center;`}>
-                            深业泰然大厦数字展厅
+                            <a href="http://www.wow-toboom.com/"  target="_blank">WOW to Boom</a>                        
                         </h3>
+                       
                 </AniBlock>
-                <AniBlock className="lax center-block" css={css`width: 50%; height: 100%`} >
+                <AniBlock className="lax center-block" css={css`width: 50%; height: 100%;`}>
                     <SliderBlock 
                         height="80%"
                         imgList={[
-                            'scene/IMG_9656.JPG',
-                            'scene/IMG_9354.JPG'
+                            '/scene/toboom (6).png',
+                            '/scene/toboom (1).png',
+                            '/scene/toboom (2).png',
+                            '/scene/toboom (3).png',
+                            '/scene/toboom (4).png',
+                            '/scene/toboom (5).png',
+                            '/scene/toboom (7).png',
+                            '/scene/toboom (8).png',
+                            // '/scene/pbr2.0_1.png',
+                            // '/scene/pbr2.0_2.png',
                             // 'pbr2.0_1.png'
                         ]}/>
                 </AniBlock>
-            </section> */}
-           
-            
-           
-{/*             
-            <AniBlock className="lax" data-lax-preset="fadeInOut">
-                <h3>了不起哦</h3>
-                <p>我是正文</p>
-            </AniBlock>
-            
-            <AniBlock className="lax" data-lax-preset="fadeInOut">
-                <h3>了不起哦</h3>
-                <p>我是正文</p>
-            </AniBlock>
-            
-            <AniBlock className="lax" data-lax-preset="fadeInOut">
-                <h3  data-lax-translate-x="0, 0, vh, 200">了不起哦ooooooo</h3>
-                <p>我是正文</p>
-            </AniBlock>
-            
-            <AniBlock className="lax" data-lax-preset="fadeInOut">
-                <h3>了不起哦</h3>
-                <p>我是正文</p>
-            </AniBlock>
-            
-            <AniBlock className="lax" data-lax-opacity="0 1, 800 0" data-lax-translate-x="0 -300, 800 500">
-                <h3>了不起哦噢噢噢噢噢噢噢噢</h3>
-                <p>我是正文</p>
-            </AniBlock>
-            
-            <AniBlock className="lax" data-lax-preset="fadeInOut">
-                <h3>了不起哦</h3>
-                <p>我是正文</p>
-            </AniBlock>
-            <AniBlock className="lax" data-lax-preset="linger fadeInOut">
-                <h3>了不起哦</h3>
-                <p>我是正文</p>
-            </AniBlock>
-            <AniBlock className="lax" data-lax-preset="fadeInOut">
-                <h3>了不起哦</h3>
-                <p>我是正文</p>
-            </AniBlock>
-            <AniBlock className="lax" data-lax-preset="linger fadeInOut">
-                <h3>了不起哦</h3>
-                <p>我是正文</p>
-            </AniBlock> */}
-            
+               
+                
+            </section>
+      
+          
+
             
           
             
