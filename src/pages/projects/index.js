@@ -50,7 +50,7 @@ export default ({ data }) => {
             {/* @ { defaultVal, startScrollVal, } */}
             {/* <AniBlock className="lax" data-lax-bg-pos-x="0 -500, 100 100"> */}
 
-            <section css={css`height: 500px; background-color: #000;`}>
+            <section css={css`height: 500px;`}>
                 <AniBlock 
                     className="lax center-block" 
                     data-lax-opacity="0 1, elh 0"

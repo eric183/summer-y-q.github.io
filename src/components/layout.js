@@ -14,6 +14,7 @@ import { useLax, useLaxElement } from 'use-lax';
 import lax from 'lax.js'
 import Scrollbar from 'smooth-scrollbar'
 
+import { gsap } from 'gsap';
 
 
 // console.log(linkColor);
@@ -72,6 +73,22 @@ export default ({ children }) => {
     }
 
     useEffect(() => {
+
+        
+        if(globalHistory.location.pathname == "/projects" || globalHistory.location.pathname == "/projects/") {
+            
+            gsap.to(document.body, {
+                backgroundColor: '#000'
+            })
+            // document.body.style.backgroundColor = '#000';
+        } else {
+            gsap.to(document.body, {
+                backgroundColor: '#fff'
+            })
+            // document.body.style.backgroundColor = '#fff';
+        }
+
+        globalHistory.location.pathname == "/projects/" ? setColor('#fff'): setColor('#07e');
         // console.log(globalHistory);
       
         // debugger;
@@ -81,14 +98,6 @@ export default ({ children }) => {
 
         // return ()=> { bindScroll(true) }
 
-        if(globalHistory.location.pathname == "/projects" || globalHistory.location.pathname == "/projects/") {
-            
-            document.body.style.backgroundColor = '#000';
-        } else {
-            document.body.style.backgroundColor = '#fff';
-        }
-
-        globalHistory.location.pathname == "/projects/" ? setColor('#fff'): setColor('#07e');
 
     }, [])
 
