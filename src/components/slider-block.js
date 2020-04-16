@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import Swiper from 'swiper';
-import "Swiper/css/swiper.min.css";
+import "swiper/css/swiper.min.css";
 import { css } from "@emotion/core";
 import './slider-block.module.css';
 
