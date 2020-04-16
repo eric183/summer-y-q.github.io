@@ -76,7 +76,16 @@ export default ({ children }) => {
         // debugger;
         bindScroll();
         setLoad(true);
+        // debugger;
+
         // return ()=> { bindScroll(true) }
+
+        if(globalHistory.location.pathname == "/projects" || globalHistory.location.pathname == "/projects/") {
+            
+            document.body.style.backgroundColor = '#000';
+        } else {
+            document.body.style.backgroundColor = '#fff';
+        }
     }, [])
 
 
