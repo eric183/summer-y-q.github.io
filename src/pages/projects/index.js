@@ -65,12 +65,7 @@ export default ({ data }) => {
                     <SliderBlock 
                         height="80%"
                         imgList={[
-                            'https://swiperjs.com/demos/images/nature-1.jpg',
-                            'https://swiperjs.com/demos/images/nature-2.jpg',
-                            'https://swiperjs.com/demos/images/nature-3.jpg',
-                            'https://swiperjs.com/demos/images/nature-4.jpg',
-                            'https://swiperjs.com/demos/images/nature-5.jpg',
-                            'https://swiperjs.com/demos/images/nature-6.jpg',
+                            import('../../assets/images/pbr2.0.png')
                         ]}/>
                     {/* <div className="calor" ref={CalRef}>
                         <div className="swiper-wrapper" css={css`width: 500px; height: 500px;`}>
