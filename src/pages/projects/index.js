@@ -67,8 +67,8 @@ export default ({ data }) => {
                     <SliderBlock 
                         height="80%"
                         imgList={[
-                            'scene/IMG_9656.JPG',
-                            'scene/IMG_9354.JPG'
+                            '/scene/IMG_9656.JPG',
+                            '/scene/IMG_9354.JPG'
                             // 'pbr2.0_1.png'
                         ]}/>
                 </AniBlock>

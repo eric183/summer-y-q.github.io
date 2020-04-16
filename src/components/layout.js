@@ -16,10 +16,10 @@ import Scrollbar from 'smooth-scrollbar'
 
 
 
-
+// console.log(linkColor);
 const ListLink = props => (
     <li style={{ display: `inline-block`, marginRight: `1rem`, marginBottom: 0 }}>
-        <AniLink fade duration={.2} to={props.to}>
+        <AniLink fade duration={.2} to={props.to} css={css`color: ${props.linkColor}`}>
 
             {props.children}
         </AniLink>
@@ -44,6 +44,7 @@ export default ({ children }) => {
         }
     `)
     const [hasLoad, setLoad] = useState(false);
+    const [linkColor, setColor] = useState('#07e')
     const bindScroll = (willLeave) => {
         lax.setup()
         // document.addEventListener('scroll', function (x) {
@@ -86,6 +87,9 @@ export default ({ children }) => {
         } else {
             document.body.style.backgroundColor = '#fff';
         }
+
+        globalHistory.location.pathname == "/projects/" ? setColor('#fff'): setColor('#07e');
+
     }, [])
 
 
@@ -133,9 +137,9 @@ export default ({ children }) => {
                                 display: inline-block; 
                                 font-family: ${fontFamily}; 
                                 margin: 0; 
-                                color: ${ globalHistory.location.pathname == "/projects" ? '#fff' : '#000'};
+                                color: ${ globalHistory.location.pathname == "/projects/" ? '#fff' : '#000'};
                             `}>
-                        <SplitText initialPose="exit" pose="enter" charPoses={globalHistory.location.pathname == "/projects" ? charPoses : false}>
+                        <SplitText initialPose="exit" pose="enter" charPoses={globalHistory.location.pathname == "/projects/" ? charPoses : false}>
                             {data.site.siteMetadata.author}
                         </SplitText>
                     </h3>
@@ -156,7 +160,7 @@ export default ({ children }) => {
                             fontSize: 15px;
                         `}>
                     {/* <ListLink to="/">Home</ListLink> */}
-                    <ListLink to="/projects">Projects</ListLink>
+                    <ListLink to="/projects/" linkColor={linkColor}>Projects</ListLink>
                     {/* <ListLink to="/contact/">Contact</ListLink> */}
                     {/* <ListLink to="/file-system/">System</ListLink> */}
                 </ul>
