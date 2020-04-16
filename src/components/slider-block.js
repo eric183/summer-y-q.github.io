@@ -6,7 +6,7 @@ import './slider-block.module.css';
 import { globalHistory } from '@reach/router'
 
 export default (props) => {
-    // const CalRef = useRef(null);
+    const CalRef = useRef(null);
     // debugger;
 
     // if(globalHistory.location.pathname != "/projects/") {

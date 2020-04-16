@@ -34,20 +34,7 @@ const ListLink = props => (
 export default ({ children }) => {
 
         
-    if(globalHistory.location.pathname == "/projects" || globalHistory.location.pathname == "/projects/") {
-            
-        gsap.to(document.body, {
-            backgroundColor: '#000'
-        })
-        // document.body.style.backgroundColor = '#000';
-    } else {
-        gsap.to(document.body, {
-            backgroundColor: '#fff'
-        })
-        // document.body.style.backgroundColor = '#fff';
-    }
-
-    globalHistory.location.pathname == "/projects/" ? setColor('#fff'): setColor('#07e');
+   
     const data = useStaticQuery(graphql`
         query {
             site {
@@ -88,7 +75,20 @@ export default ({ children }) => {
     }
 
     useEffect(() => {
-
+        if(globalHistory.location.pathname == "/projects" || globalHistory.location.pathname == "/projects/") {
+            
+            gsap.to(document.body, {
+                backgroundColor: '#000'
+            })
+            // document.body.style.backgroundColor = '#000';
+        } else {
+            gsap.to(document.body, {
+                backgroundColor: '#fff'
+            })
+            // document.body.style.backgroundColor = '#fff';
+        }
+    
+        globalHistory.location.pathname == "/projects/" ? setColor('#fff'): setColor('#07e');
         // console.log(globalHistory);
       
         // debugger;
