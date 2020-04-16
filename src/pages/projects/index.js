@@ -49,8 +49,71 @@ export default ({ data }) => {
         <Layout>
             {/* @ { defaultVal, startScrollVal, } */}
             {/* <AniBlock className="lax" data-lax-bg-pos-x="0 -500, 100 100"> */}
-
             <section css={css`height: 500px;`}>
+                <AniBlock className="lax center-block" css={css`width: 50%; height: 100%`} >
+                    <SliderBlock 
+                        height="80%"
+                        imgList={[
+                            '/scene/IMG_9656.JPG',
+                            '/scene/IMG_9354.JPG',
+                            '/scene/IMG_9356.JPG',
+                            '/scene/IMG_9357.JPG',
+                           
+                            // 'pbr2.0_1.png'
+                        ]}/>
+                </AniBlock>
+                <AniBlock 
+                    className="lax center-block" 
+                    // data-lax-opacity="0 1, elh 0"
+                    css={css`
+                        width: 50%;
+                        height: 100%;   
+                        flex-flow: column;   
+                        justify-content: center;            
+                    `} >
+
+                        <h3 css={css`color: #fff; width: 100%; text-align: center;`}>
+                            深业泰然智慧楼宇展厅 1.0(SHADER)
+                        </h3>
+                        <h3 css={css`color: #fff; width: 100%; text-align: center;`}>
+                            房博会智慧楼宇⼤屏
+                        </h3>
+                </AniBlock>
+               
+            </section>
+            <section css={css`height: 500px;`}>
+                <AniBlock 
+                    className="lax center-block" 
+                    data-lax-opacity="0 1, elh 0"
+                    css={css`
+                        width: 50%;
+                        height: 100%;                  
+                    `} >
+
+                        <h3 css={css`color: #fff; width: 100%; text-align: center;`}>
+                            SaaS前端
+                        </h3>
+                </AniBlock>
+                <AniBlock className="lax center-block" css={css`width: 50%; height: 100%`} >
+                    <SliderBlock 
+                        height="80%"
+                        imgList={[
+                            '/scene/projects_1.png',
+                            '/scene/projects_2.png'
+                            // 'pbr2.0_1.png'
+                        ]}/>
+                </AniBlock>
+            </section>
+            {/* <section css={css`height: 500px;`}>
+                <AniBlock className="lax center-block" css={css`width: 50%; height: 100%`} >
+                    <SliderBlock 
+                        height="80%"
+                        imgList={[
+                            '/scene/IMG_9656.JPG',
+                            '/scene/IMG_9354.JPG'
+                            // 'pbr2.0_1.png'
+                        ]}/>
+                </AniBlock>
                 <AniBlock 
                     className="lax center-block" 
                     data-lax-opacity="0 1, elh 0"
@@ -63,16 +126,61 @@ export default ({ data }) => {
                             深业泰然大厦数字展厅
                         </h3>
                 </AniBlock>
+               
+            </section> */}
+            <section css={css`height: 500px;`}>
+                <AniBlock 
+                    className="lax center-block" 
+                    // data-lax-opacity="0 1, elh 0"
+                    css={css`
+                        width: 50%;
+                        height: 100%;                  
+                    `} >
+
+                        <h3 css={css`color: #fff; width: 100%; text-align: center;`}>
+                            深业泰然智慧楼宇展厅 2.0(BPR)
+                        </h3>
+                </AniBlock>
                 <AniBlock className="lax center-block" css={css`width: 50%; height: 100%`} >
                     <SliderBlock 
                         height="80%"
                         imgList={[
-                            '/scene/IMG_9656.JPG',
-                            '/scene/IMG_9354.JPG'
+                            '/scene/tairan_unreal_1.png',
+                            '/scene/tairan_unreal_2.png',
+                            '/scene/pbr2.0_1.png',
+                            '/scene/pbr2.0_2.png',
                             // 'pbr2.0_1.png'
                         ]}/>
                 </AniBlock>
             </section>
+            <section css={css`height: 500px;`}>
+                <AniBlock className="lax center-block" css={css`width: 50%; height: 100%`} >
+                    <SliderBlock 
+                        height="80%"
+                        imgList={[
+                            '/scene/admin_ipad_1.png',
+                            '/scene/admin_ipad_2.png',
+                            '/scene/admin_ipad_3.png',
+                            // '/scene/pbr2.0_1.png',
+                            // '/scene/pbr2.0_2.png',
+                            // 'pbr2.0_1.png'
+                        ]}/>
+                </AniBlock>
+                <AniBlock 
+                    className="lax center-block" 
+                    // data-lax-opacity="0 1, elh 0"
+                    css={css`
+                        width: 50%;
+                        height: 100%;                  
+                    `} >
+
+                        <h3 css={css`color: #fff; width: 100%; text-align: center;`}>
+                            运营楼管平台iPad移动端                        
+                        </h3>
+                </AniBlock>
+                
+            </section>
+          
 
             {/* <section css={css`height: 500px; background-color: #000;`}>
                 <AniBlock 
