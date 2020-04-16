@@ -3,10 +3,15 @@ import Swiper from 'swiper';
 import "swiper/css/swiper.min.css";
 import { css } from "@emotion/core";
 import './slider-block.module.css';
+import { globalHistory } from '@reach/router'
 
 export default (props) => {
-    const CalRef = useRef(null);
-    debugger;
+    // const CalRef = useRef(null);
+    // debugger;
+
+    // if(globalHistory.location.pathname != "/projects/") {
+
+    // }
     useEffect(()=> {
         var mySwiper = new Swiper(CalRef.current, { 
             effect: 'flip',
