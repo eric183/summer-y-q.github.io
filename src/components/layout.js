@@ -124,7 +124,7 @@ export default ({ children }) => {
                                 display: inline-block; 
                                 font-family: ${fontFamily}; 
                                 margin: 0; 
-                                color: ${ globalHistory.location.pathname == "/projects" ? '#000' : '#000'};
+                                color: ${ globalHistory.location.pathname == "/projects" ? '#fff' : '#000'};
                             `}>
                         <SplitText initialPose="exit" pose="enter" charPoses={globalHistory.location.pathname == "/projects" ? charPoses : false}>
                             {data.site.siteMetadata.author}
