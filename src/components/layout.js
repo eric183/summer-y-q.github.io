@@ -137,7 +137,7 @@ export default ({ children }) => {
                                 display: inline-block; 
                                 font-family: ${fontFamily}; 
                                 margin: 0; 
-                                color: ${ globalHistory.location.pathname == "/projects/" ? '#fff' : '#000'};
+                                color: ${ linkColor };
                             `}>
                         <SplitText initialPose="exit" pose="enter" charPoses={globalHistory.location.pathname == "/projects/" ? charPoses : false}>
                             {data.site.siteMetadata.author}
