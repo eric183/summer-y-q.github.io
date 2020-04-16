@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Layout from '../../components/layout'
 import AniBlock from '../../components/ani-block'
+import SliderBlock from '../../components/slider-block';
 
 import { globalHistory } from '@reach/router'
 import { TransitionState } from "gatsby-plugin-transition-link";
@@ -8,10 +9,16 @@ import posed from 'react-pose';
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 import { gsap } from 'gsap';
 
+import { css } from "@emotion/core";
+
+
+
 export default ({ data }) => {
     const [hasMount, setMount] = useState(false)
-    
+    const CalRef = useRef(null);
     useEffect(()=> {
+    
+
         setTimeout(()=> {
             setMount(true);
         }, 0)
@@ -41,14 +48,48 @@ export default ({ data }) => {
         <Layout>
             {/* @ { defaultVal, startScrollVal, } */}
             {/* <AniBlock className="lax" data-lax-bg-pos-x="0 -500, 100 100"> */}
-            <AniBlock className="lax" data-lax-opacity="0 1, elh 0">
-                深业泰然大厦数字展厅
-            </AniBlock>
+            <section css={css`height: 500px; background-color: #000;`}>
+                <AniBlock 
+                    className="lax center-block" 
+                    data-lax-opacity="0 1, elh 0"
+                    css={css`
+                        width: 50%;
+                        height: 100%;
+                        color: #fff;
+                        padding-left: 50px;
+                    `} >
+
+                    深业泰然大厦数字展厅
+                </AniBlock>
+                <AniBlock className="lax center-block" css={css`width: 50%; height: 100%`} >
+                    <SliderBlock 
+                        height="80%"
+                        imgList={[
+                            'https://swiperjs.com/demos/images/nature-1.jpg',
+                            'https://swiperjs.com/demos/images/nature-2.jpg',
+                            'https://swiperjs.com/demos/images/nature-3.jpg',
+                            'https://swiperjs.com/demos/images/nature-4.jpg',
+                            'https://swiperjs.com/demos/images/nature-5.jpg',
+                            'https://swiperjs.com/demos/images/nature-6.jpg',
+                        ]}/>
+                    {/* <div className="calor" ref={CalRef}>
+                        <div className="swiper-wrapper" css={css`width: 500px; height: 500px;`}>
+                            <div className="swiper-slide" style={{ backgroundImage: 'url(https://swiperjs.com/demos/images/nature-1.jpg)' }}></div>
+                            <div className="swiper-slide" style={{ backgroundImage: 'url(https://swiperjs.com/demos/images/nature-2.jpg)' }}></div>
+                            <div className="swiper-slide" style={{ backgroundImage: 'url(https://swiperjs.com/demos/images/nature-3.jpg)' }}></div>
+                            <div className="swiper-slide" style={{ backgroundImage: 'url(https://swiperjs.com/demos/images/nature-4.jpg)' }}></div>
+                            <div className="swiper-slide" style={{ backgroundImage: 'url(https://swiperjs.com/demos/images/nature-5.jpg)' }}></div>
+                            <div className="swiper-slide" style={{ backgroundImage: 'url(https://swiperjs.com/demos/images/nature-6.jpg)' }}></div>
+                        </div>
+
+                        <div className="swiper-pagination"></div>
+
+                    </div> */}
+                </AniBlock>
+            </section>
+           
             
-            <AniBlock className="lax" data-lax-preset="fadeInOut">
-                <h3>了不起哦</h3>
-                <p>我是正文</p>
-            </AniBlock>
+           
             
             <AniBlock className="lax" data-lax-preset="fadeInOut">
                 <h3>了不起哦</h3>
