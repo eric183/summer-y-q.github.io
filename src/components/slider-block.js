@@ -9,6 +9,8 @@ export default (props) => {
     useEffect(()=> {
         var mySwiper = new Swiper(CalRef.current, { 
             effect: 'flip',
+            zoom: true,
+            loop: true,
             grabCursor: true,
             pagination: {
                 el: '.swiper-pagination',
@@ -17,7 +19,10 @@ export default (props) => {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
-            
+            autoplay: {
+                delay: 3500,
+                disableOnInteraction: false,
+            },
         });
     }, [])
 
@@ -26,7 +31,12 @@ export default (props) => {
             <div className="swiper-wrapper" css={css`height: 100%; width: 100%;`}>
                 {
                     props.imgList.map((_img, index)=> (
-                        <div className="swiper-slide" style={{ backgroundImage: `url(${_img})` }} key={index}></div>
+                        <div className="swiper-slide"  key={index}>
+                            <div className="swiper-zoom-container">
+                                <img src={`${_img}`} />
+
+                            </div>
+                        </div>
                     ))
                 }
             </div>

@@ -146,7 +146,7 @@ export default ({ children }) => {
                             fontFamily: 'Caveat', cursive;
                             fontSize: 15px;
                         `}>
-                    <ListLink to="/">Home</ListLink>
+                    {/* <ListLink to="/">Home</ListLink> */}
                     <ListLink to="/projects">Projects</ListLink>
                     {/* <ListLink to="/contact/">Contact</ListLink> */}
                     {/* <ListLink to="/file-system/">System</ListLink> */}

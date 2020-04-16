@@ -10,6 +10,7 @@ import AniLink from "gatsby-plugin-transition-link/AniLink"
 import { gsap } from 'gsap';
 
 import { css } from "@emotion/core";
+import { Scene } from 'three';
 
 
 
@@ -48,44 +49,58 @@ export default ({ data }) => {
         <Layout>
             {/* @ { defaultVal, startScrollVal, } */}
             {/* <AniBlock className="lax" data-lax-bg-pos-x="0 -500, 100 100"> */}
+
             <section css={css`height: 500px; background-color: #000;`}>
                 <AniBlock 
                     className="lax center-block" 
                     data-lax-opacity="0 1, elh 0"
                     css={css`
                         width: 50%;
-                        height: 100%;
-                        color: #fff;
-                        padding-left: 50px;
+                        height: 100%;                  
                     `} >
 
-                    深业泰然大厦数字展厅
+                        <h3 css={css`color: #fff; width: 100%; text-align: center;`}>
+                            深业泰然大厦数字展厅
+                        </h3>
                 </AniBlock>
                 <AniBlock className="lax center-block" css={css`width: 50%; height: 100%`} >
                     <SliderBlock 
                         height="80%"
                         imgList={[
-                            import('../../assets/images/pbr2.0.png')
+                            'scene/IMG_9656.JPG',
+                            'scene/IMG_9354.JPG'
+                            // 'pbr2.0_1.png'
                         ]}/>
-                    {/* <div className="calor" ref={CalRef}>
-                        <div className="swiper-wrapper" css={css`width: 500px; height: 500px;`}>
-                            <div className="swiper-slide" style={{ backgroundImage: 'url(https://swiperjs.com/demos/images/nature-1.jpg)' }}></div>
-                            <div className="swiper-slide" style={{ backgroundImage: 'url(https://swiperjs.com/demos/images/nature-2.jpg)' }}></div>
-                            <div className="swiper-slide" style={{ backgroundImage: 'url(https://swiperjs.com/demos/images/nature-3.jpg)' }}></div>
-                            <div className="swiper-slide" style={{ backgroundImage: 'url(https://swiperjs.com/demos/images/nature-4.jpg)' }}></div>
-                            <div className="swiper-slide" style={{ backgroundImage: 'url(https://swiperjs.com/demos/images/nature-5.jpg)' }}></div>
-                            <div className="swiper-slide" style={{ backgroundImage: 'url(https://swiperjs.com/demos/images/nature-6.jpg)' }}></div>
-                        </div>
-
-                        <div className="swiper-pagination"></div>
-
-                    </div> */}
                 </AniBlock>
             </section>
+
+            {/* <section css={css`height: 500px; background-color: #000;`}>
+                <AniBlock 
+                    className="lax center-block" 
+                    data-lax-opacity="0 1, elh 0"
+                    css={css`
+                        width: 50%;
+                        height: 100%;                  
+                    `} >
+
+                        <h3 css={css`color: #fff; width: 100%; text-align: center;`}>
+                            深业泰然大厦数字展厅
+                        </h3>
+                </AniBlock>
+                <AniBlock className="lax center-block" css={css`width: 50%; height: 100%`} >
+                    <SliderBlock 
+                        height="80%"
+                        imgList={[
+                            'scene/IMG_9656.JPG',
+                            'scene/IMG_9354.JPG'
+                            // 'pbr2.0_1.png'
+                        ]}/>
+                </AniBlock>
+            </section> */}
            
             
            
-            
+{/*             
             <AniBlock className="lax" data-lax-preset="fadeInOut">
                 <h3>了不起哦</h3>
                 <p>我是正文</p>
@@ -126,7 +141,7 @@ export default ({ data }) => {
             <AniBlock className="lax" data-lax-preset="linger fadeInOut">
                 <h3>了不起哦</h3>
                 <p>我是正文</p>
-            </AniBlock>
+            </AniBlock> */}
             
             
           
