@@ -125,6 +125,7 @@ export default ({ children }) => {
                 globalHistory.location.pathname != "/projects" && */}
             <header
                 css={css`
+                        display: ${globalHistory.location.pathname == "/cv" ? 'none': 'flex' };
                         margin: 1.5rem; 
                         font-family: ${fontFamily};
                         align-items: center;

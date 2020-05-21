@@ -1,9 +1,9 @@
 var plugins = [{
-      plugin: require('D:/workspace/eric183.github.io/node_modules/gatsby-plugin-transition-link/gatsby-ssr'),
+      plugin: require('F:/Workspace/eric183.github.io/node_modules/gatsby-plugin-transition-link/gatsby-ssr'),
       options: {"plugins":[]},
     },{
-      plugin: require('D:/workspace/eric183.github.io/node_modules/gatsby-plugin-manifest/gatsby-ssr'),
-      options: {"plugins":[],"name":"GatsbyJS","short_name":"GatsbyJS","start_url":"/","background_color":"#6b37bf","theme_color":"#6b37bf","display":"standalone","icon":"D:\\workspace\\eric183.github.io/src/images/head.jpg"},
+      plugin: require('F:/Workspace/eric183.github.io/node_modules/gatsby-plugin-manifest/gatsby-ssr'),
+      options: {"plugins":[],"name":"GatsbyJS","short_name":"GatsbyJS","start_url":"/","background_color":"#6b37bf","theme_color":"#6b37bf","display":"standalone","icon":"F:\\Workspace\\eric183.github.io/src/images/head.jpg","cache_busting_mode":"query","include_favicon":true,"legacy":true,"theme_color_in_head":true,"cacheDigest":"334341ce83d379e696df6b42eb3439a4"},
     }]
 // During bootstrap, we write requires at top of this file which looks like:
 // var plugins = [
