@@ -35,7 +35,7 @@ module.exports = {
                 {
                     name: "大数据可视化科技版(Shader)脚手架",
                     withSkills: ["WebGl", "ThreeJS", "ReactJS", "Webpack", "WebSocket", "Blender", "Electron"],
-                    desc: "大数据可视化项目，WebGl渲染，JS脚本与Socket控制交互，blender构建模型，Electron打包输出EXE安装包",
+                    desc: "大数据可视化项目，WebGl渲染，JS脚本与Socket控制交互，Blender构建模型，Electron打包输出EXE安装包",
                     link: "https://www.behance.net/gallery/97483001/chuneng",
                 },
                 {
@@ -148,25 +148,26 @@ module.exports = {
                         begin: "2015.03",
                         end: "2016.01"
                     },
-                    desc: "运营后台辅助开发，线上活动平台搭建",
+                    desc: "运营后台开发，线上活动平台搭建",
                 }
             ],
             technologies: [
                 {
                     name: "language",
-                    label: "领域与语言",
+                    label: "语言",
                     children: ["Javascript", "C#", "Typescript", "NodeJS"]
                 },
                 {
                     name: "frameWork",
                     label: "Web前端框架",
-                    children: ["Webpack", "Gulp", "ReactJS", "VueJS", "AngularJS", "GatsbyJS", "小程序开发"]
+                    children: ["Webpack", "Gulp", "ReactJS", "VueJS", "AngularJS","ThreeJS", "BabylonJS", "GatsbyJS"]
+                    // children: ["VueJS",  "Jquery", "Bootstrap"]
                 },
-                {
-                    name: "WebGl",
-                    label: "WebGl",
-                    children: ["ThreeJS, BabylonJS"]
-                },
+                // {
+                //     name: "WebGl",
+                //     label: "WebGl",
+                //     children: ["ThreeJS, BabylonJS"]
+                // },
                 {
                     name: "exe",
                     label: "客户端",

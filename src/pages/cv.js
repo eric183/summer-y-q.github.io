@@ -25,6 +25,7 @@ export default (props) => {
 
                 {/* about me */}
                 <section>
+                    <TitleContent title="关于我" />
                     {resumeInfo.desc}
                 </section>
                 
@@ -34,7 +35,7 @@ export default (props) => {
                         resumeInfo.social.map((d, index)=> {
                             return (
                                 <p key={index}> 
-                                <i class={ d.icon ? d.icon : "" }></i>
+                                <i className={ d.icon ? d.icon : "" }></i>
 
 
 
@@ -95,12 +96,12 @@ export default (props) => {
                             resumeInfo.technologies.map((technology, index)=> {
                                 
                                 return (
-                                    <ul>
+                                    <ul key={index}>
                                         <li>{ technology.label }</li>
                                         <li>
                                             <ul>
                                                 { 
-                                                    technology.children.map((child, index)=> <li>{child}</li>)      
+                                                    technology.children.map((child, index)=> <li key={index}>{child}</li>)      
                                                 }
                                             </ul>
                                         </li>

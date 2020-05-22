@@ -3,7 +3,21 @@ import './src/styles/global.css'
 
 // import { globalHistory } from '@reach/router'
 
-// export default () => {
+
+// const hideScroll = (_boolean) => {
+//     document.documentElement.style.overflow = _boolean ? "visible" : "visible";
+//     // document.body.style.overflow = _boolean ? "hidden" : "scroll";
+
+// }
+
+// window.onbeforeprint = (evt) => {
+//     hideScroll(false)
+// } 
+
+// window.onafterprint = (evt) => {
+//     hideScroll(false)
+// } 
+// // export default () => {
 //     // Scrollbar.init(document.body);
 //     console.log(globalHistory.location.pathname);
 //     debugger;
