@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[9],{RXBc:function(n,t,u){"use strict";u.r(t),u.d(t,"query",(function(){return c}));u("q1tI"),u("Wbzz"),u("Bl7J");var r=u("qKvR");u("kOA+");t.default=function(n){n.data;return Object(r.b)("div",null,"改建中... :)")};var c="1084940869"}}]);
-//# sourceMappingURL=component---src-pages-index-js-3d32a39ee4d3e8787ee9.js.map
