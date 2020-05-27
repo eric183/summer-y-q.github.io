@@ -1,6 +1,7 @@
 import React, { Fragment } from "react"
 import { Link } from 'gatsby'
 import Layout from '../components/layout'
+import CanvasModule from '../components/webgl-canvas';
 import { css } from '@emotion/core'
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 import { graphql } from 'gatsby';
@@ -12,9 +13,9 @@ export default ({ data }) => {
 
 	// console.log(data);
 	return (
-		<div>
-			改建中...
-			:)
+		<div css={css`position: fixed; width: 100%; height: 100%; left: 0; right: 0; top: 0; bottom: 0;`}>
+			
+			<CanvasModule />
 		</div>
 		// <Layout>
 		// 	{/* <BlogContent data={data}></BlogContent> */}

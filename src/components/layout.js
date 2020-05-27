@@ -5,7 +5,7 @@ import { css } from '@emotion/core'
 import LayoutCss from './layout.module.css'
 import { globalHistory } from '@reach/router'
 // import { Scrollbars } from 'react-custom-scrollbars'
-import WebglCavas from './webgl-cavas';
+// import WebglCavas from './webgl-canvas';
 import SplitText from 'react-pose-text';
 import posed from "react-pose"
 import { TransitionState } from "gatsby-plugin-transition-link";
