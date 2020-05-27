@@ -14,7 +14,7 @@ const T = THREE;
 
 
 var scene, renderer, camera, stats, control;
-var model, skeleton, mixer, clock;
+var model, skeleton, mixer, clock, clips;
 var temp = new THREE.Vector3;
 
 var crossFadeControls = [];
@@ -104,13 +104,15 @@ export default props => {
             skeleton.visible = false;
             scene.add(skeleton);
 
-            var clips = gltf.animations;
+            clips = gltf.animations;
 
             mixer = new THREE.AnimationMixer(model);
             // var animations = model.animations;
             console.log(clips);
 
-            mixer.clipAction(THREE.AnimationClip.findByName(clips, 'elbow')).play();
+
+            // [left, right, elbow, jump]
+            mixer.clipAction(THREE.AnimationClip.findByName(clips, 'Idle')).play();
             // idleAction = mixer.clipAction(animations[0]);
             // walkAction = mixer.clipAction(animations[3]);
             // runAction = mixer.clipAction(animations[1]);
@@ -118,8 +120,8 @@ export default props => {
             // actions = [idleAction, walkAction, runAction];
 
 
+            keyBinder();
             updateFixed();
-
 
         });
         // loader.load( 'models/gltf/Soldier.glb', function ( gltf ) {
@@ -183,10 +185,52 @@ export default props => {
 
         // camera.position.lerp(temp, 0.2);
         control.update();
+        // console.log(model.position);
         camera.lookAt( new THREE.Vector3(model.position.x, model.position.y + 1, model.position.z));
         renderer.render(scene, camera);
 
         
+    }
+
+    const keyBinder = () => {
+        window.addEventListener('keyup', (evt) => {
+            // clips.forEach((clip) => {
+            //     // clip.stop();
+            //     mixer.clipAction(clip).stop();
+            // })
+            mixer.stopAllAction();
+
+            // console.log(evt.keyCode);
+
+
+            switch(evt.keyCode) {
+                case 74:
+                    mixActive('right');
+                    // mixer.clipAction(THREE.AnimationClip.findByName(clips, 'right')).play();
+                    break;
+                case 75:
+                    mixActive('left');
+                    break;
+                case 32:
+                    mixActive('jump');
+                    break;
+                default:
+                    mixActive('Idle');
+
+                    return;
+            }
+        }, false)
+    }
+
+    const mixActive = (name) => {
+        let action = mixer.clipAction(THREE.AnimationClip.findByName(clips, name));
+        
+        action.setLoop( name !== "Idle" ? THREE.LoopOnce : THREE.LoopRepeat ); 
+        action.clampWhenFinished = true; 
+        // action.setLoop(THREE.LoopOnce, 1);
+        action.fadeIn(0.5);
+        action.play();
+
     }
     return (
         <div style={{ position: 'absolute', top: 0, width: '100%', height: '100%' }} ref={ divEl }></div>
