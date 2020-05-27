@@ -31,7 +31,7 @@ var sizeOfNextStep = 0;
 export default props => {
 
     const divEl = useRef(null)
-
+    console.log(props);
     useEffect(() => {
 
         // var renderer = new T.WebGLRenderer({ alpha: true });
@@ -51,7 +51,7 @@ export default props => {
 
         scene = new THREE.Scene();
 
-        scene.add(helper);
+        // scene.add(helper);
 
         scene.background = new THREE.Color(0xa0a0a0);
         scene.fog = new THREE.Fog(0xa0a0a0, 10, 50);
@@ -123,6 +123,7 @@ export default props => {
             keyBinder();
             updateFixed();
 
+            props.loadBinder(true);
         });
         // loader.load( 'models/gltf/Soldier.glb', function ( gltf ) {
 
@@ -211,6 +212,9 @@ export default props => {
                 case 75:
                     mixActive('left');
                     break;
+                case 76:
+                    mixActive('elbow');
+                    break;
                 case 32:
                     mixActive('jump');
                     break;
@@ -228,7 +232,7 @@ export default props => {
         action.setLoop( name !== "Idle" ? THREE.LoopOnce : THREE.LoopRepeat ); 
         action.clampWhenFinished = true; 
         // action.setLoop(THREE.LoopOnce, 1);
-        action.fadeIn(0.5);
+        action.fadeIn(0.1);
         action.play();
 
     }

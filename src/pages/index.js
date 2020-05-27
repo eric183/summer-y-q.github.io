@@ -1,4 +1,4 @@
-import React, { Fragment } from "react"
+import React, { Fragment, useState } from "react"
 import { Link } from 'gatsby'
 import Layout from '../components/layout'
 import CanvasModule from '../components/webgl-canvas';
@@ -10,12 +10,26 @@ import { graphql } from 'gatsby';
 // Annie Use Your Telescope
 
 export default ({ data }) => {
-
+	const [hasLoaded, setLoad] = useState(false)
+	const loadBinder = (value) => {
+		setLoad(value);
+	}
 	// console.log(data);
 	return (
-		<div css={css`position: fixed; width: 100%; height: 100%; left: 0; right: 0; top: 0; bottom: 0;`}>
-			
-			<CanvasModule />
+		<div css={css`
+			position: fixed; 
+			width: 100%; 
+			height: 100%; 
+			left: 0; 
+			right: 0; 
+			top: 0; 
+			bottom: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;`
+		}>
+			<img src="bean.gif" css={css`display: ${ !hasLoaded ? "block" : "none" }; position: relative; z-index: 1;`}/>
+			<CanvasModule loadBinder={ loadBinder }/>
 		</div>
 		// <Layout>
 		// 	{/* <BlogContent data={data}></BlogContent> */}
