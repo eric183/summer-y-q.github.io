@@ -7,7 +7,8 @@ import React, {
 // import './index.scss'
 
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 const T = THREE;
 
@@ -38,12 +39,18 @@ export default props => {
         var container = divEl.current;
 
         camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
-        camera.position.set(1, 2, - 3);
+        camera.position.set(1, 2, -3);
         camera.lookAt(0, 1, 0);
+        camera.name = "MainCamera";
+        // console.log(camera);
+        var helper = new THREE.CameraHelper( camera );
 
         clock = new THREE.Clock();
 
         scene = new THREE.Scene();
+
+        scene.add( helper );
+
         scene.background = new THREE.Color(0xa0a0a0);
         scene.fog = new THREE.Fog(0xa0a0a0, 10, 50);
 
@@ -71,7 +78,40 @@ export default props => {
         mesh.receiveShadow = true;
         scene.add(mesh);
 
-        // var loader = new GLTFLoader();
+        var loader = new GLTFLoader();
+
+        window.scene = scene;
+        window.THREE = THREE;
+
+
+        loader.load('/soldier.glb', (gltf) => {
+            model = gltf.scene;
+            scene.add( model );
+             model.traverse(( object ) => {
+
+                if ( object.isMesh ) object.castShadow = true;
+
+            });
+
+            skeleton = new THREE.SkeletonHelper( model );
+            skeleton.visible = false;
+            scene.add( skeleton );
+            
+            var animations = gltf.animations;
+
+            mixer = new THREE.AnimationMixer( model );
+
+            idleAction = mixer.clipAction( animations[ 0 ] );
+            walkAction = mixer.clipAction( animations[ 3 ] );
+            runAction = mixer.clipAction( animations[ 1 ] );
+
+            actions = [ idleAction, walkAction, runAction ];
+
+
+            updateFixed();
+
+            
+        });
         // loader.load( 'models/gltf/Soldier.glb', function ( gltf ) {
 
         // model = gltf.scene;
@@ -118,14 +158,14 @@ export default props => {
         renderer.shadowMap.enabled = true;
         container.appendChild(renderer.domElement);
 
-        // updateFixed();
         renderer.render( scene, camera );
 
     }, [])
 
     const updateFixed = () => {
         requestAnimationFrame( updateFixed );
-        console.log('hi');
+        // console.log('hi');
+        renderer.render( scene, camera );
     }
     return (
         <div style={{ position: 'absolute', top: 0, width: '100%', height: '100%' }} ref={divEl}></div>
