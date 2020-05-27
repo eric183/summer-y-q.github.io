@@ -12,9 +12,14 @@ export default ({ data }) => {
 
 	// console.log(data);
 	return (
-		<Layout>
-			{/* <BlogContent data={data}></BlogContent> */}
-		</Layout>
+		<div>
+			改建中...
+			:)
+		</div>
+		// <Layout>
+		// 	{/* <BlogContent data={data}></BlogContent> */}
+		
+		// </Layout>
 	)
 }
 

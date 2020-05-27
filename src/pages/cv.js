@@ -11,22 +11,22 @@ import { css } from "@emotion/core"
 export default (props) => {
 
     const { resumeInfo } = props.data.site.siteMetadata; 
-    console.log(resumeInfo);
+    // console.log(resumeInfo);
 	return (
 		<Layout>
 			<div className="scroll-content" css={css`height: 100%; width: 100%;background-color: #f1f1f1; padding: 20px`}>
 
                 <header css={css`overflow: hidden`}>
-                    <h2>{resumeInfo.name}</h2>
-                    <h3>{resumeInfo.title}</h3>
-                    <p>{resumeInfo.years}年经验</p>
+                    <h2>{ resumeInfo.name }</h2>
+                    <h3>{ resumeInfo.title }</h3>
+                    <p>{ resumeInfo.years }年经验</p>
                 </header>
 
 
                 {/* about me */}
                 <section>
                     <TitleContent title="关于我" />
-                    {resumeInfo.desc}
+                    { resumeInfo.desc }
                 </section>
                 
 
@@ -35,7 +35,7 @@ export default (props) => {
                         resumeInfo.social.map((d, index)=> {
                             return (
                                 <p key={index}> 
-                                <i className={ d.icon ? d.icon : "" }></i>
+                                    <i className={ d.icon ? d.icon : "" }></i>
 
 
 
