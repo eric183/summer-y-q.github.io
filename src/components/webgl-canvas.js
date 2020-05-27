@@ -13,8 +13,9 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 const T = THREE;
 
 
-var scene, renderer, camera, stats;
+var scene, renderer, camera, stats, control;
 var model, skeleton, mixer, clock;
+var temp = new THREE.Vector3;
 
 var crossFadeControls = [];
 
@@ -41,15 +42,16 @@ export default props => {
         camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
         camera.position.set(1, 2, -3);
         camera.lookAt(0, 1, 0);
+
         camera.name = "MainCamera";
         // console.log(camera);
-        var helper = new THREE.CameraHelper( camera );
+        var helper = new THREE.CameraHelper(camera);
 
         clock = new THREE.Clock();
 
         scene = new THREE.Scene();
 
-        scene.add( helper );
+        scene.add(helper);
 
         scene.background = new THREE.Color(0xa0a0a0);
         scene.fog = new THREE.Fog(0xa0a0a0, 10, 50);
@@ -80,37 +82,45 @@ export default props => {
 
         var loader = new GLTFLoader();
 
+
+        // camera.lookAt( scene.position );
+
         window.scene = scene;
         window.THREE = THREE;
 
 
         loader.load('/soldier.glb', (gltf) => {
             model = gltf.scene;
-            scene.add( model );
-             model.traverse(( object ) => {
+            model.rotation.y = 2.9;
+            scene.add(model);
+            model.traverse((object) => {
 
-                if ( object.isMesh ) object.castShadow = true;
+                if (object.isMesh) object.castShadow = true;
 
             });
 
-            skeleton = new THREE.SkeletonHelper( model );
-            skeleton.visible = false;
-            scene.add( skeleton );
             
-            var animations = gltf.animations;
+            skeleton = new THREE.SkeletonHelper(model);
+            skeleton.visible = false;
+            scene.add(skeleton);
 
-            mixer = new THREE.AnimationMixer( model );
+            var clips = gltf.animations;
 
-            idleAction = mixer.clipAction( animations[ 0 ] );
-            walkAction = mixer.clipAction( animations[ 3 ] );
-            runAction = mixer.clipAction( animations[ 1 ] );
+            mixer = new THREE.AnimationMixer(model);
+            // var animations = model.animations;
+            console.log(clips);
 
-            actions = [ idleAction, walkAction, runAction ];
+            mixer.clipAction(THREE.AnimationClip.findByName(clips, 'elbow')).play();
+            // idleAction = mixer.clipAction(animations[0]);
+            // walkAction = mixer.clipAction(animations[3]);
+            // runAction = mixer.clipAction(animations[1]);
+
+            // actions = [idleAction, walkAction, runAction];
 
 
             updateFixed();
 
-            
+
         });
         // loader.load( 'models/gltf/Soldier.glb', function ( gltf ) {
 
@@ -152,22 +162,33 @@ export default props => {
 
         // });
         renderer = new THREE.WebGLRenderer({ antialias: true });
+
+        control = new OrbitControls(camera, renderer.domElement)
+        // scene.add(control);
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.outputEncoding = THREE.sRGBEncoding;
         renderer.shadowMap.enabled = true;
         container.appendChild(renderer.domElement);
-
-        renderer.render( scene, camera );
-
+        renderer.render(scene, camera);
+        // control.position0.z = 80
     }, [])
 
     const updateFixed = () => {
-        requestAnimationFrame( updateFixed );
+        requestAnimationFrame(updateFixed);
         // console.log('hi');
-        renderer.render( scene, camera );
+
+        temp.setFromMatrixPosition(model.matrixWorld);
+        mixer.update(clock.getDelta());
+
+        // camera.position.lerp(temp, 0.2);
+        control.update();
+        camera.lookAt( new THREE.Vector3(model.position.x, model.position.y + 1, model.position.z));
+        renderer.render(scene, camera);
+
+        
     }
     return (
-        <div style={{ position: 'absolute', top: 0, width: '100%', height: '100%' }} ref={divEl}></div>
+        <div style={{ position: 'absolute', top: 0, width: '100%', height: '100%' }} ref={ divEl }></div>
     )
 }
