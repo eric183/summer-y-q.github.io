@@ -12,7 +12,7 @@ import { gsap } from 'gsap';
 import { css } from "@emotion/core";
 import { Scene } from 'three';
 
-
+import { graphql } from 'gatsby';
 
 export default ({ data }) => {
     const [hasMount, setMount] = useState(false)
