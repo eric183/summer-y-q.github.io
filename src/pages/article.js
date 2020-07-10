@@ -7,7 +7,6 @@ import Layout from '../components/layout'
 import CanvasModule from '../components/webgl-canvas';
 import { css } from '@emotion/core'
 import AniLink from "gatsby-plugin-transition-link/AniLink"
-import "../styles/global.css";
 
 // const contentful = require("contentful");
 // // import contentful from 'contentful';
