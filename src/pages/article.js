@@ -4,7 +4,7 @@ import { Canvas, useFrame } from 'react-three-fiber'
 
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/layout'
-import CanvasModule from '../components/webgl-canvas';
+// import CanvasModule from '../components/webgl-canvas/webgl-canvas';
 import { css } from '@emotion/core'
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 
