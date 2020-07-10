@@ -27,10 +27,13 @@ import AniLink from "gatsby-plugin-transition-link/AniLink"
 // Annie Use Your Telescope
 
 export default ({ data }) => {
+    
 	const [hasLoaded, setLoad] = useState(false)
+    
 	const loadBinder = (value) => {
 		setLoad(value);
-	}
+    }
+    
 	// console.log(data);
 	return (
 		// <div css={css`
@@ -71,9 +74,22 @@ const AnimateText = (props) => {
 
 const BlogContent = ({ data }) => {
 
+    const [isHover, setHover] = useState(false);
+
 	return (
 		<Fragment>
-			<h4>{data.site.siteMetadata.desc}</h4>
+            <h4 
+                className="article-title"
+                onMouseEnter={()=> { setHover(true)}}
+                onMouseLeave={()=> { setHover(false)}}
+                style={{ 
+                    display: 'inline-block', 
+                    backgroundColor: '#33D9B8',
+                    padding: '15px',
+                    color: '#fff',
+                    borderRadius: '3px',
+                    // width: isHover ? '100%' : 'auto'
+                }}>{data.site.siteMetadata.desc}</h4>
 
 			{data.allMarkdownRemark.edges.map(({ node }) => (
 
