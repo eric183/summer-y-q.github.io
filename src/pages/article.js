@@ -7,7 +7,7 @@ import Layout from '../components/layout'
 import CanvasModule from '../components/webgl-canvas';
 import { css } from '@emotion/core'
 import AniLink from "gatsby-plugin-transition-link/AniLink"
-
+import "../styles/global.css";
 
 // const contentful = require("contentful");
 // // import contentful from 'contentful';
@@ -34,30 +34,30 @@ export default ({ data }) => {
 	}
 	// console.log(data);
 	return (
-		<div css={css`
-			position: fixed; 
-			width: 100%; 
-			height: 100%; 
-			left: 0; 
-			right: 0; 
-			top: 0; 
-			bottom: 0;
-			display: flex;
-			align-items: center;
-			justify-content: center;`
-		}>
-			{/* <img src="bean.gif" css={css`display: ${!hasLoaded ? "block" : "none"}; position: relative; z-index: 1;`} /> */}
-			<CanvasModule loadBinder={loadBinder} />
-			{/* <Canvas>
+		// <div css={css`
+		// 	position: fixed; 
+		// 	width: 100%; 
+		// 	height: 100%; 
+		// 	left: 0; 
+		// 	right: 0; 
+		// 	top: 0; 
+		// 	bottom: 0;
+		// 	display: flex;
+		// 	align-items: center;
+		// 	justify-content: center;`
+		// }>
+		// 	{/* <img src="bean.gif" css={css`display: ${!hasLoaded ? "block" : "none"}; position: relative; z-index: 1;`} /> */}
+		// 	<CanvasModule loadBinder={loadBinder} />
+		// 	{/* <Canvas>
 
-				<Box position={[-1.2, 0, 0]}  />
-			</Canvas> */}
+		// 		<Box position={[-1.2, 0, 0]}  />
+		// 	</Canvas> */}
 
-		</div>
-		// <Layout>
-		// 	{/* <BlogContent data={data}></BlogContent> */}
+		// </div>
+		<Layout>
+			<BlogContent data={data}></BlogContent>
 
-		// </Layout>
+		</Layout>
 	)
 }
 

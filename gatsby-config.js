@@ -196,12 +196,13 @@ module.exports = {
                 path: `${__dirname}/src/`,
             },
         },
-        // {
-        //     resolve: `gatsby-plugin-typography`,
-        //     options: {
-        //         pathToConfigModule: `src/utils/typography`,
-        //     },
-        // },
+        {
+            resolve: `gatsby-plugin-typography`,
+            options: {
+                pathToConfigModule: `src/utils/typography`,
+                omitGoogleFont: true
+            },
+        },
         {
             resolve: `gatsby-plugin-manifest`,
             options: {

@@ -137,8 +137,8 @@ export default ({ children }) => {
                 <AniLink
                     swipe
                     duration={0.5}
-                    direction={globalHistory.location.pathname == "/" ? "down" : "up"}
-                    to={globalHistory.location.pathname == "/" ? "/about" : "/"}>
+                    direction={globalHistory.location.pathname == "/article" ? "down" : "up"}
+                    to={globalHistory.location.pathname == "/article" ? "/about" : "/article"}>
 
 
 

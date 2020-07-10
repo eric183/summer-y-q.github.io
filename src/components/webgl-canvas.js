@@ -3,11 +3,11 @@ import React, { Suspense, useEffect, useRef, useMemo } from "react"
 import { Canvas, Dom, useLoader, useFrame } from "react-three-fiber"
 import { TextureLoader, LinearFilter } from "three"
 import lerp from "lerp"
-import { Text, MultilineText } from "./Text"
-import Plane from "./Plane"
-import Diamonds from "./diamonds/Diamonds"
-import { Block, useBlock } from "./blocks"
-import state from "./store"
+import { Text, MultilineText } from "./diamond-view/Text"
+import Plane from "./diamond-view/Plane"
+import Diamonds from "./diamond-view/diamonds/Diamonds"
+import { Block, useBlock } from "./diamond-view/blocks"
+import state from "./diamond-view/store"
 import "./style.css"
 
 function Startup() {
@@ -23,6 +23,7 @@ function Paragraph({ image, index, offset, factor, header, aspect, text }) {
     const pixelWidth = w * state.zoom * size
     const left = !(index % 2)
     const color = index % 2 ? "#D40749" : "#2FE8C3"
+    console.log(text);
     return (
         <Block factor={factor} offset={offset}>
             <group position={[left ? -alignRight : alignRight, 0, 0]}>
@@ -53,9 +54,10 @@ function Content() {
         <>
             <Block factor={1} offset={0}>
                 <Block factor={1.2}>
-                    <Text left size={w * 0.08} position={[-w / 3.2, 0.5, -1]} color="#d40749">
-                        ERiC DUty
-          </Text>
+                    <Text left size={w * 0.08} position={[-w / 4.2, 0.5, -1]} color="#d40749">
+                        {/* ERiC DUty */}
+                        MYoYo
+                    </Text>
                 </Block>
                 <Block factor={1.0}>
                     <Dom position={[-w / 3.2, -w * 0.08 + 0.25, -1]}>It was the year 2076.{mobile ? <br /> : " "}The substance had arrived.</Dom>

@@ -14,6 +14,7 @@ function Block({ children, offset, factor, ...props }) {
     const curTop = state.top.current
     ref.current.position.y = lerp(curY, (curTop / state.zoom) * factor, 0.1)
   })
+  // console.log(children);
   return (
     <offsetContext.Provider value={offset}>
       <group {...props} position={[0, -sectionHeight * offset * factor, 0]}>
