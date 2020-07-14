@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import style from 'styled-components';
 import { css } from '@emotion/core';
 import { useSpring, animated, interpolate } from 'react-spring'
-// import "../components/nes.css";
 
 
 

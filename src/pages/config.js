@@ -1,5 +1,4 @@
 import React from 'react';
-import '../components/nes.css';
 
 export default () => (
     <div >
