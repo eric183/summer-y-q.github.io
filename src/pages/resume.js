@@ -2,16 +2,26 @@ import React from 'react';
 import Layout from '../components/layout'
 // import "@fortawesome/fontawesome-free/js/all.min.js";
 // import "@fortawesome/fontawesome-free/css/all.css";
+import { jsx, css } from '@emotion/react'
 
 import { graphql } from 'gatsby'
+
+const InjectCss = css`
+    &,.scroll-content {
+        h1, h2, h3, h4, h5, h6 {
+            margin: 0;
+        }
+    }   
+`
+
 
 const ResumeLayout = (props) => {
 
     // const { resumeInfo } = props.data.site.siteMetadata; 
     const { experience, social, skill, name, title, years, desc } = props.data.site.siteMetadata.resumeInfo; 
 	return (
-		<Layout>
-            <div className="scroll-content" >
+		// <Layout>
+            <div className="scroll-content" css={InjectCss}>
                 <header>
                     <h2>{ name }</h2>
                     <h3>{ title }</h3>
@@ -81,7 +91,7 @@ const ResumeLayout = (props) => {
                 </section>
 			</div>
 
-		</Layout>
+		// </Layout>
 
 	)
 }
