@@ -6,7 +6,7 @@ import SliderBlock from '../../components/slider-block';
 
 // import posed from 'react-pose';
 
-import { css } from "@emotion/core";
+import { css } from "@emotion/react";
 
 import { graphql } from 'gatsby';
 

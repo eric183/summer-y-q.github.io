@@ -5,7 +5,7 @@ import React, { Fragment, useState } from "react"
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 // import CanvasModule from '../components/webgl-canvas/webgl-canvas';
-import { css } from '@emotion/core'
+import { css } from '@emotion/react'
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 
 // const contentful = require("contentful");
@@ -30,6 +30,11 @@ export default ({ data }) => {
     
 	// console.log(data);
 	return (
+		<>
+			<Layout>
+				<BlogContent data={data}></BlogContent>
+			</Layout>
+		</>
 		// <div css={css`
 		// 	position: fixed; 
 		// 	width: 100%; 
@@ -50,10 +55,7 @@ export default ({ data }) => {
 		// 	</Canvas> */}
 
 		// </div>
-		<Layout>
-			<BlogContent data={data}></BlogContent>
-
-		</Layout>
+	
 	)
 }
 

@@ -2,8 +2,8 @@ import React, { useState } from "react"
 
 
 import { graphql } from 'gatsby'
-import CanvasModule from '../components/webgl-canvas';
-import { css } from '@emotion/core'
+// import CanvasModule from '../components/webgl-canvas';
+import { css } from '@emotion/react'
 
 
 // const contentful = require("contentful");
@@ -40,11 +40,14 @@ export default () => {
 			top: 0; 
 			bottom: 0;
 			display: flex;
+			flex-direction: column;
 			align-items: center;
 			justify-content: center;`
 		}>
+			<p>Back soon</p>
+			<p>Please wait</p>
 			{/* <img src="bean.gif" css={css`display: ${!hasLoaded ? "block" : "none"}; position: relative; z-index: 1;`} /> */}
-			<CanvasModule loadBinder={loadBinder} />
+			{/* <CanvasModule loadBinder={loadBinder} /> */}
 			{/* <Canvas>
 
 				<Box position={[-1.2, 0, 0]}  />

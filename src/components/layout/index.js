@@ -1,16 +1,12 @@
-import React, { useEffect, useState, useRef } from "react"
-import { Link, graphql, useStaticQuery } from "gatsby"
+import React, { useEffect, useState } from "react"
+import { graphql, useStaticQuery } from "gatsby"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
-import { css } from '@emotion/core'
-import LayoutCss from './layout.module.css'
+import { css } from '@emotion/react'
 import { globalHistory } from '@reach/router'
 // import { Scrollbars } from 'react-custom-scrollbars'
 // import WebglCavas from './webgl-canvas';
 import SplitText from 'react-pose-text';
-import posed from "react-pose"
-import { TransitionState } from "gatsby-plugin-transition-link";
 
-import { useLax, useLaxElement } from 'use-lax';
 import lax from 'lax.js'
 import Scrollbar from 'smooth-scrollbar'
 
@@ -49,33 +45,43 @@ export default ({ children }) => {
     const [hasLoad, setLoad] = useState(false);
     const [linkColor, setColor] = useState('#07e')
     const bindScroll = (willLeave) => {
-        lax.setup()
+        console.log(lax);
+        // debugger;
+        // lax.setup()
+        let scrollbar = Scrollbar.init(document.body);
+        
+        lax.addDriver('scrollY', function () {
+            return  scrollbar.scrollY
+        });
         // document.addEventListener('scroll', function (x) {
         //     // console.log(document.body.firstChild.scrollTop);
         //     lax.update(document.body.scrollTop)
         // }, false)
 
-        lax.update(document.body.scrollTop);
+        // lax.update(document.body.scrollTop);
 
 
-        let scrollbar = Scrollbar.init(document.body);
-        // console.log(scrollbar.scrollTop); // 456
+        // let scrollbar = Scrollbar.init(document.body);
+        // // console.log(scrollbar.scrollTop); // 456
 
-        scrollbar.addListener((s)=> {
-            // console.log(console.log(s.offset.y))
-            if(s.offset.y == 'undefined') return;
-            lax.update(s.offset.y);
-            // console.log(s.offset.y);
+        // scrollbar.addListener((s)=> {
+        //     // console.log(console.log(s.offset.y))
+        //     if(s.offset.y === 'undefined') return;
+        //     lax.update(s.offset.y);
+        //     // console.log(s.offset.y);
 
-        })
+        // })
 
-        lax.update(scrollbar.scrollTop);
+        // lax.update(scrollbar.scrollTop);
 
-        // if(willLeave) scrollbar.destroy();
+        if(willLeave) {
+            scrollbar.destroy();
+            lax.removeElements();
+        } 
     }
 
     useEffect(() => {
-        if(globalHistory.location.pathname == "/projects" || globalHistory.location.pathname == "/projects/") {
+        if(globalHistory.location.pathname === "/projects" || globalHistory.location.pathname === "/projects/") {
             
             gsap.to(document.body, {
                 backgroundColor: '#000'
@@ -88,16 +94,11 @@ export default ({ children }) => {
             // document.body.style.backgroundColor = '#fff';
         }
     
-        globalHistory.location.pathname == "/projects/" ? setColor('#fff'): setColor('#07e');
-        // console.log(globalHistory);
-      
-        // debugger;
-        bindScroll();
+        globalHistory.location.pathname === "/projects/" ? setColor('#fff'): setColor('#07e');
         setLoad(true);
-        // debugger;
-
-        // return ()=> { bindScroll(true) }
-
+        
+        bindScroll();
+        return ()=> { bindScroll(true) };
 
     }, [])
 
@@ -110,7 +111,7 @@ export default ({ children }) => {
 
         <div
             pose={
-                (globalHistory.location.pathname == "/projects") && hasLoad ? 'transin' : 'transout'
+                (globalHistory.location.pathname === "/projects") && hasLoad ? 'transin' : 'transout'
             }
             className="layout-content"
             css={css`
@@ -125,7 +126,7 @@ export default ({ children }) => {
                 globalHistory.location.pathname != "/projects" && */}
             <header
                 css={css`
-                        display: ${globalHistory.location.pathname == "/cv" ? 'none': 'flex' };
+                        display: ${globalHistory.location.pathname === "/cv" ? 'none': 'flex' };
                         margin: 1.5rem; 
                         font-family: ${fontFamily};
                         align-items: center;
@@ -137,8 +138,8 @@ export default ({ children }) => {
                 <AniLink
                     swipe
                     duration={0.5}
-                    direction={globalHistory.location.pathname == "/article" ? "down" : "up"}
-                    to={globalHistory.location.pathname == "/article" ? "/about" : "/article"}>
+                    direction={globalHistory.location.pathname === "/article" ? "down" : "up"}
+                    to={globalHistory.location.pathname === "/article" ? "/about" : "/article"}>
 
 
 
@@ -149,7 +150,7 @@ export default ({ children }) => {
                                 margin: 0; 
                                 color: ${ linkColor };
                             `}>
-                        <SplitText initialPose="exit" pose="enter" charPoses={globalHistory.location.pathname == "/projects/" ? charPoses : false}>
+                        <SplitText initialPose="exit" pose="enter" charPoses={globalHistory.location.pathname === "/projects/" ? charPoses : false}>
                             {data.site.siteMetadata.author}
                         </SplitText>
                     </h3>
@@ -198,27 +199,27 @@ const charPoses = {
     }
 };
 
-const DivContent = posed.div({
-    // background: ${ globalHistory.location.pathname == "/projects" ? 'red' : '#fff' };
+// const DivContent = posed.div({
+//     // background: ${ globalHistory.location.pathname == "/projects" ? 'red' : '#fff' };
 
-    transin: {
-        y: 0,
-        opacity: 1,
-        delay: 300,
-        transition: {
-            y: { type: 'spring', stiffness: 1000, damping: 15 },
-            default: { duration: 300 }
-        }
-        // beforeChildren: true,
-        // staggerChildren: 5000,
+//     transin: {
+//         y: 0,
+//         opacity: 1,
+//         delay: 300,
+//         transition: {
+//             y: { type: 'spring', stiffness: 1000, damping: 15 },
+//             default: { duration: 300 }
+//         }
+//         // beforeChildren: true,
+//         // staggerChildren: 5000,
 
-    },
-    transout: {
-        y: 50,
-        opacity: 0,
-        transition: { duration: 150 }
-    }
-})
+//     },
+//     transout: {
+//         y: 50,
+//         opacity: 0,
+//         transition: { duration: 150 }
+//     }
+// })
 
 // export const query = useStaticQuery(graphql`
 //     query {

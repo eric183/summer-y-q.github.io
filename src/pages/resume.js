@@ -4,7 +4,6 @@ import Layout from '../components/layout'
 // import "@fortawesome/fontawesome-free/css/all.css";
 
 import { graphql } from 'gatsby'
-// import { css } from "@emotion/core"
 
 
 
@@ -16,15 +15,13 @@ const TitleContent = (props) => (
     </div>
 )
 
-export default (props) => {
+const Resume = (props) => {
 
     const { resumeInfo } = props.data.site.siteMetadata; 
     // console.log(resumeInfo);
 	return (
 		<Layout>
-			{/* <div className="scroll-content" css={css`height: 100%; width: 100%;background-color: #f1f1f1; padding: 20px`}> */}
 			<div className="scroll-content" >
-            {/* css={css`height: 100%; width: 100%;background-color: #f1f1f1; padding: 20px`} */}
                 <header>
                     <h2>{ resumeInfo.name }</h2>
                     <h3>{ resumeInfo.title }</h3>
@@ -34,7 +31,7 @@ export default (props) => {
 
                 {/* about me */}
                 <section>
-                    <TitleContent title="关于我" />
+                    <TitleContent title="Summary" />
                     { resumeInfo.desc }
                 </section>
                 
@@ -57,7 +54,7 @@ export default (props) => {
                 </section>
 
                 <section>
-                    <TitleContent title="工作经历：" />
+                    <TitleContent title="Experiences" />
                     
 
                     <ul>
@@ -77,7 +74,7 @@ export default (props) => {
                 </section>
 
                 <section>
-                    <TitleContent title="项目："/>
+                    <TitleContent title="Projects"/>
                     <ul>
                         { 
                             resumeInfo.projects.map((project, index) => 
@@ -100,9 +97,9 @@ export default (props) => {
                 </section>
 
                 <section>
-                    <TitleContent title="技术栈" />
+                    <TitleContent title="Skills" />
                         {
-                            resumeInfo.technologies.map((technology, index)=> {
+                            resumeInfo.skills.map((technology, index)=> {
                                 
                                 return (
                                     <ul key={index}>
@@ -121,27 +118,6 @@ export default (props) => {
 
                  
                 </section>
-                
-                <section></section>
-
-                <section></section>
-                
-				{/* <AniBlock className="lax" data-lax-translate-x="0 0, vh 1200">
-					<h3>了不起哦</h3>
-					<p>我是正文</p>
-				</AniBlock>
-				<AniBlock className="lax" data-lax-translate-x="0 0, vh 1200">
-					<h3>了不起哦</h3>
-					<p>我是正文</p>
-				</AniBlock>
-				<AniBlock className="lax" data-lax-translate-x="0 0, vh 1200">
-					<h3>了不起哦</h3>
-					<p>我是正文</p>
-				</AniBlock> */}
-				
-				{/* <p className="lax" data-lax-preset="spin fadeInOut">{props.data.site.siteMetadata.about}</p>
-				<h1>About me</h1>
-				<p>{props.data.site.siteMetadata.about}</p> */}
 			</div>
 
 		</Layout>
@@ -197,7 +173,7 @@ export const query = graphql`
                     link
                     isPrivate
                 }
-                technologies {
+                skills {
                    name
                    label
                    children
@@ -209,13 +185,4 @@ export const query = graphql`
   }
 `
 
-// export const query = graphql`
-//   query About {
-//     site {
-//       siteMetadata {
-//         title,
-//         about
-//       }
-//     }
-//   }
-// `
+export default Resume;

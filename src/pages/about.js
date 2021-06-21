@@ -2,11 +2,11 @@ import React from 'react';
 import Layout from '../components/layout'
 
 import { graphql } from 'gatsby'
-import { css } from "@emotion/core"
+import { css } from "@emotion/react"
 
 export default (props) => {
 
-
+	console.log(props);
 	return (
 		<Layout>
 			<div className="scroll-content" css={css`height: 100%; width: 100%;`}>

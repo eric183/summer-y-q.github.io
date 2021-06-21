@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import Swiper from 'swiper';
-import "swiper/css/swiper.min.css";
-import { css } from "@emotion/core";
+import "swiper/swiper.min.css";
+import { css } from "@emotion/react";
 import './slider-block.module.css';
 import { globalHistory } from '@reach/router'
 
@@ -49,7 +49,7 @@ export default (props) => {
                             css={cusorCss}
                         >
                             <div className="swiper-zoom-container" css={cusorCss}>
-                                <img src={`${_img}`} css={cusorCss}/>
+                                <img src={`${_img}`} css={cusorCss} />
 
                             </div>
                         </div>
