@@ -4,7 +4,7 @@ import Layout from '../components/layout'
 import { graphql } from 'gatsby'
 import { css } from "@emotion/react"
 
-export default (props) => {
+const About =  (props) => {
 
 	console.log(props);
 	return (
@@ -87,6 +87,7 @@ export const query = graphql`
   }
 `
 
+export default About;
 // export const query = graphql`
 //   query About {
 //     site {

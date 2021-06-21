@@ -26,7 +26,7 @@ import AniLink from "gatsby-plugin-transition-link/AniLink"
 // import  { bodyFontFamily } from '../utils/typography' 
 // Annie Use Your Telescope
 
-export default ({ data }) => {
+const Article = ({ data }) => {
     
 	// console.log(data);
 	return (
@@ -138,3 +138,5 @@ export const query = graphql`
 	
   }
 `
+
+export default Article;

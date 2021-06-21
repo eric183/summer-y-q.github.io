@@ -5,65 +5,51 @@ import Layout from '../components/layout'
 
 import { graphql } from 'gatsby'
 
+const ResumeLayout = (props) => {
 
-
-
-
-const TitleContent = (props) => (
-    <div className="title-content">
-        <h3>{props.title}</h3>
-    </div>
-)
-
-const Resume = (props) => {
-
-    const { resumeInfo } = props.data.site.siteMetadata; 
-    // console.log(resumeInfo);
+    // const { resumeInfo } = props.data.site.siteMetadata; 
+    const { experience, social, skill, name, title, years, desc } = props.data.site.siteMetadata.resumeInfo; 
 	return (
 		<Layout>
-			<div className="scroll-content" >
+            <div className="scroll-content" >
                 <header>
-                    <h2>{ resumeInfo.name }</h2>
-                    <h3>{ resumeInfo.title }</h3>
-                    <p>{ resumeInfo.years }年经验</p>
+                    <h2>{ name }</h2>
+                    <h3>{ title }</h3>
+                    <p>{ years }年经验</p>
                 </header>
 
 
                 {/* about me */}
-                <section>
+                {/* <section>
                     <TitleContent title="Summary" />
-                    { resumeInfo.desc }
-                </section>
+                    { desc }
+                </section> */}
                 
 
-                <section>
+                {/* <section>
                     { 
                         resumeInfo.social.map((d, index)=> {
                             return (
                                 <p key={index}> 
                                     <i className={ d.icon ? d.icon : "" }></i>
-
-
-
-                                    {/* <FontAwesomeIcon icon="coffee" /> */}
                                     { d.text } 
                                 </p>
                             )
                         })
                     }    
-                </section>
+                </section> */}
 
                 <section>
-                    <TitleContent title="Experiences" />
+                    <TitleContent title="Work Experience" />
                     
 
-                    <ul>
+                    <ul className=''>
                         { 
-                            resumeInfo.works.map((work, index)=> (
+                            experience.map((work, index)=> (
                                 <li key={index}>
                                     <p>{ work.title }</p>
                                     <p>{ work.company }</p>
-                                    <p>{ work.date.begin } - { work.date.end }</p>
+                                    <p>{ work.from } - { work.to }</p>
                                     <p>{ work.desc }</p>
                                 </li>
                             )) 
@@ -74,32 +60,9 @@ const Resume = (props) => {
                 </section>
 
                 <section>
-                    <TitleContent title="Projects"/>
-                    <ul>
-                        { 
-                            resumeInfo.projects.map((project, index) => 
-                                {   
-                                    return !project.isPrivate ?  
-                                        (<li key={index}>
-                                            <p>{ project.name }</p>
-                                            {/* <p>{ project.company }</p> */}
-                                            <p>{ project.desc }</p>
-                                            { 
-                                                project.link ? 
-                                                    <p>link: <a href="avoid(undefined)">{project.link}</a></p> : null
-                                            }
-                                        </li>) : null
-                                }
-                            ) 
-                        }
-                        
-                    </ul>
-                </section>
-
-                <section>
-                    <TitleContent title="Skills" />
+                    <TitleContent title="Skill" />
                         {
-                            resumeInfo.skills.map((technology, index)=> {
+                            skill.map((technology, index)=> {
                                 
                                 return (
                                     <ul key={index}>
@@ -115,8 +78,6 @@ const Resume = (props) => {
                                 )
                             })
                         }
-
-                 
                 </section>
 			</div>
 
@@ -125,64 +86,56 @@ const Resume = (props) => {
 	)
 }
 
+const TitleContent = (props) => (
+    <div className="title-content">
+        <h3>{props.title}</h3>
+    </div>  
+)
 
 
-
-// export const query = graphql`
-//   {
-//     allFile {
-//       edges {
-//         node {
-//           id
-//           base
-//           accessTime
-//           name
-//           size
-//         }
-//       }
-//     }
-//   }
-// `
 export const query = graphql`
   {
     site {
-        siteMetadata {
-          
-            about
-            title
-            resumeInfo {
-                name
-                title
-                desc
-                years
-                social {
-                    text
-                    link
-                    icon
-                }
-                works {
-                    company
-                    desc
-                    title
-                    date { begin end }
-                }
-                projects {
-                    name
-                    withSkills
-                    desc
-                    link
-                    isPrivate
-                }
-                skills {
-                   name
-                   label
-                   children
-                }
+      siteMetadata {
+        resumeInfo {
+          desc
+          name
+          title
+          years
+          experience {
+            addr
+            children {
+              desc
+              isPrivate
+              role
+              name
+              withSkills
             }
+            company
+            from
+            title
+            to
+          }
+          skill {
+            children
+            label
+            name
+          }
+          social {
+            icon
+            link
+            text
+          }
         }
-        buildTime
+        about
+        author
+        desc
+        description
+        fontFamily
+        title
+      }
     }
   }
 `
 
-export default Resume;
+export default ResumeLayout;

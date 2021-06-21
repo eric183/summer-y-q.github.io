@@ -11,7 +11,7 @@ import { css } from "@emotion/react";
 import { graphql } from 'gatsby';
 
 
-export default () => {
+const Projects = () => {
     const [hasMount] = useState(false)
     useEffect(()=> {
     
@@ -289,3 +289,5 @@ export const query = graphql`
   
 }
 `
+
+export default Projects;

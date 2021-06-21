@@ -24,6 +24,7 @@
     "contentful": "^8.4.2",
     "gatsby": "^3.7.2",
     "gatsby-plugin-emotion": "^6.7.1",
+    "gatsby-plugin-graphql-codegen": "^3.0.0",
     "gatsby-plugin-manifest": "^3.7.1",
     "gatsby-plugin-sharp": "^3.7.1",
     "gatsby-plugin-transition-link": "^1.18.0",

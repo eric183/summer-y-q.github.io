@@ -1,7 +1,7 @@
-import React, { useState } from "react"
+import React from "react"
 
 
-import { graphql } from 'gatsby'
+// import { graphql } from 'gatsby'
 // import CanvasModule from '../components/webgl-canvas';
 import { css } from '@emotion/react'
 
@@ -24,12 +24,12 @@ import { css } from '@emotion/react'
 // import  { bodyFontFamily } from '../utils/typography' 
 // Annie Use Your Telescope
 
-export default () => {
-	const [, setLoad] = useState(false)
-	const loadBinder = (value) => {
-		setLoad(value);
-	}
-	// console.log(data);
+const Index = (props) => {
+	// const [, setLoad] = useState(false)
+	// const loadBinder = (value) => {
+	// 	setLoad(value);
+	// }
+	console.log(props);
 	return (
 		<div css={css`
 			position: fixed; 
@@ -44,8 +44,8 @@ export default () => {
 			align-items: center;
 			justify-content: center;`
 		}>
-			<p>Back soon</p>
-			<p>Please wait</p>
+			<p>Backsn</p>
+			<p>Please wait hi</p>
 			{/* <img src="bean.gif" css={css`display: ${!hasLoaded ? "block" : "none"}; position: relative; z-index: 1;`} /> */}
 			{/* <CanvasModule loadBinder={loadBinder} /> */}
 			{/* <Canvas>
@@ -64,39 +64,41 @@ export default () => {
 
 
 
-export const query = graphql`
-  {
-    allMarkdownRemark {
-      edges {
-        node {
-          id
-          frontmatter {
-            date
-			title
-          }
-          timeToRead
-          html
-          excerpt
-          fields {
-            slug
-          }
-        }
-      }
-      totalCount
-	}
-	site {
-	id
-	siteMetadata {
-			title
-			about
-			author
-			fontFamily
-			desc
-		}
-	}
+// export const query = graphql`
+//   {
+//     allMarkdownRemark {
+//       edges {
+//         node {
+//           id
+//           frontmatter {
+//             date
+// 			title
+//           }
+//           timeToRead
+//           html
+//           excerpt
+//           fields {
+//             slug
+//           }
+//         }
+//       }
+//       totalCount
+// 	}
+// 	site {
+// 	id
+// 	siteMetadata {
+// 			title
+// 			about
+// 			author
+// 			fontFamily
+// 			desc
+// 		}
+// 	}
 
-  }
-`
+//   }
+// `
+
+export default Index;
 
 
 // import React, { Fragment, useState, useRef, useEffect, useMemo } from "react"
