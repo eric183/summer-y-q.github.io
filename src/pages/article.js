@@ -1,8 +1,8 @@
-import React, { Fragment, useState, useRef } from "react"
-import { Canvas, useFrame } from 'react-three-fiber'
+import React, { Fragment, useState } from "react"
+// import { useFrame } from 'react-three-fiber'
 
 
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 // import CanvasModule from '../components/webgl-canvas/webgl-canvas';
 import { css } from '@emotion/core'
@@ -27,12 +27,6 @@ import AniLink from "gatsby-plugin-transition-link/AniLink"
 // Annie Use Your Telescope
 
 export default ({ data }) => {
-    
-	const [hasLoaded, setLoad] = useState(false)
-    
-	const loadBinder = (value) => {
-		setLoad(value);
-    }
     
 	// console.log(data);
 	return (
@@ -63,18 +57,10 @@ export default ({ data }) => {
 	)
 }
 
-const AnimateText = (props) => {
-
-	return (
-		<div className="text-content">
-
-		</div>
-	)
-}
 
 const BlogContent = ({ data }) => {
 
-    const [isHover, setHover] = useState(false);
+    const [, setHover] = useState(false);
 
 	return (
 		<Fragment>
@@ -116,31 +102,6 @@ const BlogContent = ({ data }) => {
 	)
 }
 
-const Box = (props) => {
-	// This reference will give us direct access to the mesh
-	const mesh = useRef()
-  
-	// Set up state for the hovered and active state
-	const [hovered, setHover] = useState(false)
-	const [active, setActive] = useState(false)
-  
-	// Rotate mesh every frame, this is outside of React without overhead
-	useFrame(() => (mesh.current.rotation.x = mesh.current.rotation.y += 0.01))
-  
-	return (
-
-			<mesh
-				{...props}
-				ref={mesh}
-				scale={active ? [1.5, 1.5, 1.5] : [1, 1, 1]}
-				onClick={(e) => setActive(!active)}
-				onPointerOver={(e) => setHover(true)}
-				onPointerOut={(e) => setHover(false)}>
-				<boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
-				<meshStandardMaterial attach="material" color={hovered ? 'hotpink' : 'orange'} />
-			</mesh>
-	)
-  }
 
 export const query = graphql`
   {

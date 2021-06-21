@@ -1,12 +1,20 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Layout from '../components/layout'
-import AniBlock from '../components/ani-block'
-import "@fortawesome/fontawesome-free/js/all.min.js";
-import "@fortawesome/fontawesome-free/css/all.css";
+// import "@fortawesome/fontawesome-free/js/all.min.js";
+// import "@fortawesome/fontawesome-free/css/all.css";
 
 import { graphql } from 'gatsby'
-import TransitionLink from "gatsby-plugin-transition-link"
-import { css } from "@emotion/core"
+// import { css } from "@emotion/core"
+
+
+
+
+
+const TitleContent = (props) => (
+    <div className="title-content">
+        <h3>{props.title}</h3>
+    </div>
+)
 
 export default (props) => {
 
@@ -14,9 +22,10 @@ export default (props) => {
     // console.log(resumeInfo);
 	return (
 		<Layout>
-			<div className="scroll-content" css={css`height: 100%; width: 100%;background-color: #f1f1f1; padding: 20px`}>
-
-                <header css={css`overflow: hidden`}>
+			{/* <div className="scroll-content" css={css`height: 100%; width: 100%;background-color: #f1f1f1; padding: 20px`}> */}
+			<div className="scroll-content" >
+            {/* css={css`height: 100%; width: 100%;background-color: #f1f1f1; padding: 20px`} */}
+                <header>
                     <h2>{ resumeInfo.name }</h2>
                     <h3>{ resumeInfo.title }</h3>
                     <p>{ resumeInfo.years }年经验</p>
@@ -30,7 +39,7 @@ export default (props) => {
                 </section>
                 
 
-                <section css={css`display: flex; flex-direction: column`}>
+                <section>
                     { 
                         resumeInfo.social.map((d, index)=> {
                             return (
@@ -80,7 +89,7 @@ export default (props) => {
                                             <p>{ project.desc }</p>
                                             { 
                                                 project.link ? 
-                                                    <p>link: <a>{project.link}</a></p> : null
+                                                    <p>link: <a href="avoid(undefined)">{project.link}</a></p> : null
                                             }
                                         </li>) : null
                                 }
@@ -200,14 +209,6 @@ export const query = graphql`
   }
 `
 
-
-
-
-const TitleContent = (props) => (
-    <div className="title-content">
-        <h3>{props.title}</h3>
-    </div>
-)
 // export const query = graphql`
 //   query About {
 //     site {

@@ -1,28 +1,21 @@
-import React, { useEffect, useState, useRef } from 'react'
+
+import React, { useEffect, useState } from 'react'
 import Layout from '../../components/layout'
 import AniBlock from '../../components/ani-block'
 import SliderBlock from '../../components/slider-block';
 
-import { globalHistory } from '@reach/router'
-import { TransitionState } from "gatsby-plugin-transition-link";
-import posed from 'react-pose';
-import AniLink from "gatsby-plugin-transition-link/AniLink"
-import { gsap } from 'gsap';
+// import posed from 'react-pose';
 
 import { css } from "@emotion/core";
-import { Scene } from 'three';
 
 import { graphql } from 'gatsby';
 
-export default ({ data }) => {
-    const [hasMount, setMount] = useState(false)
-    const CalRef = useRef(null);
+
+export default () => {
+    const [hasMount] = useState(false)
     useEffect(()=> {
     
 
-        setTimeout(()=> {
-            setMount(true);
-        }, 0)
         console.log('调用一次');
 
         // gsap.to(document.body, {
@@ -43,7 +36,6 @@ export default ({ data }) => {
         }
     }, [hasMount])
     
-    const { fontFamily } = data.site.siteMetadata;
 
     return (
     
@@ -206,7 +198,7 @@ export default ({ data }) => {
                     `} >
 
                         <h3 css={css`color: #fff; width: 100%; text-align: center;`}>
-                            <a href="http://www.wow-toboom.com/"  target="_blank">WOW to Boom</a>                        
+                            <a href="http://www.wow-toboom.com/"  target="_blank" rel="noreferrer">WOW to Boom</a>                        
                         </h3>
                        
                 </AniBlock>
@@ -241,24 +233,25 @@ export default ({ data }) => {
     )
    
 }
-const TitleAnimate = posed.h3({
-    hidden: { 
-        color: "#000",
-        // left: 0
-    },
-    visible: { 
-        color: "#000",
-        left: "100px",
-        top: "-30px",
-        scale: 0.6
-    },
-    
-})
 
-const Box = posed.div({
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-})
+// const TitleAnimate = posed.h3({
+//     hidden: { 
+//         color: "#000",
+//         // left: 0
+//     },
+//     visible: { 
+//         color: "#000",
+//         left: "100px",
+//         top: "-30px",
+//         scale: 0.6
+//     },
+    
+// })
+
+// const Box = posed.div({
+//     hidden: { opacity: 0 },
+//     visible: { opacity: 1 },
+// })
   
 
 

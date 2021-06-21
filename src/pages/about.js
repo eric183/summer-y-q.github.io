@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Layout from '../components/layout'
-import AniBlock from '../components/ani-block'
 
 import { graphql } from 'gatsby'
-import TransitionLink from "gatsby-plugin-transition-link"
 import { css } from "@emotion/core"
 
 export default (props) => {
