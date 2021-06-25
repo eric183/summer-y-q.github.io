@@ -33,6 +33,7 @@
     "gatsby-source-filesystem": "^3.7.1",
     "gatsby-transformer-remark": "^4.4.1",
     "gsap": "^3.2.6",
+    "html2pdf.js": "^0.9.3",
     "lax.js": "^2.0.3",
     "lerp": "^1.0.3",
     "postprocessing": "^6.14.3",
