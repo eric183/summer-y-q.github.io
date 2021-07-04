@@ -4,7 +4,9 @@
  * See: https://www.gatsbyjs.org/docs/gatsby-config/
  */
 module.exports = {
-
+    // flags: {
+    //     DEV_SSR: false,
+    // },
     siteMetadata: {
         title: "你好",
         about: "A develop & A named artist",
@@ -14,7 +16,7 @@ module.exports = {
         desc: "WAHT YOU WANT, WHAT YOU NEED",
 
         resumeInfo: {
-            name: "匡志宸",
+            name: "宋紫雯",
             // title: "前端工程师、游戏工程师、GIS工程师",
             title: "前端工程师、TA工程师",
             years: "五",

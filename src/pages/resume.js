@@ -46,11 +46,11 @@ const ResumeLayout = (props) => {
 	return (
 		// <Layout>
             <div className="scroll-content" css={InjectCss}>
-                <header>
+                {/* <header>
                     <h2>{ name }</h2>
                     <h3>{ title }</h3>
                     <p>{ years }年经</p>
-                </header>
+                </header> */}
 
 
                 {/* about me */}
