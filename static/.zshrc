@@ -46,8 +46,9 @@ fixvscode() {
 }
 
 cpzshrc() {
-  cp ~/.zshrc WorkSpace/eric183.github.io/static
+  cp ~/.zshrc $work/eric183.github.io/static
 }
+
 # where proxy
 proxyon() {
   export http_proxy="http://127.0.0.1:58591"
