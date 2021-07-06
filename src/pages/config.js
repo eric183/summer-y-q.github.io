@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Config = () => (
-    <div >
+    <div>
         <span className="nes-text is-primary">Primary</span>
     </div>
 )

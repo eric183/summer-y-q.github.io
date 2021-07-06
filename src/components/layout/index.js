@@ -17,13 +17,8 @@ import { gsap } from 'gsap';
 const ListLink = props => (
     <li style={{ display: `inline-block`, marginRight: `1rem`, marginBottom: 0 }}>
         <AniLink fade duration={.2} to={props.to} css={css`color: ${props.linkColor}`}>
-
             {props.children}
         </AniLink>
-
-
-
-
     </li>
 )
 

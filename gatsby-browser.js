@@ -36,18 +36,4 @@ import { GlobalStyle } from '~styles';
 // }
 
 // console.log(renderMethod);
-export const wrapPageElement = ({ element, props }) => {
-    // const [mounted, setMounted] = useState(false);
-    // useEffect(()=> {
-    //     setMounted(true)
-    // }, [])
-// export const wrapRootElement = ({ element, props }) => {
-    // console.log(element);
-    // // return element;
-    // if(document.querySelector('main')) {
-    return <GlobalStyle {...props}>{element}</GlobalStyle>;
-    // }
-    // return null;
-    // return !!mounted ? renderMethod(<GlobalStyle>{element}</GlobalStyle>, document.body) : null;
-    // return <div {...props}>{element}</div>
-}   
+export const wrapPageElement = ({ element, props }) => <GlobalStyle {...props}>{element}</GlobalStyle>;
