@@ -1,13 +1,15 @@
 import React from 'react';
-import './index.module.css';
+// import './index.module.css';
 import { css } from '@emotion/react';
 
 const cssInject = css`
-    position: relative;
+    position: fixed;
     width: 100vw;
     height: 100vh;
     background: #000;
-    transition: all 5s;
+    transition: all 1s;
+    z-index: 999;
+    top: 0;
     .load {
         position:absolute;
         width:600px;
@@ -207,7 +209,7 @@ const LoadingLayout = ({ loading }) => (
         }
         style={{ 
             opacity: loading ? 1 : 0,
-            // visibility: loading ? 'visible' : 'hidden',
+            visibility: loading ? 'visible' : 'hidden',
             height: loading ? '100vh' : 0,
         }}
     >

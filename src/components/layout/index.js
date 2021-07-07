@@ -45,9 +45,9 @@ export default ({ children }) => {
         // lax.setup()
         let scrollbar = Scrollbar.init(document.body);
         
-        lax.addDriver('scrollY', function () {
+        /* lax.addDriver('scrollY', function () {
             return  scrollbar.scrollY
-        });
+        }); */
         // document.addEventListener('scroll', function (x) {
         //     // console.log(document.body.firstChild.scrollTop);
         //     lax.update(document.body.scrollTop)
@@ -71,7 +71,7 @@ export default ({ children }) => {
 
         if(willLeave) {
             scrollbar.destroy();
-            lax.removeElements();
+            /* lax.removeElements(); */
         } 
     }
 

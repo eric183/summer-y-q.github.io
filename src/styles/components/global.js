@@ -21,7 +21,7 @@ export const GlobalStyle = Styled.main`
     }
 
     .tl-edges {
-        overflow: hidden;
+        /* overflow: hidden; */
     }
      
     .article-title {

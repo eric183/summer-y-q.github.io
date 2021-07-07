@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Layout from '../components/layout'
+import Scrollbar from '~components/scrollbar';
 // import "@fortawesome/fontawesome-free/js/all.min.js";
 // import "@fortawesome/fontawesome-free/css/all.css";
 import { jsx, css } from '@emotion/react'
@@ -44,8 +45,9 @@ const ResumeLayout = (props) => {
         // html2pdf(document.querySelector('.scroll-content'));
     }, []);
 	return (
-		// <Layout>
+		<Scrollbar>
             <div className="scroll-content" css={InjectCss}>
+                
                 {/* <header>
                     <h2>{ name }</h2>
                     <h3>{ title }</h3>
@@ -115,7 +117,7 @@ const ResumeLayout = (props) => {
                 </section>
 			</div>
 
-		// </Layout>
+		</Scrollbar>
 
 	)
 }

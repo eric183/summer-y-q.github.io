@@ -1,10 +1,19 @@
 import Styled from '@emotion/styled';
 
 export const ResumeStyle = Styled.div`
+
+    @media print {
+        * { 
+            font-size: 12pt;
+            /* transform: scale(1); */
+        }
+    }
     * {
         font-family: 'Noto Sans', sans-serif;
     }
-
+/*   
+    overflow: auto;
+    height: 100vh; */
     header {
         width: 100%;
         text-align: center;
@@ -41,6 +50,6 @@ export const ResumeStyle = Styled.div`
     }
 
     .block-section {
-        padding-left: 40px;
+        padding: 0 40px;
     }
 `

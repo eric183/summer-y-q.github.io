@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from 'react-dom';
 import { GlobalStyle } from '~styles';
-
+import './src/styles/index.module.css';
 // const renderMethod = !!module.hot ? ReactDOM.render : ReactDOM.hydrate;
 
 // import './src/styles/global.css'
