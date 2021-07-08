@@ -5,15 +5,35 @@ const BOLDER_FONT_COLOR = '#333333';
 const SLIME_FONT_COLOR = '#686868';
 
 export const ResumeStyle = Styled.div`
+    /* width: 210mm;
+    height: 297mm;    
+    overflow: hidden; */
+   
     .print-layout {
         padding: 40px 20px;
+        box-sizing: border-box;
+        /* html, body { */
+            /* width: 210mm;
+            height: 297mm;         */
+        /* } */
     }
+    
+    /* @page {
+        size: A4;
+    } */
 
     @media print {
         * { 
-            /* font-size: 12pt; */
+            font-size: 10px;
         }
-        
+        overflow: hidden;
+        /* width: 210mm;
+        height: 297mm;      */
+        /* html, body {
+            width: 210mm;
+            height: 297mm;        
+        }
+         */
         h2 {
             /* font-weight: border; */
             font-weight: bolder;
@@ -22,6 +42,10 @@ export const ResumeStyle = Styled.div`
                 font-weight: bolder;
                 font-size: 28px;
             }           
+        }
+
+        .fragment-title h3 {
+            font-size: 15px;
         }
 
         header {
@@ -93,10 +117,13 @@ export const ResumeStyle = Styled.div`
     }
 
     .block-section {
-        text-align:justify;
+        text-align: justify;
         margin-bottom: 50px;
-        /* p { */
-        /* } */
+        
+        p {
+            text-align: justify;
+        }
+      
     }
     
     .summary-fragment {
@@ -124,9 +151,10 @@ export const ResumeStyle = Styled.div`
         }
         h4 {
             width: 20%;
-            margin-right: 100px;
+            /* margin-right: 100px; */
             color: ${BOLDER_FONT_COLOR};
             font-weight: 900;
+            flex-shrink: 0;
             /* margin: 0;
             padding: 0; */
         }
@@ -170,7 +198,7 @@ export const ResumeStyle = Styled.div`
         }
     }
     h3 {
-        font-weight: 500;
+        font-weight: 600;
         font-size: 25px;
         color: ${BOLDER_FONT_COLOR};
         margin: 15px 0;

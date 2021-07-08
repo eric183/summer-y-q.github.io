@@ -84,6 +84,7 @@ const Sample = (props) => {
                     </section>
                     <section className='block-section'>
                         <h2><span>{'Work Experience'.slice(0, 3)}</span>{'Work Experience'.slice(3)}</h2>
+                        {/* <h2><span>{'Work Experience'.slice(0, 3)}</span>{'Work Experience'.slice(3)}</h2> */}
                             
                         {
                             experience.map((item, index) => (

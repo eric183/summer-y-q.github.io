@@ -232,30 +232,45 @@ module.exports = {
             // ],
             skill: [
                 {
-                    name: "language",
+                    name: "Front-end",
                     label: "语言",
-                    children: ["Javascript", "C#", "Typescript", "NodeJS"]
+                    children: ['React', 'Vue', 'Angular', 'Mobx', 'Redux', 'Vuex', 'Webpack', 'Gulp', 'TaroJS', 'MpVue', 'ThreeJS', 'BabylonJS', 'GSAP']
                 },
                 {
-                    name: "frameWork",
-                    label: "Web前端框架",
-                    children: ["Webpack", "Gulp", "ReactJS", "VueJS", "AngularJS","ThreeJS", "BabylonJS", "GatsbyJS"]
+                    name: "Back-end",
+                    label: "语言",
+                    children: ['Koa', 'Express', 'Gatsby', 'Contentful', 'RPC', 'Graphql', 'REST']
+                },
+                {
+                    name: "Programming",
+                    label: "",
+                    children: ['Typescript', 'Javascript', 'Nodejs', 'C#', 'LaTeX']
                     // children: ["VueJS",  "Jquery", "Bootstrap"]
                 },
-                // {
-                //     name: "WebGl",
-                //     label: "WebGl",
-                //     children: ["ThreeJS, BabylonJS"]
-                // },
                 {
-                    name: "exe",
-                    label: "客户端",
-                    children: ["Unity", "Electron"]
+                    name: "GIS",
+                    label: "WebGl",
+                    children: ['高德', '腾讯地图', 'CityEngine', 'OpenStreetMap', 'MapBox', 'DeckGL']
                 },
                 {
-                    name: "asset",
+                    name: "Devops",
+                    label: "客户端",
+                    children: ['Docker', 'Vagrant', 'Jenkins', 'Netlify', 'GitAction']
+                },
+                {
+                    name: "3D Arts",
                     label: "美术素材",
-                    children: ["Blender", "CityEngine", "Substance Painter", "Mixamo"]
+                    children: ['Maya', 'Blender', 'Zbrush', 'Mari', 'Substance']
+                },
+                {
+                    name: "Client",
+                    label: "美术素材",
+                    children: ['Unity', 'UE4', 'Electron', '小程序']
+                },
+                {
+                    name: "UI & Prototype",
+                    label: "美术素材",
+                    children: ['Photoshop', 'Figma', 'MindNode', 'Lottie', 'Spine']
                 }
             ]
 
