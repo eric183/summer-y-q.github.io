@@ -116,6 +116,7 @@ export const ResumeStyle = Styled.div`
         li {
             color: ${SLIME_FONT_COLOR};
             font-weight: 100;
+            transform: scale(0.9);
         }
         h4 {
             width: 20%;
@@ -127,17 +128,27 @@ export const ResumeStyle = Styled.div`
         }
     }
 
+    .work-fragment {
+        margin-bottom: 60px;
+        p {
+            margin: 5px 0;
+            font-size: 15px;
+            color: ${SLIME_FONT_COLOR};
+        }
+    }
+
     .skill-item {
         li {
             margin-left: 10px;
         }
     }
+
     .work-skill {
         margin: 0;
         padding: 0;
         list-style: none;
-        margin-top: -15px;
         li {
+            margin: 0;
             color: red;
         }
         li:not(:first-child) {
@@ -146,12 +157,18 @@ export const ResumeStyle = Styled.div`
     }
     h2 {
         /* font-weight: border; */
-        font-weight: bolder;
+        font-weight: 900;
         font-size: 30px;
         color: ${BOLDER_FONT_COLOR};
         span {
             font-weight: bolder;
             font-size: 30px;
         }
+    }
+    h3 {
+        font-weight: 500;
+        font-size: 25px;
+        color: ${BOLDER_FONT_COLOR};
+        margin: 15px 0;
     }
 `
