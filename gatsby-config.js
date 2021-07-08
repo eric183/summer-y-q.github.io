@@ -16,16 +16,17 @@ module.exports = {
         desc: "WAHT YOU WANT, WHAT YOU NEED",
 
         resumeInfo: {
-            name: "宋紫雯",
+            name: "匡志宸",
             // title: "前端工程师、游戏工程师、GIS工程师",
             title: "前端工程师、TA工程师",
             years: "五",
-            desc: "Hello，我叫匡志宸，来自内蒙古鄂尔多斯的南方人，大学专业是英语，自学入行开发到现在有五年半的时间，其中前端开发是主职，目前主流的前端项目（BC端）几乎都有参与主导过研发，主要内容有程序产品与功能开发，并做过1-2年的团队管理，参与过技术选型与及技术架构设计。目前职业方向是C端orB端主程业务开发。特长是客户端3D渲染、游戏、CG动画",
+            // desc: "Hello，我叫匡志宸，来自内蒙古鄂尔多斯的南方人，大学专业是英语，自学入行开发到现在有五年半的时间，其中前端开发是主职，目前主流的前端项目（BC端）几乎都有参与主导过研发，主要内容有程序产品与功能开发，并做过1-2年的团队管理，参与过技术选型与及技术架构设计。目前职业方向是C端orB端主程业务开发。特长是客户端3D渲染、游戏、CG动画",
+            desc: "距离大三跟随信工远同学赴美实习后回国，入行到现在有5年半的时间，带过一段时间前端团队，做过管理，做过核心开发，经过上一段工作的洗礼，发现自己更适合做开发，而不是管理。Vue用了两年，React用了3年，后来又接触了WebGL、GIS，并学习了游戏开发的工业流程，对前端开发有了一些新的感悟，个人认为前端不应该仅仅局限于Javascript这套语言，工具的成熟与新技术的孵化一定会磨平终端之间的差异化，而我本人也比较愿意去接触一些新的语言于工具。",
             social: [
-                { text: "16675196790", link: "", icon: "fas fa-mobile" },
-                { text: "net.happylandle.club", link: "https://net.happylandle.club", icon: "fas fa-globe-asia" },
-                { text: "github.com/eric183", link: "https://github.com/eric183", icon: "fab fa-github" },
-                { text: "kk297466058@gmail.com", link: "", icon: "far fa-envelope"},
+                { text: "16675196790", link: "", icon: "\ue900" },
+                { text: "net.happylandle.club", link: "https://net.happylandle.club", icon: "\ue8fc" },
+                { text: "github.com/eric183", link: "https://github.com/eric183", icon: "\ue8ef" },
+                { text: "kk297466058@gmail.com", link: "", icon: "\ue8e3"},
             ],
             experience: [
                 {
@@ -36,7 +37,7 @@ module.exports = {
                     addr: '深圳/南山',
                     children: [
                         {
-                            name: "[B端CMS项目SaaS重构] ",
+                            name: "B端CMS项目SaaS重构",
                             role: '前端项目负责人、主程、前端架构',
                             withSkills: [
                                 'Docker',
@@ -51,7 +52,7 @@ module.exports = {
                             link: null
                         },
                         {
-                            name: "[深业集团平台运营楼管CMS]",
+                            name: "深业集团平台运营楼管CMS",
                             role: '主程、前端架构',
                             withSkills: [
                                 'Node',
@@ -75,7 +76,7 @@ module.exports = {
                     addr: '深圳/福田',
                     children: [
                         {
-                            name: "[B端面料管理系统CMS] ",
+                            name: "B端面料管理系统CMS ",
                             role: '前端项目负责人、主程、前端架构',
                             withSkills: [
                                 'Docker',
@@ -90,7 +91,7 @@ module.exports = {
                             link: null
                         },
                         {
-                            name: "[发现面料小程序BC端]",
+                            name: "发现面料小程序BC端",
                             role: '前端项目负责人、主程、前端架构',
                             withSkills: [
                                 'Javascript',

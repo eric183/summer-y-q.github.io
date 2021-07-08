@@ -1,22 +1,62 @@
 import Styled from '@emotion/styled';
+const TITLE_FONT_COLOR = '#5d5d5d';
+const ALERT_FONT_COLOR = '#df4533';
+const BOLDER_FONT_COLOR = '#333333';
+const SLIME_FONT_COLOR = '#686868';
 
 export const ResumeStyle = Styled.div`
+    .print-layout {
+        padding: 40px 20px;
+    }
 
     @media print {
         * { 
-            font-size: 12pt;
-            /* transform: scale(1); */
+            /* font-size: 12pt; */
+        }
+        
+        h2 {
+            /* font-weight: border; */
+            font-weight: bolder;
+            font-size: 28px;
+            span {
+                font-weight: bolder;
+                font-size: 28px;
+            }           
+        }
+
+        header {
+            font-size: 12px;
+            color: ${TITLE_FONT_COLOR};
+            
+            li {
+                font-size: 12px;
+            }
         }
     }
+
     * {
         font-family: 'Noto Sans', sans-serif;
     }
+
+    .happy-icon {
+        font-size: 22px;
+        color: ${TITLE_FONT_COLOR};
+    }
+
 /*   
     overflow: auto;
-    height: 100vh; */
+    height: 100vh; */   
     header {
         width: 100%;
         text-align: center;
+        h1 {
+            margin: 0;
+            color: ${TITLE_FONT_COLOR};
+        }
+        & > p {
+            margin: 10px;
+            color: ${ALERT_FONT_COLOR};        
+        }
         ul {
             width: 100%;
             margin: 0;
@@ -24,6 +64,8 @@ export const ResumeStyle = Styled.div`
         }
         li {
             list-style: none;   
+            /* width: 25%; */
+            font-size: 12px;
             a {
                 color: #000;
                 text-decoration: none;
@@ -35,6 +77,7 @@ export const ResumeStyle = Styled.div`
     }
     h2 {
         position: relative;
+        margin: 0 0 20px;
         &::after {
             position: absolute;
             content: '';
@@ -50,6 +93,65 @@ export const ResumeStyle = Styled.div`
     }
 
     .block-section {
-        padding: 0 40px;
+        text-align:justify;
+        margin-bottom: 50px;
+        /* p { */
+        /* } */
+    }
+    
+    .summary-fragment {
+        font-size: 15px;
+    }
+
+    .skill-fragment {
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            /* margin: 0;
+            padding: 0; */
+            list-style: none;
+        }
+        li {
+            color: ${SLIME_FONT_COLOR};
+            font-weight: 100;
+        }
+        h4 {
+            width: 20%;
+            margin-right: 100px;
+            color: ${BOLDER_FONT_COLOR};
+            font-weight: 900;
+            /* margin: 0;
+            padding: 0; */
+        }
+    }
+
+    .skill-item {
+        li {
+            margin-left: 10px;
+        }
+    }
+    .work-skill {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        margin-top: -15px;
+        li {
+            color: red;
+        }
+        li:not(:first-child) {
+            margin-left: 18px;
+        }
+    }
+    h2 {
+        /* font-weight: border; */
+        font-weight: bolder;
+        font-size: 30px;
+        color: ${BOLDER_FONT_COLOR};
+        span {
+            font-weight: bolder;
+            font-size: 30px;
+        }
     }
 `
