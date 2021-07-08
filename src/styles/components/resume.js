@@ -112,11 +112,15 @@ export const ResumeStyle = Styled.div`
             /* margin: 0;
             padding: 0; */
             list-style: none;
+            ul {
+                li {
+                    transform: scale(0.9);
+                }
+            }
         }
         li {
             color: ${SLIME_FONT_COLOR};
             font-weight: 100;
-            transform: scale(0.9);
         }
         h4 {
             width: 20%;
