@@ -34,6 +34,10 @@ export const ResumeStyle = Styled.div`
             height: 297mm;        
         }
          */
+        h1 {
+            font-size: 32px;
+        }
+
         h2 {
             /* font-weight: border; */
             font-weight: bolder;
@@ -51,7 +55,11 @@ export const ResumeStyle = Styled.div`
         header {
             font-size: 12px;
             color: ${TITLE_FONT_COLOR};
-            
+
+            p {
+                font-size: 22px;
+            }
+
             li {
                 font-size: 12px;
             }
@@ -63,7 +71,7 @@ export const ResumeStyle = Styled.div`
     }
 
     .happy-icon {
-        font-size: 22px;
+        font-size: 18px;
         color: ${TITLE_FONT_COLOR};
     }
 
@@ -89,7 +97,7 @@ export const ResumeStyle = Styled.div`
         li {
             list-style: none;   
             /* width: 25%; */
-            font-size: 12px;
+            font-size: 15px;
             a {
                 color: #000;
                 text-decoration: none;

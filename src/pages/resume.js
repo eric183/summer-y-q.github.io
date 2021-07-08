@@ -1,132 +1,125 @@
-import React, { useEffect } from 'react';
-import Layout from '../components/layout'
+import React, { useEffect, useState } from 'react';
+import Helmet from 'react-helmet';
+import { ResumeStyle } from '~styles';
+import { css } from '@emotion/react';
 import Scrollbar from '~components/scrollbar';
-// import "@fortawesome/fontawesome-free/js/all.min.js";
-// import "@fortawesome/fontawesome-free/css/all.css";
-import { jsx, css } from '@emotion/react'
-
+import LoadingLayout from '~components/loading';
+import html2pdf from 'html2pdf.js'
 import { graphql } from 'gatsby'
-// import html2pdf from 'html2pdf.js'
 
-const InjectCss = css`
-    &,.scroll-content {
-        h1, h2, h3, h4, h5, h6 {
-            margin: 0;
-        }
-    }
-    @media print {
-        // 隱藏不要被列印的元素
-        .NotPrint {
-           display:none;
-        }
-        // 要被列印的元素
-        .PrintUnit {
-           // 元素前要被分頁
-           page-break-before:always;
-           // 元素本身不能被分頁
-           page-break-inside:avoid;
-           }
-    }
-    
-    @page{
-        size: A4 portrait;  //a4尺寸 直式
-        margin: 1cm;  //邊距1公分
-        orphans:4;   //頁面最後一段段落行數，預設值為2
-        widows:2;  //頁面第一段段落行數，預設值為2
-    }   
-`
+const Sample = (props) => {
+    const [loading, setLoading] = useState(true);
 
-
-const ResumeLayout = (props) => {
-
-    // const { resumeInfo } = props.data.site.siteMetadata; 
     const { experience, social, skill, name, title, years, desc } = props.data.site.siteMetadata.resumeInfo; 
+
     useEffect(() => {
-        // html2pdf(document.querySelector('.scroll-content'));
+        setLoading(false);
+
     }, []);
-	return (
-		<Scrollbar>
-            <div className="scroll-content" css={InjectCss}>
-                
-                {/* <header>
-                    <h2>{ name }</h2>
-                    <h3>{ title }</h3>
-                    <p>{ years }年经</p>
-                </header> */}
+    // const test = 'Work Experience';
+    const test = 'Test NoBusyDoingThings';
+    return (
+        <Scrollbar>
+            <ResumeStyle>
+                <Helmet>
+                    <link href="https://fonts.font.im/css?family=Noto+Sans" rel="stylesheet" />
+                </Helmet>
+                <LoadingLayout loading={loading} />
+                <article className='print-layout'>
+                    <header>
+                        <h1>{name}</h1>
+                        <p>{title.replace('、', ' / ')}</p>
+                        {/* <p>xxx</p> */}
+                        {/* clear-anchor-style */}
+                        {/* <ul className='flex-row flex-justify-around'> */}
+                        <ul className='flex-row flex-justify-between'>
+                            {
+                                social.map((item, index) => (
+                                    <li key={index} className='flex-row flex-lt-center'>
+                                        <i className='happy-icon icon-mobile-phone'>{item.icon}</i>
+                                        {/* <i className='happy-icon'>{item.icon}</i> */}
+                                        { 
+                                            item.link ? 
+                                            <a href={item.link} target='_blank'>{item.text}</a>
+                                             : item.text
+                                        }
+                                      
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </header>
+                    <section className='block-section'>
+                        <h2><span>{'Summary'.slice(0, 3)}</span>{'Summary'.slice(3)}</h2>
+                        <div className='summary-fragment'>
+                            {/* <p>{desc}</p> */}
+                            <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+                        </div>
 
+                    </section>
 
-                {/* about me */}
-                {/* <section>
-                    <TitleContent title="Summary" />
-                    { desc }
-                </section> */}
-                
-
-                {/* <section>
-                    { 
-                        resumeInfo.social.map((d, index)=> {
-                            return (
-                                <p key={index}> 
-                                    <i className={ d.icon ? d.icon : "" }></i>
-                                    { d.text } 
-                                </p>
-                            )
-                        })
-                    }    
-                </section> */}
-
-                <section>
-                    <TitleContent title="Work Experience" />
-                    
-
-                    <ul className=''>
-                        { 
-                            experience.map((work, index)=> (
-                                <li key={index}>
-                                    <p>{ work.title }</p>
-                                    <p>{ work.company }</p>
-                                    <p>{ work.from } - { work.to }</p>
-                                    <p>{ work.desc }</p>
-                                </li>
-                            )) 
-                        }
-                        
-                    </ul>
-
-                </section>
-
-                <section>
-                    <TitleContent title="Skill" />
-                        {
-                            skill.map((technology, index)=> {
-                                
-                                return (
-                                    <ul key={index}>
-                                        <li>{ technology.label }</li>
-                                        <li>
-                                            <ul>
-                                                { 
-                                                    technology.children.map((child, index)=> <li key={index}>{child}</li>)      
-                                                }
+                    <section className='block-section'>
+                        <h2><span>{'Skill'.slice(0, 3)}</span>{'Skill'.slice(3)}</h2>
+                        <div className='skill-fragment'>
+                            <ul>
+                                {
+                                    skill.map((item, index) => (
+                                        <li className='flex-row flex-align-center' key={index}>
+                                            <h4>{item.name}</h4>
+                                            <ul className='flex-row skill-item'>
+                                               {
+                                                   item.children.map((x, xIndex) => (
+                                                       <li key={xIndex}>
+                                                           <span>{x}</span>
+                                                        </li>
+                                                   ))
+                                               }
                                             </ul>
                                         </li>
+                                    ))
+                                }
+                            </ul>
+                        </div>
+
+                    </section>
+                    <section className='block-section'>
+                        <h2><span>{'Work Experience'.slice(0, 3)}</span>{'Work Experience'.slice(3)}</h2>
+                        {/* <h2><span>{'Work Experience'.slice(0, 3)}</span>{'Work Experience'.slice(3)}</h2> */}
+                            
+                        {
+                            experience.map((item, index) => (
+                                <div className='work-fragment' key={index}>
+                                    <div className='fragment-title flex-row flex-justify-between'>
+                                        <h3>{item.company}</h3>
+                                        <h3>{item.title}</h3>
+                                        <h3>{item.from} - {item.to}</h3>
+                                    </div>
+                                    <ul>
+                                        {
+                                            item.children.map((child, childIndex)=> (
+                                                <li key={childIndex}>
+                                                    [{child.name}]
+                                                    <p>{child.desc}</p>
+                                                    <ul className="flex-row work-skill">
+                                                        {
+                                                            child.withSkills.map((skill, skillIndex) => (
+                                                                <li key={skillIndex}>{skill}</li>
+                                                            ))
+                                                        }
+                                                    </ul>
+                                                </li>
+                                            ))
+                                        }
                                     </ul>
-                                )
-                            })
+                                </div>
+                            ))
                         }
-                </section>
-			</div>
-
-		</Scrollbar>
-
-	)
+                    </section>
+                </article>
+            </ResumeStyle>
+        </Scrollbar>
+    )
 }
-
-const TitleContent = (props) => (
-    <div className="title-content">
-        <h3>{props.title}</h3>
-    </div>  
-)
 
 
 export const query = graphql`
@@ -173,5 +166,4 @@ export const query = graphql`
     }
   }
 `
-
-export default ResumeLayout;
+export default Sample;

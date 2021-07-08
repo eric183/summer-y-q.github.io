@@ -28,7 +28,7 @@ const Sample = (props) => {
                 <article className='print-layout'>
                     <header>
                         <h1>{name}</h1>
-                        <p>{title}</p>
+                        <p>{title.replace('、', ' / ')}</p>
                         {/* <p>xxx</p> */}
                         {/* clear-anchor-style */}
                         {/* <ul className='flex-row flex-justify-around'> */}
