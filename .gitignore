@@ -12,3 +12,5 @@ src/save
 _README.md
 
 public/
+
+__generated__

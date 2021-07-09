@@ -65,12 +65,14 @@
 		"paths": {
 			"~components/*": ["src/components/*"],
 			"~static/*":  ["static/*"],
-			"~/*":  ["src/*"]
+			"~/*":  ["src/*"],
+			"@LocalType": ["types/index.d.ts"]
 		},
 	},
 	"include": [
 		"./src/**/*",
-		".eslintrc.js"
+		".eslintrc.js",
+		"types/**/*"
 	],
 	"exclude": [
 		"node_modules",

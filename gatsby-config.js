@@ -281,8 +281,26 @@ module.exports = {
         `gatsby-plugin-transition-link`,
         `gatsby-transformer-remark`,
         `gatsby-plugin-emotion`,
-        // `gatsby-plugin-graphql-codegen`,
+        {
+            // resolve: `gatsby-plugin-graphql-codegen`,
+            resolve: `gatsby-plugin-typegen`,
+            options: {
+                outputPath: `types/gatsby-types.d.ts`,
+                emitSchema: {
+                    '__generated__/gatsby-schema.graphql': true,
+                }
+            }
 
+            // resolve: `gatsby-plugin-graphql-codegen`,
+            // options: {
+            //     fileName: `./graphql-types.ts`,
+            //     documentPaths: [
+            //       './src/**/*.{ts,tsx}',
+            //       './node_modules/gatsby-*/**/*.js',
+            //       './gatsby-node.ts',
+            //     ],
+            // }
+        },
         {
             resolve: `gatsby-source-filesystem`,
             options: {

@@ -1,16 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import Helmet from 'react-helmet';
 import { ResumeStyle } from '~/styles';
 import { css } from '@emotion/react';
 import Scrollbar from '~components/scrollbar';
 import LoadingLayout from '~components/loading';
 import { graphql } from 'gatsby'
+// import  GatsbyTypes from '@LocalType';
 
-const Sample = (props: { data: { site: { siteMetadata: { resumeInfo: { experience: any; social: any; skill: any; name: any; title: any; years: any; desc: any; }; }; }; }; }) => {
+interface SiteType {
+    data: GatsbyTypes.ResumeDataQuery
+}
+
+const Sample: FC<SiteType> = ({ data }) => {
     const [loading, setLoading] = useState(true);
+    // props.data.site.siteMetadata.title
 
-    const { experience, social, skill, name, title, years, desc } = props.data.site.siteMetadata.resumeInfo; 
 
+    if(!data?.site?.siteMetadata?.resumeInfo) throw new Error('no this type');
+
+    const { experience, social, skill, name, title = '', years, desc } = data.site.siteMetadata.resumeInfo; 
     useEffect(() => {
         setLoading(false);
 
@@ -33,14 +41,14 @@ const Sample = (props: { data: { site: { siteMetadata: { resumeInfo: { experienc
                         {/* <ul className='flex-row flex-justify-around'> */}
                         <ul className='flex-row flex-justify-between'>
                             {
-                                social.map((item: { icon: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; link: string | undefined; text: {} | null | undefined; }, index: React.Key | undefined) => (
+                                social?.map((item, index) => (
                                     <li key={index} className='flex-row flex-lt-center'>
-                                        <i className='happy-icon icon-mobile-phone'>{item.icon}</i>
+                                        <i className='happy-icon icon-mobile-phone'>{item?.icon}</i>
                                         {/* <i className='happy-icon'>{item.icon}</i> */}
                                         { 
-                                            item.link ? 
-                                            <a href={item.link} target='_blank'>{item.text}</a>
-                                             : item.text
+                                            item?.link ? 
+                                            <a href={item?.link} target='_blank'>{item?.text}</a>
+                                             : item?.text
                                         }
                                       
                                     </li>
@@ -62,12 +70,12 @@ const Sample = (props: { data: { site: { siteMetadata: { resumeInfo: { experienc
                         <div className='skill-fragment'>
                             <ul>
                                 {
-                                    skill.map((item: { name: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; children: any[]; }, index: React.Key | undefined) => (
+                                    skill?.map((item, index) => (
                                         <li className='flex-row flex-align-center' key={index}>
-                                            <h4>{item.name}</h4>
+                                            <h4>{item?.name}</h4>
                                             <ul className='flex-row skill-item'>
                                                {
-                                                   item.children.map((x: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined, xIndex: React.Key | undefined) => (
+                                                   item?.children?.map((x, xIndex) => (
                                                        <li key={xIndex}>
                                                            <span>{x}</span>
                                                         </li>
@@ -86,22 +94,22 @@ const Sample = (props: { data: { site: { siteMetadata: { resumeInfo: { experienc
                         {/* <h2><span>{'Work Experience'.slice(0, 3)}</span>{'Work Experience'.slice(3)}</h2> */}
                             
                         {
-                            experience.map((item: { company: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; title: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; from: string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined; to: string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined; children: any[]; }, index: React.Key | undefined) => (
+                            experience?.map((item, index) => (
                                 <div className='work-fragment' key={index}>
                                     <div className='fragment-title flex-row flex-justify-between'>
-                                        <h3>{item.company}</h3>
-                                        <h3>{item.title}</h3>
-                                        <h3>{item.from} - {item.to}</h3>
+                                        <h3>{item?.company}</h3>
+                                        <h3>{item?.title}</h3>
+                                        <h3>{item?.from} - {item?.to}</h3>
                                     </div>
                                     <ul>
                                         {
-                                            item.children.map((child: { name: string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined; desc: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; withSkills: any[]; }, childIndex: React.Key | undefined)=> (
+                                            item?.children?.map((child, childIndex) => (
                                                 <li key={childIndex}>
-                                                    [{child.name}]
-                                                    <p>{child.desc}</p>
+                                                    [{child?.name}]
+                                                    <p>{child?.desc}</p>
                                                     <ul className="flex-row work-skill">
                                                         {
-                                                            child.withSkills.map((skill: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined, skillIndex: React.Key | undefined) => (
+                                                            child?.withSkills?.map((skill, skillIndex) => (
                                                                 <li key={skillIndex}>{skill}</li>
                                                             ))
                                                         }
@@ -122,21 +130,31 @@ const Sample = (props: { data: { site: { siteMetadata: { resumeInfo: { experienc
 
 
 export const query = graphql`
-  {
+query ResumeData {
     site {
       siteMetadata {
+        about
+        author
+        desc
+        description
+        fontFamily
         resumeInfo {
           desc
           name
           title
           years
+          social {
+            icon
+            text
+            link
+          }
           experience {
             addr
             children {
               desc
               isPrivate
-              role
               name
+              role
               withSkills
             }
             company
@@ -149,17 +167,7 @@ export const query = graphql`
             label
             name
           }
-          social {
-            icon
-            link
-            text
-          }
         }
-        about
-        author
-        desc
-        description
-        fontFamily
         title
       }
     }
