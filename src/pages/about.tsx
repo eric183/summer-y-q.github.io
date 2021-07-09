@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Layout from '../components/layout'
 
 import { graphql } from 'gatsby'
 import { css } from "@emotion/react"
 
-const About =  (props) => {
+const About: FC = (props) => {
 
 	console.log(props);
 	return (

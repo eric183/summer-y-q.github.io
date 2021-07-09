@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react"
+import React, { FC, Fragment, useState } from "react"
 // import { useFrame } from 'react-three-fiber'
 
 
@@ -6,7 +6,7 @@ import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 // import CanvasModule from '../components/webgl-canvas/webgl-canvas';
 import { css } from '@emotion/react'
-import AniLink from "gatsby-plugin-transition-link/AniLink"
+// import AniLink from "gatsby-plugin-transition-link/AniLink"
 
 // const contentful = require("contentful");
 // // import contentful from 'contentful';
@@ -25,8 +25,11 @@ import AniLink from "gatsby-plugin-transition-link/AniLink"
 // 	.catch(err => console.log(err));
 // import  { bodyFontFamily } from '../utils/typography' 
 // Annie Use Your Telescope
+interface SiteType {
+    data: GatsbyTypes.ArticleTypeQuery
+}
 
-const Article = ({ data }) => {
+const Article: FC<SiteType> = ({ data }) => {
     
 	// console.log(data);
 	return (
@@ -60,7 +63,7 @@ const Article = ({ data }) => {
 }
 
 
-const BlogContent = ({ data }) => {
+const BlogContent: FC<{ data:  GatsbyTypes.ArticleTypeQuery}> = ({ data }) => {
 
     const [, setHover] = useState(false);
 
@@ -77,26 +80,23 @@ const BlogContent = ({ data }) => {
                     color: '#fff',
                     borderRadius: '3px',
                     // width: isHover ? '100%' : 'auto'
-                }}>{data.site.siteMetadata.desc}</h4>
+                }}>{data?.site?.siteMetadata?.desc}</h4>
 
 			{data.allMarkdownRemark.edges.map(({ node }) => (
 
-				<AniLink key={node.id} swipe direction="down" duration={0.5} to={node.fields.slug}>
-					{/* Go to Page 4 */}
-
-					<article>
-						<h3>
-							{node.frontmatter.title}{" "}
-							<span
-								css={css`
-								color: #bbb;`}
-							>
-								{/* — {node.frontmatter.date} */}
-							</span>
-						</h3>
-						<p>{node.excerpt}</p>
-					</article>
-				</AniLink>
+			
+				<article>
+					<h3>
+						{node?.frontmatter?.title}{" "}
+						<span
+							css={css`
+							color: #bbb;`}
+						>
+							{/* — {node.frontmatter.date} */}
+						</span>
+					</h3>
+					<p>{node.excerpt}</p>
+				</article>
 
 			))}
 
@@ -106,7 +106,7 @@ const BlogContent = ({ data }) => {
 
 
 export const query = graphql`
-  {
+  query ArticleType {
     allMarkdownRemark {
       edges {
         node {

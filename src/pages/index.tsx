@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC }from "react"
 
 
 // import { graphql } from 'gatsby'
@@ -24,7 +24,7 @@ import { css } from '@emotion/react'
 // import  { bodyFontFamily } from '../utils/typography' 
 // Annie Use Your Telescope
 
-const Index = (props) => {
+const Index: FC = (props) => {
 	// const [, setLoad] = useState(false)
 	// const loadBinder = (value) => {
 	// 	setLoad(value);

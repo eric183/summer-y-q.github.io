@@ -1,8 +1,12 @@
-import React from "react"
+import React, { FC } from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 
-const FileSystem = ({ data }) => {
+interface SiteType {
+    data: GatsbyTypes.FileSystemTypeQuery
+}
+
+const FileSystem: FC<SiteType> = ({ data }) => {
     // console.log(data)
     return (
         <Layout>
@@ -33,7 +37,7 @@ const FileSystem = ({ data }) => {
     )
 }
 export const query = graphql`
-  query {
+  query FileSystemType {
     allFile {
       edges {
         node {

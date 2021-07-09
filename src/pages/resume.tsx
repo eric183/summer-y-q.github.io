@@ -130,47 +130,47 @@ const Sample: FC<SiteType> = ({ data }) => {
 
 
 export const query = graphql`
-query ResumeData {
-    site {
-      siteMetadata {
-        about
-        author
+    query ResumeData {
+  site {
+    siteMetadata {
+      about
+      author
+      desc
+      description
+      fontFamily
+      resumeInfo {
         desc
-        description
-        fontFamily
-        resumeInfo {
-          desc
-          name
-          title
-          years
-          social {
-            icon
-            text
-            link
-          }
-          experience {
-            addr
-            children {
-              desc
-              isPrivate
-              name
-              role
-              withSkills
-            }
-            company
-            from
-            title
-            to
-          }
-          skill {
-            children
-            label
-            name
-          }
-        }
+        name
         title
+        years
+        social {
+          icon
+          text
+          link
+        }
+        experience {
+          addr
+          children {
+            desc
+            isPrivate
+            name
+            role
+            withSkills
+          }
+          company
+          from
+          title
+          to
+        }
+        skill {
+          children
+          label
+          name
+        }
       }
+      title
     }
   }
+}
 `
 export default Sample;
