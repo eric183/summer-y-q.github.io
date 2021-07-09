@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Helmet from 'react-helmet';
-import { ResumeStyle } from '~styles';
 import { css } from '@emotion/react';
+import { ResumeStyle } from '~/styles';
 import Scrollbar from '~components/scrollbar';
 import LoadingLayout from '~components/loading';
-import html2pdf from 'html2pdf.js'
+// import html2pdf from 'html2pdf.js'
 import { graphql } from 'gatsby'
 
-const Sample = (props) => {
+const Sample = (props: { data: { site: { siteMetadata: { resumeInfo: { experience: any; social: any; skill: any; name: any; title: any; years: any; desc: any; }; }; }; }; }) => {
     const [loading, setLoading] = useState(true);
 
     const { experience, social, skill, name, title, years, desc } = props.data.site.siteMetadata.resumeInfo; 
@@ -34,7 +34,7 @@ const Sample = (props) => {
                         {/* <ul className='flex-row flex-justify-around'> */}
                         <ul className='flex-row flex-justify-between'>
                             {
-                                social.map((item, index) => (
+                                social.map((item: { icon: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; link: string | undefined; text: {} | null | undefined; }, index: React.Key | undefined) => (
                                     <li key={index} className='flex-row flex-lt-center'>
                                         <i className='happy-icon icon-mobile-phone'>{item.icon}</i>
                                         {/* <i className='happy-icon'>{item.icon}</i> */}
@@ -63,12 +63,12 @@ const Sample = (props) => {
                         <div className='skill-fragment'>
                             <ul>
                                 {
-                                    skill.map((item, index) => (
+                                    skill.map((item: { name: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; children: any[]; }, index: React.Key | undefined) => (
                                         <li className='flex-row flex-align-center' key={index}>
                                             <h4>{item.name}</h4>
                                             <ul className='flex-row skill-item'>
                                                {
-                                                   item.children.map((x, xIndex) => (
+                                                   item.children.map((x: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined, xIndex: React.Key | undefined) => (
                                                        <li key={xIndex}>
                                                            <span>{x}</span>
                                                         </li>
@@ -87,7 +87,7 @@ const Sample = (props) => {
                         {/* <h2><span>{'Work Experience'.slice(0, 3)}</span>{'Work Experience'.slice(3)}</h2> */}
                             
                         {
-                            experience.map((item, index) => (
+                            experience.map((item: { company: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; title: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; from: string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined; to: string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined; children: any[]; }, index: React.Key | undefined) => (
                                 <div className='work-fragment' key={index}>
                                     <div className='fragment-title flex-row flex-justify-between'>
                                         <h3>{item.company}</h3>
@@ -96,13 +96,13 @@ const Sample = (props) => {
                                     </div>
                                     <ul>
                                         {
-                                            item.children.map((child, childIndex)=> (
+                                            item.children.map((child: { name: string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined; desc: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; withSkills: any[]; }, childIndex: React.Key | undefined)=> (
                                                 <li key={childIndex}>
                                                     [{child.name}]
                                                     <p>{child.desc}</p>
                                                     <ul className="flex-row work-skill">
                                                         {
-                                                            child.withSkills.map((skill, skillIndex) => (
+                                                            child.withSkills.map((skill: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined, skillIndex: React.Key | undefined) => (
                                                                 <li key={skillIndex}>{skill}</li>
                                                             ))
                                                         }
