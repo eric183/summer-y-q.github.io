@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-export default (props) => {
+const AniBlock: FC = (props) => {
 
     // var aniVal = props.data.aniVal;
 
@@ -13,3 +13,5 @@ export default (props) => {
         </div>
     )
 }
+
+export default AniBlock;

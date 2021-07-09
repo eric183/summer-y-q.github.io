@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 // import './index.module.css';
 import { css } from '@emotion/react';
 
@@ -202,7 +202,7 @@ const cssInject = css`
         }
     }
 `
-const LoadingLayout = ({ loading }) => (
+const LoadingLayout: FC<{ loading: boolean }> = ({ loading }) => (
     <div className='container' 
         css={
             cssInject

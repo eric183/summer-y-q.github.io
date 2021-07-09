@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react"
+import React, { FC, useEffect, useState } from "react"
 import { graphql, useStaticQuery } from "gatsby"
-import AniLink from "gatsby-plugin-transition-link/AniLink"
+// import AniLink from "gatsby-plugin-transition-link/AniLink"
 import { css } from '@emotion/react'
 import { globalHistory } from '@reach/router'
 // import { Scrollbars } from 'react-custom-scrollbars'
 // import WebglCavas from './webgl-canvas';
 import SplitText from 'react-pose-text';
 
-import lax from 'lax.js'
+// import lax from 'lax.js'
 import Scrollbar from 'smooth-scrollbar'
 
 import { gsap } from 'gsap';
 
 
 
-const ScrollBar = (props) => {
-    const bindScroll = (willLeave) => {
+const ScrollBar: FC<{ children: JSX.Element }> = (props) => {
+    const bindScroll = (willLeave: boolean | undefined) => {
         // console.log(lax);
         // debugger;
         // lax.setup()
@@ -47,7 +47,7 @@ const ScrollBar = (props) => {
 
         if(willLeave) {
             scrollbar.destroy();
-            lax.removeElements();
+            // lax.removeElements();
         } 
     }
 
@@ -60,7 +60,7 @@ const ScrollBar = (props) => {
             document.body.style.overflow = 'hidden';
         });
 
-        bindScroll();
+        bindScroll(undefined);
         return ()=> { bindScroll(true) };
 
     }, [])  
