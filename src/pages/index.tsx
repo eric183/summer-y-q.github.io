@@ -1,9 +1,10 @@
-import React, { FC }from "react"
+import React, { FC, useRef, useState }from "react"
 
 
 // import { graphql } from 'gatsby'
 // import CanvasModule from '../components/webgl-canvas';
 import { css } from '@emotion/react'
+import { Canvas, useFrame } from "@react-three/fiber";
 
 
 // const contentful = require("contentful");
@@ -23,6 +24,30 @@ import { css } from '@emotion/react'
 // 	.catch(err => console.log(err));
 // import  { bodyFontFamily } from '../utils/typography' 
 // Annie Use Your Telescope
+
+const Box: FC<JSX.IntrinsicElements['mesh']> = (props) => {
+	// This reference will give us direct access to the mesh
+	const mesh = useRef<THREE.Mesh>(null!)
+	// Set up state for the hovered and active state
+	const [hovered, setHover] = useState(false)
+	const [active, setActive] = useState(false)
+	// Subscribe this component to the render-loop, rotate the mesh every frame
+	useFrame((state, delta) => (mesh.current.rotation.x += 0.01))
+	// Return view, these are regular three.js elements expressed in JSX
+	return (
+	  <mesh
+		{...props}
+		ref={mesh}
+		scale={active ? 1.5 : 1}
+		onClick={(event) => setActive(!active)}
+		onPointerOver={(event) => setHover(true)}
+		onPointerOut={(event) => setHover(false)}
+	  >
+		<boxGeometry args={[1, 1, 1]} />
+		<meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+	  </mesh>
+	)
+}
 
 const Index: FC = (props) => {
 	// const [, setLoad] = useState(false)
@@ -44,8 +69,14 @@ const Index: FC = (props) => {
 			align-items: center;
 			justify-content: center;`
 		}>
-			<p>Backsn</p>
-			<p>Please wait hi</p>
+			<Canvas>
+				<ambientLight intensity={0.5} />
+				<spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+				<pointLight position={[-10, -10, -10]} />
+				<Box position={[-1.2, 0, 0]} />
+			</Canvas>
+			{/* <p>Backsn</p>
+			<p>Please wait hi</p> */}
 			{/* <img src="bean.gif" css={css`display: ${!hasLoaded ? "block" : "none"}; position: relative; z-index: 1;`} /> */}
 			{/* <CanvasModule loadBinder={loadBinder} /> */}
 			{/* <Canvas>

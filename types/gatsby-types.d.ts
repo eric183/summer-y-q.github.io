@@ -2785,12 +2785,12 @@ type SiteBuildMetadataSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
-type fWorkspaceeric183GithubIosrctemplatesblogPostJs471609186QueryVariables = Exact<{
+type userserickuangDesktopmyDeveric183GithubIosrctemplatesblogPostJs471609186QueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
 
 
-type fWorkspaceeric183GithubIosrctemplatesblogPostJs471609186Query = { readonly markdownRemark: Maybe<(
+type userserickuangDesktopmyDeveric183GithubIosrctemplatesblogPostJs471609186Query = { readonly markdownRemark: Maybe<(
     Pick<MarkdownRemark, 'html'>
     & { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'title'>> }
   )> };
@@ -2800,38 +2800,13 @@ type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
-type ResumeDataQueryVariables = Exact<{ [key: string]: never; }>;
+type userserickuangDesktopmyDeveric183GithubIosrcpagesaboutTsx4122199845QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type ResumeDataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
-      Pick<SiteSiteMetadata, 'about' | 'author' | 'desc' | 'description' | 'fontFamily' | 'title'>
-      & { readonly resumeInfo: Maybe<(
-        Pick<SiteSiteMetadataResumeInfo, 'desc' | 'name' | 'title' | 'years'>
-        & { readonly social: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoSocial, 'icon' | 'text' | 'link'>>>>, readonly experience: Maybe<ReadonlyArray<Maybe<(
-          Pick<SiteSiteMetadataResumeInfoExperience, 'addr' | 'company' | 'from' | 'title' | 'to'>
-          & { readonly children: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoExperienceChildren, 'desc' | 'isPrivate' | 'name' | 'role' | 'withSkills'>>>> }
-        )>>>, readonly skill: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoSkill, 'children' | 'label' | 'name'>>>> }
-      )> }
-    )> }> };
-
-type fWorkspaceeric183GithubIosrcpagesprojectsindexJs2422230711QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type fWorkspaceeric183GithubIosrcpagesprojectsindexJs2422230711Query = { readonly allMarkdownRemark: (
-    Pick<MarkdownRemarkConnection, 'totalCount'>
-    & { readonly edges: ReadonlyArray<{ readonly node: (
-        Pick<MarkdownRemark, 'id' | 'timeToRead' | 'html' | 'excerpt'>
-        & { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'date' | 'title'>>, readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>> }
-      ) }> }
-  ), readonly site: Maybe<(
-    Pick<Site, 'id'>
-    & { readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'about' | 'author' | 'fontFamily' | 'desc'>> }
+type userserickuangDesktopmyDeveric183GithubIosrcpagesaboutTsx4122199845Query = { readonly site: Maybe<(
+    Pick<Site, 'buildTime'>
+    & { readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'about' | 'title'>> }
   )> };
-
-type FileSystemTypeQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type FileSystemTypeQuery = { readonly allFile: { readonly edges: ReadonlyArray<{ readonly node: Pick<File, 'relativePath' | 'prettySize' | 'extension' | 'birthTime'> }> } };
 
 type ArticleTypeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2847,22 +2822,42 @@ type ArticleTypeQuery = { readonly allMarkdownRemark: (
     & { readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'about' | 'author' | 'fontFamily' | 'desc'>> }
   )> };
 
-type fWorkspaceeric183GithubIosrcpagesaboutTsx4122199845QueryVariables = Exact<{ [key: string]: never; }>;
+type FileSystemTypeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type fWorkspaceeric183GithubIosrcpagesaboutTsx4122199845Query = { readonly site: Maybe<(
-    Pick<Site, 'buildTime'>
-    & { readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'about' | 'title'>> }
+type FileSystemTypeQuery = { readonly allFile: { readonly edges: ReadonlyArray<{ readonly node: Pick<File, 'relativePath' | 'prettySize' | 'extension' | 'birthTime'> }> } };
+
+type ResumeDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type ResumeDataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
+      Pick<SiteSiteMetadata, 'about' | 'author' | 'desc' | 'description' | 'fontFamily' | 'title'>
+      & { readonly resumeInfo: Maybe<(
+        Pick<SiteSiteMetadataResumeInfo, 'desc' | 'name' | 'title' | 'years'>
+        & { readonly social: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoSocial, 'icon' | 'text' | 'link'>>>>, readonly experience: Maybe<ReadonlyArray<Maybe<(
+          Pick<SiteSiteMetadataResumeInfoExperience, 'addr' | 'company' | 'from' | 'title' | 'to'>
+          & { readonly children: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoExperienceChildren, 'desc' | 'isPrivate' | 'name' | 'role' | 'withSkills'>>>> }
+        )>>>, readonly skill: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoSkill, 'children' | 'label' | 'name'>>>> }
+      )> }
+    )> }> };
+
+type userserickuangDesktopmyDeveric183GithubIosrcpagesprojectsindexJs2422230711QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type userserickuangDesktopmyDeveric183GithubIosrcpagesprojectsindexJs2422230711Query = { readonly allMarkdownRemark: (
+    Pick<MarkdownRemarkConnection, 'totalCount'>
+    & { readonly edges: ReadonlyArray<{ readonly node: (
+        Pick<MarkdownRemark, 'id' | 'timeToRead' | 'html' | 'excerpt'>
+        & { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'date' | 'title'>>, readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>> }
+      ) }> }
+  ), readonly site: Maybe<(
+    Pick<Site, 'id'>
+    & { readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'about' | 'author' | 'fontFamily' | 'desc'>> }
   )> };
 
 type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type Unnamed_1_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'author' | 'fontFamily'>> }> };
-
-type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type Unnamed_2_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'author' | 'fontFamily'>> }> };
 
 }
