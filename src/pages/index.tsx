@@ -1,10 +1,15 @@
-import React, { FC, useRef, useState }from "react"
+import React, { FC, useEffect, useRef, useState } from "react"
 
 
 // import { graphql } from 'gatsby'
 // import CanvasModule from '../components/webgl-canvas';
 import { css } from '@emotion/react'
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Stage, OrbitControls, Reflector, useHelper } from "@react-three/drei";
+import { Camera, Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useSpring, animated } from '@react-spring/three';
+import { EffectComposer, Pixelation } from "@react-three/postprocessing";
+import { useControls } from "leva";
+import THREE, { BoxHelper, Vector3 } from "three";
 
 
 // const contentful = require("contentful");
@@ -28,24 +33,121 @@ import { Canvas, useFrame } from "@react-three/fiber";
 const Box: FC<JSX.IntrinsicElements['mesh']> = (props) => {
 	// This reference will give us direct access to the mesh
 	const mesh = useRef<THREE.Mesh>(null!)
+	const reflector = useRef<THREE.Mesh>(null!)
 	// Set up state for the hovered and active state
 	const [hovered, setHover] = useState(false)
 	const [active, setActive] = useState(false)
+	const { setScale, position } = useControls({
+		setScale: 1,
+		position: [0, 20, 0]
+	})
+	// const [cameraPosition, setCameraPosition] = useState([0, 1, 0]);
+	// const { camera } = useThree();
+	// const set = useThree((state) => state.set);
+	const { camera } = useThree();
+
+
+	// const { scale } = useSpring({ scale: active ? 1.5 : 1 })
+	const { scale } = useSpring({ scale: setScale })
+
+	const { granularity, cameraFov, cameraPosition } = useControls({
+		granularity: {
+			value: 0, min: -10, max: 10
+		},
+		cameraFov: {
+			fov: 60, near: 0.1, far: 1000,
+			//  position: [0, 0, 5]
+		},
+		cameraPosition: [0, 1, 0],
+	})
+
+
+
+	useEffect(() => {
+		// setTimeout(() => {
+		// 	setCameraPosition([0, 5, 0]);
+		// }, 1500)
+		// camera.position.set()
+		// set({ camera: new THREE.OrthographicCamera(...) })
+		// set({
+		// 	camera: {
+		// 		fov: 60,
+		// 		position: new Vector3().fromArray([0, 0, 5])
+		// 	} as Camera
+		// })
+
+		// camera.position.fromArray(cameraPosition)
+		// debugger;
+	}, [cameraPosition])
+	// useThree();
+
+	// useEffect(() => {
+	// 	debugger;
+	// }, [cameraPosition])	
+
+	// useHelper(mesh, BoxHelper, 'hl')
+	// useHelper(reflector, BoxHelper, 'hl2')
+	// debugger;
 	// Subscribe this component to the render-loop, rotate the mesh every frame
-	useFrame((state, delta) => (mesh.current.rotation.x += 0.01))
+	// useFrame((state, delta) => (mesh.current.rotation.x += 0.01));
+
 	// Return view, these are regular three.js elements expressed in JSX
+
+	// const camera = {
+	// 	position: new Vector3().fromArray(cameraPosition),
+	// 	fov: cameraFov.fov
+	// }
 	return (
-	  <mesh
-		{...props}
-		ref={mesh}
-		scale={active ? 1.5 : 1}
-		onClick={(event) => setActive(!active)}
-		onPointerOver={(event) => setHover(true)}
-		onPointerOut={(event) => setHover(false)}
-	  >
-		<boxGeometry args={[1, 1, 1]} />
-		<meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
-	  </mesh>
+
+		<group>
+
+			{/* <camera args={
+				position: new Vector3().fromArray(cameraPosition),
+				fov: cameraFov.fov
+			} /> */}
+			<fog attach="fog" args={['lightpink', 60, 100]} />
+			<ambientLight intensity={1} />
+			<spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+			<pointLight position={[-10, -10, -10]} />
+			<OrbitControls />
+			{/* <EffectComposer>
+				<Pixelation granularity={granularity} />
+			</EffectComposer> */}
+			<spotLight position={[50, 50, -30]} castShadow />
+
+			<Reflector
+				resolution={1024}
+				receiveShadow
+				mirror={0}
+				blur={[500, 100]}
+				mixBlur={1}
+				mixStrength={0.5}
+				depthScale={1}
+				minDepthThreshold={0.8}
+				maxDepthThreshold={1}
+				position={[0, 0, 8]}
+				scale={[2, 2, 1]}
+				rotation={[-Math.PI / 2, 0, Math.PI]}
+				args={[70, 70]}>
+				{(Material, props) => <Material metalness={0.25} color="#eea6b1" roughness={1} {...props} />}
+			</Reflector>
+			<animated.mesh
+				position={[0, 0, 0]}
+				// <animated.mesh
+				// {...props}
+				ref={mesh}
+			// scale={scale}
+			// scale={ active ? 1.5 : 1 }
+			// scale={ scale }
+			// onClick={(event) => setActive(!active)}
+			// onPointerOver={(event) => setHover(true)}
+			// onPointerOut={(event) => setHover(false)}
+			>
+				<boxGeometry args={[1, 1, 1]} />
+				<meshStandardMaterial color={'orange'} />
+				{/* </mesh> */}
+			</animated.mesh>
+		</group>
 	)
 }
 
@@ -54,7 +156,13 @@ const Index: FC = (props) => {
 	// const loadBinder = (value) => {
 	// 	setLoad(value);
 	// }
-	console.log(props);
+	// const mesh = useRef<THREE.Mesh>(null!);
+
+	// useFrame((state, delta) => {
+
+	// 	// set({ camera: { fov: cameraFov.fov, position: new THREE.Vector3(0, 0, 0).fromArray(cameraPosition) } as Camera });
+	// });
+
 	return (
 		<div css={css`
 			position: fixed; 
@@ -67,14 +175,32 @@ const Index: FC = (props) => {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			justify-content: center;`
+			justify-content: center;
+			background: #ffb6c1;
+			`
 		}>
-			<Canvas>
-				<ambientLight intensity={0.5} />
-				<spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-				<pointLight position={[-10, -10, -10]} />
-				<Box position={[-1.2, 0, 0]} />
+			<Canvas
+				mode='concurrent'
+				shadows
+				dpr={[1, 2]}
+				camera={{
+					position: [0, 0, 5],
+					fov: 60
+				}}
+				onCreated={state => {
+					// @ts-ignore
+					const __THREE_DEVTOOLS__ = window['__THREE_DEVTOOLS__'];
+
+					if (typeof __THREE_DEVTOOLS__ !== 'undefined') {
+						__THREE_DEVTOOLS__.dispatchEvent(new CustomEvent('observe', { detail: state.scene }));
+						__THREE_DEVTOOLS__.dispatchEvent(new CustomEvent('observe', { detail: state.gl }));
+					}
+				}}
+			>
+
+				<Box />
 			</Canvas>
+			{/* </Canvas> */}
 			{/* <p>Backsn</p>
 			<p>Please wait hi</p> */}
 			{/* <img src="bean.gif" css={css`display: ${!hasLoaded ? "block" : "none"}; position: relative; z-index: 1;`} /> */}

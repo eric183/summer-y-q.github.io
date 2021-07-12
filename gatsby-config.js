@@ -234,7 +234,7 @@ module.exports = {
                 {
                     name: "Front-end",
                     label: "语言",
-                    children: ['React', 'Vue', 'Angular', 'Mobx', 'Redux', 'Vuex', 'Webpack', 'Gulp', 'TaroJS', 'MpVue', 'ThreeJS', 'BabylonJS', 'GSAP']
+                    children: ['React', 'Vue', 'Angular', 'Mobx', 'Redux', 'Vuex', 'Webpack', 'Gulp', 'TaroJS', 'ThreeJS', 'BabylonJS', 'GSAP']
                 },
                 {
                     name: "Back-end",
