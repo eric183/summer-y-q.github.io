@@ -110,7 +110,7 @@ export const ResumeStyle = Styled.div`
     }
     h2 {
         position: relative;
-        margin: 0 0 20px;
+        margin: 0 0 26px;
         &::after {
             position: absolute;
             content: '';
