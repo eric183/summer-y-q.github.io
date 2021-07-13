@@ -105,7 +105,7 @@ const Sample: FC<SiteType> = ({ data }) => {
                                         {
                                             item?.children?.map((child, childIndex) => (
                                                 <li key={childIndex}>
-                                                    [{child?.name}]
+                                                    <span>{child?.name}</span>
                                                     <p>{child?.desc}</p>
                                                     <ul className="flex-row work-skill">
                                                         {

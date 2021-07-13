@@ -1,15 +1,16 @@
-import React, { FC, useEffect, useRef, useState } from "react"
+import React, { FC, Ref, useEffect, useRef, useState } from "react"
 
 
 // import { graphql } from 'gatsby'
 // import CanvasModule from '../components/webgl-canvas';
 import { css } from '@emotion/react'
-import { Stage, OrbitControls, Reflector, useHelper } from "@react-three/drei";
-import { Camera, Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Stage, OrbitControls, Reflector, useHelper, CameraShake, OrbitControlsProps } from "@react-three/drei";
+import { Camera, Canvas, ReactThreeFiber, useFrame, useThree } from "@react-three/fiber";
 import { useSpring, animated } from '@react-spring/three';
 import { EffectComposer, Pixelation } from "@react-three/postprocessing";
-import { useControls } from "leva";
+import { button, useControls } from "leva";
 import THREE, { BoxHelper, Vector3 } from "three";
+// import { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 
 
 // const contentful = require("contentful");
@@ -51,6 +52,7 @@ const Box: FC<JSX.IntrinsicElements['mesh']> = (props) => {
 	const { scale } = useSpring({ scale: setScale })
 
 	const { granularity, cameraFov, cameraPosition } = useControls({
+		'Hello Button': button(() => console.log('position', camera.position.toArray(), '\n', 'rotation', camera.rotation.toArray())),
 		granularity: {
 			value: 0, min: -10, max: 10
 		},
@@ -58,7 +60,7 @@ const Box: FC<JSX.IntrinsicElements['mesh']> = (props) => {
 			fov: 60, near: 0.1, far: 1000,
 			//  position: [0, 0, 5]
 		},
-		cameraPosition: [0, 1, 0],
+		cameraPosition: camera.position.toArray(),
 	})
 
 
@@ -77,6 +79,7 @@ const Box: FC<JSX.IntrinsicElements['mesh']> = (props) => {
 		// })
 
 		// camera.position.fromArray(cameraPosition)
+		// camera.lookAt(new Vector3().fromArray([-1.93, 1, -0.94]));
 		// debugger;
 	}, [cameraPosition])
 	// useThree();
@@ -89,7 +92,13 @@ const Box: FC<JSX.IntrinsicElements['mesh']> = (props) => {
 	// useHelper(reflector, BoxHelper, 'hl2')
 	// debugger;
 	// Subscribe this component to the render-loop, rotate the mesh every frame
-	// useFrame((state, delta) => (mesh.current.rotation.x += 0.01));
+	useFrame((state, delta) => {
+		// camera.lookAt(new Vector3().fromArray([-1.93, 1, -0.94]));
+		// camera.lookAt(mesh.current.position);
+		// camera.position.x += 0.01;
+		camera.updateMatrixWorld();
+		// mesh.current.rotation.x += 0.01;
+	});
 
 	// Return view, these are regular three.js elements expressed in JSX
 
@@ -105,64 +114,76 @@ const Box: FC<JSX.IntrinsicElements['mesh']> = (props) => {
 				position: new Vector3().fromArray(cameraPosition),
 				fov: cameraFov.fov
 			} /> */}
-			<fog attach="fog" args={['lightpink', 60, 100]} />
-			<ambientLight intensity={1} />
-			<spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-			<pointLight position={[-10, -10, -10]} />
-			<OrbitControls />
+		
 			{/* <EffectComposer>
 				<Pixelation granularity={granularity} />
 			</EffectComposer> */}
-			<spotLight position={[50, 50, -30]} castShadow />
 
-			<Reflector
-				resolution={1024}
-				receiveShadow
-				mirror={0}
-				blur={[500, 100]}
-				mixBlur={1}
-				mixStrength={0.5}
-				depthScale={1}
-				minDepthThreshold={0.8}
-				maxDepthThreshold={1}
-				position={[0, 0, 8]}
-				scale={[2, 2, 1]}
-				rotation={[-Math.PI / 2, 0, Math.PI]}
-				args={[70, 70]}>
-				{(Material, props) => <Material metalness={0.25} color="#eea6b1" roughness={1} {...props} />}
-			</Reflector>
-			<animated.mesh
-				position={[0, 0, 0]}
-				// <animated.mesh
-				// {...props}
-				ref={mesh}
-			// scale={scale}
-			// scale={ active ? 1.5 : 1 }
-			// scale={ scale }
-			// onClick={(event) => setActive(!active)}
-			// onPointerOver={(event) => setHover(true)}
-			// onPointerOut={(event) => setHover(false)}
-			>
-				<boxGeometry args={[1, 1, 1]} />
-				<meshStandardMaterial color={'orange'} />
-				{/* </mesh> */}
-			</animated.mesh>
+
+		<spotLight position={[50, 50, -30]} castShadow />
+        <pointLight position={[-10, -10, -10]} color="red" intensity={3} />
+        <pointLight position={[0, -5, 5]} intensity={0.5} />
+        <directionalLight position={[0, -5, 0]} color="red" intensity={2} />
+			<group position={[-4.5, -4, 0]} rotation={[0, -2.8, 0]}>
+				<Reflector
+					resolution={1024}
+					receiveShadow
+					mirror={0}
+					blur={[500, 100]}
+					mixBlur={1}
+					mixStrength={0.5}
+					depthScale={1}
+					minDepthThreshold={0.8}
+					maxDepthThreshold={1}
+					position={[0, 0, 8]}
+					scale={[2, 2, 1]}
+					rotation={[-Math.PI / 2, 0, Math.PI]}
+					args={[70, 70]}>
+					{(Material, props) => <Material metalness={0.25} color="#eea6b1" roughness={1} {...props} />}
+				</Reflector>
+				<animated.mesh
+					// position={[0, .5, 0]}
+					position={[-1.93, 1, -0.94]} rotation={[-Math.PI, 0.73, -Math.PI]} 
+					// <animated.mesh
+					// {...props}
+					ref={mesh}
+				// scale={scale}
+				// scale={ active ? 1.5 : 1 }
+				// scale={ scale }
+				// onClick={(event) => setActive(!active)}
+				// onPointerOver={(event) => setHover(true)}
+				// onPointerOut={(event) => setHover(false)}
+				>
+					<boxGeometry args={[1, 1, 1]} />
+					<meshStandardMaterial color={'orange'} />
+					{/* </mesh> */}
+				</animated.mesh>
+			</group>
 		</group>
 	)
 }
+
+// interface OrbitControlsType {
+// 	OrbitControls: typeof OrbitControls
+// }
 
 const Index: FC = (props) => {
 	// const [, setLoad] = useState(false)
 	// const loadBinder = (value) => {
 	// 	setLoad(value);
 	// }
-	// const mesh = useRef<THREE.Mesh>(null!);
+	// const control = useRef<OrbitControls | null>(null!);
+	const control = useRef(null!);
 
 	// useFrame((state, delta) => {
 
 	// 	// set({ camera: { fov: cameraFov.fov, position: new THREE.Vector3(0, 0, 0).fromArray(cameraPosition) } as Camera });
 	// });
-
+	useControls({
+		'getControl': button(() => {
+			console.log('position', control.current, '\n', 'rotation', control.current)
+		}),
+	})
 	return (
 		<div css={css`
 			position: fixed; 
@@ -184,8 +205,10 @@ const Index: FC = (props) => {
 				shadows
 				dpr={[1, 2]}
 				camera={{
-					position: [0, 0, 5],
-					fov: 60
+					position: [-25.343932835213916, -0.5992951128131994, 4.040151518755322],
+					rotation: [-0.7036948367260863, -1.368973455420232, -0.6935959525797508, "XYZ"],
+					fov: 20,
+					// near: 0.1, far: 1000
 				}}
 				onCreated={state => {
 					// @ts-ignore
@@ -197,8 +220,13 @@ const Index: FC = (props) => {
 					}
 				}}
 			>
+				{/* <fog attach="fog" args={['lightpink', 60, 100]} /> */}
 
 				<Box />
+				{/* <Rig /> */}
+
+				<OrbitControls ref={control} />
+
 			</Canvas>
 			{/* </Canvas> */}
 			{/* <p>Backsn</p>
@@ -218,6 +246,14 @@ const Index: FC = (props) => {
 	)
 }
 
+
+const Rig: FC = () => {
+	const [vec] = useState(() => new Vector3())
+	const { camera, mouse } = useThree()
+	useFrame(() => camera.position.lerp(vec.set(mouse.x * 2, 1, 60), 0.05))
+	return <CameraShake maxYaw={0.01} maxPitch={0.01} maxRoll={0.01} yawFrequency={0.5} pitchFrequency={0.5} rollFrequency={0.4} />
+}
+  
 
 
 

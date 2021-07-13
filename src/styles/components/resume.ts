@@ -3,6 +3,7 @@ const TITLE_FONT_COLOR = '#5d5d5d';
 const ALERT_FONT_COLOR = '#df4533';
 const BOLDER_FONT_COLOR = '#333333';
 const SLIME_FONT_COLOR = '#686868';
+const RED_FONT_COLOR = 'red';
 
 export const ResumeStyle = Styled.div`
     /* width: 210mm;
@@ -97,7 +98,7 @@ export const ResumeStyle = Styled.div`
         li {
             list-style: none;   
             /* width: 25%; */
-            font-size: 15px;
+            font-size: 17px;
             a {
                 color: #000;
                 text-decoration: none;
@@ -120,7 +121,7 @@ export const ResumeStyle = Styled.div`
             transform: translate(15px);
         }
         span {
-            color: red;
+            color: ${RED_FONT_COLOR};
         }
     }
 
@@ -175,6 +176,13 @@ export const ResumeStyle = Styled.div`
             font-size: 15px;
             color: ${SLIME_FONT_COLOR};
         }
+
+        li {
+            position: relative;
+            span {
+                font-weight: 600;
+            }
+        }
     }
 
     .skill-item {
@@ -189,8 +197,19 @@ export const ResumeStyle = Styled.div`
         list-style: none;
         li {
             margin: 0;
-            color: red;
+            color: ${RED_FONT_COLOR};
         }
+        
+        li:after {
+            position: absolute;
+            content: '';
+            background: ${RED_FONT_COLOR};
+            width: 100%;
+            height: 1px;
+            left: 0;
+            bottom: 0;
+        }
+
         li:not(:first-child) {
             margin-left: 18px;
         }
@@ -206,8 +225,8 @@ export const ResumeStyle = Styled.div`
         }
     }
     h3 {
-        font-weight: 600;
-        font-size: 25px;
+        font-weight: 900;
+        font-size: 27px;
         color: ${BOLDER_FONT_COLOR};
         margin: 15px 0;
     }
