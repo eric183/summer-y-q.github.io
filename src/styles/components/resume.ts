@@ -218,7 +218,7 @@ export const ResumeStyle = Styled.div`
     h2 {
         /* font-weight: border; */
         font-weight: 900;
-        font-size: 30px;
+        font-size: 34px;
         color: ${BOLDER_FONT_COLOR};
         span {
             font-weight: bolder;
@@ -227,7 +227,7 @@ export const ResumeStyle = Styled.div`
     }
     h3 {
         font-weight: 900;
-        font-size: 23px;
+        font-size: 21px;
         color: ${BOLDER_FONT_COLOR};
         margin: 15px 0;
     }
