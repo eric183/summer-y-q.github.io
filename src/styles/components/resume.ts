@@ -222,7 +222,7 @@ export const ResumeStyle = Styled.div`
         color: ${BOLDER_FONT_COLOR};
         span {
             font-weight: bolder;
-            font-size: 30px;
+            font-size: 34px;
         }
     }
     h3 {
