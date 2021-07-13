@@ -198,6 +198,7 @@ export const ResumeStyle = Styled.div`
         li {
             margin: 0;
             color: ${RED_FONT_COLOR};
+            font-size: 15px;
         }
         
         li:after {
@@ -226,7 +227,7 @@ export const ResumeStyle = Styled.div`
     }
     h3 {
         font-weight: 900;
-        font-size: 27px;
+        font-size: 23px;
         color: ${BOLDER_FONT_COLOR};
         margin: 15px 0;
     }

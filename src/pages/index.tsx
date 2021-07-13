@@ -60,12 +60,14 @@ const Box: FC<JSX.IntrinsicElements['mesh']> = (props) => {
 			fov: 60, near: 0.1, far: 1000,
 			//  position: [0, 0, 5]
 		},
-		cameraPosition: camera.position.toArray(),
+		cameraPosition: [-25, -0, 4],
+		// cameraPosition: camera.position.toArray(),
 	})
 
 
 
 	useEffect(() => {
+		camera.position.fromArray(cameraPosition);
 		// setTimeout(() => {
 		// 	setCameraPosition([0, 5, 0]);
 		// }, 1500)
@@ -78,10 +80,9 @@ const Box: FC<JSX.IntrinsicElements['mesh']> = (props) => {
 		// 	} as Camera
 		// })
 
-		// camera.position.fromArray(cameraPosition)
 		// camera.lookAt(new Vector3().fromArray([-1.93, 1, -0.94]));
 		// debugger;
-	}, [cameraPosition])
+	}, [cameraPosition, cameraFov])
 	// useThree();
 
 	// useEffect(() => {
@@ -94,8 +95,9 @@ const Box: FC<JSX.IntrinsicElements['mesh']> = (props) => {
 	// Subscribe this component to the render-loop, rotate the mesh every frame
 	useFrame((state, delta) => {
 		// camera.lookAt(new Vector3().fromArray([-1.93, 1, -0.94]));
-		// camera.lookAt(mesh.current.position);
+
 		// camera.position.x += 0.01;
+		camera.lookAt(mesh.current.position);
 		camera.updateMatrixWorld();
 		// mesh.current.rotation.x += 0.01;
 	});
@@ -143,7 +145,8 @@ const Box: FC<JSX.IntrinsicElements['mesh']> = (props) => {
 				</Reflector>
 				<animated.mesh
 					// position={[0, .5, 0]}
-					position={[-1.93, 1, -0.94]} rotation={[-Math.PI, 0.73, -Math.PI]} 
+					position={[-1.93, 1, -0.94]} 
+					rotation={[-Math.PI, 0.73, -Math.PI]} 
 					// <animated.mesh
 					// {...props}
 					ref={mesh}
@@ -206,7 +209,7 @@ const Index: FC = (props) => {
 				dpr={[1, 2]}
 				camera={{
 					position: [-25.343932835213916, -0.5992951128131994, 4.040151518755322],
-					rotation: [-0.7036948367260863, -1.368973455420232, -0.6935959525797508, "XYZ"],
+					// rotation: [-0.7036948367260863, -1.368973455420232, -0.6935959525797508, "XYZ"],
 					fov: 20,
 					// near: 0.1, far: 1000
 				}}
@@ -226,7 +229,7 @@ const Index: FC = (props) => {
 				{/* <Rig /> */}
 
 				<OrbitControls ref={control} />
-
+				{/* <CameraShake maxYaw={0.01} maxPitch={0.01} maxRoll={0.01} yawFrequency={0.5} pitchFrequency={0.5} rollFrequency={0.4} /> */}
 			</Canvas>
 			{/* </Canvas> */}
 			{/* <p>Backsn</p>
