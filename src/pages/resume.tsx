@@ -47,7 +47,7 @@ const Sample: FC<SiteType> = ({ data }) => {
                                         {/* <i className='happy-icon'>{item.icon}</i> */}
                                         { 
                                             item?.link ? 
-                                            <a href={item?.link} target='_blank'>{item?.text}</a>
+                                            <a href={item?.link} target='_blank' rel="noreferrer">{item?.text}</a>
                                              : item?.text
                                         }
                                       
