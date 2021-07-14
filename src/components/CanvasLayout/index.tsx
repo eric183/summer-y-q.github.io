@@ -1,37 +1,32 @@
+/* eslint-disable react/prop-types */
 import React, { FC } from 'react';
 import { css } from '@emotion/react';
 import { Canvas } from '@react-three/fiber';
 
 const CanvasLayout: FC<{
     children: JSX.Element | JSX.Element[],
-    canvasProps?: {
-        mode?: "concurrent" | "legacy" | "blocking",
-        shadows?: boolean,
-        dpr?: number[],
-        camera?: any,
-        onCreated?: any,
-    },
+    canvasProps?: any,
     wrapperStyle?: React.CSSProperties,
 }> = (props) => {
 
-    const { 
-        mode = 'concurrent', 
-        shadows = false, 
-        dpr = [1, 2], 
-        camera = {position: [0, 160, 160], fov: 20},
-        onCreated = (state: { scene: any; gl: any; }) => {
-            // @ts-ignore
-            const __THREE_DEVTOOLS__ = window['__THREE_DEVTOOLS__'];
+    // const { 
+    //     mode = 'concurrent', 
+    //     shadows = false, 
+    //     dpr = [1, 2], 
+    //     camera = {position: [0, 160, 160], fov: 20},
+    //     onCreated = (state: { scene: any; gl: any; }) => {
+    //         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //         // @ts-ignore
+    //         const __THREE_DEVTOOLS__ = window['__THREE_DEVTOOLS__'];
 
-            if (typeof __THREE_DEVTOOLS__ !== 'undefined') {
-                __THREE_DEVTOOLS__.dispatchEvent(new CustomEvent('observe', { detail: state.scene }));
-                __THREE_DEVTOOLS__.dispatchEvent(new CustomEvent('observe', { detail: state.gl }));
-            }
-        }
+    //         if (typeof __THREE_DEVTOOLS__ !== 'undefined') {
+    //             __THREE_DEVTOOLS__.dispatchEvent(new CustomEvent('observe', { detail: state.scene }));
+    //             __THREE_DEVTOOLS__.dispatchEvent(new CustomEvent('observe', { detail: state.gl }));
+    //         }
+    //     }
 
-    } = props.canvasProps ? props.canvasProps : {};
+    // } = props.canvasProps ? props.canvasProps : {};
 
-    const { wrapperStyle } = props;
     return (
 
         <div 
@@ -49,15 +44,17 @@ const CanvasLayout: FC<{
                 justify-content: center;
                 background: #ffb6c1;
             `}
-            style={wrapperStyle}
+            style={props.wrapperStyle ?? props.wrapperStyle}
 
             >
             <Canvas
-                mode={mode}
-                shadows
-                dpr={[1, 2]}
-                camera={camera}
-                onCreated={onCreated}
+                // eslint-disable-next-line react/prop-types
+                {...props}
+                // mode={mode}
+                // shadows
+                // dpr={[1, 2]}
+                // camera={camera}
+                // onCreated={onCreated}
             >
                 {props.children}
             </Canvas>

@@ -58,6 +58,10 @@ export const onCreateWebpackConfig = ({ stage, loaders, actions }) => {
                     {
                         test: /html2pdf\.js/,
                         use: loaders.null(),
+                    },
+                    {
+                        test: /threejs\-meshline/,
+                        use: loaders.null(),
                     }
                 ],
             },

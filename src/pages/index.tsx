@@ -181,24 +181,28 @@ const Box: FC<JSX.IntrinsicElements['mesh']> = (props) => {
 					args={[70, 70]}>
 					{(Material, props) => <Material metalness={0.25} color="#eea6b1" roughness={1} {...props} />}
 				</Reflector>
-				<animated.mesh
-					// position={[0, .5, 0]}
-					position={[-5.28, 4.8, 5.12]}
-					// rotation={[-Math.PI, 0.73, -Math.PI]}
-					// <animated.mesh
-					// {...props}
-					ref={mesh}
-				// scale={scale}
-				// scale={ active ? 1.5 : 1 }
-				// scale={ scale }
-				// onClick={(event) => setActive(!active)}
-				// onPointerOver={(event) => setHover(true)}
-				// onPointerOut={(event) => setHover(false)}
-				>
-					<boxGeometry args={[1, 1, 1]} />
-					<meshStandardMaterial color={'orange'} />
-					{/* </mesh> */}
-				</animated.mesh>
+				<TransformControls>
+					<animated.mesh
+						receiveShadow 
+						castShadow						
+						// position={[0, .5, 0]}
+						// position={[-5.28, 4.8, 5.12]}
+						// rotation={[-Math.PI, 0.73, -Math.PI]}
+						// <animated.mesh
+						// {...props}
+						// ref={mesh}
+						// scale={scale}
+						// scale={ active ? 1.5 : 1 }
+						// scale={ scale }
+						// onClick={(event) => setActive(!active)}
+						// onPointerOver={(event) => setHover(true)}
+						// onPointerOut={(event) => setHover(false)}
+					>
+						<boxGeometry args={[1, 1, 1]} />
+						<meshStandardMaterial color={'orange'} />
+						{/* </mesh> */}
+					</animated.mesh>
+				</TransformControls>
 
 			</group>
 
@@ -222,7 +226,21 @@ const Index: FC = (props) => {
 	// const control = useRef<OrbitControls | null>(null!);
 
 	return (
-		<CanvasLayout>
+		<CanvasLayout 
+			// mode={'concurrent'}
+			dpr={[1, 2]}
+			camera={{position: [0, 160, 160], fov: 20}}
+			oncreate={(state: { scene: any; gl: any; }) => {
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
+				const __THREE_DEVTOOLS__ = window['__THREE_DEVTOOLS__'];
+	
+				if (typeof __THREE_DEVTOOLS__ !== 'undefined') {
+					__THREE_DEVTOOLS__.dispatchEvent(new CustomEvent('observe', { detail: state.scene }));
+					__THREE_DEVTOOLS__.dispatchEvent(new CustomEvent('observe', { detail: state.gl }));
+				}
+			}}
+		>
 			<fog attach="fog" args={['lightpink', 60, 100]} />
 			<Box />
 		</CanvasLayout>

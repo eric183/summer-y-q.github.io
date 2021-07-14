@@ -327,6 +327,17 @@ module.exports = {
                 display: `standalone`,
                 icon: `${__dirname}/src/images/head.jpg`
             }
-        }
+        },
+        // {
+        //     resolve: 'gatsby-plugin-typescript',
+        //     options: {
+        //       transpileOnly: true, // default
+        //       compilerOptions: {
+        //         target: 'es5',
+        //         experimentalDecorators: true,
+        //         jsx: `react`
+        //       }, // default
+        //     }
+        //   },
     ],
 }
