@@ -14,3 +14,5 @@ _README.md
 public/
 
 __generated__
+
+.eslintrc.js_1

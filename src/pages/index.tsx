@@ -34,17 +34,14 @@ import CanvasLayout from "~components/CanvasLayout";
 // import  { bodyFontFamily } from '../utils/typography' 
 // Annie Use Your Telescope
 
-   // project: [
-        //     'tsconfig.json'
-        // ],
-    // extends: [
-    //   'eslint:recommended',
-    //   'plugin:@typescript-eslint/recommended',
-    // ],
+// project: [
+//     'tsconfig.json'
+// ],
+// extends: [
+//   'eslint:recommended',
+//   'plugin:@typescript-eslint/recommended',
+// ],
 const Box: FC<JSX.IntrinsicElements['mesh']> = (props) => {
-	debugger;
-	const john = 23;
-	console.log(john);
 	const mesh = useRef<THREE.Mesh>(null!)
 	const reflector = useRef<THREE.Mesh>(null!)
 	// Set up state for the hovered and active state
@@ -57,7 +54,7 @@ const Box: FC<JSX.IntrinsicElements['mesh']> = (props) => {
 	// const [cameraPosition, setCameraPosition] = useState([0, 1, 0]);
 	// const { camera } = useThree();
 	// const set = useThree((state) => state.set);
-	const { camera, mouse} = useThree();
+	const { camera, mouse } = useThree();
 
 	// const { scale } = useSpring({ scale: active ? 1.5 : 1 })
 	const { scale } = useSpring({ scale: setScale })
@@ -92,7 +89,7 @@ const Box: FC<JSX.IntrinsicElements['mesh']> = (props) => {
 		// 	-0.5992951128132021,
 		// 	4.040151518755319
 		// )
-		
+
 		setTimeout(() => {
 			// camera.lookAt(mesh.current.position);
 			camera.position.lerp(vec.set(mouse.x * 2, 1, 60), 0.05);
@@ -102,7 +99,7 @@ const Box: FC<JSX.IntrinsicElements['mesh']> = (props) => {
 
 		}, 1500)
 	}, [])
-	
+
 
 	useEffect(() => {
 		// camera.position.fromArray(cameraPosition);
@@ -223,7 +220,7 @@ const Index: FC = (props) => {
 	// 	setLoad(value);
 	// }
 	// const control = useRef<OrbitControls | null>(null!);
-	
+
 	return (
 		<CanvasLayout>
 			<fog attach="fog" args={['lightpink', 60, 100]} />
