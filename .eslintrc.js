@@ -1,4 +1,5 @@
 module.exports = {
+	baseUrl: './',
 	env: {
 		browser: true,
 		es2021: true,
@@ -18,7 +19,7 @@ module.exports = {
 		project: [
 			'tsconfig.json',
 		],
-		tsconfigRootDir: __dirname,
+		// tsconfigRootDir: __dirname,
 		ecmaFeatures: {
 			jsx: true,
 		},

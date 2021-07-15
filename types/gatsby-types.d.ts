@@ -2795,11 +2795,6 @@ type fWorkspaceeric183GithubIosrctemplatesblogPostJs471609186Query = { readonly 
     & { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'title'>> }
   )> };
 
-type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
-
 type fWorkspaceeric183GithubIosrcpagesaboutTsx4122199845QueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2854,6 +2849,11 @@ type fWorkspaceeric183GithubIosrcpagesprojectsindexJs2422230711Query = { readonl
     Pick<Site, 'id'>
     & { readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'about' | 'author' | 'fontFamily' | 'desc'>> }
   )> };
+
+type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 

@@ -22,6 +22,7 @@
 
 import { Mesh, OrthographicCamera, PlaneBufferGeometry, Scene, ShaderMaterial, UniformsUtils, Vector2 } from 'three'
 import { Pass } from 'three/examples/jsm/postprocessing/Pass'
+// import { Pass } from './test'
 
 const WaterShader = {
     uniforms: {
@@ -66,7 +67,8 @@ const WaterShader = {
 }
 
 const WaterPass = function (dt_size) {
-    Pass.call(this)
+    // Pass.call(this)
+    new Pass(this);
     if (WaterShader === undefined) console.error('THREE.WaterPass relies on THREE.WaterShader')
     var shader = WaterShader
     this.uniforms = UniformsUtils.clone(shader.uniforms)

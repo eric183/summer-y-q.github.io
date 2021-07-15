@@ -1,12 +1,16 @@
 /* eslint-disable */
 
 import { extend as myExtends, useFrame, useLoader, useThree } from '@react-three/fiber';
-import React, { FC, forwardRef, Suspense, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { FC, forwardRef, Suspense, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three'
 import CanvasLayout from '~components/CanvasLayout';
 import { WaterEffect } from '~components/Effects';
-import { MeshLine, MeshLineMaterial, MeshLineRaycast } from 'three.meshline';
+// import { MeshLine, MeshLineMaterial, MeshLineRaycast } from 'three.meshline';
 import { navigate } from "gatsby";
+// const { MeshLine, MeshLineMaterial, MeshLineRaycast } = require('three.meshline');
+// { "modules": false ,"targets":{"node":"current" } },
+
+
 // import { shaderMaterial } from '@react-three/drei';
 // import glsl from 'glslify';
 
@@ -41,22 +45,27 @@ import { navigate } from "gatsby";
 //       }
 //     `
 //   )
-myExtends({ MeshLine, MeshLineMaterial })
+// myExtends({ MeshLine, MeshLineMaterial })
 
 const DDA: FC = () => {
     const mouse = useRef([0, 0])
     const [hovered, hover] = useState(false);
-    // const points = [];
-    //     for (let j = 0; j < Math.PI; j += (2 * Math.PI) / 100) {
-    //     points.push(Math.cos(j), Math.sin(j), 0);
-    // }
+    const points = [];
+        for (let j = 0; j < Math.PI; j += (2 * Math.PI) / 100) {
+        points.push(Math.cos(j), Math.sin(j), 0);
+    }
+    useEffect(() => {
+        document.body.style.cursor = hovered
+          ? 'pointer'
+          : "url('https://raw.githubusercontent.com/chenglou/react-motion/master/demos/demo8-draggable-list/cursor.png') 39 39, auto"
+    }, [hovered])
     return (
         <CanvasLayout
             linear
             dpr={[1, 2]}
             camera={{ fov: 100, position: [0, 0, 30] }}
             onCreated={({ gl }) => {
-                // gl.toneMapping = THREE.Uncharted2ToneMapping
+                gl.toneMapping = THREE.CineonToneMapping
                 gl.setClearColor(new THREE.Color('#020207'))
             }}
             wrapperStyle={{ backgroundColor: '#eee' }}>
@@ -65,7 +74,7 @@ const DDA: FC = () => {
             <pointLight distance={100} intensity={4} color="white" />
             <Number mouse={mouse} hover={hover} />
             <Particles count={10000} mouse={mouse} />
-            {/* <WaterEffect /> */}
+            <WaterEffect />
 
             {/* <Sparks count={20} mouse={mouse} colors={['#A2CCB6', '#FCEEB5', '#EE786E', '#e0feff', 'lightpink', 'lightblue']} /> */}
             {/* <mesh raycast={MeshLineRaycast}>
@@ -218,7 +227,7 @@ function Number({ hover }) {
         if (ref.current) {
             ref.current.position.x = THREE.MathUtils.lerp(ref.current.position.x, state.mouse.x * 2, 0.1)
             ref.current.rotation.x = THREE.MathUtils.lerp(ref.current.rotation.x, state.mouse.y / 2, 0.1)
-            ref.current.rotation.y = 0.8
+            ref.current.rotation.y += 0.003
         }
     })
     return (
@@ -241,18 +250,23 @@ const Text = forwardRef(({ children, vAlign = 'center', hAlign = 'center', size 
     const font = useLoader(THREE.FontLoader, '/k.json')
     const config = useMemo(() => ({ font, size: 40, height: 50 }), [font])
     const mesh = useRef()
+    const meshNormalMaterialRef = useRef()
     useLayoutEffect(() => {
         const size = new THREE.Vector3()
         mesh.current.geometry.computeBoundingBox()
         mesh.current.geometry.boundingBox.getSize(size)
         mesh.current.position.x = hAlign === 'center' ? -size.x / 2 : hAlign === 'right' ? 0 : -size.x
         mesh.current.position.y = vAlign === 'center' ? -size.y / 2 : vAlign === 'top' ? 0 : -size.y
+        meshNormalMaterialRef.current.wireframe = false;
+        // mesh.current.rotation.x = 20;
+        // ref.current.
+        // console.log(mesh.current.rotation);
     }, [children])
     return (
         <group ref={ref} {...props} scale={[0.1 * size, 0.1 * size, 0.1]}>
             <mesh ref={mesh}>
                 <textGeometry args={[children, config]} />
-                <meshNormalMaterial />
+                <meshNormalMaterial ref={meshNormalMaterialRef}/>
             </mesh>
         </group>
     )

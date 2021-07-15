@@ -10,6 +10,7 @@ import { WaterPass } from './water'
 
 extend({ EffectComposer, ShaderPass, RenderPass, WaterPass, UnrealBloomPass, FilmPass })
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function Effects() {
     const composer = useRef()
     const { scene, gl, size, camera } = useThree()
@@ -20,7 +21,7 @@ export default function Effects() {
         <effectComposer ref={composer} args={[gl]}>
             <renderPass attachArray="passes" scene={scene} camera={camera} />
             <waterPass attachArray="passes" factor={1.5} />
-            <unrealBloomPass attachArray="passes" args={[aspect, 2, 1, 0]} />
+            <unrealBloomPass attachArray="passes" args={[aspect, 0.5, 1, 0]} />
         </effectComposer>
     )
 }

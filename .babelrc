@@ -1,0 +1,39 @@
+{
+    "plugins": [
+        [
+            "@babel/plugin-proposal-decorators",
+            {
+                "legacy": true
+            }
+        ],
+        ["@babel/plugin-proposal-private-methods", { "loose": true }],
+        ["@babel/plugin-proposal-class-properties", { "loose": true }],
+        ["@babel/plugin-transform-classes", {"loose": true}]
+    ],
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "targets": { "node": "current" },
+                "forceAllTransforms": true
+            }
+        ],
+        [
+            "babel-preset-gatsby",
+            {
+                "targets": {
+                    "browsers": [
+                        ">0.2%",
+                        "not dead",
+                        "not ie <= 11",
+                        "not op_mini all"
+                    ]
+                }
+            }
+        ]
+    ],
+    "include": [
+        "node_modules/three/examples/jsm/postprocessing/Pass",
+        "src/components/Effects/water/"
+    ]
+}
