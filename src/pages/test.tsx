@@ -1,8 +1,9 @@
-import { Box, Octahedron, OrbitControls, ScreenQuad, TransformControls, useHelper } from '@react-three/drei';
+import { Box, Icosahedron, Octahedron, OrbitControls, ScreenQuad, Sphere, TransformControls, useHelper } from '@react-three/drei';
 import { useFrame, useLoader, useThree } from '@react-three/fiber';
 import { button, useControls } from 'leva';
 import React, { FC, Suspense, useEffect, useRef, useState } from 'react';
-import { BoxHelper, PointLightHelper, SpotLightHelper, TextureLoader } from 'three';
+import { MathUtils, BoxHelper, PointLightHelper, SpotLightHelper, TextureLoader } from 'three';
+
 import { TransformControls as TransformControlsImpl } from 'three-stdlib'
 import CanvasLayout from '~components/CanvasLayout';
 import TransformTool from '~components/TransformTool';
@@ -14,7 +15,8 @@ const Test: FC = ()=> {
     const ScreenQuadRef = useRef(null!)
     
     useEffect(() => {
-        console.log(ScreenQuadRef);
+        // console.log(ScreenQuadRef);
+        // console.log(MathUtils.lerp(1, 10, 0.1));
     }, []);
     
     return (
@@ -35,22 +37,36 @@ const Test: FC = ()=> {
 const MeshGroup = () => {
     const [normalTexture] = useLoader(TextureLoader,  ['/NormalMap.png']);
     const mesh = useRef<THREE.Mesh>(null!);
+
+    const { mouse } = useThree();
     useFrame((state) => {
-        // mesh.current.rotation.y += 0.1;
+        // console.log(mouse);
+        mesh.current.position.x = MathUtils.lerp(mesh.current.position.x, mouse.x, .5);
+
+        mesh.current.rotation.x = MathUtils.lerp(mesh.current.position.y, mouse.x, .5);
+        // mesh.current.position.z = MathUtils.lerp(mesh.current.position.y, mouse.y, 1);
+        // mesh.current.rotation.y += 0.01;
+        mesh.current.rotation.y = MathUtils.lerp(mesh.current.position.y, mouse.y, .5);
+
+        mesh.current.position.y = MathUtils.lerp(mesh.current.position.y, mouse.y, .5);
+
+        // console.log('rotation:', mesh.current.rotation);
+        console.log('position:', mesh.current.position.x);
     });
     return (
         <group ref={mesh}>
-            <mesh>
-                <Octahedron>
+            {/* <mesh> */}
+                <Sphere>
+                {/* args={[5, 32, 32]} */}
                     {/* <meshNormalMaterial /> */}
                     <meshStandardMaterial 
-                        color={'#0x292929'}
+                        color={'0x292929'}
                         normalMap={normalTexture}
-                        metalness={0}
+                        metalness={0.1}
                         roughness={.2}
                     />
-                </Octahedron>
-            </mesh>
+                </Sphere>
+            {/* </mesh> */}
         </group>
     )
 }
@@ -73,10 +89,10 @@ const LightGroup: FC<{
   
     return (
         <group ref={LightGroupRef}>
-            <ambientLight args={[0x4, 2]}/>
+            {/* <ambientLight args={[0x4, 2]}/> */}
             {/* <TransformControls position={position} ref={transformControlsRef}> */}
             <TransformTool controlArgs={controlArgs} tKey="pl1">
-                <pointLight args={[0xff0000, 1, 10]} ref={pl1} />
+                <pointLight args={[0xffffff, 1, 2]} ref={pl1} />
             </TransformTool>
             {/* </TransformControls> */}
         </group>
