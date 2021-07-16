@@ -19,8 +19,8 @@ export default function Effects() {
     useFrame(() => composer.current.render(), 1)
     return (
         <effectComposer ref={composer} args={[gl]}>
-            <renderPass attachArray="passes" scene={scene} camera={camera} />
-            <waterPass attachArray="passes" factor={1.5} />
+            {/* <renderPass attachArray="passes" scene={scene} camera={camera} /> */}
+            {/* <waterPass attachArray="passes" factor={1.5} /> */}
             <unrealBloomPass attachArray="passes" args={[aspect, 0.5, 1, 0]} />
         </effectComposer>
     )

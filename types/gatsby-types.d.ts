@@ -2785,20 +2785,25 @@ type SiteBuildMetadataSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
-type fWorkspaceeric183GithubIosrctemplatesblogPostJs471609186QueryVariables = Exact<{
+type userserickuangDesktopmyDeveric183GithubIosrctemplatesblogPostJs471609186QueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
 
 
-type fWorkspaceeric183GithubIosrctemplatesblogPostJs471609186Query = { readonly markdownRemark: Maybe<(
+type userserickuangDesktopmyDeveric183GithubIosrctemplatesblogPostJs471609186Query = { readonly markdownRemark: Maybe<(
     Pick<MarkdownRemark, 'html'>
     & { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'title'>> }
   )> };
 
-type fWorkspaceeric183GithubIosrcpagesaboutTsx4122199845QueryVariables = Exact<{ [key: string]: never; }>;
+type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type fWorkspaceeric183GithubIosrcpagesaboutTsx4122199845Query = { readonly site: Maybe<(
+type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
+
+type userserickuangDesktopmyDeveric183GithubIosrcpagesaboutTsx4122199845QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type userserickuangDesktopmyDeveric183GithubIosrcpagesaboutTsx4122199845Query = { readonly site: Maybe<(
     Pick<Site, 'buildTime'>
     & { readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'about' | 'title'>> }
   )> };
@@ -2836,10 +2841,10 @@ type ResumeDataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
       )> }
     )> }> };
 
-type fWorkspaceeric183GithubIosrcpagesprojectsindexJs2422230711QueryVariables = Exact<{ [key: string]: never; }>;
+type userserickuangDesktopmyDeveric183GithubIosrcpagesprojectsindexJs2422230711QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type fWorkspaceeric183GithubIosrcpagesprojectsindexJs2422230711Query = { readonly allMarkdownRemark: (
+type userserickuangDesktopmyDeveric183GithubIosrcpagesprojectsindexJs2422230711Query = { readonly allMarkdownRemark: (
     Pick<MarkdownRemarkConnection, 'totalCount'>
     & { readonly edges: ReadonlyArray<{ readonly node: (
         Pick<MarkdownRemark, 'id' | 'timeToRead' | 'html' | 'excerpt'>
@@ -2849,11 +2854,6 @@ type fWorkspaceeric183GithubIosrcpagesprojectsindexJs2422230711Query = { readonl
     Pick<Site, 'id'>
     & { readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'about' | 'author' | 'fontFamily' | 'desc'>> }
   )> };
-
-type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
