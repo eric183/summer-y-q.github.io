@@ -14,5 +14,5 @@ _README.md
 public/
 
 __generated__
-
+types/gatsby-types.d.ts
 .eslintrc.js_1
