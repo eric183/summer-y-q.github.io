@@ -2,7 +2,7 @@ import { Box, Icosahedron, Octahedron, OrbitControls, ScreenQuad, Sphere, Transf
 import { useFrame, useLoader, useThree } from '@react-three/fiber';
 import { button, useControls } from 'leva';
 import React, { FC, Suspense, useEffect, useRef, useState } from 'react';
-import { MathUtils, BoxHelper, PointLightHelper, SpotLightHelper, TextureLoader } from 'three';
+import { MathUtils, BoxHelper, PointLightHelper, SpotLightHelper, TextureLoader, Vector3 } from 'three';
 
 import { TransformControls as TransformControlsImpl } from 'three-stdlib'
 import CanvasLayout from '~components/CanvasLayout';
@@ -35,6 +35,7 @@ const Test: FC = ()=> {
 } 
 
 const MeshGroup = () => {
+    const [vec] = useState(() => new Vector3())
     const [normalTexture] = useLoader(TextureLoader,  ['/NormalMap.png']);
     const mesh = useRef<THREE.Mesh>(null!);
     const sphereRef = useRef<THREE.Mesh>(null!);
@@ -52,7 +53,18 @@ const MeshGroup = () => {
 
         // console.log('rotation:', mesh.current.rotation);
         // console.log('position:', mesh.current.position.x);
+        // if (start) {
+            state.camera.position.lerp(vec.set(state.mouse.x * 10,  state.mouse.y * 10, 14), 0.05)
+            state.camera.lookAt(0, 0, 0)
+        //   }
     });
+
+    // return useFrame((state) => {
+    //     if (start) {
+    //       state.camera.position.lerp(vec.set(state.mouse.x * 10,  state.mouse.y * 10, 14), 0.05)
+    //       state.camera.lookAt(0, 0, 0)
+    //     }
+    //   })
     useEffect(() => {
         console.log(sphereRef);
     }, [])
