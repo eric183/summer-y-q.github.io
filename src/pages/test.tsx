@@ -37,7 +37,7 @@ const Test: FC = ()=> {
 const MeshGroup = () => {
     const [normalTexture] = useLoader(TextureLoader,  ['/NormalMap.png']);
     const mesh = useRef<THREE.Mesh>(null!);
-
+    const sphereRef = useRef<THREE.Mesh>(null!);
     const { mouse } = useThree();
     useFrame((state) => {
         // console.log(mouse);
@@ -51,22 +51,26 @@ const MeshGroup = () => {
         mesh.current.position.y = MathUtils.lerp(mesh.current.position.y, mouse.y, .5);
 
         // console.log('rotation:', mesh.current.rotation);
-        console.log('position:', mesh.current.position.x);
+        // console.log('position:', mesh.current.position.x);
     });
+    useEffect(() => {
+        console.log(sphereRef);
+    }, [])
     return (
         <group ref={mesh}>
-            {/* <mesh> */}
-                <Sphere>
-                {/* args={[5, 32, 32]} */}
+            <mesh>
+                {/* <Sphere ref={sphereRef}> */}
+                {/* <Sphere attach='sphere'> */}
                     {/* <meshNormalMaterial /> */}
+                    <sphereBufferGeometry args={[1.1, 30, 30]} attach="geometry" />
                     <meshStandardMaterial 
                         color={'0x292929'}
                         normalMap={normalTexture}
                         metalness={0.1}
                         roughness={.2}
                     />
-                </Sphere>
-            {/* </mesh> */}
+                {/* </Sphere> */}
+            </mesh>
         </group>
     )
 }
