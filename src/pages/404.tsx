@@ -1,14 +1,15 @@
+import { OrbitControls } from '@react-three/drei';
 import React from 'react';
+import CanvasLayout from '~components/CanvasLayout';
 
 export default () => (
-    <div>
-        你要的页面不见了...
-    </div>
-)
-// const Error = () => (
-//     <div>
-//         你要的页面不见了...
-//     </div>
-// )
-
-// export default Error;
+    <CanvasLayout wrapperStyle={{ background: '#eee' }}>
+        <group>
+            <mesh>
+                <boxBufferGeometry args={[2, 2, 2]} />
+                <meshNormalMaterial />
+            </mesh>
+        </group>
+        <OrbitControls />
+    </CanvasLayout>
+);

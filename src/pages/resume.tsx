@@ -13,12 +13,13 @@ interface SiteType {
 
 const Sample: FC<SiteType> = ({ data }) => {
     const [loading, setLoading] = useState(true);
+    const [showShit, setShowShit] = useState(false);
     // props.data.site.siteMetadata.title
 
 
     if(!data?.site?.siteMetadata?.resumeInfo) throw new Error('no this type');
 
-    const { experience, social, skill, name, title = '', years, desc } = data.site.siteMetadata.resumeInfo; 
+    const { experience, social, skill, name, title = '', years, desc, sideProjects } = data.site.siteMetadata.resumeInfo; 
     useEffect(() => {
         setLoading(false);
 
@@ -34,8 +35,11 @@ const Sample: FC<SiteType> = ({ data }) => {
                 <LoadingLayout loading={loading} />
                 <article className='print-layout'>
                     <header>
-                        <h1>{name}</h1>
+                        <h1 onClick={()=> {
+                            window.open('/前端工程师-匡志宸.pdf')
+                        }}>{name}</h1>
                         <p>{title.replace('、', ' / ')}</p>
+                        {/* <a href='/前端工程师-匡志宸.pdf'></a> */}
                         {/* <p>xxx</p> */}
                         {/* clear-anchor-style */}
                         {/* <ul className='flex-row flex-justify-around'> */}
@@ -59,8 +63,8 @@ const Sample: FC<SiteType> = ({ data }) => {
                     <section className='block-section'>
                         <h2><span>{'Summary'.slice(0, 3)}</span>{'Summary'.slice(3)}</h2>
                         <div className='summary-fragment'>
-                            {/* <p>{desc}</p> */}
-                            <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+                            <p>{desc}</p>
+                            {/* <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p> */}
                         </div>
 
                     </section>
@@ -94,7 +98,7 @@ const Sample: FC<SiteType> = ({ data }) => {
                         {/* <h2><span>{'Work Experience'.slice(0, 3)}</span>{'Work Experience'.slice(3)}</h2> */}
                             
                         {
-                            experience?.map((item, index) => (
+                            (showShit ? experience : experience?.filter((item)=> !item?.isShit))?.map((item, index) => (
                                 <div className='work-fragment' key={index}>
                                     <div className='fragment-title flex-row flex-justify-between'>
                                         <h3>{item?.company}</h3>
@@ -122,7 +126,43 @@ const Sample: FC<SiteType> = ({ data }) => {
                             ))
                         }
                     </section>
+                    <section className='block-section side-projects'>
+                        <h2><span>{'Side Projects'.slice(0, 3)}</span>{'Side Projects'.slice(3)}</h2>
+                        {/* <h2><span>{'Work Experience'.slice(0, 3)}</span>{'Work Experience'.slice(3)}</h2> */}
+                            
+                        {
+                            sideProjects?.map((item, index) => (
+                                <div className='work-fragment' key={index}>
+                                    {/* <div className='fragment-title flex-row flex-justify-between'>
+                                        <h3>{item?.company}</h3>
+                                        <h3>{item?.title}</h3>
+                                        <h3>{item?.from} - {item?.to}</h3>
+                                    </div> */}
+                                    <ul>
+                                        {
+                                            // item?.children?.map((child, childIndex) => (
+                                                <li key={index}>
+                                                    <span>{item?.name}</span>
+                                                    <p>{item?.desc}</p>
+                                                    <ul className="flex-row work-skill">
+                                                        {
+                                                            item?.withSkills?.map((skill, skillIndex) => (
+                                                                <li key={skillIndex}>{skill}</li>
+                                                            ))
+                                                        }
+                                                    </ul>
+                                                </li>
+                                            // ))
+                                        }
+                                    </ul>
+                                </div>
+                            ))
+                        }
+                    </section>
                 </article>
+
+
+                <footer>THANK YOU VERY MUCH FOR TAKING THE TIME TO READ MY RESUME</footer>
             </ResumeStyle>
         </Scrollbar>
     )
@@ -161,6 +201,14 @@ export const query = graphql`
           from
           title
           to
+          isShit
+        }
+        sideProjects {
+            desc
+            isPrivate
+            name
+            role
+            withSkills
         }
         skill {
           children

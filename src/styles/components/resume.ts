@@ -18,7 +18,23 @@ export const ResumeStyle = Styled.div`
             height: 297mm;         */
         /* } */
     }
-    
+
+    @page { 
+        /* switch to landscape */ 
+        /* size: landscape;  */
+        /* set page margins */ 
+        /* margin: 0.5cm;  */
+        /* Default footers */ 
+        @bottom-left { 
+            content: "Department of Strategy"; 
+        } 
+        @bottom-right { 
+            content: counter(page) " of " counter(pages); 
+        }
+    }
+
+   
+
     /* @page {
         size: A4;
     } */
@@ -35,6 +51,23 @@ export const ResumeStyle = Styled.div`
             height: 297mm;        
         }
          */
+
+
+        /* footer {
+            position: fixed;
+            bottom: 0;
+        }
+
+         p {
+            page-break-inside: avoid;
+        }
+         */
+        .block-section {
+            margin: 50px 0 20px;
+        }
+        .block-section:nth-child(5) {
+            margin-top: 220px;
+        }
         h1 {
             font-size: 32px;
         }
@@ -76,6 +109,9 @@ export const ResumeStyle = Styled.div`
         color: ${TITLE_FONT_COLOR};
     }
 
+    p {
+        white-space: pre-line;
+    }
 /*   
     overflow: auto;
     height: 100vh; */   
@@ -231,4 +267,22 @@ export const ResumeStyle = Styled.div`
         color: ${BOLDER_FONT_COLOR};
         margin: 15px 0;
     }
+    footer {
+        text-align: center;
+        font-size: 13px;
+        font-weight: 900;
+        color: #999;
+
+        /* position: fixed; 
+        bottom: 0; */
+    }
+    .side-projects {
+        .work-fragment {
+            margin: 0;
+        }
+    }
+
+     /* p { page-break-after: always; }
+     .footer { position: fixed; bottom: 0px; }
+    .pagenum:before { content: counter(page); } */
 `

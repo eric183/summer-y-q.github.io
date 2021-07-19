@@ -259,8 +259,6 @@ type Site = Node & {
   readonly siteMetadata: Maybe<SiteSiteMetadata>;
   readonly port: Maybe<Scalars['Int']>;
   readonly host: Maybe<Scalars['String']>;
-  readonly polyfill: Maybe<Scalars['Boolean']>;
-  readonly pathPrefix: Maybe<Scalars['String']>;
   readonly id: Scalars['ID'];
   readonly parent: Maybe<Node>;
   readonly children: ReadonlyArray<Node>;
@@ -283,6 +281,7 @@ type SiteSiteMetadata = {
   readonly fontFamily: Maybe<Scalars['String']>;
   readonly desc: Maybe<Scalars['String']>;
   readonly resumeInfo: Maybe<SiteSiteMetadataResumeInfo>;
+  readonly footer: Maybe<SiteSiteMetadataFooter>;
 };
 
 type SiteSiteMetadataResumeInfo = {
@@ -293,6 +292,7 @@ type SiteSiteMetadataResumeInfo = {
   readonly social: Maybe<ReadonlyArray<Maybe<SiteSiteMetadataResumeInfoSocial>>>;
   readonly experience: Maybe<ReadonlyArray<Maybe<SiteSiteMetadataResumeInfoExperience>>>;
   readonly skill: Maybe<ReadonlyArray<Maybe<SiteSiteMetadataResumeInfoSkill>>>;
+  readonly sideProjects: Maybe<ReadonlyArray<Maybe<SiteSiteMetadataResumeInfoSideProjects>>>;
 };
 
 type SiteSiteMetadataResumeInfoSocial = {
@@ -307,6 +307,7 @@ type SiteSiteMetadataResumeInfoExperience = {
   readonly from: Maybe<Scalars['String']>;
   readonly to: Maybe<Scalars['String']>;
   readonly addr: Maybe<Scalars['String']>;
+  readonly isShit: Maybe<Scalars['Boolean']>;
   readonly children: Maybe<ReadonlyArray<Maybe<SiteSiteMetadataResumeInfoExperienceChildren>>>;
 };
 
@@ -322,6 +323,19 @@ type SiteSiteMetadataResumeInfoSkill = {
   readonly name: Maybe<Scalars['String']>;
   readonly label: Maybe<Scalars['String']>;
   readonly children: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+};
+
+type SiteSiteMetadataResumeInfoSideProjects = {
+  readonly name: Maybe<Scalars['String']>;
+  readonly role: Maybe<Scalars['String']>;
+  readonly withSkills: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly isPrivate: Maybe<Scalars['Boolean']>;
+  readonly desc: Maybe<Scalars['String']>;
+};
+
+type SiteSiteMetadataFooter = {
+  readonly zh: Maybe<Scalars['String']>;
+  readonly en: Maybe<Scalars['String']>;
 };
 
 type SiteFunction = Node & {
@@ -664,8 +678,6 @@ type Query_siteArgs = {
   siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
   port: Maybe<IntQueryOperatorInput>;
   host: Maybe<StringQueryOperatorInput>;
-  polyfill: Maybe<BooleanQueryOperatorInput>;
-  pathPrefix: Maybe<StringQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
@@ -1505,6 +1517,7 @@ type SiteSiteMetadataFilterInput = {
   readonly fontFamily: Maybe<StringQueryOperatorInput>;
   readonly desc: Maybe<StringQueryOperatorInput>;
   readonly resumeInfo: Maybe<SiteSiteMetadataResumeInfoFilterInput>;
+  readonly footer: Maybe<SiteSiteMetadataFooterFilterInput>;
 };
 
 type SiteSiteMetadataResumeInfoFilterInput = {
@@ -1515,6 +1528,7 @@ type SiteSiteMetadataResumeInfoFilterInput = {
   readonly social: Maybe<SiteSiteMetadataResumeInfoSocialFilterListInput>;
   readonly experience: Maybe<SiteSiteMetadataResumeInfoExperienceFilterListInput>;
   readonly skill: Maybe<SiteSiteMetadataResumeInfoSkillFilterListInput>;
+  readonly sideProjects: Maybe<SiteSiteMetadataResumeInfoSideProjectsFilterListInput>;
 };
 
 type SiteSiteMetadataResumeInfoSocialFilterListInput = {
@@ -1537,6 +1551,7 @@ type SiteSiteMetadataResumeInfoExperienceFilterInput = {
   readonly from: Maybe<StringQueryOperatorInput>;
   readonly to: Maybe<StringQueryOperatorInput>;
   readonly addr: Maybe<StringQueryOperatorInput>;
+  readonly isShit: Maybe<BooleanQueryOperatorInput>;
   readonly children: Maybe<SiteSiteMetadataResumeInfoExperienceChildrenFilterListInput>;
 };
 
@@ -1560,6 +1575,23 @@ type SiteSiteMetadataResumeInfoSkillFilterInput = {
   readonly name: Maybe<StringQueryOperatorInput>;
   readonly label: Maybe<StringQueryOperatorInput>;
   readonly children: Maybe<StringQueryOperatorInput>;
+};
+
+type SiteSiteMetadataResumeInfoSideProjectsFilterListInput = {
+  readonly elemMatch: Maybe<SiteSiteMetadataResumeInfoSideProjectsFilterInput>;
+};
+
+type SiteSiteMetadataResumeInfoSideProjectsFilterInput = {
+  readonly name: Maybe<StringQueryOperatorInput>;
+  readonly role: Maybe<StringQueryOperatorInput>;
+  readonly withSkills: Maybe<StringQueryOperatorInput>;
+  readonly isPrivate: Maybe<BooleanQueryOperatorInput>;
+  readonly desc: Maybe<StringQueryOperatorInput>;
+};
+
+type SiteSiteMetadataFooterFilterInput = {
+  readonly zh: Maybe<StringQueryOperatorInput>;
+  readonly en: Maybe<StringQueryOperatorInput>;
 };
 
 type SiteConnection = {
@@ -1629,15 +1661,22 @@ type SiteFieldsEnum =
   | 'siteMetadata.resumeInfo.experience.from'
   | 'siteMetadata.resumeInfo.experience.to'
   | 'siteMetadata.resumeInfo.experience.addr'
+  | 'siteMetadata.resumeInfo.experience.isShit'
   | 'siteMetadata.resumeInfo.experience.children'
   | 'siteMetadata.resumeInfo.skill'
   | 'siteMetadata.resumeInfo.skill.name'
   | 'siteMetadata.resumeInfo.skill.label'
   | 'siteMetadata.resumeInfo.skill.children'
+  | 'siteMetadata.resumeInfo.sideProjects'
+  | 'siteMetadata.resumeInfo.sideProjects.name'
+  | 'siteMetadata.resumeInfo.sideProjects.role'
+  | 'siteMetadata.resumeInfo.sideProjects.withSkills'
+  | 'siteMetadata.resumeInfo.sideProjects.isPrivate'
+  | 'siteMetadata.resumeInfo.sideProjects.desc'
+  | 'siteMetadata.footer.zh'
+  | 'siteMetadata.footer.en'
   | 'port'
   | 'host'
-  | 'polyfill'
-  | 'pathPrefix'
   | 'id'
   | 'parent.id'
   | 'parent.parent.id'
@@ -1739,8 +1778,6 @@ type SiteFilterInput = {
   readonly siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
   readonly port: Maybe<IntQueryOperatorInput>;
   readonly host: Maybe<StringQueryOperatorInput>;
-  readonly polyfill: Maybe<BooleanQueryOperatorInput>;
-  readonly pathPrefix: Maybe<StringQueryOperatorInput>;
   readonly id: Maybe<StringQueryOperatorInput>;
   readonly parent: Maybe<NodeFilterInput>;
   readonly children: Maybe<NodeFilterListInput>;
@@ -2835,9 +2872,9 @@ type ResumeDataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
       & { readonly resumeInfo: Maybe<(
         Pick<SiteSiteMetadataResumeInfo, 'desc' | 'name' | 'title' | 'years'>
         & { readonly social: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoSocial, 'icon' | 'text' | 'link'>>>>, readonly experience: Maybe<ReadonlyArray<Maybe<(
-          Pick<SiteSiteMetadataResumeInfoExperience, 'addr' | 'company' | 'from' | 'title' | 'to'>
+          Pick<SiteSiteMetadataResumeInfoExperience, 'addr' | 'company' | 'from' | 'title' | 'to' | 'isShit'>
           & { readonly children: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoExperienceChildren, 'desc' | 'isPrivate' | 'name' | 'role' | 'withSkills'>>>> }
-        )>>>, readonly skill: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoSkill, 'children' | 'label' | 'name'>>>> }
+        )>>>, readonly sideProjects: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoSideProjects, 'desc' | 'isPrivate' | 'name' | 'role' | 'withSkills'>>>>, readonly skill: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoSkill, 'children' | 'label' | 'name'>>>> }
       )> }
     )> }> };
 
