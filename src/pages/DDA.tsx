@@ -1,276 +1,363 @@
-/* eslint-disable */
-
-import { extend as myExtends, useFrame, useLoader, useThree } from '@react-three/fiber';
-import React, { FC, forwardRef, Suspense, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import * as THREE from 'three'
-import CanvasLayout from '~components/CanvasLayout';
-import { WaterEffect } from '~components/Effects';
-// import { MeshLine, MeshLineMaterial, MeshLineRaycast } from 'three.meshline';
-import { navigate } from "gatsby";
-// const { MeshLine, MeshLineMaterial, MeshLineRaycast } = require('three.meshline');
-// { "modules": false ,"targets":{"node":"current" } },
+import React, { FC, Ref, useEffect, useRef, useState } from "react"
 
 
-// import { shaderMaterial } from '@react-three/drei';
-// import glsl from 'glslify';
+// import { graphql } from 'gatsby'
+// import CanvasModule from '../components/webgl-canvas';
+import { css } from '@emotion/react'
+import { Stage, OrbitControls, TransformControls, Reflector, useHelper, CameraShake, OrbitControlsProps } from "@react-three/drei";
+import { Camera, Canvas, ReactThreeFiber, useFrame, useThree } from "@react-three/fiber";
+import { useSpring, animated } from '@react-spring/three';
+import { EffectComposer, Pixelation } from "@react-three/postprocessing";
+import { button, useControls } from "leva";
+import THREE, { BoxHelper, Vector3 } from "three";
+import { OrbitControls as OrbitControlsImpl } from 'three-stdlib'
+import CanvasLayout from "~components/CanvasLayout";
 
-// const fragmentShader = glsl`
-//   #pragma glslify: random = require(glsl-random)
+// import { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 
-//   void main () {
-//     float brightness = random(gl_FragCoord.xy / resolution.xy);
-//     gl_FragColor = vec4(vec3(brightness), 1.0);
-//   }
-// `;
 
-// import * as meshline from 'threejs.meshline'
+// const contentful = require("contentful");
+// // import contentful from 'contentful';
+// console.log(contentful);
 
-// const ColorShiftMaterial = shaderMaterial(
-//     { time: 0, color: new THREE.Color(0.2, 0.0, 0.1) },
-//     // vertex shader
-//     glsl`
-//       varying vec2 vUv;
-//       void main() {
-//         vUv = uv;
-//         gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-//       }
-//     `,
-//     // fragment shader
-//     glsl`
-//       uniform float time;
-//       uniform vec3 color;
-//       varying vec2 vUv;
-//       void main() {
-//         gl_FragColor.rgba = vec4(0.5 + 0.3 * sin(vUv.yxx + time) + color, 1.0);
-//       }
-//     `
-//   )
-// myExtends({ MeshLine, MeshLineMaterial })
+// const client = contentful.createClient({
+// 	// This is the space ID. A space is like a project folder in Contentful terms
+// 	space: "lb38j2qtphgf",
+// 	// This is the access token for this space. Normally you get both ID and the token in the Contentful web app
+// 	accessToken: "Ce58EwR4wkTMdwnFlbVoLU_7QJPp-TfRThnYKK1L74Q"
+// });
+// // This API call will request an entry with the specified ID from the space defined at the top, using a space-specific access token.
+// client
+// 	.getEntry("6WD9yV9FJTcIK9wcj45GQ9")
+// 	.then(entry => console.log(entry))
+// 	.catch(err => console.log(err));
+// import  { bodyFontFamily } from '../utils/typography' 
+// Annie Use Your Telescope
 
-const DDA: FC = () => {
-    const mouse = useRef([0, 0])
-    const [hovered, hover] = useState(false);
-    const points = [];
-        for (let j = 0; j < Math.PI; j += (2 * Math.PI) / 100) {
-        points.push(Math.cos(j), Math.sin(j), 0);
-    }
-    useEffect(() => {
-        document.body.style.cursor = hovered
-          ? 'pointer'
-          : "url('https://raw.githubusercontent.com/chenglou/react-motion/master/demos/demo8-draggable-list/cursor.png') 39 39, auto"
-    }, [hovered])
-    return (
-        <CanvasLayout
-            linear
-            dpr={[1, 2]}
-            camera={{ fov: 100, position: [0, 0, 30] }}
-            onCreated={({ gl }) => {
-                gl.toneMapping = THREE.CineonToneMapping
-                gl.setClearColor(new THREE.Color('#020207'))
-            }}
-            wrapperStyle={{ backgroundColor: '#eee' }}>
-            {/* <fog attach="fog" args={['lightpink', 60, 100]} /> */}
-            <fog attach="fog" args={['white', 50, 190]} />
-            <pointLight distance={100} intensity={4} color="white" />
-            <Number mouse={mouse} hover={hover} />
-            <Particles count={10000} mouse={mouse} />
-            <WaterEffect />
+// project: [
+//     'tsconfig.json'
+// ],
+// extends: [
+//   'eslint:recommended',
+//   'plugin:@typescript-eslint/recommended',
+// ],
+const Box: FC<JSX.IntrinsicElements['mesh']> = (props) => {
+	const mesh = useRef<THREE.Mesh>(null!)
+	const reflector = useRef<THREE.Mesh>(null!)
+	// Set up state for the hovered and active state
+	const [hovered, setHover] = useState(false)
+	const [active, setActive] = useState(false)
+	const { setScale, position } = useControls({
+		setScale: 1,
+		position: [0, 20, 0]
+	})
+	// const [cameraPosition, setCameraPosition] = useState([0, 1, 0]);
+	// const { camera } = useThree();
+	// const set = useThree((state) => state.set);
+	const { camera, mouse } = useThree();
 
-            {/* <Sparks count={20} mouse={mouse} colors={['#A2CCB6', '#FCEEB5', '#EE786E', '#e0feff', 'lightpink', 'lightblue']} /> */}
-            {/* <mesh raycast={MeshLineRaycast}>
-                
-                <meshLine attach="geometry" vertices={points} widthCallback={pointWidth => pointWidth * Math.random()}/>
-                <meshLineMaterial
-                attach="material"
-                transparent
-                depthTest={false}
-                dashArray={0.05}
-                dashRatio={0.95}
-                />
-            </mesh> */}
-            {/* <mesh>
-                <colorShiftMaterial attach="material" color="hotpink" time={1} />
-            </mesh> */}
-        </CanvasLayout>
-    )
+	// const { scale } = useSpring({ scale: active ? 1.5 : 1 })
+	const { scale } = useSpring({ scale: setScale })
+
+	const { granularity, cameraFov, cameraPosition } = useControls({
+		'Hello Button': button(() => console.log('position', camera.position.toArray(), '\n', 'rotation', camera.rotation.toArray())),
+		granularity: {
+			value: 0, min: -10, max: 10
+		},
+		cameraFov: {
+			fov: 60, near: 0.1, far: 1000,
+			//  position: [0, 0, 5]
+		},
+		cameraPosition: [-25, -0, 4],
+		'getControl': button(() => {
+			console.log('position', control.current, '\n', 'rotation', control.current)
+		}),
+		// cameraPosition: camera.position.toArray(),
+	})
+
+	const control = useRef<OrbitControlsImpl>(null!);
+	const [vec] = useState(() => new Vector3())
+	// useFrame((state, delta) => {
+
+	// 	// set({ camera: { fov: cameraFov.fov, position: new THREE.Vector3(0, 0, 0).fromArray(cameraPosition) } as Camera });
+	// });
+
+	useEffect(() => {
+		// const _C: OrbitControlsProps = control.current;
+		// _C.position = new Vector3(
+		// 	-25.343932835213916,
+		// 	-0.5992951128132021,
+		// 	4.040151518755319
+		// )
+
+		setTimeout(() => {
+			// camera.lookAt(mesh.current.position);
+			camera.position.lerp(vec.set(mouse.x * 2, 1, 60), 0.05);
+			// mesh.current.lookAt(camera.position);
+			// camera.updateMatrixWorld();
+
+
+		}, 1500)
+	}, [])
+
+
+	useEffect(() => {
+		// camera.position.fromArray(cameraPosition);
+		// setTimeout(() => {
+		// 	setCameraPosition([0, 5, 0]);
+		// }, 1500)
+		// camera.position.set()
+		// set({ camera: new THREE.OrthographicCamera(...) })
+		// set({
+		// 	camera: {
+		// 		fov: 60,
+		// 		position: new Vector3().fromArray([0, 0, 5])
+		// 	} as Camera
+		// })
+
+		// camera.lookAt(new Vector3().fromArray([-1.93, 1, -0.94]));
+		// debugger;
+	}, [cameraPosition, cameraFov])
+	// useThree();
+
+
+	// useHelper(mesh, BoxHelper, 'hl')
+	// useHelper(reflector, BoxHelper, 'hl2')
+	// debugger;
+	// Subscribe this component to the render-loop, rotate the mesh every frame
+	useFrame((state, delta) => {
+		// camera.lookAt(new Vector3().fromArray([-1.93, 1, -0.94]));
+		// mesh.current.lookAt(camera.position);
+
+		// camera.position.x += 0.01;
+		// camera.lookAt(mesh.current.position);
+		// camera.updateMatrixWorld();
+		// mesh.current.rotation.x += 0.01;
+		// control.current.update();
+
+		camera.position.lerp(vec.set(mouse.x * 2, 1, 60), 0.05)
+		// camera.position.lerp(vec.set(mouse.y * 2, 1, 60), 0.05)
+	});
+	// useFrame(() => camera.position.lerp(vec.set(mouse.x * 2, 1, 60), 0.05))
+
+	// Return view, these are regular three.js elements expressed in JSX
+
+	// const camera = {
+	// 	position: new Vector3().fromArray(cameraPosition),
+	// 	fov: cameraFov.fov
+	// }
+	return (
+
+		<group>
+
+			{/* <camera args={
+				position: new Vector3().fromArray(cameraPosition),
+				fov: cameraFov.fov
+			} /> */}
+
+			{/* <EffectComposer>
+				<Pixelation granularity={granularity} />
+			</EffectComposer> */}
+
+
+			<spotLight position={[50, 50, -30]} castShadow />
+			<pointLight position={[-10, -10, -10]} color="red" intensity={3} />
+			<pointLight position={[0, -5, 5]} intensity={0.5} />
+			<directionalLight position={[0, -5, 0]} color="red" intensity={2} />
+			<group position={[-4.5, -4, 0]} rotation={[0, -2.8, 0]}>
+				<Reflector
+					resolution={1024}
+					receiveShadow
+					mirror={0}
+					blur={[500, 100]}
+					mixBlur={1}
+					mixStrength={0.5}
+					depthScale={1}
+					minDepthThreshold={0.8}
+					maxDepthThreshold={1}
+					position={[0, 0, 8]}
+					scale={[2, 2, 1]}
+					rotation={[-Math.PI / 2, 0, Math.PI]}
+					args={[70, 70]}>
+					{(Material, props) => <Material metalness={0.25} color="#eea6b1" roughness={1} {...props} />}
+				</Reflector>
+				<TransformControls>
+					<animated.mesh
+						receiveShadow 
+						castShadow						
+						// position={[0, .5, 0]}
+						// position={[-5.28, 4.8, 5.12]}
+						// rotation={[-Math.PI, 0.73, -Math.PI]}
+						// <animated.mesh
+						// {...props}
+						// ref={mesh}
+						// scale={scale}
+						// scale={ active ? 1.5 : 1 }
+						// scale={ scale }
+						// onClick={(event) => setActive(!active)}
+						// onPointerOver={(event) => setHover(true)}
+						// onPointerOut={(event) => setHover(false)}
+					>
+						<boxGeometry args={[1, 1, 1]} />
+						<meshStandardMaterial color={'orange'} />
+						{/* </mesh> */}
+					</animated.mesh>
+				</TransformControls>
+
+			</group>
+
+			<OrbitControls ref={control} />
+			{/* <CameraShake controls={control} maxYaw={0.01} maxPitch={0.01} maxRoll={0.01} yawFrequency={0.5} pitchFrequency={0.5} rollFrequency={0.4} /> */}
+
+			{/* <CameraShake maxYaw={0.01} maxPitch={0.01} maxRoll={0.01} yawFrequency={0.5} pitchFrequency={0.5} rollFrequency={0.4} /> */}
+		</group>
+	)
+}
+
+// interface OrbitControlsType {
+// 	OrbitControls: typeof OrbitControls
+// }
+
+const Index: FC = (props) => {
+	// const [, setLoad] = useState(false)
+	// const loadBinder = (value) => {
+	// 	setLoad(value);
+	// }
+	// const control = useRef<OrbitControls | null>(null!);
+
+	return (
+		<CanvasLayout 
+			// mode={'concurrent'}
+			dpr={[1, 2]}
+			camera={{position: [0, 160, 160], fov: 20}}
+			oncreate={(state: { scene: any; gl: any; }) => {
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
+				const __THREE_DEVTOOLS__ = window['__THREE_DEVTOOLS__'];
+	
+				if (typeof __THREE_DEVTOOLS__ !== 'undefined') {
+					__THREE_DEVTOOLS__.dispatchEvent(new CustomEvent('observe', { detail: state.scene }));
+					__THREE_DEVTOOLS__.dispatchEvent(new CustomEvent('observe', { detail: state.gl }));
+				}
+			}}
+		>
+			<fog attach="fog" args={['lightpink', 60, 100]} />
+			<Box />
+		</CanvasLayout>
+	)
 }
 
 
-// eslint-disable-next-line react/prop-types
-const Particles: FC<{ count: number, mouse: number[] }> = ({ count, mouse }) => {
-    const mesh = useRef()
-    const light = useRef()
-    const { size, viewport } = useThree()
-    const aspect = size.width / viewport.width
+// const Rig: FC = () => {
 
-    const dummy = useMemo(() => new THREE.Object3D(), [])
-    // Generate some random positions, speed factors and timings
-    const particles = useMemo(() => {
-        const temp = []
-        for (let i = 0; i < count; i++) {
-            const t = Math.random() * 100
-            const factor = 20 + Math.random() * 100
-            const speed = 0.01 + Math.random() / 200
-            const xFactor = -50 + Math.random() * 100
-            const yFactor = -50 + Math.random() * 100
-            const zFactor = -50 + Math.random() * 100
-            temp.push({ t, factor, speed, xFactor, yFactor, zFactor, mx: 0, my: 0 })
-        }
-        return temp
-    }, [count])
-    // The innards of this hook will run every frame
-    useFrame((state) => {
-        // Makes the light follow the mouse
-        light.current.position.set(mouse.current[0] / aspect, -mouse.current[1] / aspect, 0)
-        // Run through the randomized data to calculate some movement
-        particles.forEach((particle, i) => {
-            let { t, factor, speed, xFactor, yFactor, zFactor } = particle
-            // There is no sense or reason to any of this, just messing around with trigonometric functions
-            t = particle.t += speed / 2
-            const a = Math.cos(t) + Math.sin(t * 1) / 10
-            const b = Math.sin(t) + Math.cos(t * 2) / 10
-            const s = Math.cos(t)
-            particle.mx += (mouse.current[0] - particle.mx) * 0.01
-            particle.my += (mouse.current[1] * -1 - particle.my) * 0.01
-            // Update the dummy object
-            dummy.position.set(
-                (particle.mx / 10) * a + xFactor + Math.cos((t / 10) * factor) + (Math.sin(t * 1) * factor) / 10,
-                (particle.my / 10) * b + yFactor + Math.sin((t / 10) * factor) + (Math.cos(t * 2) * factor) / 10,
-                (particle.my / 10) * b + zFactor + Math.cos((t / 10) * factor) + (Math.sin(t * 3) * factor) / 10
-            )
-            dummy.scale.set(s, s, s)
-            dummy.rotation.set(s * 5, s * 5, s * 5)
-            dummy.updateMatrix()
-            // And apply the matrix to the instanced item
-            mesh.current.setMatrixAt(i, dummy.matrix)
-        })
-        mesh.current.instanceMatrix.needsUpdate = true
-    })
-    return (
-        <>
-            <pointLight ref={light} distance={40} intensity={8} color="lightblue" />
-            <instancedMesh ref={mesh} args={[null, null, count]}>
-                <dodecahedronGeometry args={[0.2, 0]} />
-                <meshPhongMaterial color="#050505" />
-            </instancedMesh>
-        </>
-    )
-}
+// 	useFrame(() => camera.position.lerp(vec.set(mouse.x * 2, 1, 60), 0.05))
+// 	return <CameraShake maxYaw={0.01} maxPitch={0.01} maxRoll={0.01} yawFrequency={0.5} pitchFrequency={0.5} rollFrequency={0.4} />
+// }
 
 
-// const r = () => Math.max(0.2, Math.random())
 
-// const Sparks: FC = ({ mouse, count, colors, radius = 10 }) => {
-//     const lines = useMemo(
-//         () =>
-//             new Array(count).fill().map((_, index) => {
-//                 const pos = new THREE.Vector3(Math.sin(0) * radius * r(), Math.cos(0) * radius * r(), 0)
-//                 const points = new Array(30).fill().map((_, index) => {
-//                     const angle = (index / 20) * Math.PI * 2
-//                     return pos.add(new THREE.Vector3(Math.sin(angle) * radius * r(), Math.cos(angle) * radius * r(), 0)).clone()
-//                 })
-//                 const curve = new THREE.CatmullRomCurve3(points).getPoints(1000)
-//                 return {
-//                     color: colors[parseInt(colors.length * Math.random())],
-//                     width: Math.max(0.1, (0.2 * index) / 10),
-//                     speed: Math.max(0.001, 0.004 * Math.random()),
-//                     curve
-//                 }
-//             }),
-//         [count]
-//     )
 
-//     const ref = useRef()
-//     const { size, viewport } = useThree()
-//     const aspect = size.width / viewport.width
-//     useFrame(() => {
-//         if (ref.current) {
-//             ref.current.rotation.x = THREE.MathUtils.lerp(ref.current.rotation.x, 0 + mouse.current[1] / aspect / 200, 0.1)
-//             ref.current.rotation.y = THREE.MathUtils.lerp(ref.current.rotation.y, 0 + mouse.current[0] / aspect / 400, 0.1)
+// export const query = graphql`
+//   {
+//     allMarkdownRemark {
+//       edges {
+//         node {
+//           id
+//           frontmatter {
+//             date
+// 			title
+//           }
+//           timeToRead
+//           html
+//           excerpt
+//           fields {
+//             slug
+//           }
 //         }
-//     })
+//       }
+//       totalCount
+// 	}
+// 	site {
+// 	id
+// 	siteMetadata {
+// 			title
+// 			about
+// 			author
+// 			fontFamily
+// 			desc
+// 		}
+// 	}
 
-//     return (
-//         <group ref={ref}>
-//             <group position={[-radius * 2, -radius, -10]} scale={[1, 1.3, 1]}>
-//                 {/* {lines.map((props, index) => (
-//                     <Fatline key={index} {...props} />
-//                 ))} */}
+//   }
+// `
 
-//                 <mesh>
-//                     <meshLine attach="geometry" />
-//                     {/* <meshLineMaterial ref={material} transparent depthTest={false} lineWidth={width} color={color} dashArray={0.1} dashRatio={0.95} /> */}
-//                 </mesh>
-//             </group>
-//         </group>
-//     )
-// }
-
-// function Fatline({ curve, width, color, speed }) {
-//     const material = useRef()
-//     // console.log()
-//     // debugger;
-//     // useFrame(() => (material.current.uniforms.dashOffset.value -= speed))
-//     return (
-//         <mesh>
-//             <meshLine attach="geometry" vertices={curve} />
-//             <meshLineMaterial ref={material} transparent depthTest={false} lineWidth={width} color={color} dashArray={0.1} dashRatio={0.95} />
-//         </mesh>
-//     )
-// }
+export default Index;
 
 
-
-function Number({ hover }) {
-    const ref = useRef()
-    useFrame((state) => {
-        if (ref.current) {
-            ref.current.position.x = THREE.MathUtils.lerp(ref.current.position.x, state.mouse.x * 2, 0.1)
-            ref.current.rotation.x = THREE.MathUtils.lerp(ref.current.rotation.x, state.mouse.y / 2, 0.1)
-            ref.current.rotation.y += 0.003
-        }
-    })
-    return (
-        <Suspense fallback={null}>
-            <group ref={ref}>
-                <Text
-                    size={10}
-                    onClick={(e) => navigate('/resume')}
-                    onPointerOver={() => hover(true)}
-                    onPointerOut={() => hover(false)}>
-                    k
-                </Text>
-            </group>
-        </Suspense>
-    )
-}
-
-const Text = forwardRef(({ children, vAlign = 'center', hAlign = 'center', size = 1, color = '#000000', ...props }, ref) => {
-    // const font = useLoader(THREE.FontLoader, '/bold.blob')
-    const font = useLoader(THREE.FontLoader, '/k.json')
-    const config = useMemo(() => ({ font, size: 40, height: 50 }), [font])
-    const mesh = useRef()
-    const meshNormalMaterialRef = useRef()
-    useLayoutEffect(() => {
-        const size = new THREE.Vector3()
-        mesh.current.geometry.computeBoundingBox()
-        mesh.current.geometry.boundingBox.getSize(size)
-        mesh.current.position.x = hAlign === 'center' ? -size.x / 2 : hAlign === 'right' ? 0 : -size.x
-        mesh.current.position.y = vAlign === 'center' ? -size.y / 2 : vAlign === 'top' ? 0 : -size.y
-        meshNormalMaterialRef.current.wireframe = false;
-        // mesh.current.rotation.x = 20;
-        // ref.current.
-        // console.log(mesh.current.rotation);
-    }, [children])
-    return (
-        <group ref={ref} {...props} scale={[0.1 * size, 0.1 * size, 0.1]}>
-            <mesh ref={mesh}>
-                <textGeometry args={[children, config]} />
-                <meshNormalMaterial ref={meshNormalMaterialRef}/>
-            </mesh>
-        </group>
-    )
-})
+// import React, { Fragment, useState, useRef, useEffect, useMemo } from "react"
+// import { Canvas, useFrame } from 'react-three-fiber'
 
 
-export default DDA;
+// import { Link, graphql } from 'gatsby'
+// import Layout from '../components/layout'
+// import CanvasModule from '../components/webgl-canvas';
+// import { css } from '@emotion/core'
+// import AniLink from "gatsby-plugin-transition-link/AniLink"
+
+
+// const MyComponentWithoutUseMemo = () => {
+// 	const refCount = React.useRef(0);
+// 	const myfunction = () => {
+// 		refCount.current++;
+// 		return 1;
+// 	};
+// 	const value = myfunction();
+
+// 	return <p>MyComponent without useMemo. Value: {value}. Ref count: {refCount.current}</p>;
+// };
+
+
+// const MyComponent = React.memo(() => {
+// 	const refCount = React.useRef(0);
+// 	const myfunction = () => {
+// 		refCount.current++;
+// 		return 1;
+// 	};
+// 	// const value = () => {
+// 	// 	return myfunction();
+// 	// };
+// 	// debugger;
+// 	const value = React.useMemo(() => {
+// 		return myfunction();
+// 	}, [refCount.current]);
+// 	// const value = React.useCallback(() => {
+// 	// 	return myfunction();
+// 	// }, []);
+
+// 	// return <p>MyComponent useMemo. Value: {value()}. Ref count: {refCount.current}</p>;
+// 	return <p>MyComponent useMemo. Value: {value}. Ref count: {refCount.current}</p>;
+// }, (pre, next) => {
+// 	// if(pre.)
+// 	if (pre.state !== next.state) {
+// 		return false;
+// 	} else {
+// 		return true;
+// 	}
+
+// });
+
+// export default () => {
+// 	const [state, setState] = React.useState("");
+
+// 	const handleSetState = e => {
+// 		setState(e.target.value);
+// 	};
+
+// 	return (
+// 		<div className="App">
+// 			<input type="text" value={state} onChange={handleSetState} />
+// 			<MyComponentWithoutUseMemo />
+// 			<MyComponent state={state} />
+// 		</div>
+// 	);
+// };
