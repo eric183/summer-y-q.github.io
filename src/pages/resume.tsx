@@ -18,7 +18,7 @@ const Sample: FC<SiteType> = ({ data }) => {
 
     if(!data?.site?.siteMetadata?.resumeInfo) throw new Error('no this type');
 
-    const { experience, social, skill, name, title = '', years, desc } = data.site.siteMetadata.resumeInfo; 
+    const { experience, social, skill, name, title = '', years, desc, sideProjects } = data.site.siteMetadata.resumeInfo; 
     useEffect(() => {
         setLoading(false);
 
@@ -122,6 +122,39 @@ const Sample: FC<SiteType> = ({ data }) => {
                             ))
                         }
                     </section>
+                    <section className='block-section'>
+                        <h2><span>{'Side Projects'.slice(0, 3)}</span>{'Side Projects'.slice(3)}</h2>
+                        {/* <h2><span>{'Work Experience'.slice(0, 3)}</span>{'Work Experience'.slice(3)}</h2> */}
+                            
+                        {
+                            sideProjects?.map((item, index) => (
+                                <div className='work-fragment' key={index}>
+                                    {/* <div className='fragment-title flex-row flex-justify-between'>
+                                        <h3>{item?.company}</h3>
+                                        <h3>{item?.title}</h3>
+                                        <h3>{item?.from} - {item?.to}</h3>
+                                    </div> */}
+                                    <ul>
+                                        {
+                                            // item?.children?.map((child, childIndex) => (
+                                                <li key={index}>
+                                                    <span>{item?.name}</span>
+                                                    <p>{item?.desc}</p>
+                                                    <ul className="flex-row work-skill">
+                                                        {
+                                                            item?.withSkills?.map((skill, skillIndex) => (
+                                                                <li key={skillIndex}>{skill}</li>
+                                                            ))
+                                                        }
+                                                    </ul>
+                                                </li>
+                                            // ))
+                                        }
+                                    </ul>
+                                </div>
+                            ))
+                        }
+                    </section>
                 </article>
             </ResumeStyle>
         </Scrollbar>
@@ -161,6 +194,13 @@ export const query = graphql`
           from
           title
           to
+        }
+        sideProjects {
+            desc
+            isPrivate
+            name
+            role
+            withSkills
         }
         skill {
           children

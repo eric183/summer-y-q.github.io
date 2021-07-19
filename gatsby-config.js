@@ -80,6 +80,7 @@ module.exports = {
                             name: "深业泰然大厦大数据可视化BI系统",
                             role: '主程、前端架构',
                             withSkills: [
+                                'Nodejs',
                                 'Webpack',
                                 'React',
                                 'Mobx',
@@ -133,8 +134,8 @@ module.exports = {
                 },
                 {
                     company: '星潮热点传媒有限公司',
-                    title: '前端TL',
-                    from: '2017.08',
+                    title: '前端组长',
+                    from: '2016.08',
                     to: '2018.12',
                     addr: '深圳/福田',
                     children: [
@@ -143,159 +144,77 @@ module.exports = {
                             role: '前端项目负责人、主程、前端架构',
                             withSkills: [
                                 'Docker',
-                                'Node',
+                                'Nodejs',
                                 'Webpack',
                                 'React',
-                                'Redux',
-                                'Element'
+                                'Mobx',
+                                'FabricJS',
+                                'MoJS',
+                                'GSAP',
                             ],
                             isPrivate: true,
-                            desc: "起先面料系统CMS与小程序并行开发，前期我忙于小程序开发，并未参与。当时项目采用thinkphp的框架，前后端不分离，前端用layUI，但项目进展滞后。于是由我介入重新开发，编写了Dockerfile，引入工程与组件开发的概念，框架层选用React，数据状态使用Mobx进行业务开发，并同时对公司前端组进行技术培训，历时2个月，加班加点，项目按时上线，组内技术得到质的提升，也因此项目，我被公司高层推选为前端组长",
+                            desc: "起先面料系统CMS与小程序并行开发，前期我忙于小程序开发，并未参与。当时项目采用thinkphp的框架，前后端不分离，前端用layUI，但项目进展滞后。\n当下只能由我参与重新开发，构建前端工程与预演组件开发，整合制定前端代码规范，引入代码审查机制，编写独立与项目的前端Dockerfile，框架层选用React，数据状态使用Mobx进行业务开发；并同时对公司前端组进行技术培训，历时2个月，加班加点，项目按时上线，前端团队的交付能力和健壮性得到质的提升，而后我被公司高层推选为前端组长",
                             link: null
                         },
                         {
                             name: "wow-toBoom乌托邦面料设计WebApp",
                             role: '前端项目负责人、主程、前端架构',
                             isPrivate: true,
-                            desc: "新项目“wow-toBoom乌托邦”是面向独立服装设计的在线灵感编辑产品，发布会进行预售。项目由我负责主导，选择React组件开发，而canvas的操作库考虑到状态的json保存机制，为方便状态栈的读写选择了FabricJS，搭配前沿的动画库MoJS、GSAP，开发历时3个月正式上线",                            
+                            desc: "新项目“wow-toBoom乌托邦”是面向独立服装设计的在线灵感编辑产品，发布会进行预售。项目由我负责主导，选择React组件开发，而canvas的操作库考虑到状态的json保存机制，为方便状态栈的读写选择了FabricJS，搭配前沿的动画库MoJS、GSAP",
                             link: null
                         },
                         {
                             name: "发现面料小程序BC端",
                             role: '前端项目负责人、主程、前端架构',
                             isPrivate: true,
-                            desc: "入职星潮热点的第一个中型项目，是发现面料的小程序子版本，服务于用户的服装面料订购、灵感推介。前端由我一人负责，采用小程序原生方案开发【当时未有三方框架】，1.0版本历时两个月 ",                            desc: "",
+                            desc: "入职星潮热点的第一个中型项目，是发现面料的小程序子版本，服务于用户的服装面料订购、灵感推介。前端由我一人负责，采用小程序原生方案开发（当时未有三方框架）",
                             link: null
                         },
                     ],
+                },
+                {
+                    company: '爱婴慧科技有限公司',
+                    title: '前端工程师',
+                    from: '2015.03',
+                    to: '2016.08',
+                    addr: '深圳/南山',
+                    children: [
+                        {
+                            name: "妈咪在线课堂WebApp",
+                            role: '前端项目负责人、主程、前端架构',
+                            withSkills: [
+                                'Nodejs',
+                                'Gulp',
+                                'Webpack',
+                                'Vue',
+                                'Vuex',
+                                'Ricout',
+                                'jQuery',
+                                'Mqtt',
+                            ],
+                            isPrivate: true,
+                            desc: "项目使用的vue0.21 + jQuery，落后于时代的架构设计导致页面性能极差与维护困难，而且IM聊天室功能使用不稳定的websocket，在两天的紧张开发成功上线之后开始着手整个项目重构，由vue0.21 -> vue1.0的迁移开始，整合制定前端代码规范，弱化jQuery的依赖，引入webpack、babel工作流处理ES6^代码，Gulp构建生产环境，websocket则用Mqtt替换以方便高效的订阅",
+                            link: null
+                        },
+                        {
+                            name: "妈咪HOME",
+                            role: '前端项目负责人、主程、前端架构',
+                            withSkills: [
+                                'Nodejs',
+                                'Gulp',
+                                'Webpack',
+                                'Vue',
+                                'Vuex',
+                                'Ricout',
+                                'jQuery'
+                            ],
+                            isPrivate: true,
+                            desc: "该项目整合了面向母婴人群的c端小应用：“妈咪问医”、“妈咪问诊”，“分答管理”，项目框架最开始使用Vue0.21，webpack打包统一入口，第三方工具与入口版本号统一使用Gulp构建，2015年9月利用闲暇时间，项目前端框架构建脚本进行重构，期间考虑到加载性能，去掉css文件加载，于是Sass编译打包到入口main.min.js，以style标签的形式插入文档，首屏加载速度直线上升，从最开始的6s左右减少到700ms左右",
+                            link: null
+                        }
+                    ],
                 }
             ],
-            // {
-            //     name: "strange stories（Demo）",
-            //     withSkills: ["Unity"],
-            //     isPrivate: true,
-            //     desc: "正在立项的游戏项目，已有美术和程序，脚本选型中，程序每日构建",
-            //     link: "https://game.happylandle.club"
-            // },
-            // {
-            //     name: "大数据可视化科技版(Shader)脚手架",
-            //     withSkills: ["WebGl", "ThreeJS", "ReactJS", "Webpack", "WebSocket", "Blender", "Electron"],
-            //     desc: "大数据可视化项目，WebGl渲染，JS脚本与Socket控制交互，Blender构建模型，Electron打包输出EXE安装包",
-            //     link: "https://www.behance.net/gallery/97483001/chuneng",
-            // },
-            // {
-            //     name: "深业泰然大厦大数据可视化",
-            //     withSkills: ["WebGl", "Threejs", "ReactJS", "WebSocket", "Echarts", "Gsap", "Blender", "Electron"],
-            //     desc: "为深业泰然打造的3D楼宇可视化大数据, ",
-            //     link: "https://www.behance.net/gallery/97483001/tairan",
-            // },
-            // {
-            //     name: "大数据可视化写实版(PBR)脚手架",
-            //     withSkills: ["WebGl", "BabylonJS", "ReactJS", "WebSocket", "CityEngine", "Blender", "Substance Painter", "Unreal(预演阶段)", "TensorflowJS(预演阶段)", "Electron"],
-            //     desc: "针对于之前Shader版本的可视化大数据PBR开发构建，在之前基础上新加入CityEngine与Substance Painter,期间预演了Unreal与TensorflowJS，预备之后的迭代",
-            //     link: "https://www.behance.net/gallery/97483001/chuneng",
-            // },
-            // {
-            //     name: "中国储能大厦大数据可视化",
-            //     withSkills: ["WebGl","Babylonjs", "ReactJS", "Webpack", "WebSocket", "Echarts", "Gsap", "Blender", "Electron"],
-            //     desc: "中国储能大厦3D展厅的可视化大数据",
-            //     link: "https://www.behance.net/gallery/97483001/chuneng",
-            // },
-            // {
-            //     name: "智慧城市展厅",
-            //     withSkills: ["WebGl","BabylonJS", "ThreeJS", "ReactJS", "WebSocket", "Echarts", "Gsap", "Blender", "Substance Painter", "CityEngine", "Electron"],
-            //     desc: "房博会与高交会展会的可视化大数据",
-            //     link: "https://www.behance.net/gallery/97483215/exhibit",
-            // },
-            // {
-            //     name: "中正前端SaaS重构",
-            //     withSkills: ["ReactJS", "ReduxJS", "NodeJS", "Webpack"],
-            //     desc: "基于之前多个项⽬多配置，在此进⾏项⽬单构建多配置⼊⼝的SaaS重构，完成构建脚本的升级与优化，力求替换掉旧冗余落后的架构",
-            //     // link: "https://www.behance.net/gallery/97483215/exhibit",
-            // },
-            // {
-            //     name: "深业产权系统",
-            //     withSkills: ["ReactJS", "GoJS"],
-            //     desc: "深业产权项目内容定制",
-            //     // link: "https://www.behance.net/gallery/97483215/exhibit",
-            // },
-            // {
-            //     name: "平台运营楼管iPad移动端",
-            //     withSkills: ["ReactJS", "Material Design"],
-            //     desc: "平台应用iPad定制",
-            //     // link: "https://www.behance.net/gallery/97483215/exhibit",
-            // },
-            // {
-            //     name: "楼掌门门禁系统小程序",
-            //     withSkills: ["ReactJS", "TaroJS"],
-            //     desc: "平台门禁⼩程序，并行于门禁App",
-            //     // link: "https://www.behance.net/gallery/97483215/exhibit",
-            // },
-            // {
-            //     name: "乌托邦wow-toboom",
-            //     withSkills: ["ReactJS", "MoJS", "Gsap"],
-            //     desc: "⾯向服装设计的在线⾯料设计系统、部件可⾃由组合拼装并直接⽣成预览⽂件",
-            //     link: "http://www.wow-toboom.com",
-            // },
-            // {
-            //     name: "⾯料商店⼩程序",
-            //     withSkills: ["wxjs"],
-            //     desc: "服装⾯料⼩程序商店，项⽬使⽤原⽣开发",
-            //     // link: "https://www.behance.net/gallery/97483215/exhibit",
-            // },
-            // {
-            //     name: "⾯料运营平台",
-            //     withSkills: ["VueJS", "ElementJS"],
-            //     desc: "服装⾯料运营平台",
-            //     // link: "https://www.behance.net/gallery/97483215/exhibit",
-            // },
-
-            // {
-            //     name: "妈咪问医直播课堂",
-            //     withSkills: ["VueJS", "Gulp"],
-            //     desc: "妈咪问医是⼀个⾯相医患群体的类分答项⽬，平台基于微信",
-            //     // link: "https://www.behance.net/gallery/97483215/exhibit",
-            // },
-
-
-            // works: [
-            //     {
-            //         title: "高级前端工程师",
-            //         company: "深圳中正信息",
-            //         date: {
-            //             begin: "2019.01.01",
-            //             end: "2020.04.27"
-            //         },
-            //         desc: "工具脚本定制化，重构了前端SaaS，开发了可视化大数据WebGL项目，开发了企业产权系统",
-            //     },
-            //     {
-            //         title: "前端组长",
-            //         company: "深圳星潮热点传播",
-            //         date: {
-            //             begin: "2017.08",
-            //             end: "2019.12"
-            //         },
-            //         desc: "负责前端团队管理，前端架构梳理维护，框架搭建与技术选型，产品功能研发",
-            //     },
-            //     {
-            //         title: "前端⼯程师",
-            //         company: "爱婴慧科技",
-            //         date: {
-            //             begin: "2016.06",
-            //             end: "2017.08"
-            //         },
-            //         desc: "整合妈咪home，开发线上直播问答系统，之后上线了评论社区功能",
-            //     },
-            //     {
-            //         title: "前端工程师",
-            //         company: "斑马王国",
-            //         date: {
-            //             begin: "2015.03",
-            //             end: "2016.01"
-            //         },
-            //         desc: "运营后台开发，线上活动平台搭建",
-            //     }
-            // ],
             skill: [
                 {
                     name: "Front-end",
@@ -338,6 +257,40 @@ module.exports = {
                     label: "美术素材",
                     children: ['Photoshop', 'Figma', 'MindNode', 'Lottie', 'Spine']
                 }
+            ],
+            sideProjects: [
+                {
+                    name: "Doomsday Detective Agency",
+                    role: '主程、TA',
+                    withSkills: [
+                        'Unreal',
+                        'Megascan',
+                        'Zbrush',
+                        'Blender',
+                        'Substance',
+                        'Maya',
+                        'Mari',
+                        'TextureXYZ'
+                    ],
+                    isPrivate: true,
+                    desc: "独立游戏Doomsday Detective Agency，设定于未来不久的都市探险世界观，类型定位动作探索个人负责游戏美术和程序脚本的初期预演、技术选型（地编、材质开发、gameplay脚本编写）并参与故事脚本和世界观构建",
+                    link: null
+                },
+                {
+                    name: "WebGl智慧城市展厅",
+                    role: '主程、前端架构',
+                    withSkills: [
+                        'Webpack',
+                        'WebSocket',
+                        'React',
+                        'Mobx',
+                        'Echart',
+                        'Electron',
+                    ],
+                    isPrivate: true,
+                    desc: "2019高交会与房博会数字展厅参展项目，3D美术与程序脚本的构建都由我一人独立完成，为求快速技术预演与迭代开发，实时渲染选择了webgl，框架层选择Threejs，3D模型通过Blender插件构建，WebSocket多终端控制，技术预演与功能开发并行，BI数据展示选择了沉淀项目里的Echart组件，动画选用了Lottie，方便与UI高效对接，Electron打包成exe程序以安装包的形式交付，最终项目成功展出，并获得第二十一届高交会“优秀展示奖”",
+                    link: null
+                },
             ]
 
         }
