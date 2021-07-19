@@ -67,8 +67,8 @@ const WaterShader = {
 }
 
 const WaterPass = function (dt_size) {
-    // Pass.call(this)
-    new Pass(this);
+    Pass.call(this)
+    // new Pass(this);
     if (WaterShader === undefined) console.error('THREE.WaterPass relies on THREE.WaterShader')
     var shader = WaterShader
     this.uniforms = UniformsUtils.clone(shader.uniforms)

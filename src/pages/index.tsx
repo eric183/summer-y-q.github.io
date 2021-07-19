@@ -47,37 +47,38 @@ import { navigate } from "gatsby";
 //   )
 // myExtends({ MeshLine, MeshLineMaterial })
 
-const DDA: FC = () => {
-	const mouse = useRef([0, 0])
-	const [hovered, hover] = useState(false);
-	const points = [];
-	for (let j = 0; j < Math.PI; j += (2 * Math.PI) / 100) {
-		points.push(Math.cos(j), Math.sin(j), 0);
-	}
-	useEffect(() => {
-		document.body.style.cursor = hovered
-			? 'pointer'
-			: "url('https://raw.githubusercontent.com/chenglou/react-motion/master/demos/demo8-draggable-list/cursor.png') 39 39, auto"
-	}, [hovered])
-	return (
-		<CanvasLayout
-			linear
-			dpr={[1, 2]}
-			camera={{ fov: 100, position: [0, 0, 30] }}
-			onCreated={({ gl }) => {
-				gl.toneMapping = THREE.CineonToneMapping
-				gl.setClearColor(new THREE.Color('#020207'))
-			}}
-			wrapperStyle={{ backgroundColor: '#eee' }}>
-			{/* <fog attach="fog" args={['lightpink', 60, 100]} /> */}
-			<fog attach="fog" args={['white', 50, 190]} />
-			<pointLight distance={100} intensity={4} color="white" />
-			<Number mouse={mouse} hover={hover} />
-			<Particles count={10000} mouse={mouse} />
-			<WaterEffect />
+const Index: FC = () => {
+    const mouse = useRef([0, 0])
+    const [hovered, hover] = useState(false);
+    const points = [];
+        for (let j = 0; j < Math.PI; j += (2 * Math.PI) / 100) {
+        points.push(Math.cos(j), Math.sin(j), 0);
+    }
+    useEffect(() => {
+        document.body.style.cursor = hovered
+          ? 'pointer'
+          : "url('https://raw.githubusercontent.com/chenglou/react-motion/master/demos/demo8-draggable-list/cursor.png') 39 39, auto"
+    }, [hovered])
+    return (
+        <CanvasLayout
+            // linear
+            dpr={[1, 2]}
+            camera={{ fov: 100, position: [0, 0, 30] }}
+            onCreated={({ gl }) => {
+                gl.toneMapping = THREE.CineonToneMapping
+                gl.setClearColor(new THREE.Color('#020207'))
+            }}
+            wrapperStyle={{ backgroundColor: '#eee' }}>
+            {/* <fog attach="fog" args={['lightpink', 60, 100]} /> */}
+            <fog attach="fog" args={['white', 50, 190]} />
+            {/* <ambientLight args={['x0eeeee', 1]}/> */}
+            <pointLight distance={100} intensity={4} color="white" />
+            <Number mouse={mouse} hover={hover} />
+            <Particles count={10000} mouse={mouse} />
+            <WaterEffect />
 
-			{/* <Sparks count={20} mouse={mouse} colors={['#A2CCB6', '#FCEEB5', '#EE786E', '#e0feff', 'lightpink', 'lightblue']} /> */}
-			{/* <mesh raycast={MeshLineRaycast}>
+            {/* <Sparks count={20} mouse={mouse} colors={['#A2CCB6', '#FCEEB5', '#EE786E', '#e0feff', 'lightpink', 'lightblue']} /> */}
+            {/* <mesh raycast={MeshLineRaycast}>
                 
                 <meshLine attach="geometry" vertices={points} widthCallback={pointWidth => pointWidth * Math.random()}/>
                 <meshLineMaterial
@@ -88,73 +89,74 @@ const DDA: FC = () => {
                 dashRatio={0.95}
                 />
             </mesh> */}
-			{/* <mesh>
+            {/* <mesh>
                 <colorShiftMaterial attach="material" color="hotpink" time={1} />
             </mesh> */}
-		</CanvasLayout>
-	)
+        </CanvasLayout>
+    )
 }
 
 
 // eslint-disable-next-line react/prop-types
 const Particles: FC<{ count: number, mouse: number[] }> = ({ count, mouse }) => {
-	const mesh = useRef()
-	const light = useRef()
-	const { size, viewport } = useThree()
-	const aspect = size.width / viewport.width
+    const mesh = useRef()
+    const light = useRef()
+    const { size, viewport } = useThree()
+    const aspect = size.width / viewport.width
 
-	const dummy = useMemo(() => new THREE.Object3D(), [])
-	// Generate some random positions, speed factors and timings
-	const particles = useMemo(() => {
-		const temp = []
-		for (let i = 0; i < count; i++) {
-			const t = Math.random() * 100
-			const factor = 20 + Math.random() * 100
-			const speed = 0.01 + Math.random() / 200
-			const xFactor = -50 + Math.random() * 100
-			const yFactor = -50 + Math.random() * 100
-			const zFactor = -50 + Math.random() * 100
-			temp.push({ t, factor, speed, xFactor, yFactor, zFactor, mx: 0, my: 0 })
-		}
-		return temp
-	}, [count])
-	// The innards of this hook will run every frame
-	useFrame((state) => {
-		// Makes the light follow the mouse
-		light.current.position.set(mouse.current[0] / aspect, -mouse.current[1] / aspect, 0)
-		// Run through the randomized data to calculate some movement
-		particles.forEach((particle, i) => {
-			let { t, factor, speed, xFactor, yFactor, zFactor } = particle
-			// There is no sense or reason to any of this, just messing around with trigonometric functions
-			t = particle.t += speed / 2
-			const a = Math.cos(t) + Math.sin(t * 1) / 10
-			const b = Math.sin(t) + Math.cos(t * 2) / 10
-			const s = Math.cos(t)
-			particle.mx += (mouse.current[0] - particle.mx) * 0.01
-			particle.my += (mouse.current[1] * -1 - particle.my) * 0.01
-			// Update the dummy object
-			dummy.position.set(
-				(particle.mx / 10) * a + xFactor + Math.cos((t / 10) * factor) + (Math.sin(t * 1) * factor) / 10,
-				(particle.my / 10) * b + yFactor + Math.sin((t / 10) * factor) + (Math.cos(t * 2) * factor) / 10,
-				(particle.my / 10) * b + zFactor + Math.cos((t / 10) * factor) + (Math.sin(t * 3) * factor) / 10
-			)
-			dummy.scale.set(s, s, s)
-			dummy.rotation.set(s * 5, s * 5, s * 5)
-			dummy.updateMatrix()
-			// And apply the matrix to the instanced item
-			mesh.current.setMatrixAt(i, dummy.matrix)
-		})
-		mesh.current.instanceMatrix.needsUpdate = true
-	})
-	return (
-		<>
-			<pointLight ref={light} distance={40} intensity={8} color="lightblue" />
-			<instancedMesh ref={mesh} args={[null, null, count]}>
-				<dodecahedronGeometry args={[0.2, 0]} />
-				<meshPhongMaterial color="#050505" />
-			</instancedMesh>
-		</>
-	)
+    const dummy = useMemo(() => new THREE.Object3D(), [])
+    // Generate some random positions, speed factors and timings
+    const particles = useMemo(() => {
+        const temp = []
+        for (let i = 0; i < count; i++) {
+            const t = Math.random() * 100
+            const factor = 20 + Math.random() * 100
+            const speed = 0.01 + Math.random() / 200
+            const xFactor = -50 + Math.random() * 100
+            const yFactor = -50 + Math.random() * 100
+            const zFactor = -50 + Math.random() * 100
+            temp.push({ t, factor, speed, xFactor, yFactor, zFactor, mx: 0, my: 0 })
+        }
+        return temp
+    }, [count])
+    // The innards of this hook will run every frame
+    useFrame((state) => {
+        // Makes the light follow the mouse
+        light.current.position.set(mouse.current[0] / aspect, -mouse.current[1] / aspect, 0)
+        // Run through the randomized data to calculate some movement
+        particles.forEach((particle, i) => {
+            let { t, factor, speed, xFactor, yFactor, zFactor } = particle
+            // There is no sense or reason to any of this, just messing around with trigonometric functions
+            t = particle.t += speed / 2
+            const a = Math.cos(t) + Math.sin(t * 1) / 10
+            const b = Math.sin(t) + Math.cos(t * 2) / 10
+            const s = Math.cos(t)
+            particle.mx += (mouse.current[0] - particle.mx) * 0.01
+            particle.my += (mouse.current[1] * -1 - particle.my) * 0.01
+			// particle.material = new THREE.MeshStandardMaterial();
+            // Update the dummy object
+            dummy.position.set(
+                (particle.mx / 10) * a + xFactor + Math.cos((t / 10) * factor) + (Math.sin(t * 1) * factor) / 10,
+                (particle.my / 10) * b + yFactor + Math.sin((t / 10) * factor) + (Math.cos(t * 2) * factor) / 10,
+                (particle.my / 10) * b + zFactor + Math.cos((t / 10) * factor) + (Math.sin(t * 3) * factor) / 10
+            )
+            dummy.scale.set(s, s, s)
+            dummy.rotation.set(s * 5, s * 5, s * 5)
+            dummy.updateMatrix()
+            // And apply the matrix to the instanced item
+            mesh.current.setMatrixAt(i, dummy.matrix)
+        })
+        mesh.current.instanceMatrix.needsUpdate = true
+    })
+    return (
+        <>
+            <pointLight ref={light} distance={40} intensity={8} color="lightblue" />
+            <instancedMesh ref={mesh} args={[null, null, count]}>
+                <dodecahedronGeometry args={[0.2, 0]} />
+                <meshPhongMaterial color="#220238" />
+            </instancedMesh>
+        </>
+    )
 }
 
 
@@ -222,55 +224,59 @@ const Particles: FC<{ count: number, mouse: number[] }> = ({ count, mouse }) => 
 
 
 function Number({ hover }) {
-	const ref = useRef()
-	useFrame((state) => {
-		if (ref.current) {
-			ref.current.position.x = THREE.MathUtils.lerp(ref.current.position.x, state.mouse.x * 2, 0.1)
-			ref.current.rotation.x = THREE.MathUtils.lerp(ref.current.rotation.x, state.mouse.y / 2, 0.1)
-			ref.current.rotation.y += 0.003
-		}
-	})
-	return (
-		<Suspense fallback={null}>
-			<group ref={ref}>
-				<Text
-					size={10}
-					onClick={(e) => navigate('/resume')}
-					onPointerOver={() => hover(true)}
-					onPointerOut={() => hover(false)}>
-					k
-				</Text>
-			</group>
-		</Suspense>
-	)
+    const ref = useRef()
+    useFrame((state) => {
+        if (ref.current) {
+            ref.current.position.x = THREE.MathUtils.lerp(ref.current.position.x, state.mouse.x * 2, 0.1)
+            ref.current.rotation.x = THREE.MathUtils.lerp(ref.current.rotation.x, state.mouse.y / 2, 0.1)
+            ref.current.rotation.y += 0.003
+        }
+    })
+    return (
+        <Suspense fallback={null}>
+            <group ref={ref}>
+                <Text
+                    size={10}
+                    onClick={(e) => navigate('/resume')}
+                    onPointerOver={() => hover(true)}
+                    onPointerOut={() => hover(false)}>
+                    k
+                </Text>
+				{/* <mesh>
+					<boxGeometry args={[1, 1, 1]} />
+					<meshStandardMaterial color={'orange'} />
+				</mesh> */}
+            </group>
+        </Suspense>
+    )
 }
 
 const Text = forwardRef(({ children, vAlign = 'center', hAlign = 'center', size = 1, color = '#000000', ...props }, ref) => {
-	// const font = useLoader(THREE.FontLoader, '/bold.blob')
-	const font = useLoader(THREE.FontLoader, '/k.json')
-	const config = useMemo(() => ({ font, size: 40, height: 50 }), [font])
-	const mesh = useRef()
-	const meshNormalMaterialRef = useRef()
-	useLayoutEffect(() => {
-		const size = new THREE.Vector3()
-		mesh.current.geometry.computeBoundingBox()
-		mesh.current.geometry.boundingBox.getSize(size)
-		mesh.current.position.x = hAlign === 'center' ? -size.x / 2 : hAlign === 'right' ? 0 : -size.x
-		mesh.current.position.y = vAlign === 'center' ? -size.y / 2 : vAlign === 'top' ? 0 : -size.y
-		meshNormalMaterialRef.current.wireframe = false;
-		// mesh.current.rotation.x = 20;
-		// ref.current.
-		// console.log(mesh.current.rotation);
-	}, [children])
-	return (
-		<group ref={ref} {...props} scale={[0.1 * size, 0.1 * size, 0.1]}>
-			<mesh ref={mesh}>
-				<textGeometry args={[children, config]} />
-				<meshNormalMaterial ref={meshNormalMaterialRef} />
-			</mesh>
-		</group>
-	)
+    // const font = useLoader(THREE.FontLoader, '/bold.blob')
+    const font = useLoader(THREE.FontLoader, '/k.json')
+    const config = useMemo(() => ({ font, size: 40, height: 50 }), [font])
+    const mesh = useRef()
+    const meshNormalMaterialRef = useRef()
+    useLayoutEffect(() => {
+        const size = new THREE.Vector3()
+        mesh.current.geometry.computeBoundingBox()
+        mesh.current.geometry.boundingBox.getSize(size)
+        mesh.current.position.x = hAlign === 'center' ? -size.x / 2 : hAlign === 'right' ? 0 : -size.x
+        mesh.current.position.y = vAlign === 'center' ? -size.y / 2 : vAlign === 'top' ? 0 : -size.y
+        meshNormalMaterialRef.current.wireframe = false;
+        // mesh.current.rotation.x = 20;
+        // ref.current.
+        // console.log(mesh.current.rotation);
+    }, [children])
+    return (
+        <group ref={ref} {...props} scale={[0.1 * size, 0.1 * size, 0.1]}>
+            <mesh ref={mesh}>
+                <textGeometry args={[children, config]} />
+                <meshNormalMaterial ref={meshNormalMaterialRef}/>
+            </mesh>
+        </group>
+    )
 })
 
 
-export default DDA;
+export default Index;

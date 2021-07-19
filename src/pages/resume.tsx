@@ -4,7 +4,8 @@ import { ResumeStyle } from '~/styles';
 import { css } from '@emotion/react';
 import Scrollbar from '~components/scrollbar';
 import LoadingLayout from '~components/loading';
-import { graphql } from 'gatsby'
+import { graphql } from 'gatsby';
+import Kuangzhichen from '../../static/kuangzhichen.pdf';
 // import  GatsbyTypes from '@LocalType';
 
 interface SiteType {
@@ -36,7 +37,7 @@ const Sample: FC<SiteType> = ({ data }) => {
                 <article className='print-layout'>
                     <header>
                         <h1 onClick={()=> {
-                            window.open('/前端工程师-匡志宸.pdf')
+                            window.open(Kuangzhichen);
                         }}>{name}</h1>
                         <p>{title.replace('、', ' / ')}</p>
                         {/* <a href='/前端工程师-匡志宸.pdf'></a> */}
