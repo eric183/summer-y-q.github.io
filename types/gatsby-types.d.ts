@@ -259,8 +259,6 @@ type Site = Node & {
   readonly siteMetadata: Maybe<SiteSiteMetadata>;
   readonly port: Maybe<Scalars['Int']>;
   readonly host: Maybe<Scalars['String']>;
-  readonly polyfill: Maybe<Scalars['Boolean']>;
-  readonly pathPrefix: Maybe<Scalars['String']>;
   readonly id: Scalars['ID'];
   readonly parent: Maybe<Node>;
   readonly children: ReadonlyArray<Node>;
@@ -664,8 +662,6 @@ type Query_siteArgs = {
   siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
   port: Maybe<IntQueryOperatorInput>;
   host: Maybe<StringQueryOperatorInput>;
-  polyfill: Maybe<BooleanQueryOperatorInput>;
-  pathPrefix: Maybe<StringQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
@@ -1636,8 +1632,6 @@ type SiteFieldsEnum =
   | 'siteMetadata.resumeInfo.skill.children'
   | 'port'
   | 'host'
-  | 'polyfill'
-  | 'pathPrefix'
   | 'id'
   | 'parent.id'
   | 'parent.parent.id'
@@ -1739,8 +1733,6 @@ type SiteFilterInput = {
   readonly siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
   readonly port: Maybe<IntQueryOperatorInput>;
   readonly host: Maybe<StringQueryOperatorInput>;
-  readonly polyfill: Maybe<BooleanQueryOperatorInput>;
-  readonly pathPrefix: Maybe<StringQueryOperatorInput>;
   readonly id: Maybe<StringQueryOperatorInput>;
   readonly parent: Maybe<NodeFilterInput>;
   readonly children: Maybe<NodeFilterListInput>;
@@ -2785,12 +2777,12 @@ type SiteBuildMetadataSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
-type userserickuangDesktopmyDeveric183GithubIosrctemplatesblogPostJs471609186QueryVariables = Exact<{
+type fWorkspaceeric183GithubIosrctemplatesblogPostJs471609186QueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
 
 
-type userserickuangDesktopmyDeveric183GithubIosrctemplatesblogPostJs471609186Query = { readonly markdownRemark: Maybe<(
+type fWorkspaceeric183GithubIosrctemplatesblogPostJs471609186Query = { readonly markdownRemark: Maybe<(
     Pick<MarkdownRemark, 'html'>
     & { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'title'>> }
   )> };
@@ -2800,10 +2792,10 @@ type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
-type userserickuangDesktopmyDeveric183GithubIosrcpagesaboutTsx4122199845QueryVariables = Exact<{ [key: string]: never; }>;
+type fWorkspaceeric183GithubIosrcpagesaboutTsx4122199845QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type userserickuangDesktopmyDeveric183GithubIosrcpagesaboutTsx4122199845Query = { readonly site: Maybe<(
+type fWorkspaceeric183GithubIosrcpagesaboutTsx4122199845Query = { readonly site: Maybe<(
     Pick<Site, 'buildTime'>
     & { readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'about' | 'title'>> }
   )> };
@@ -2841,10 +2833,10 @@ type ResumeDataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
       )> }
     )> }> };
 
-type userserickuangDesktopmyDeveric183GithubIosrcpagesprojectsindexJs2422230711QueryVariables = Exact<{ [key: string]: never; }>;
+type fWorkspaceeric183GithubIosrcpagesprojectsindexJs2422230711QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type userserickuangDesktopmyDeveric183GithubIosrcpagesprojectsindexJs2422230711Query = { readonly allMarkdownRemark: (
+type fWorkspaceeric183GithubIosrcpagesprojectsindexJs2422230711Query = { readonly allMarkdownRemark: (
     Pick<MarkdownRemarkConnection, 'totalCount'>
     & { readonly edges: ReadonlyArray<{ readonly node: (
         Pick<MarkdownRemark, 'id' | 'timeToRead' | 'html' | 'excerpt'>

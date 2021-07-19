@@ -1,4 +1,4 @@
-import { Box, Icosahedron, Octahedron, OrbitControls, ScreenQuad, Sphere, TransformControls, useHelper } from '@react-three/drei';
+import { Box, Icosahedron, Octahedron, OrbitControls, Reflector, ScreenQuad, Sphere, TransformControls, useHelper } from '@react-three/drei';
 import { useFrame, useLoader, useThree } from '@react-three/fiber';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
 import { button, useControls } from 'leva';
@@ -22,26 +22,29 @@ const Test: FC = () => {
     }, []);
 
     return (
-        <CanvasLayout wrapperStyle={{ background: 'rgb(24, 24, 24)' }}>
+        // <CanvasLayout wrapperStyle={{ background: 'rgb(24, 24, 24)' }}>
+        <CanvasLayout>
+            <color attach="background" args={['black']} />
+            <LightGroup controlArgs={[isControl, setIsControl]} />
+            {/* <OrbitControls enabled={isControl}/> */}
             <Suspense fallback={null}>
                 {/* <ScreenQuad 
                 ref={ScreenQuadRef}
             >    */}
                 <MeshGroup />
-                <LightGroup controlArgs={[isControl, setIsControl]} />
-                {/* <OrbitControls enabled={isControl}/> */}
                 {/* </ScreenQuad> */}
+                <EffectComposer multisampling={8}>
+                    {/* <Bloom /> */}
+                    <Bloom
+                        kernelSize={1}
+                        luminanceThreshold={0}
+                        luminanceSmoothing={0.4}
+                        intensity={0.6}
+                    />
+                    <Bloom kernelSize={KernelSize.HUGE} luminanceThreshold={0} luminanceSmoothing={0} intensity={0.5} />
+                </EffectComposer>
             </Suspense>
-            <EffectComposer multisampling={8}>
-                {/* <Bloom /> */}
-                <Bloom
-                    kernelSize={3}
-                    luminanceThreshold={0}
-                    luminanceSmoothing={0.4}
-                    intensity={0.6}
-                />
-                <Bloom kernelSize={KernelSize.HUGE} luminanceThreshold={0} luminanceSmoothing={0} intensity={0.5} />
-            </EffectComposer>
+
         </CanvasLayout>
     )
 }
@@ -88,16 +91,26 @@ const MeshGroup = () => {
             <mesh>
                 {/* <Sphere ref={sphereRef}> */}
                 {/* <Sphere attach='sphere'> */}
-                {/* <meshNormalMaterial /> */}
                 <sphereBufferGeometry args={[1.1, 30, 30]} attach="geometry" />
-                <meshStandardMaterial
-                    color={'0x292929'}
+                <meshNormalMaterial />
+                {/* <meshStandardMaterial
+                    // color={'0x292929'}
                     normalMap={normalTexture}
                     metalness={0.1}
                     roughness={.2}
-                />
+                /> */}
                 {/* </Sphere> */}
             </mesh>
+            <Reflector
+                resolution={1024}
+                mirror={1}
+                mixBlur={10}
+                args={[8, 8]}
+                mixStrength={1}
+                blur={[300, 120]}
+                position-y={-0.8}
+                rotation={[-Math.PI / 2, 0, Math.PI / 2]}
+            />
         </group>
     )
 }
@@ -120,7 +133,8 @@ const LightGroup: FC<{
 
         return (
             <group ref={LightGroupRef}>
-                <ambientLight args={[0x4, 2]} />
+                {/* <ambientLight args={[0x4, 2]} /> */}
+                <ambientLight />
                 {/* <TransformControls position={position} ref={transformControlsRef}> */}
                 {/* <TransformTool controlArgs={controlArgs} tKey="pl1">
                 <pointLight args={[0xffffff, 1, 2]} ref={pl1} />

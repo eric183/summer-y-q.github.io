@@ -16,7 +16,7 @@ module.exports = {
             title: "前端工程师、TA工程师",
             years: "五",
             // desc: "Hello，我叫匡志宸，来自内蒙古鄂尔多斯的南方人，大学专业是英语，自学入行开发到现在有五年半的时间，其中前端开发是主职，目前主流的前端项目（BC端）几乎都有参与主导过研发，主要内容有程序产品与功能开发，并做过1-2年的团队管理，参与过技术选型与及技术架构设计。目前职业方向是C端orB端主程业务开发。特长是客户端3D渲染、游戏、CG动画",
-            desc: "距离大三跟随信工远同学赴美实习后回国，入行到现在有5年半的时间，带过一段时间前端团队，做过管理，做过核心开发，经过上一段工作的洗礼，发现自己更适合做开发，而不是管理。Vue用了两年，React用了3年，后来又接触了WebGL、GIS，并学习了游戏开发的工业流程，对前端开发有了一些新的感悟，个人认为前端不应该仅仅局限于Javascript这套语言，工具的成熟与新技术的孵化一定会磨平终端之间的差异化，而我本人也比较愿意去接触一些新的语言于工具。",
+            desc: "很高兴认识你，简单自我介绍下。我是一位转行的程序员，大学专业是英语，11年离开校园后在赴美实习，回国后准备自学转行，于2015年开始从事前端与可视化技美研发到现在有快六个年头，做过直播、服装设计趋势、GIS、电商等等行业的商业项目，有丰富的互联网产品开发经验，擅长BC各平台客户端研发，带过前端团队，有过BI、GIS、CMS、SaaS、DevOps系统的开发经验，略懂设计和3D美术，对跨终端开发有浓厚的兴趣且稍有研究。\n目前身兼某独立游戏小组制作人，负责3D美术、编程与剧情脚本的工作。\n现阶段个人主要技术栈为：Typescript、 Javascript、 React、 Threejs、 Vue、 DeckGl、 Unreal Engine、 Blender",
             social: [
                 { text: "16675196790", link: "", icon: "\ue900" },
                 { text: "net.happylandle.club", link: "https://net.happylandle.club", icon: "\ue8fc" },
@@ -32,33 +32,33 @@ module.exports = {
                     addr: '深圳/南山',
                     children: [
                         {
-                            name: "B端CMS项目SaaS重构",
+                            name: "B端CMS项目SaaS化重构",
                             role: '前端项目负责人、主程、前端架构',
                             withSkills: [
                                 'Docker',
-                                'Node',
+                                'Nodejs',
                                 'Webpack',
                                 'React',
                                 'Redux',
-                                'Element'
-                            ],
-                            isPrivate: true,
-                            desc: "我接手项目后，与技术主管一起对业务结构进行梳理，开始着手将对项目进行SaaS化重构，重新设计了脚手架配置，以npm scripts驱动项目参数构建，差异化meta数据并拆分成json配置文件，合并业务结构entry, 最终多个CMS项目合并为一个配置化高复用的前端组件项目;[\b]参与整合devOps，编写dockerFile，最终降低了开发与运维成本、提升了项目构建到生产环节的稳定性",
-                            link: null
-                        },
-                        {
-                            name: "深业集团平台运营楼管CMS",
-                            role: '主程、前端架构',
-                            withSkills: [
-                                'Node',
-                                'Webpack',
-                                'React',
-                                'Mobx',
-                                'Material Design',
+                                'Element',
                                 'Echart',
                             ],
                             isPrivate: true,
-                            desc: "为深业项目配套开发的运营楼管CMS，因有iPad的移动端交互需求，UI层我选用Material Design设计语言，力求两端统一。为强化组件式的开发理念，框架层我选择React搭配Echart作BI数据，而且考虑到维护成本与学习曲线状态管理选择使用mobx，保证了项目可以快速迭代开发，新人可以快速的上手，对组内的组件开发思想有一个深度且友好的探索",
+                            desc: "我接手项目后，与技术主管一起对业务结构进行梳理，开始着手将对项目进行SaaS化重构，重新设计了脚手架配置，以npm scripts驱动项目参数构建，差异化meta数据并拆分成json配置文件，合并业务结构entry, 最终多个CMS项目合并为一个配置化高复用的前端组件项目;[\b]参与整合devOps，编写dockerFile，语义化构建版本，梳理前端代码规范，替换原本的Javascript，改为Typescript，由webpack ts-loader编译输出生产，最终降低了code review的成本，提高了整体的前端代码质量，运维成本与生产环节的稳定性得到质的提升。",
+                            link: null
+                        },
+                        {
+                            name: "WebGl智慧城市展厅",
+                            role: '主程、前端架构',
+                            withSkills: [
+                                'Webpack',
+                                'React',
+                                'Mobx',
+                                'Echart',
+                                'Electron',
+                            ],
+                            isPrivate: true,
+                            desc: "2019高交会与房博会数字展厅参展项目，3D美术与程序脚本的构建都由我一人独立完成，为求快速技术预演与迭代开发，实时渲染选择了webgl，框架层选择Threejs，3D模型通过Blender插件构建，WebSocket多终端控制，技术预演与功能开发并行，BI数据展示选择了沉淀项目里的Echart组件，动画选用了Lottie，方便与UI高效对接，Electron打包成exe程序以安装包的形式交付，最终项目成功展出，并获得第二十一届高交会“优秀展示奖”",
                             link: null
                         },
                     ],
