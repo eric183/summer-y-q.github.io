@@ -42,11 +42,15 @@ export const ResumeStyle = Styled.div`
         overflow: hidden;
        
         .summary-fragment p {
-            font-size: 16px;
+            font-size: 15px;
+        }
+
+        .block-section:nth-child(2) {
+            margin-top: 0;
         }
 
         .block-section {
-            margin: 40px 0 20px;
+            /* margin: 40px 0 20px; */
         }
 
         .skill-fragment * {
@@ -75,12 +79,23 @@ export const ResumeStyle = Styled.div`
         }
 
         .fragment-title h3 {
-            font-size: 15px;
+            font-size: 18px;
         }
           
         .fragment-title + ul {
             margin-left: 18px !important;
         } 
+
+        .work-fragment {
+            li {
+                span {
+                    font-size: 16px;
+                }
+                p {
+                    font-size: 14px;
+                }
+            }
+        }
 
         header {
             font-size: 12px;
@@ -115,6 +130,7 @@ export const ResumeStyle = Styled.div`
 
     p {
         white-space: pre-line;
+        margin: 0;
     }
 /*   
     overflow: auto;
@@ -167,6 +183,7 @@ export const ResumeStyle = Styled.div`
 
     .block-section {
         text-align: justify;
+        /* margin-bottom: 50px; */
         margin-bottom: 50px;
     
         p {
@@ -211,6 +228,9 @@ export const ResumeStyle = Styled.div`
 
     .work-fragment {
         margin-bottom: 60px;
+        &:last-child {
+            margin: 0;
+        }
         p {
             margin: 5px 0;
             font-size: 15px;
@@ -288,6 +308,7 @@ export const ResumeStyle = Styled.div`
 
     .fragment-title + ul {
         margin-left: 20px;
+        margin-bottom: 0;
     } 
 
      /* p { page-break-after: always; }

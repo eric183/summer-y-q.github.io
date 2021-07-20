@@ -142,7 +142,7 @@ module.exports = {
                                 'Electron',
                             ],
                             isPrivate: true,
-                            desc: "为位于深圳车公庙工贸园区中心地带的深业总部大厦，打造的3D大数据BI可视化展厅，仍然美术与程序脚本由我一人独立完成，在[WebGl智慧城市展厅]科技版技术沉淀的基础上，引入GIS开发流程（ArcGIS、CityEngine），以求获得更真实的渲染场景，搭配PBR的材质渲染系统，使用UE4重构了智慧城市展厅BI，前卫的视觉呈现得到了国企甲方的认可",
+                            desc: "为深圳车公庙工贸园区中心地带的深业总部大厦，打造的3D大数据BI可视化展厅，仍然美术与程序脚本由我一人独立完成，在[WebGl智慧城市展厅]科技版技术沉淀的基础上，引入GIS开发流程（ArcGIS、CityEngine），以求获得更真实的渲染场景，搭配PBR的材质渲染系统，使用UE4重构了智慧城市展厅BI，前卫的视觉呈现得到了国企甲方的认可",
                             link: null
                         },
                         {
@@ -163,7 +163,7 @@ module.exports = {
                                 "Unity"
                             ],
                             isPrivate: true,
-                            desc: "为位于深圳科技园CBD的中国储能大厦，打造的3D大数据BI可视化展厅，仍然美术与程序脚本由我一人负责，不同于[深业泰然大厦大数据可视化BI系统]项目，这里需要对展会项目的[科技版]优化。考虑到原先WebGl的生产瓶颈，遂决定启用Unity的原生方案重构，Unity的材质节点可以更快更方便的调试出更“科技感”的视效",
+                            desc: "为深圳科技园CBD的中国储能大厦，打造的3D大数据BI可视化展厅，仍然美术与程序脚本由我一人负责，不同于[深业泰然大厦大数据可视化BI系统]项目，这里需要对展会项目的[科技版]优化。考虑到原先WebGl的生产瓶颈，遂决定启用Unity的原生方案重构，Unity的材质节点可以更快更方便的调试出更“科技感”的视效",
                             link: null
                         },
                         {
@@ -216,6 +216,16 @@ module.exports = {
                             name: "wow-toBoom乌托邦面料设计WebApp",
                             role: '前端项目负责人、主程、前端架构',
                             isPrivate: true,
+                            withSkills: [
+                                'Docker',
+                                'Nodejs',
+                                'Webpack',
+                                'React',
+                                'Mobx',
+                                'FabricJS',
+                                'MoJS',
+                                'GSAP'
+                            ],
                             desc: "新项目“wow-toBoom乌托邦”是面向独立服装设计的在线灵感编辑产品，发布会进行预售。项目由我负责主导，选择React组件开发，而canvas的操作库考虑到状态的json保存机制，为方便状态栈的读写选择了FabricJS，搭配前沿的动画库MoJS、GSAP",
                             link: null
                         },
