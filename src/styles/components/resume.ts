@@ -36,9 +36,9 @@ export const ResumeStyle = Styled.div`
     } */
 
     @media print {
-        * { 
+        /* * { 
             font-size: 10px;
-        }
+        } */
         overflow: hidden;
        
         .summary-fragment p {
@@ -49,10 +49,16 @@ export const ResumeStyle = Styled.div`
             margin: 40px 0 20px;
         }
 
-        .block-section:nth-child(5) {
+        .skill-fragment * {
+            /* h4 {
+
+            } */
+            font-size: 12px;
+        }
+        /* .block-section:nth-child(5) {
             margin-top: 220px;
         }
-      
+       */
 
         h1 {
             font-size: 32px;
@@ -85,6 +91,14 @@ export const ResumeStyle = Styled.div`
             }
 
             li {
+                font-size: 12px !important;
+            }
+
+            a {
+                font-size: 12px;
+            }
+            
+            i {
                 font-size: 12px;
             }
         }
