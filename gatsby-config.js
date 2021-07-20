@@ -223,7 +223,7 @@ module.exports = {
                             name: "发现面料小程序BC端",
                             role: '前端项目负责人、主程、前端架构',
                             isPrivate: true,
-                            desc: "入职星潮热点的第一个中型项目，是发现面料的小程序子版本，服务于用户的服装面料订购、灵感推介。前端由我一人负责，采用小程序原生方案开发（当时未有三方框架）",
+                            desc: "星潮热点面向B端OMS与C端采购商城的小程序业务，服务于用户与商户的服装面料订购、灵感推介。独立负责开发完整前端业务组件，采用小程序原生方案开发（当时未有三方框架）",
                             link: null
                         },
                     ],
@@ -344,7 +344,7 @@ module.exports = {
                         'Lottie',
                     ],
                     isPrivate: true,
-                    desc: "个人为【深圳文明办】开发的鹏城新风文明小程序，采用TaroJS、React hooks开发，与CMS框架类型高度耦合，前端数据存储采用context原生reduce Api，引入Lottie与UI设计师一起维护实现平滑的动画视效",
+                    desc: "【深圳文明办】开发的鹏城新风文明小程序，采用TaroJS、React hooks开发，与CMS框架类型高度耦合，前端数据存储采用context原生reduce Api，引入Lottie与UI设计师一起维护实现平滑的动画视效",
                     link: null
                 },
                 {

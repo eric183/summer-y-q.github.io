@@ -9,8 +9,9 @@ import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass'
 import { WaterPass } from './water'
 import { Bloom, EffectComposer } from '@react-three/postprocessing'
 import { KernelSize, BlendFunction } from 'postprocessing'
+import { Effects as Ef } from '@react-three/drei/web'
 
-extend({ ShaderPass, WaterPass, FilmPass })
+extend({ ShaderPass, WaterPass, FilmPass, RenderPass })
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function Effects() {
@@ -20,9 +21,13 @@ export default function Effects() {
     // useEffect(() => void composer.current.setSize(size.width, size.height), [size])
     // useFrame(() => composer.current.render(), 1)
     return (
-        <EffectComposer multisampling={8}>
+        <Ef>
+
+        {/* // <EffectComposer multisampling={8}> */}
             {/* <renderPass attachArray="passes" scene={scene} camera={camera} />
-            <waterPass attachArray="passes" factor={1.5} /> */}
+            // <waterPass attachArray="passes" factor={1.5} /> */}
+            <renderPass attachArray="passes" scene={scene} camera={camera} />
+            <waterPass attachArray="passes" factor={1.5} /> 
             <Bloom
                 kernelSize={1}
                 luminanceThreshold={0}
@@ -30,6 +35,9 @@ export default function Effects() {
                 intensity={0.6}
             />
             <Bloom kernelSize={KernelSize.HUGE} luminanceThreshold={0} luminanceSmoothing={0} intensity={0.5} />
-        </EffectComposer>
+
+        {/* // </EffectComposer> */}
+
+        </Ef>
     )
 }

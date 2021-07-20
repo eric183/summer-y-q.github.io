@@ -19,12 +19,8 @@ export const ResumeStyle = Styled.div`
         /* } */
     }
 
-    @page { 
-        /* switch to landscape */ 
-        /* size: landscape;  */
-        /* set page margins */ 
-        /* margin: 0.5cm;  */
-        /* Default footers */ 
+    /* @page { 
+    
         @bottom-left { 
             content: "Department of Strategy"; 
         } 
@@ -33,7 +29,7 @@ export const ResumeStyle = Styled.div`
         }
     }
 
-   
+    */
 
     /* @page {
         size: A4;
@@ -44,30 +40,20 @@ export const ResumeStyle = Styled.div`
             font-size: 10px;
         }
         overflow: hidden;
-        /* width: 210mm;
-        height: 297mm;      */
-        /* html, body {
-            width: 210mm;
-            height: 297mm;        
-        }
-         */
-
-
-        /* footer {
-            position: fixed;
-            bottom: 0;
+       
+        .summary-fragment p {
+            font-size: 16px;
         }
 
-         p {
-            page-break-inside: avoid;
-        }
-         */
         .block-section {
-            margin: 50px 0 20px;
+            margin: 40px 0 20px;
         }
+
         .block-section:nth-child(5) {
             margin-top: 220px;
         }
+      
+
         h1 {
             font-size: 32px;
         }
@@ -85,6 +71,10 @@ export const ResumeStyle = Styled.div`
         .fragment-title h3 {
             font-size: 15px;
         }
+          
+        .fragment-title + ul {
+            margin-left: 18px !important;
+        } 
 
         header {
             font-size: 12px;
@@ -164,7 +154,7 @@ export const ResumeStyle = Styled.div`
     .block-section {
         text-align: justify;
         margin-bottom: 50px;
-        
+    
         p {
             text-align: justify;
         }
@@ -172,7 +162,7 @@ export const ResumeStyle = Styled.div`
     }
     
     .summary-fragment {
-        font-size: 15px;
+        font-size: 16px;
     }
 
     .skill-fragment {
@@ -281,6 +271,10 @@ export const ResumeStyle = Styled.div`
             margin: 0;
         }
     }
+
+    .fragment-title + ul {
+        margin-left: 20px;
+    } 
 
      /* p { page-break-after: always; }
      .footer { position: fixed; bottom: 0px; }
