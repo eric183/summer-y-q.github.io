@@ -7,6 +7,9 @@ import CanvasLayout from '~components/CanvasLayout';
 import { WaterEffect } from '~components/Effects';
 // import { MeshLine, MeshLineMaterial, MeshLineRaycast } from 'three.meshline';
 import { navigate } from "gatsby";
+import { TextureLoader } from 'three';
+import { useSpring, animated } from '@react-spring/three';
+
 // const { MeshLine, MeshLineMaterial, MeshLineRaycast } = require('three.meshline');
 // { "modules": false ,"targets":{"node":"current" } },
 
@@ -253,10 +256,13 @@ function Number({ hover }) {
 
 const Text = forwardRef(({ children, vAlign = 'center', hAlign = 'center', size = 1, color = '#000000', ...props }, ref) => {
     // const font = useLoader(THREE.FontLoader, '/bold.blob')
+    const [active, setActive] = useState<boolean>(false);
     const font = useLoader(THREE.FontLoader, '/k.json')
     const config = useMemo(() => ({ font, size: 40, height: 50 }), [font])
     const mesh = useRef()
-    const meshNormalMaterialRef = useRef()
+    const meshNormalMaterialRef = useRef<THREE.MeshBasicMaterial>(null!);
+    const [colorMap] = useLoader(TextureLoader, ['/NormalMap.png'])
+    
     useLayoutEffect(() => {
         const size = new THREE.Vector3()
         mesh.current.geometry.computeBoundingBox()
@@ -264,15 +270,27 @@ const Text = forwardRef(({ children, vAlign = 'center', hAlign = 'center', size 
         mesh.current.position.x = hAlign === 'center' ? -size.x / 2 : hAlign === 'right' ? 0 : -size.x
         mesh.current.position.y = vAlign === 'center' ? -size.y / 2 : vAlign === 'top' ? 0 : -size.y
         meshNormalMaterialRef.current.wireframe = false;
+        setActive(true);
         // mesh.current.rotation.x = 20;
         // ref.current.
         // console.log(mesh.current.rotation);
     }, [children])
+    // useFrame(()=> {
+    //     meshNormalMaterialRef.current.
+    // })
+
+    const { displacementScale } = useSpring({
+        displacementScale: active ? 0 : 100000,
+    })
     return (
         <group ref={ref} {...props} scale={[0.1 * size, 0.1 * size, 0.1]}>
             <mesh ref={mesh}>
                 <textGeometry args={[children, config]} />
-                <meshNormalMaterial ref={meshNormalMaterialRef}/>
+                <animated.meshNormalMaterial 
+                    ref={meshNormalMaterialRef}
+                    displacementMap={colorMap}
+                    displacementScale={displacementScale}
+                />
             </mesh>
         </group>
     )

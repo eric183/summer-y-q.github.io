@@ -1,10 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
 import Helmet from 'react-helmet';
-import { ResumeStyle } from '~/styles';
+import { graphql } from 'gatsby';
 import { css } from '@emotion/react';
+import { ResumeStyle } from '~/styles';
 import Scrollbar from '~components/scrollbar';
 import LoadingLayout from '~components/loading';
-import { graphql } from 'gatsby';
 import Kuangzhichen from '../../static/kuangzhichen.pdf';
 // import  GatsbyTypes from '@LocalType';
 
@@ -15,18 +15,23 @@ interface SiteType {
 const Sample: FC<SiteType> = ({ data }) => {
     const [loading, setLoading] = useState(true);
     const [showShit, setShowShit] = useState(false);
+    const [isTA, setTA] = useState<boolean>(false);
     // props.data.site.siteMetadata.title
 
 
-    if(!data?.site?.siteMetadata?.resumeInfo) throw new Error('no this type');
+    if (!data?.site?.siteMetadata?.resumeInfo) throw new Error('no this type');
 
-    const { experience, social, skill, name, title = '', years, desc, sideProjects } = data.site.siteMetadata.resumeInfo; 
+    const { experience, social, skill, name, title, years, desc, sideProjects } = data.site.siteMetadata.resumeInfo;
     useEffect(() => {
         setLoading(false);
-
+        const callback = (evt: { altKey: boolean; key: string; }) => evt.altKey && evt.key === 't' && setTA(x => !x);        
+        window.addEventListener('keyup', callback);
+        // return window.removeEventListener('keyup', callback);
     }, []);
+
     // const test = 'Work Experience';
     const test = 'Test NoBusyDoingThings';
+
     return (
         <Scrollbar>
             <ResumeStyle>
@@ -36,10 +41,10 @@ const Sample: FC<SiteType> = ({ data }) => {
                 <LoadingLayout loading={loading} />
                 <article className='print-layout'>
                     <header>
-                        <h1 onClick={()=> {
+                        <h1 onClick={() => {
                             window.open(Kuangzhichen);
                         }}>{name}</h1>
-                        <p>{title.replace('、', ' / ')}</p>
+                        <p>{isTA && title ? [title[1], title[0]]?.join('/') : title[0]}</p>
                         {/* <a href='/前端工程师-匡志宸.pdf'></a> */}
                         {/* <p>xxx</p> */}
                         {/* clear-anchor-style */}
@@ -50,12 +55,12 @@ const Sample: FC<SiteType> = ({ data }) => {
                                     <li key={index} className='flex-row flex-lt-center'>
                                         <i className='happy-icon icon-mobile-phone'>{item?.icon}</i>
                                         {/* <i className='happy-icon'>{item.icon}</i> */}
-                                        { 
-                                            item?.link ? 
-                                            <a href={item?.link} target='_blank' rel="noreferrer">{item?.text}</a>
-                                             : item?.text
+                                        {
+                                            item?.link ?
+                                                <a href={item?.link} target='_blank' rel="noreferrer">{item?.text}</a>
+                                                : item?.text
                                         }
-                                      
+
                                     </li>
                                 ))
                             }
@@ -69,7 +74,6 @@ const Sample: FC<SiteType> = ({ data }) => {
                         </div>
 
                     </section>
-
                     <section className='block-section'>
                         <h2><span>{'Skill'.slice(0, 3)}</span>{'Skill'.slice(3)}</h2>
                         <div className='skill-fragment'>
@@ -79,13 +83,13 @@ const Sample: FC<SiteType> = ({ data }) => {
                                         <li className='flex-row flex-align-center' key={index}>
                                             <h4>{item?.name}</h4>
                                             <ul className='flex-row skill-item'>
-                                               {
-                                                   item?.children?.map((x, xIndex) => (
-                                                       <li key={xIndex}>
-                                                           <span>{x}</span>
+                                                {
+                                                    item?.children?.map((x, xIndex) => (
+                                                        <li key={xIndex}>
+                                                            <span>{x}</span>
                                                         </li>
-                                                   ))
-                                               }
+                                                    ))
+                                                }
                                             </ul>
                                         </li>
                                     ))
@@ -97,9 +101,9 @@ const Sample: FC<SiteType> = ({ data }) => {
                     <section className='block-section'>
                         <h2><span>{'Work Experience'.slice(0, 3)}</span>{'Work Experience'.slice(3)}</h2>
                         {/* <h2><span>{'Work Experience'.slice(0, 3)}</span>{'Work Experience'.slice(3)}</h2> */}
-                            
+
                         {
-                            (showShit ? experience : experience?.filter((item)=> !item?.isShit))?.map((item, index) => (
+                            (showShit ? experience : experience?.filter((item) => !item?.isShit))?.map((item, index) => (
                                 <div className='work-fragment' key={index}>
                                     <div className='fragment-title flex-row flex-justify-between'>
                                         <h3>{item?.company}</h3>
@@ -130,7 +134,7 @@ const Sample: FC<SiteType> = ({ data }) => {
                     <section className='block-section side-projects'>
                         <h2><span>{'Side Projects'.slice(0, 3)}</span>{'Side Projects'.slice(3)}</h2>
                         {/* <h2><span>{'Work Experience'.slice(0, 3)}</span>{'Work Experience'.slice(3)}</h2> */}
-                            
+
                         {
                             sideProjects?.map((item, index) => (
                                 <div className='work-fragment' key={index}>
@@ -142,17 +146,17 @@ const Sample: FC<SiteType> = ({ data }) => {
                                     <ul>
                                         {
                                             // item?.children?.map((child, childIndex) => (
-                                                <li key={index}>
-                                                    <span>{item?.name}</span>
-                                                    <p>{item?.desc}</p>
-                                                    <ul className="flex-row work-skill">
-                                                        {
-                                                            item?.withSkills?.map((skill, skillIndex) => (
-                                                                <li key={skillIndex}>{skill}</li>
-                                                            ))
-                                                        }
-                                                    </ul>
-                                                </li>
+                                            <li key={index}>
+                                                <span>{item?.name}</span>
+                                                <p>{item?.desc}</p>
+                                                <ul className="flex-row work-skill">
+                                                    {
+                                                        item?.withSkills?.map((skill, skillIndex) => (
+                                                            <li key={skillIndex}>{skill}</li>
+                                                        ))
+                                                    }
+                                                </ul>
+                                            </li>
                                             // ))
                                         }
                                     </ul>

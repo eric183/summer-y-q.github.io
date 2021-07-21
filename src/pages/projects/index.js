@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../../components/layout'
 import AniBlock from '../../components/ani-block'
-import SliderBlock from '../../components/slider-block';
+// import SliderBlock from '../../components/slider-block';
 
 // import posed from 'react-pose';
 
@@ -44,7 +44,7 @@ const Projects = () => {
             {/* <AniBlock className="lax" data-lax-bg-pos-x="0 -500, 100 100"> */}
             <section css={css`height: 500px;`}>
                 <AniBlock className="lax center-block" css={css`width: 50%; height: 100%`} >
-                    <SliderBlock 
+                    /* <SliderBlock 
                         height="80%"
                         imgList={[
                             '/scene/IMG_9656.JPG',
@@ -53,7 +53,7 @@ const Projects = () => {
                             '/scene/IMG_9357.JPG',
                            
                             // 'pbr2.0_1.png'
-                        ]}/>
+                        ]}/> */
                 </AniBlock>
                 <AniBlock 
                     className="lax center-block" 
