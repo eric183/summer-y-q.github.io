@@ -2,7 +2,7 @@ import { OrbitControls } from '@react-three/drei';
 import React from 'react';
 import CanvasLayout from '~components/CanvasLayout';
 
-export default () => (
+const ProjectIs = () => (
     <CanvasLayout wrapperStyle={{ background: '#eee' }}>
         <group>
             <mesh>
@@ -13,6 +13,8 @@ export default () => (
         <OrbitControls />
     </CanvasLayout>
 );
+
+export default ProjectIs
 // import React, { useEffect, useState } from 'react'
 // import Layout from '../../components/layout'
 // import AniBlock from '../../components/ani-block'

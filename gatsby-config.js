@@ -16,7 +16,7 @@ module.exports = {
             title: ['前端工程师', '技术美术TA'],
             years: "五",
             // desc: "Hello，我叫匡志宸，来自内蒙古鄂尔多斯的南方人，大学专业是英语，自学入行开发到现在有五年半的时间，其中前端开发是主职，目前主流的前端项目（BC端）几乎都有参与主导过研发，主要内容有程序产品与功能开发，并做过1-2年的团队管理，参与过技术选型与及技术架构设计。目前职业方向是C端orB端主程业务开发。特长是客户端3D渲染、游戏、CG动画",
-            desc: "很高兴认识你，简单自我介绍下。我是一位转行的程序员，大学专业是英语，11年离开校园后在赴美实习，回国后准备自学转行，于2015年开始从事前端与可视化技美研发到现在有快六个年头，做过直播、服装设计趋势、GIS、电商等等行业的商业项目，有丰富的互联网产品开发经验，擅长BC各平台客户端研发，带过前端团队，有过BI、GIS、CMS、SaaS、DevOps系统的开发经验，略懂设计和3D美术，对跨终端开发有浓厚的兴趣且稍有研究。\n目前身兼某独立游戏小组制作人，负责3D美术、编程与剧情脚本的工作。\n现阶段个人主要技术栈为：Typescript、 Javascript、 React、 Threejs、 Vue、 DeckGl、 Unreal Engine、 Unity、 Zbrush、Blender",
+            desc: "很高兴认识你，简单自我介绍下。我是一位转行的程序员，大学专业是英语，11年离开校园后在赴美实习，回国后准备自学转行，于2015年开始从事前端与可视化技美研发到现在有快六个年头，做过直播、服装设计趋势、GIS、电商等等行业的商业项目，有丰富的互联网产品开发经验，擅长BC各平台客户端研发，带过前端团队，有过BI、GIS、CMS、SaaS、DevOps系统的开发经验，略懂设计和3D美术，对跨终端开发有浓厚的兴趣且稍有研究。\n目前身兼某独立游戏小组制作人，负责3D美术、编程与剧情脚本的工作。\n现阶段个人主要技术栈为：Typescript、Javascript、React、Threejs、Vue、DeckGl、Unreal Engine、Unity、Zbrush、Blender、Maya",
             social: [
                 { text: "16675196790", link: "", icon: "\ue900" },
                 { text: "net.happylandle.club", link: "https://net.happylandle.club", icon: "\ue8fc" },
@@ -299,7 +299,7 @@ module.exports = {
                 {
                     name: "Programming",
                     label: "",
-                    children: ['Typescript', 'Javascript', 'Nodejs', 'C#', 'LaTeX']
+                    children: ['Typescript', 'Javascript', 'Nodejs', 'C#', 'BluePrint']
                     // children: ["VueJS",  "Jquery", "Bootstrap"]
                 },
                 {
@@ -325,7 +325,7 @@ module.exports = {
                 {
                     name: "UI & Prototype",
                     label: "美术素材",
-                    children: ['Photoshop', 'Figma', 'MindNode', 'Lottie', 'Spine']
+                    children: ['Photoshop', 'Figma', 'MindNode', 'Lottie']
                 }
             ],
             sideProjects: [
@@ -343,7 +343,23 @@ module.exports = {
                         'TextureXYZ'
                     ],
                     isPrivate: true,
-                    desc: "独立游戏Doomsday Detective Agency，设定于未来不久的都市探险世界观，类型定位动作探索个人负责游戏美术和程序脚本的初期预演、技术选型（地编、材质开发、gameplay脚本编写）并参与故事脚本和世界观构建",
+                    desc: "独立游戏Doomsday Detective Agency，设定于未来不久的都市探险世界观，类型定位动作探索。由我负责游戏美术和程序脚本的初期预演、技术选型（地编、材质开发、Gameplay脚本编写）并参与故事脚本和世界观构建。\n地形分层实现，底层使用基于GIS技术Heightmap生成，BP辅助构建智能材质球，可碰撞植被使用Unreal自带folige工具、BP脚本生成；人类Actor使用虚拟人项目沉淀技术构建；其他硬表面Mesh使用Blender、Substance和Megascan",
+                    link: null
+                },
+                {
+                    name: "德洛丽丝·计划",
+                    role: '主程、TA',
+                    withSkills: [
+                        'Unreal',
+                        'Zbrush',
+                        'Zwrap',
+                        'Mari',
+                        'Maya',
+                        'Xgen',
+                        'TextureXYZ',
+                    ],
+                    isPrivate: true,
+                    desc: "虚拟人偶项目，HighPoly由Zbrush三个常用笔刷产出：ClayBuildup、Move、Standard、DamStardard；Zwrap拓扑LowPoly与AlbedoMap，导出AlbedoMap进Mari后，使用TextureXYZ对Udim贴图集进行修改与优化；使用Xgen添加角色毛发。\n最后在Arnold渲染出产品图，导出生产Mesh到Unreal（开发中） ",
                     link: null
                 },
                 {
