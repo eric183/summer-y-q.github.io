@@ -40,7 +40,11 @@ export const ResumeStyle = Styled.div`
             font-size: 10px;
         } */
         overflow: hidden;
-       
+        
+        li:not(:first-child) {
+            margin-left: 8px !important;
+        }
+
         .summary-fragment p {
             font-size: 15px;
         }

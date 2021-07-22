@@ -9,6 +9,7 @@ import { WaterEffect } from '~components/Effects';
 import { navigate } from "gatsby";
 import { TextureLoader } from 'three';
 import { useSpring, animated } from '@react-spring/three';
+import { useGLTF } from '@react-three/drei';
 
 // const { MeshLine, MeshLineMaterial, MeshLineRaycast } = require('three.meshline');
 // { "modules": false ,"targets":{"node":"current" } },
@@ -54,13 +55,13 @@ const Index: FC = () => {
     const mouse = useRef([0, 0])
     const [hovered, hover] = useState(false);
     const points = [];
-        for (let j = 0; j < Math.PI; j += (2 * Math.PI) / 100) {
+    for (let j = 0; j < Math.PI; j += (2 * Math.PI) / 100) {
         points.push(Math.cos(j), Math.sin(j), 0);
     }
     useEffect(() => {
         document.body.style.cursor = hovered
-          ? 'pointer'
-          : "url('https://raw.githubusercontent.com/chenglou/react-motion/master/demos/demo8-draggable-list/cursor.png') 39 39, auto"
+            ? 'pointer'
+            : "url('https://raw.githubusercontent.com/chenglou/react-motion/master/demos/demo8-draggable-list/cursor.png') 39 39, auto"
     }, [hovered])
     return (
         <CanvasLayout
@@ -136,7 +137,7 @@ const Particles: FC<{ count: number, mouse: number[] }> = ({ count, mouse }) => 
             const s = Math.cos(t)
             particle.mx += (mouse.current[0] - particle.mx) * 0.01
             particle.my += (mouse.current[1] * -1 - particle.my) * 0.01
-			// particle.material = new THREE.MeshStandardMaterial();
+            // particle.material = new THREE.MeshStandardMaterial();
             // Update the dummy object
             dummy.position.set(
                 (particle.mx / 10) * a + xFactor + Math.cos((t / 10) * factor) + (Math.sin(t * 1) * factor) / 10,
@@ -227,12 +228,18 @@ const Particles: FC<{ count: number, mouse: number[] }> = ({ count, mouse }) => 
 
 
 function Number({ hover }) {
-    const ref = useRef()
+    const ref = useRef(null!);
+    const [vec] = useState(() => new THREE.Vector3());
+
     useFrame((state) => {
         if (ref.current) {
-            ref.current.position.x = THREE.MathUtils.lerp(ref.current.position.x, state.mouse.x * 2, 0.1)
+            // ref.current.position.x = THREE.MathUtils.lerp(ref.current.position.x, state.mouse.x * 2, 0.1)
+
+            ref.current.position.lerp(vec.set(state.mouse.x * 2, state.mouse.y * 2, vec.y + 0.03), 0.1);
             ref.current.rotation.x = THREE.MathUtils.lerp(ref.current.rotation.x, state.mouse.y / 2, 0.1)
-            ref.current.rotation.y += 0.003
+            ref.current.rotation.y += 0.003;
+            state.camera.position.lerp(vec.set(-state.mouse.x * 5, state.camera.position.y, 30), 0.5);
+
         }
     })
     return (
@@ -245,7 +252,7 @@ function Number({ hover }) {
                     onPointerOut={() => hover(false)}>
                     k
                 </Text>
-				{/* <mesh>
+                {/* <mesh>
 					<boxGeometry args={[1, 1, 1]} />
 					<meshStandardMaterial color={'orange'} />
 				</mesh> */}
@@ -257,20 +264,66 @@ function Number({ hover }) {
 const Text = forwardRef(({ children, vAlign = 'center', hAlign = 'center', size = 1, color = '#000000', ...props }, ref) => {
     // const font = useLoader(THREE.FontLoader, '/bold.blob')
     const [active, setActive] = useState<boolean>(false);
+    const [viewIndex, setViewIndex] = useState<0 | 1>(0);
     const font = useLoader(THREE.FontLoader, '/k.json')
-    const config = useMemo(() => ({ font, size: 40, height: 50 }), [font])
-    const mesh = useRef()
+    const config = useMemo(() => ({ font, size: 40, height: 20 }), [font])
+    const mesh = useRef<THREE.Mesh>(null!)
+    const mesh2 = useRef<THREE.Mesh>(null!)
+    const groupRef = useRef<THREE.Mesh>(null!)
     const meshNormalMaterialRef = useRef<THREE.MeshBasicMaterial>(null!);
-    const [colorMap] = useLoader(TextureLoader, ['/NormalMap.png'])
-    
+    const [colorMap] = useLoader(TextureLoader, ['/NormalMap.png']);
+    const { nodes } = useGLTF('/lady.glb', true);
+    console.log(nodes);
+    useFrame((state) => {
+        // console.log(state.camera.position);
+        // console.log(state);
+        // state.camera.position.z += 0.1;
+        // vec.copy(state.camera.position);
+        // console.log(state);
+        // state?.events?.handlers?.onWheel = () => {
+        // console.log(state);
+        // state.events.handlers?.onWheel()
+
+        // }
+        // console.log( state.camera.position);
+        // state.camera.position.lerp(vec.set(state.mouse.x * 10, state.mouse.y * 10, 10), 0.05);
+        // groupRef.current.position.z += 0.1;
+        if (viewIndex === 0) {
+            const size = new THREE.Vector3()
+            mesh.current.geometry.computeBoundingBox()
+            mesh.current.geometry?.boundingBox?.getSize(size)
+            // mesh.current.position.x = THREE.MathUtils.lerp(0, -size.x / 2, 1);
+            // mesh.current.position.y = THREE.MathUtils.lerp(0, -size.y / 2, 1);
+            // mesh.current.position.z = THREE.MathUtils.lerp(-1000, 0, [-1000, 0]);
+            mesh.current.position.lerp(size.set(-size.x / 2, -size.y / 2, 0), 0.15); 
+            // mesh.current.material.displacementScale = 1000
+            // console.log(mesh.current.material);
+
+            mesh2.current.position.lerp(size.set(0, 0, -1000), 0.15);
+
+            // mesh2.current.position.x = THREE.MathUtils.lerp(-size.x, 0, 1);
+            // mesh2.current.position.y = THREE.MathUtils.lerp(-size.y, 0, 1);
+            // mesh2.current.position.z = THREE.MathUtils.lerp(0, -1000, [-1000, 0]);
+        } else {
+            const size = new THREE.Vector3()
+            // mesh2.current.geometry.computeBoundingBox()
+            // mesh2.current.geometry?.boundingBox?.getSize(size)
+
+            mesh2.current.position.lerp(size.set(0, 0, -10), 0.15); 
+            mesh.current.position.lerp(size.set(0, 0, -1000), 0.15);
+            // mesh.current.position.x = THREE.MathUtils.lerp(-size.x, 0, 1);
+            // mesh.current.position.y = THREE.MathUtils.lerp(-size.y, 0, 1);
+            // mesh.current.position.z = THREE.MathUtils.lerp(0, -1000, [-1000, 0]);
+        }
+    })
     useLayoutEffect(() => {
-        const size = new THREE.Vector3()
-        mesh.current.geometry.computeBoundingBox()
-        mesh.current.geometry.boundingBox.getSize(size)
-        mesh.current.position.x = hAlign === 'center' ? -size.x / 2 : hAlign === 'right' ? 0 : -size.x
-        mesh.current.position.y = vAlign === 'center' ? -size.y / 2 : vAlign === 'top' ? 0 : -size.y
-        meshNormalMaterialRef.current.wireframe = false;
+
+        // mesh2.current.material.opacity = 0;
+
+        // mesh2.current.position.x =  ? 0 : -size.x
+        // meshNormalMaterialRef.current.wireframe = false;
         setActive(true);
+        // console.log(groupRef);
         // mesh.current.rotation.x = 20;
         // ref.current.
         // console.log(mesh.current.rotation);
@@ -283,11 +336,34 @@ const Text = forwardRef(({ children, vAlign = 'center', hAlign = 'center', size 
         displacementScale: active ? 0 : 100000,
     })
     return (
-        <group ref={ref} {...props} scale={[0.1 * size, 0.1 * size, 0.1]}>
-            <mesh ref={mesh}>
+        <group
+            ref={groupRef}
+            onWheel={(evt) => {
+
+                if (evt.deltaY > 0) {
+                    setViewIndex(1);
+                } else {
+                    setViewIndex(0);
+                }
+            }}
+            {...props} >
+            <mesh ref={mesh} scale={[0.1 * size, 0.1 * size, 0.1]}>
+                {/* onWheel={(evt) => {mesh.current.position.z = 50}} */}
                 <textGeometry args={[children, config]} />
+                <animated.meshNormalMaterial
+                    ref={meshNormalMaterialRef}
+                    displacementMap={colorMap}
+                    displacementScale={displacementScale}
+                />
+            </mesh>
+            <mesh ref={mesh2} geometry={nodes.lady.geometry} scale={10}>
+                {/* onWheel={(evt) => {mesh.current.position.z = 50}} */}
+                {/* <textGeometry args={[children, config]} /> */}
                 <animated.meshNormalMaterial 
                     ref={meshNormalMaterialRef}
+                    transparent={true}
+                    // opacity={0}
+                    color={'x0e9e9e9'}
                     displacementMap={colorMap}
                     displacementScale={displacementScale}
                 />
