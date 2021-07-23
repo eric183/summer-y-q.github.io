@@ -9,7 +9,7 @@ import { WaterEffect } from '~components/Effects';
 import { navigate } from "gatsby";
 import { TextureLoader } from 'three';
 import { useSpring, animated } from '@react-spring/three';
-import { useGLTF } from '@react-three/drei';
+import { Html, useGLTF, useProgress } from '@react-three/drei';
 
 // const { MeshLine, MeshLineMaterial, MeshLineRaycast } = require('three.meshline');
 // { "modules": false ,"targets":{"node":"current" } },
@@ -65,6 +65,7 @@ const Index: FC = () => {
     }, [hovered])
     return (
         <CanvasLayout
+
             // linear
             dpr={[1, 2]}
             camera={{ fov: 100, position: [0, 0, 30] }}
@@ -73,29 +74,35 @@ const Index: FC = () => {
                 gl.setClearColor(new THREE.Color('#020207'))
             }}
             wrapperStyle={{ backgroundColor: '#eee' }}>
-            {/* <fog attach="fog" args={['lightpink', 60, 100]} /> */}
-            <fog attach="fog" args={['white', 50, 190]} />
-            {/* <ambientLight args={['x0eeeee', 1]}/> */}
-            <pointLight distance={100} intensity={4} color="white" />
-            <Number mouse={mouse} hover={hover} />
-            <Particles count={10000} mouse={mouse} />
-            <WaterEffect />
 
-            {/* <Sparks count={20} mouse={mouse} colors={['#A2CCB6', '#FCEEB5', '#EE786E', '#e0feff', 'lightpink', 'lightblue']} /> */}
-            {/* <mesh raycast={MeshLineRaycast}>
-                
-                <meshLine attach="geometry" vertices={points} widthCallback={pointWidth => pointWidth * Math.random()}/>
-                <meshLineMaterial
-                attach="material"
-                transparent
-                depthTest={false}
-                dashArray={0.05}
-                dashRatio={0.95}
-                />
-            </mesh> */}
-            {/* <mesh>
-                <colorShiftMaterial attach="material" color="hotpink" time={1} />
-            </mesh> */}
+            <Suspense fallback={<Loader />}>
+
+
+                {/* <fog attach="fog" args={['lightpink', 60, 100]} /> */}
+                <fog attach="fog" args={['white', 50, 190]} />
+                {/* <ambientLight args={['x0eeeee', 1]}/> */}
+                <pointLight distance={100} intensity={4} color="white" />
+                <Number mouse={mouse} hover={hover} />
+                <Particles count={10000} mouse={mouse} />
+                <WaterEffect />
+
+                {/* <Sparks count={20} mouse={mouse} colors={['#A2CCB6', '#FCEEB5', '#EE786E', '#e0feff', 'lightpink', 'lightblue']} /> */}
+                {/* <mesh raycast={MeshLineRaycast}>
+                        
+                        <meshLine attach="geometry" vertices={points} widthCallback={pointWidth => pointWidth * Math.random()}/>
+                        <meshLineMaterial
+                        attach="material"
+                        transparent
+                        depthTest={false}
+                        dashArray={0.05}
+                        dashRatio={0.95}
+                        />
+                    </mesh> */}
+                {/* <mesh>
+                        <colorShiftMaterial attach="material" color="hotpink" time={1} />
+                    </mesh> */}
+
+            </Suspense>
         </CanvasLayout>
     )
 }
@@ -163,70 +170,6 @@ const Particles: FC<{ count: number, mouse: number[] }> = ({ count, mouse }) => 
     )
 }
 
-
-// const r = () => Math.max(0.2, Math.random())
-
-// const Sparks: FC = ({ mouse, count, colors, radius = 10 }) => {
-//     const lines = useMemo(
-//         () =>
-//             new Array(count).fill().map((_, index) => {
-//                 const pos = new THREE.Vector3(Math.sin(0) * radius * r(), Math.cos(0) * radius * r(), 0)
-//                 const points = new Array(30).fill().map((_, index) => {
-//                     const angle = (index / 20) * Math.PI * 2
-//                     return pos.add(new THREE.Vector3(Math.sin(angle) * radius * r(), Math.cos(angle) * radius * r(), 0)).clone()
-//                 })
-//                 const curve = new THREE.CatmullRomCurve3(points).getPoints(1000)
-//                 return {
-//                     color: colors[parseInt(colors.length * Math.random())],
-//                     width: Math.max(0.1, (0.2 * index) / 10),
-//                     speed: Math.max(0.001, 0.004 * Math.random()),
-//                     curve
-//                 }
-//             }),
-//         [count]
-//     )
-
-//     const ref = useRef()
-//     const { size, viewport } = useThree()
-//     const aspect = size.width / viewport.width
-//     useFrame(() => {
-//         if (ref.current) {
-//             ref.current.rotation.x = THREE.MathUtils.lerp(ref.current.rotation.x, 0 + mouse.current[1] / aspect / 200, 0.1)
-//             ref.current.rotation.y = THREE.MathUtils.lerp(ref.current.rotation.y, 0 + mouse.current[0] / aspect / 400, 0.1)
-//         }
-//     })
-
-//     return (
-//         <group ref={ref}>
-//             <group position={[-radius * 2, -radius, -10]} scale={[1, 1.3, 1]}>
-//                 {/* {lines.map((props, index) => (
-//                     <Fatline key={index} {...props} />
-//                 ))} */}
-
-//                 <mesh>
-//                     <meshLine attach="geometry" />
-//                     {/* <meshLineMaterial ref={material} transparent depthTest={false} lineWidth={width} color={color} dashArray={0.1} dashRatio={0.95} /> */}
-//                 </mesh>
-//             </group>
-//         </group>
-//     )
-// }
-
-// function Fatline({ curve, width, color, speed }) {
-//     const material = useRef()
-//     // console.log()
-//     // debugger;
-//     // useFrame(() => (material.current.uniforms.dashOffset.value -= speed))
-//     return (
-//         <mesh>
-//             <meshLine attach="geometry" vertices={curve} />
-//             <meshLineMaterial ref={material} transparent depthTest={false} lineWidth={width} color={color} dashArray={0.1} dashRatio={0.95} />
-//         </mesh>
-//     )
-// }
-
-
-
 function Number({ hover }) {
     const ref = useRef(null!);
     const [vec] = useState(() => new THREE.Vector3());
@@ -243,7 +186,7 @@ function Number({ hover }) {
         }
     })
     return (
-        <Suspense fallback={null}>
+        // <Suspense fallback={<Loader />}>
             <group ref={ref}>
                 <Text
                     size={10}
@@ -257,7 +200,7 @@ function Number({ hover }) {
 					<meshStandardMaterial color={'orange'} />
 				</mesh> */}
             </group>
-        </Suspense>
+        // </Suspense>
     )
 }
 
@@ -273,7 +216,7 @@ const Text = forwardRef(({ children, vAlign = 'center', hAlign = 'center', size 
     const meshNormalMaterialRef = useRef<THREE.MeshBasicMaterial>(null!);
     const [colorMap] = useLoader(TextureLoader, ['/NormalMap.png']);
     const { nodes } = useGLTF('/lady.glb', true);
-    console.log(nodes);
+    // console.log(nodes);
     useFrame((state) => {
         // console.log(state.camera.position);
         // console.log(state);
@@ -295,7 +238,7 @@ const Text = forwardRef(({ children, vAlign = 'center', hAlign = 'center', size 
             // mesh.current.position.x = THREE.MathUtils.lerp(0, -size.x / 2, 1);
             // mesh.current.position.y = THREE.MathUtils.lerp(0, -size.y / 2, 1);
             // mesh.current.position.z = THREE.MathUtils.lerp(-1000, 0, [-1000, 0]);
-            mesh.current.position.lerp(size.set(-size.x / 2, -size.y / 2, 0), 0.15); 
+            mesh.current.position.lerp(size.set(-size.x / 2, -size.y / 2, 0), 0.15);
             // mesh.current.material.displacementScale = 1000
             // console.log(mesh.current.material);
 
@@ -309,7 +252,7 @@ const Text = forwardRef(({ children, vAlign = 'center', hAlign = 'center', size 
             // mesh2.current.geometry.computeBoundingBox()
             // mesh2.current.geometry?.boundingBox?.getSize(size)
 
-            mesh2.current.position.lerp(size.set(0, 0, -10), 0.15); 
+            mesh2.current.position.lerp(size.set(0, 0, -10), 0.15);
             mesh.current.position.lerp(size.set(0, 0, -1000), 0.15);
             // mesh.current.position.x = THREE.MathUtils.lerp(-size.x, 0, 1);
             // mesh.current.position.y = THREE.MathUtils.lerp(-size.y, 0, 1);
@@ -336,6 +279,7 @@ const Text = forwardRef(({ children, vAlign = 'center', hAlign = 'center', size 
         displacementScale: active ? 0 : 100000,
     })
     return (
+
         <group
             ref={groupRef}
             onWheel={(evt) => {
@@ -356,10 +300,11 @@ const Text = forwardRef(({ children, vAlign = 'center', hAlign = 'center', size 
                     displacementScale={displacementScale}
                 />
             </mesh>
+
             <mesh ref={mesh2} geometry={nodes.lady.geometry} scale={10}>
                 {/* onWheel={(evt) => {mesh.current.position.z = 50}} */}
                 {/* <textGeometry args={[children, config]} /> */}
-                <animated.meshNormalMaterial 
+                <animated.meshNormalMaterial
                     ref={meshNormalMaterialRef}
                     transparent={true}
                     // opacity={0}
@@ -372,5 +317,12 @@ const Text = forwardRef(({ children, vAlign = 'center', hAlign = 'center', size 
     )
 })
 
+
+
+function Loader() {
+    const { progress } = useProgress()
+    console.log(progress);
+    return <Html center>{progress} % loaded</Html>
+}
 
 export default Index;

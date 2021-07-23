@@ -16,7 +16,7 @@ module.exports = {
             title: ['前端工程师', '技术美术TA'],
             years: "五",
             // desc: "Hello，我叫匡志宸，来自内蒙古鄂尔多斯的南方人，大学专业是英语，自学入行开发到现在有五年半的时间，其中前端开发是主职，目前主流的前端项目（BC端）几乎都有参与主导过研发，主要内容有程序产品与功能开发，并做过1-2年的团队管理，参与过技术选型与及技术架构设计。目前职业方向是C端orB端主程业务开发。特长是客户端3D渲染、游戏、CG动画",
-            desc: "很高兴认识你，简单自我介绍下。我是一位转行的程序员，大学专业是英语，11年离开校园后在赴美实习，回国后准备自学转行，于2015年开始从事前端与可视化技美研发到现在有快六个年头，做过直播、服装设计趋势、GIS、电商等等行业的商业项目，有丰富的互联网产品开发经验，擅长BC各平台客户端研发，带过前端团队，有过BI、GIS、CMS、SaaS、DevOps系统的开发经验，略懂设计和3D美术，对跨终端开发有浓厚的兴趣且稍有研究。\n目前身兼某独立游戏小组制作人，负责3D美术、编程与剧情脚本的工作。\n现阶段个人主要技术栈为：Typescript、Javascript、React、Threejs、Vue、DeckGl、Unreal Engine、Unity、Zbrush、Blender、Maya\n技美相关作品链接： Behance",
+            desc: "很高兴认识你，简单自我介绍下。我是一位转行的程序员，大学专业是英语，11年离开校园后在赴美实习，回国后准备自学转行，于2015年开始从事前端与可视化技美研发到现在有快六个年头，做过直播、服装设计趋势、GIS、电商等等行业的商业项目，有丰富的互联网产品开发经验，擅长BC各平台客户端研发，带过前端团队，有过BI、GIS、CMS、SaaS、DevOps系统的开发经验，略懂设计和3D美术，对跨终端开发有浓厚的兴趣且稍有研究。\n目前身兼某独立游戏小组制作人，负责3D美术、编程与剧情脚本的工作。\n现阶段个人主要技术栈为：Typescript、Javascript、React、Threejs、Vue、DeckGl、Unreal Engine、Unity、Zbrush、Blender、Maya",
             social: [
                 { text: "16675196790", link: "", icon: "\ue900" },
                 { text: "net.happylandle.club", link: "https://net.happylandle.club", icon: "\ue8fc" },
@@ -72,7 +72,8 @@ module.exports = {
                 },
                 {
                     company: '中正信息科技有限公司',
-                    title: '高级前端工程师',
+                    // title: '高级前端工程师',
+                    title: '前端技美',
                     from: '2019.01.01',
                     to: '2020.04.27',
                     addr: '深圳/南山',

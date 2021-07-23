@@ -15,7 +15,8 @@ interface SiteType {
 const Sample: FC<SiteType> = ({ data }) => {
     const [loading, setLoading] = useState(true);
     const [showShit, setShowShit] = useState(false);
-    const [isTA, setTA] = useState<boolean>(false);
+    // const [isTA, setTA] = useState<boolean>(false);
+    const [isTA, setTA] = useState<boolean>(true);
     // props.data.site.siteMetadata.title
 
 
