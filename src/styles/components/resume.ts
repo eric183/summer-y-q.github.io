@@ -41,7 +41,7 @@ export const ResumeStyle = Styled.div`
         } */
         overflow: hidden;
         
-        li:not(:first-child) {
+        .work-fragment li:not(:first-child) {
             margin-left: 8px !important;
         }
 

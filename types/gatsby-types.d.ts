@@ -259,8 +259,6 @@ type Site = Node & {
   readonly siteMetadata: Maybe<SiteSiteMetadata>;
   readonly port: Maybe<Scalars['Int']>;
   readonly host: Maybe<Scalars['String']>;
-  readonly polyfill: Maybe<Scalars['Boolean']>;
-  readonly pathPrefix: Maybe<Scalars['String']>;
   readonly id: Scalars['ID'];
   readonly parent: Maybe<Node>;
   readonly children: ReadonlyArray<Node>;
@@ -304,35 +302,37 @@ type SiteSiteMetadataResumeInfoSocial = {
 };
 
 type SiteSiteMetadataResumeInfoExperience = {
-  readonly company: Maybe<Scalars['String']>;
-  readonly title: Maybe<Scalars['String']>;
+  readonly company: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly title: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly isShit: Maybe<Scalars['Boolean']>;
   readonly from: Maybe<Scalars['String']>;
   readonly to: Maybe<Scalars['String']>;
   readonly addr: Maybe<Scalars['String']>;
-  readonly isShit: Maybe<Scalars['Boolean']>;
   readonly children: Maybe<ReadonlyArray<Maybe<SiteSiteMetadataResumeInfoExperienceChildren>>>;
 };
 
 type SiteSiteMetadataResumeInfoExperienceChildren = {
-  readonly name: Maybe<Scalars['String']>;
+  readonly name: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly role: Maybe<Scalars['String']>;
   readonly withSkills: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly isPrivate: Maybe<Scalars['Boolean']>;
-  readonly desc: Maybe<Scalars['String']>;
+  readonly desc: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
 };
 
 type SiteSiteMetadataResumeInfoSkill = {
   readonly name: Maybe<Scalars['String']>;
   readonly label: Maybe<Scalars['String']>;
   readonly children: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly hasEn: Maybe<Scalars['Boolean']>;
+  readonly enChildren: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
 };
 
 type SiteSiteMetadataResumeInfoSideProjects = {
-  readonly name: Maybe<Scalars['String']>;
+  readonly name: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly role: Maybe<Scalars['String']>;
   readonly withSkills: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly isPrivate: Maybe<Scalars['Boolean']>;
-  readonly desc: Maybe<Scalars['String']>;
+  readonly desc: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
 };
 
 type SiteSiteMetadataFooter = {
@@ -680,8 +680,6 @@ type Query_siteArgs = {
   siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
   port: Maybe<IntQueryOperatorInput>;
   host: Maybe<StringQueryOperatorInput>;
-  polyfill: Maybe<BooleanQueryOperatorInput>;
-  pathPrefix: Maybe<StringQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
@@ -1552,10 +1550,10 @@ type SiteSiteMetadataResumeInfoExperienceFilterListInput = {
 type SiteSiteMetadataResumeInfoExperienceFilterInput = {
   readonly company: Maybe<StringQueryOperatorInput>;
   readonly title: Maybe<StringQueryOperatorInput>;
+  readonly isShit: Maybe<BooleanQueryOperatorInput>;
   readonly from: Maybe<StringQueryOperatorInput>;
   readonly to: Maybe<StringQueryOperatorInput>;
   readonly addr: Maybe<StringQueryOperatorInput>;
-  readonly isShit: Maybe<BooleanQueryOperatorInput>;
   readonly children: Maybe<SiteSiteMetadataResumeInfoExperienceChildrenFilterListInput>;
 };
 
@@ -1579,6 +1577,8 @@ type SiteSiteMetadataResumeInfoSkillFilterInput = {
   readonly name: Maybe<StringQueryOperatorInput>;
   readonly label: Maybe<StringQueryOperatorInput>;
   readonly children: Maybe<StringQueryOperatorInput>;
+  readonly hasEn: Maybe<BooleanQueryOperatorInput>;
+  readonly enChildren: Maybe<StringQueryOperatorInput>;
 };
 
 type SiteSiteMetadataResumeInfoSideProjectsFilterListInput = {
@@ -1662,15 +1662,17 @@ type SiteFieldsEnum =
   | 'siteMetadata.resumeInfo.experience'
   | 'siteMetadata.resumeInfo.experience.company'
   | 'siteMetadata.resumeInfo.experience.title'
+  | 'siteMetadata.resumeInfo.experience.isShit'
   | 'siteMetadata.resumeInfo.experience.from'
   | 'siteMetadata.resumeInfo.experience.to'
   | 'siteMetadata.resumeInfo.experience.addr'
-  | 'siteMetadata.resumeInfo.experience.isShit'
   | 'siteMetadata.resumeInfo.experience.children'
   | 'siteMetadata.resumeInfo.skill'
   | 'siteMetadata.resumeInfo.skill.name'
   | 'siteMetadata.resumeInfo.skill.label'
   | 'siteMetadata.resumeInfo.skill.children'
+  | 'siteMetadata.resumeInfo.skill.hasEn'
+  | 'siteMetadata.resumeInfo.skill.enChildren'
   | 'siteMetadata.resumeInfo.sideProjects'
   | 'siteMetadata.resumeInfo.sideProjects.name'
   | 'siteMetadata.resumeInfo.sideProjects.role'
@@ -1681,8 +1683,6 @@ type SiteFieldsEnum =
   | 'siteMetadata.footer.en'
   | 'port'
   | 'host'
-  | 'polyfill'
-  | 'pathPrefix'
   | 'id'
   | 'parent.id'
   | 'parent.parent.id'
@@ -1784,8 +1784,6 @@ type SiteFilterInput = {
   readonly siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
   readonly port: Maybe<IntQueryOperatorInput>;
   readonly host: Maybe<StringQueryOperatorInput>;
-  readonly polyfill: Maybe<BooleanQueryOperatorInput>;
-  readonly pathPrefix: Maybe<StringQueryOperatorInput>;
   readonly id: Maybe<StringQueryOperatorInput>;
   readonly parent: Maybe<NodeFilterInput>;
   readonly children: Maybe<NodeFilterListInput>;
@@ -2830,12 +2828,12 @@ type SiteBuildMetadataSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
-type fWorkspaceeric183GithubIosrctemplatesblogPostJs471609186QueryVariables = Exact<{
+type userserickuangDesktopmyDeveric183GithubIosrctemplatesblogPostJs471609186QueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
 
 
-type fWorkspaceeric183GithubIosrctemplatesblogPostJs471609186Query = { readonly markdownRemark: Maybe<(
+type userserickuangDesktopmyDeveric183GithubIosrctemplatesblogPostJs471609186Query = { readonly markdownRemark: Maybe<(
     Pick<MarkdownRemark, 'html'>
     & { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'title'>> }
   )> };
@@ -2845,10 +2843,10 @@ type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
-type fWorkspaceeric183GithubIosrcpagesaboutTsx4122199845QueryVariables = Exact<{ [key: string]: never; }>;
+type userserickuangDesktopmyDeveric183GithubIosrcpagesaboutTsx4122199845QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type fWorkspaceeric183GithubIosrcpagesaboutTsx4122199845Query = { readonly site: Maybe<(
+type userserickuangDesktopmyDeveric183GithubIosrcpagesaboutTsx4122199845Query = { readonly site: Maybe<(
     Pick<Site, 'buildTime'>
     & { readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'about' | 'title'>> }
   )> };
@@ -2871,6 +2869,20 @@ type FileSystemTypeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type FileSystemTypeQuery = { readonly allFile: { readonly edges: ReadonlyArray<{ readonly node: Pick<File, 'relativePath' | 'prettySize' | 'extension' | 'birthTime'> }> } };
+
+type ResumeDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type ResumeDataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
+      Pick<SiteSiteMetadata, 'about' | 'author' | 'desc' | 'description' | 'fontFamily' | 'title'>
+      & { readonly resumeInfo: Maybe<(
+        Pick<SiteSiteMetadataResumeInfo, 'desc' | 'name' | 'title' | 'years'>
+        & { readonly social: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoSocial, 'icon' | 'text' | 'link'>>>>, readonly experience: Maybe<ReadonlyArray<Maybe<(
+          Pick<SiteSiteMetadataResumeInfoExperience, 'addr' | 'company' | 'from' | 'title' | 'to' | 'isShit'>
+          & { readonly children: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoExperienceChildren, 'desc' | 'isPrivate' | 'name' | 'role' | 'withSkills'>>>> }
+        )>>>, readonly sideProjects: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoSideProjects, 'desc' | 'isPrivate' | 'name' | 'role' | 'withSkills'>>>>, readonly skill: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoSkill, 'children' | 'enChildren' | 'hasEn' | 'label' | 'name'>>>> }
+      )> }
+    )> }> };
 
 type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 

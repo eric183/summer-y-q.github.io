@@ -21,8 +21,8 @@ const Sample: FC<SiteType> = ({ data }) => {
     const [loading, setLoading] = useState(true);
     const [showShit, setShowShit] = useState(false);
     // const [isTA, setTA] = useState<boolean>(false);
-    const [isTA, setTA] = useState<boolean>(true);
-    const [translateLang, setTranslateLang] = useState<'ch' | 'en'>('ch');
+    const [isTA, setTA] = useState<boolean>(false);
+    const [translateLang, setTran] = useState<'ch' | 'en'>(() => 'en');
     // props.data.site.siteMetadata.title
 
 
@@ -31,15 +31,28 @@ const Sample: FC<SiteType> = ({ data }) => {
     const { experience, social, skill, name, title, years, desc, sideProjects } = data.site.siteMetadata.resumeInfo;
     useEffect(() => {
         setLoading(false);
-        const callback = (evt: { altKey: boolean; key: string; }) => evt.altKey && evt.key === 't' && setTA(x => !x);        
+        // const callback = (evt: { altKey: boolean; key: string; }) => evt.altKey && evt.key === 't' && setTA(x => !x);
+        const callback = (evt: { altKey: boolean; key: string; }) => {
+            // if(evt.altKey && evt.key === 't') {
+            if(evt.key === 't') {
+                // debugger;
+                if(translateLang === 'ch') {
+                    setTran((pre) => 'en');
+                } else {
+                    setTran((pre) => 'ch');
+                }
+            }
+        };
         window.addEventListener('keyup', callback);
         // return window.removeEventListener('keyup', callback);
-        setTranslateLang('en');
+        // setTranslateLang('en');
+        // setTranslateLang('ch');
     }, []);
 
     // const test = 'Work Experience';
     // const test = 'Test NoBusyDoingThings';
     const lang = translateIndex[translateLang];
+    console.log(lang, translateLang);
     return (
         <Scrollbar>
             <ResumeStyle>
@@ -59,7 +72,7 @@ const Sample: FC<SiteType> = ({ data }) => {
                         {/* <ul className='flex-row flex-justify-around'> */}
                         <ul className='flex-row flex-justify-between'>
                             {
-                                social?.map((item, index) => (
+                                social?.map((item: { icon: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; link: string | undefined; text: {} | null | undefined; }, index: React.Key | null | undefined) => (
                                     <li key={index} className='flex-row flex-lt-center'>
                                         <i className='happy-icon icon-mobile-phone'>{item?.icon}</i>
                                         {/* <i className='happy-icon'>{item.icon}</i> */}
@@ -77,7 +90,7 @@ const Sample: FC<SiteType> = ({ data }) => {
                     <section className='block-section'>
                         <h2><span>{'Summary'.slice(0, 3)}</span>{'Summary'.slice(3)}</h2>
                         <div className='summary-fragment'>
-                            <p>{desc?[lang]}</p>
+                            <p>{desc[lang]}</p>
                             {/* <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p> */}
                         </div>
 
@@ -87,11 +100,17 @@ const Sample: FC<SiteType> = ({ data }) => {
                         <div className='skill-fragment'>
                             <ul>
                                 {
-                                    skill?.map((item, index) => (
+                                    skill?.map((item: { name: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; hasEn: any; enChildren: (boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined)[]; children: any[]; }, index: React.Key | null | undefined) => (
                                         <li className='flex-row flex-align-center' key={index}>
                                             <h4>{item?.name}</h4>
                                             <ul className='flex-row skill-item'>
                                                 {
+                                                    translateLang === 'en' && item.hasEn ? 
+                                                    item?.enChildren?.map((x: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined, xIndex: React.Key | null | undefined) => (
+                                                        <li key={xIndex}>
+                                                            <span>{x}</span>
+                                                        </li>
+                                                    )) : 
                                                     item?.children?.map((x, xIndex) => (
                                                         <li key={xIndex}>
                                                             <span>{x}</span>
@@ -111,22 +130,22 @@ const Sample: FC<SiteType> = ({ data }) => {
                         {/* <h2><span>{'Work Experience'.slice(0, 3)}</span>{'Work Experience'.slice(3)}</h2> */}
 
                         {
-                            (showShit ? experience : experience?.filter((item) => !item?.isShit))?.map((item, index) => (
+                            (showShit ? experience : experience?.filter((item: { isShit: any; }) => !item?.isShit))?.map((item: { company: { [x: string]: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; }; title: { [x: string]: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; }; from: string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined; to: string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined; children: any[]; }, index: React.Key | null | undefined) => (
                                 <div className='work-fragment' key={index}>
                                     <div className='fragment-title flex-row flex-justify-between'>
-                                        <h3>{item?.company}</h3>
-                                        <h3>{item?.title}</h3>
-                                        <h3>{item?.from} - {item?.to}</h3>
+                                        <h3>{item.company[lang]}</h3>
+                                        <h3>{item.title[lang]}</h3>
+                                        <h3>{item.from} - {item.to}</h3>
                                     </div>
                                     <ul>
                                         {
                                             item?.children?.map((child, childIndex) => (
                                                 <li key={childIndex}>
-                                                    <span>{child?.name}</span>
-                                                    <p>{child?.desc}</p>
+                                                    <span>{child.name[lang]}</span>
+                                                    <p>{child.desc[lang]}</p>
                                                     <ul className="flex-row work-skill">
                                                         {
-                                                            child?.withSkills?.map((skill, skillIndex) => (
+                                                            child?.withSkills?.map((skill: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined, skillIndex: React.Key | null | undefined) => (
                                                                 <li key={skillIndex}>{skill}</li>
                                                             ))
                                                         }
@@ -144,7 +163,7 @@ const Sample: FC<SiteType> = ({ data }) => {
                         {/* <h2><span>{'Work Experience'.slice(0, 3)}</span>{'Work Experience'.slice(3)}</h2> */}
 
                         {
-                            sideProjects?.map((item, index) => (
+                            sideProjects?.map((item: { name: { [x: string]: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; }; desc: { [x: string]: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; }; withSkills: any[]; }, index: React.Key | null | undefined) => (
                                 <div className='work-fragment' key={index}>
                                     {/* <div className='fragment-title flex-row flex-justify-between'>
                                         <h3>{item?.company}</h3>
@@ -155,8 +174,8 @@ const Sample: FC<SiteType> = ({ data }) => {
                                         {
                                             // item?.children?.map((child, childIndex) => (
                                             <li key={index}>
-                                                <span>{item?.name}</span>
-                                                <p>{item?.desc}</p>
+                                                <span>{item?.name[lang]}</span>
+                                                <p>{item?.desc[lang]}</p>
                                                 <ul className="flex-row work-skill">
                                                     {
                                                         item?.withSkills?.map((skill, skillIndex) => (
@@ -225,6 +244,8 @@ export const query = graphql`
         }
         skill {
           children
+          enChildren
+          hasEn
           label
           name
         }
