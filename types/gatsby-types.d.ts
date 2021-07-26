@@ -287,10 +287,10 @@ type SiteSiteMetadata = {
 };
 
 type SiteSiteMetadataResumeInfo = {
-  readonly name: Maybe<Scalars['String']>;
-  readonly title: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly name: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly title: Maybe<ReadonlyArray<Maybe<ReadonlyArray<Maybe<Scalars['String']>>>>>;
   readonly years: Maybe<Scalars['String']>;
-  readonly desc: Maybe<Scalars['String']>;
+  readonly desc: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly social: Maybe<ReadonlyArray<Maybe<SiteSiteMetadataResumeInfoSocial>>>;
   readonly experience: Maybe<ReadonlyArray<Maybe<SiteSiteMetadataResumeInfoExperience>>>;
   readonly skill: Maybe<ReadonlyArray<Maybe<SiteSiteMetadataResumeInfoSkill>>>;
@@ -2871,20 +2871,6 @@ type FileSystemTypeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type FileSystemTypeQuery = { readonly allFile: { readonly edges: ReadonlyArray<{ readonly node: Pick<File, 'relativePath' | 'prettySize' | 'extension' | 'birthTime'> }> } };
-
-type ResumeDataQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type ResumeDataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
-      Pick<SiteSiteMetadata, 'about' | 'author' | 'desc' | 'description' | 'fontFamily' | 'title'>
-      & { readonly resumeInfo: Maybe<(
-        Pick<SiteSiteMetadataResumeInfo, 'desc' | 'name' | 'title' | 'years'>
-        & { readonly social: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoSocial, 'icon' | 'text' | 'link'>>>>, readonly experience: Maybe<ReadonlyArray<Maybe<(
-          Pick<SiteSiteMetadataResumeInfoExperience, 'addr' | 'company' | 'from' | 'title' | 'to' | 'isShit'>
-          & { readonly children: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoExperienceChildren, 'desc' | 'isPrivate' | 'name' | 'role' | 'withSkills'>>>> }
-        )>>>, readonly sideProjects: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoSideProjects, 'desc' | 'isPrivate' | 'name' | 'role' | 'withSkills'>>>>, readonly skill: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoSkill, 'children' | 'label' | 'name'>>>> }
-      )> }
-    )> }> };
 
 type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 

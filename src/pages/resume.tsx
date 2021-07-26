@@ -12,11 +12,17 @@ interface SiteType {
     data: GatsbyTypes.ResumeDataQuery
 }
 
+enum translateIndex {
+    ch = 0,
+    en = 1,
+}
+
 const Sample: FC<SiteType> = ({ data }) => {
     const [loading, setLoading] = useState(true);
     const [showShit, setShowShit] = useState(false);
     // const [isTA, setTA] = useState<boolean>(false);
     const [isTA, setTA] = useState<boolean>(true);
+    const [translateLang, setTranslateLang] = useState<'ch' | 'en'>('ch');
     // props.data.site.siteMetadata.title
 
 
@@ -28,11 +34,12 @@ const Sample: FC<SiteType> = ({ data }) => {
         const callback = (evt: { altKey: boolean; key: string; }) => evt.altKey && evt.key === 't' && setTA(x => !x);        
         window.addEventListener('keyup', callback);
         // return window.removeEventListener('keyup', callback);
+        setTranslateLang('en');
     }, []);
 
     // const test = 'Work Experience';
-    const test = 'Test NoBusyDoingThings';
-
+    // const test = 'Test NoBusyDoingThings';
+    const lang = translateIndex[translateLang];
     return (
         <Scrollbar>
             <ResumeStyle>
@@ -44,8 +51,8 @@ const Sample: FC<SiteType> = ({ data }) => {
                     <header>
                         <h1 onClick={() => {
                             window.open(Kuangzhichen);
-                        }}>{name}</h1>
-                        <p>{isTA && title ? [title[1], title[0]]?.join('/') : title[0]}</p>
+                        }}>{name[lang]}</h1>
+                        <p>{isTA && title ? [title[lang][1], title[lang][0]]?.join('/') : title[lang][0]}</p>
                         {/* <a href='/前端工程师-匡志宸.pdf'></a> */}
                         {/* <p>xxx</p> */}
                         {/* clear-anchor-style */}
@@ -70,7 +77,7 @@ const Sample: FC<SiteType> = ({ data }) => {
                     <section className='block-section'>
                         <h2><span>{'Summary'.slice(0, 3)}</span>{'Summary'.slice(3)}</h2>
                         <div className='summary-fragment'>
-                            <p>{desc}</p>
+                            <p>{desc?[lang]}</p>
                             {/* <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p> */}
                         </div>
 
