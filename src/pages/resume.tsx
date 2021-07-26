@@ -44,10 +44,12 @@ const Sample: FC<SiteType> = ({ data }) => {
             }
         };
         window.addEventListener('keyup', callback);
-        // return window.removeEventListener('keyup', callback);
+        return () => {
+            window.removeEventListener('keyup', callback);
+        }
         // setTranslateLang('en');
         // setTranslateLang('ch');
-    }, []);
+    }, [translateLang]);
 
     // const test = 'Work Experience';
     // const test = 'Test NoBusyDoingThings';
@@ -203,56 +205,56 @@ const Sample: FC<SiteType> = ({ data }) => {
 
 export const query = graphql`
     query ResumeData {
-  site {
-    siteMetadata {
-      about
-      author
-      desc
-      description
-      fontFamily
-      resumeInfo {
-        desc
-        name
-        title
-        years
-        social {
-          icon
-          text
-          link
-        }
-        experience {
-          addr
-          children {
+        site {
+            siteMetadata {
+            about
+            author
             desc
-            isPrivate
-            name
-            role
-            withSkills
-          }
-          company
-          from
-          title
-          to
-          isShit
+            description
+            fontFamily
+            resumeInfo {
+                desc
+                name
+                title
+                years
+                social {
+                icon
+                text
+                link
+                }
+                experience {
+                addr
+                children {
+                    desc
+                    isPrivate
+                    name
+                    role
+                    withSkills
+                }
+                company
+                from
+                title
+                to
+                isShit
+                }
+                sideProjects {
+                    desc
+                    isPrivate
+                    name
+                    role
+                    withSkills
+                }
+                skill {
+                children
+                enChildren
+                hasEn
+                label
+                name
+                }
+            }
+            title
+            }
         }
-        sideProjects {
-            desc
-            isPrivate
-            name
-            role
-            withSkills
-        }
-        skill {
-          children
-          enChildren
-          hasEn
-          label
-          name
-        }
-      }
-      title
     }
-  }
-}
 `
 export default Sample;
