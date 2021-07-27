@@ -58,6 +58,7 @@ const Index: FC = () => {
     for (let j = 0; j < Math.PI; j += (2 * Math.PI) / 100) {
         points.push(Math.cos(j), Math.sin(j), 0);
     }
+    const progressInfo = useProgress()
     useEffect(() => {
         document.body.style.cursor = hovered
             ? 'pointer'
@@ -75,14 +76,15 @@ const Index: FC = () => {
             }}
             wrapperStyle={{ backgroundColor: '#eee' }}>
 
-            <Suspense fallback={<Loader />}>
+            <Suspense fallback={<Loader progressInfo={progressInfo}/>}>
 
 
                 {/* <fog attach="fog" args={['lightpink', 60, 100]} /> */}
                 <fog attach="fog" args={['white', 50, 190]} />
                 {/* <ambientLight args={['x0eeeee', 1]}/> */}
                 <pointLight distance={100} intensity={4} color="white" />
-                <Number mouse={mouse} hover={hover} />
+                    <Number mouse={mouse} hover={hover} />
+
                 <Particles count={10000} mouse={mouse} />
                 <WaterEffect />
 
@@ -101,8 +103,8 @@ const Index: FC = () => {
                 {/* <mesh>
                         <colorShiftMaterial attach="material" color="hotpink" time={1} />
                     </mesh> */}
-
             </Suspense>
+
         </CanvasLayout>
     )
 }
@@ -319,10 +321,10 @@ const Text = forwardRef(({ children, vAlign = 'center', hAlign = 'center', size 
 
 
 
-function Loader() {
-    const { progress } = useProgress()
-    console.log(progress);
-    return <Html center>{progress} % loaded</Html>
+const Loader: FC<{
+    progressInfo: { progress: number, item: string },
+}> = ({ progressInfo }) => {
+    return <Html center>{progressInfo.progress} % loaded</Html>
 }
 
 export default Index;
