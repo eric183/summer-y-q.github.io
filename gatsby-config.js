@@ -240,7 +240,7 @@ module.exports = {
                             isPrivate: true,
                             desc: [
                                 "起先面料系统CMS与小程序并行开发，前期我忙于小程序开发，并未参与。当时项目采用thinkphp的框架，前后端不分离，前端用layUI，但项目进展滞后。\n当下只能由我参与重新开发，构建前端工程与预演组件开发，整合制定前端代码规范，引入代码审查机制，编写独立与项目的前端Dockerfile，框架层选用React，数据状态使用Mobx进行业务开发；并同时对公司前端组进行技术培训，历时2个月，加班加点，项目按时上线，前端团队的交付能力和健壮性得到质的提升，而后我被公司高层推选为前端组长",
-                                "At first, the fabric system CMS and small program were developed in parallel, and I was busy with small program development in the early stage, so I did not participate. At that time, the project used the framework of thinkphp, the front-end and back-end were not separated, and the front-end used layUI, but the project progress was lagging behind. \n the moment, I could only participate in redevelopment, build front-end engineering and preview component development, integrate and develop front-end code specification, introduce code review mechanism, write independent and project front-end Dockerfile, choose React for the framework layer, use Mobx for data state business development; and at the same time, technical training for the company's front-end group, which took 2 months, working overtime, the project was launched on time. The front-end team's delivery capability and robustness were qualitatively improved, and I was elected by the company's senior management as the front-end team leader."
+                                "At first, the fabric system CMS and WeChat applet were developed in parallel, and I was busy with WeChat applet development in the early stage, so I did not participate. At that time, the project used the framework of thinkphp, the front-end and back-end were not separated, and the front-end used layUI, but the project progress was lagging behind. \n the moment, I could only participate in redevelopment, build front-end engineering and preview component development, integrate and develop front-end code specification, introduce code review mechanism, write independent and project front-end Dockerfile, choose React for the framework layer, use Mobx for data state business development; and at the same time, technical training for the company's front-end group, which took 2 months, working overtime, the project was launched on time. The front-end team's delivery capability and robustness were qualitatively improved, and I was elected by the company's senior management as the front-end team leader."
                             ],
                             link: null
                         },
@@ -270,7 +270,7 @@ module.exports = {
                             isPrivate: true,
                             desc: [
                                 "星潮热点面向B端OMS与C端采购商城的小程序业务，服务于用户与商户的服装面料订购、灵感推介。独立负责开发完整前端业务组件，采用小程序原生方案开发（当时未有三方框架）",
-                                'The small program business of B-side OMS and C-side procurement malls, serving users and merchants for clothing fabric ordering and inspiration promotion. Independently responsible for the development of complete front-end business components, using small program native solution development (there was no tripartite framework at the time)'
+                                'The WeChat applet business of B-side OMS and C-side procurement malls, serving users and merchants for clothing fabric ordering and inspiration promotion. Independently responsible for the development of complete front-end business components, using WeChat applet native solution development (there was no tripartite framework at the time)'
                             ],
                             link: null
                         },
@@ -414,7 +414,7 @@ module.exports = {
                     link: null
                 },
                 {
-                    name: ["深圳市鹏城新风文明C端小程序", "Shenzhen Pengcheng New Wind Civilization C-end small program"],
+                    name: ["深圳市鹏城新风文明C端小程序", "Shenzhen Pengcheng New Wind Civilization C-end WeChat applet"],
                     role: '主程、前端架构',
                     withSkills: [
                         'Docker',
@@ -427,7 +427,7 @@ module.exports = {
                     isPrivate: true,
                     desc: [
                         "【深圳文明办】开发的鹏城新风文明小程序，采用TaroJS、React hooks开发，与CMS框架类型高度耦合，前端数据存储采用context原生reduce Api，引入Lottie与UI设计师一起维护实现平滑的动画视效",
-                        '[Shenzhen Civilization Office] developed Pengcheng new wind civilization small program, using TaroJS, React hooks development, and CMS framework type highly coupled, front-end data storage using context native reduce Api, the introduction of Lottie and UI designers to maintain together to achieve smooth animation visual effects'
+                        '[Shenzhen Civilization Office] developed Pengcheng new wind civilization WeChat applet, using TaroJS, React hooks development, and CMS framework type highly coupled, front-end data storage using context native reduce Api, the introduction of Lottie and UI designers to maintain together to achieve smooth animation visual effects'
                     ],
                     link: null
                 },
