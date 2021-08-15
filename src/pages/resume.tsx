@@ -72,12 +72,11 @@ const Sample: FC<SiteType> = ({ data }) => {
                         {/* <p>xxx</p> */}
                         {/* clear-anchor-style */}
                         {/* <ul className='flex-row flex-justify-around'> */}
-                        <ul className='flex-row flex-justify-between'>
+                        {/* <ul className='flex-row flex-justify-between'>
                             {
                                 social?.map((item: { icon: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; link: string | undefined; text: {} | null | undefined; }, index: React.Key | null | undefined) => (
                                     <li key={index} className='flex-row flex-lt-center'>
                                         <i className='happy-icon icon-mobile-phone'>{item?.icon}</i>
-                                        {/* <i className='happy-icon'>{item.icon}</i> */}
                                         {
                                             item?.link ?
                                                 <a href={item?.link} target='_blank' rel="noreferrer">{item?.text}</a>
@@ -87,7 +86,7 @@ const Sample: FC<SiteType> = ({ data }) => {
                                     </li>
                                 ))
                             }
-                        </ul>
+                        </ul> */}
                     </header>
                     <section className='block-section'>
                         <h2><span>{'Summary'.slice(0, 3)}</span>{'Summary'.slice(3)}</h2>
