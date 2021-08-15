@@ -173,6 +173,7 @@ const Particles: FC<{ count: number, mouse: number[] }> = ({ count, mouse }) => 
 }
 
 function Number({ hover }) {
+    const TextRef = useRef(null!);
     const ref = useRef(null!);
     const [vec] = useState(() => new THREE.Vector3());
 
@@ -187,12 +188,16 @@ function Number({ hover }) {
 
         }
     })
+    const testTool = () => {
+        console.log('hi');
+    }
     return (
         // <Suspense fallback={<Loader />}>
             <group ref={ref}>
                 <Text
                     size={10}
-                    onClick={(e) => navigate('/resume')}
+                    ref={TextRef}
+                    onClick={() => navigate('/resume')}
                     onPointerOver={() => hover(true)}
                     onPointerOut={() => hover(false)}>
                     k
@@ -272,18 +277,19 @@ const Text = forwardRef(({ children, vAlign = 'center', hAlign = 'center', size 
         // mesh.current.rotation.x = 20;
         // ref.current.
         // console.log(mesh.current.rotation);
+        // testTool();
     }, [children])
     // useFrame(()=> {
     //     meshNormalMaterialRef.current.
     // })
 
     const { displacementScale } = useSpring({
-        displacementScale: active ? 0 : 100000,
-    })
-    return (
+        displacementScale: active ? 0 : 1000,
+    });
 
+    return (
         <group
-            ref={groupRef}
+            ref={ref}
             onWheel={(evt) => {
 
                 if (evt.deltaY > 0) {
@@ -319,12 +325,14 @@ const Text = forwardRef(({ children, vAlign = 'center', hAlign = 'center', size 
     )
 })
 
-
-
 const Loader: FC<{
     progressInfo: { progress: number, item: string },
 }> = ({ progressInfo }) => {
     return <Html center>{progressInfo.progress} % loaded</Html>
+}
+
+const Promotion:FC = () => {
+
 }
 
 export default Index;
