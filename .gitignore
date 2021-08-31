@@ -16,3 +16,5 @@ public/
 __generated__
 types/gatsby-types.d.ts
 .eslintrc.js_1
+
+.DS_Store
