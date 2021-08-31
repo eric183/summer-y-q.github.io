@@ -1,6 +1,13 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+PROXYPORT="8889"
+
+export http_proxy="http://127.0.0.1:${8889}"
+export https_proxy="http://127.0.0.1:${8889}"
+git config --global http.proxy http://127.0.0.1:${8889}
+git config --global https.proxy http://127.0.0.1:${8889}
+npm config set proxy http://127.0.0.1:${8889}
+npm config set https-proxy http://127.0.0.1:${8889}
+echo "HTTP Proxy on"
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -19,7 +26,8 @@ source $ZSH/oh-my-zsh.sh
 
 # Zsh Theme
 
-work="/Users/erickuang/WorkSpace/miyuan-front-projects"
+# work="/Users/erickuang/WorkSpace/miyuan-front-projects"
+work="/Users/$(whoami)/Documents/WorkSpace"
 
 gowork() {
   cd $work
@@ -51,12 +59,12 @@ cpzshrc() {
 
 # where proxy
 proxyon() {
-  export http_proxy="http://127.0.0.1:58591"
-  export https_proxy="http://127.0.0.1:58591"
-  git config --global http.proxy socks5://127.0.0.1:51837
-  git config --global https.proxy socks5://127.0.0.1:51837
-  npm config set proxy http://127.0.0.1:58591
-  npm config set https-proxy http://127.0.0.1:58591
+  export http_proxy="http://127.0.0.1:${PROXYPORT}"
+  export https_proxy="http://127.0.0.1:${PROXYPORT}"
+  git config --global http.proxy http://127.0.0.1:${PROXYPORT}
+  git config --global https.proxy http://127.0.0.1:${PROXYPORT}
+  npm config set proxy http://127.0.0.1:${PROXYPORT}
+  npm config set https-proxy http://127.0.0.1:${PROXYPORT}
   echo "HTTP Proxy on"
 }
 
