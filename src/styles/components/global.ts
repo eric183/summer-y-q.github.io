@@ -4,11 +4,6 @@
 import Styled from '@emotion/styled';
 
 export const GlobalStyle = Styled.main`
-
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
-
     @font-face {
         font-family: 'happylandle';  /* Project id 2655512 */
         src: url('//at.alicdn.com/t/font_2655512_tl9zru25kj.woff2?t=1625560964019') format('woff2'),

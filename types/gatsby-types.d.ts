@@ -3084,11 +3084,6 @@ type MarkdownRemarkSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
-type FileSystemTypeQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type FileSystemTypeQuery = { readonly allFile: { readonly edges: ReadonlyArray<{ readonly node: Pick<File, 'relativePath' | 'prettySize' | 'extension' | 'birthTime'> }> } };
-
 type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3102,18 +3097,9 @@ type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
 
 type Unnamed_2_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'author' | 'fontFamily'>> }> };
 
-type ResumeDataQueryVariables = Exact<{ [key: string]: never; }>;
+type FileSystemTypeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type ResumeDataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
-      Pick<SiteSiteMetadata, 'about' | 'author' | 'desc' | 'description' | 'fontFamily' | 'title'>
-      & { readonly resumeInfo: Maybe<(
-        Pick<SiteSiteMetadataResumeInfo, 'desc' | 'name' | 'title' | 'years'>
-        & { readonly social: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoSocial, 'icon' | 'text' | 'link'>>>>, readonly experience: Maybe<ReadonlyArray<Maybe<(
-          Pick<SiteSiteMetadataResumeInfoExperience, 'addr' | 'company' | 'from' | 'title' | 'to' | 'isShit'>
-          & { readonly children: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoExperienceChildren, 'desc' | 'isPrivate' | 'name' | 'role' | 'withSkills'>>>> }
-        )>>>, readonly sideProjects: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoSideProjects, 'desc' | 'isPrivate' | 'name' | 'role' | 'withSkills'>>>>, readonly skill: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataResumeInfoSkill, 'children' | 'enChildren' | 'hasEn' | 'label' | 'name'>>>> }
-      )> }
-    )> }> };
+type FileSystemTypeQuery = { readonly allFile: { readonly edges: ReadonlyArray<{ readonly node: Pick<File, 'relativePath' | 'prettySize' | 'extension' | 'birthTime'> }> } };
 
 }
