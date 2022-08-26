@@ -18,3 +18,8 @@ types/gatsby-types.d.ts
 .eslintrc.js_1
 
 .DS_Store
+
+.env.development
+
+
+ericportfolio/*

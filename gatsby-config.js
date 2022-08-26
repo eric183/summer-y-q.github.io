@@ -1,3 +1,11 @@
+require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}`,
+})
+
+
+console.log('.................',  process.env.NODE_ENV);
+console.log('dddddddddddddd',   process.env.SANITY_PROJECT_ID);
+
 module.exports = {
     // flags: {
     //     DEV_SSR: false,
@@ -461,6 +469,16 @@ module.exports = {
         'gatsby-plugin-postcss',
         `gatsby-plugin-transition-link`,
         `gatsby-transformer-remark`,
+
+        {
+            resolve: `gatsby-source-sanity`,
+            options: {
+                projectId: process.env.SANITY_PROJECT_ID,
+                dataset: process.env.NODE_ENV,
+                token: process.env.SANITY_TOKEN,
+                graphqlTag: process.env.GRAPHQL_TAG,
+            },
+        },
         `gatsby-plugin-emotion`,
         {
             // resolve: `gatsby-plugin-graphql-codegen`,
