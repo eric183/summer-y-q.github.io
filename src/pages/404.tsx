@@ -1,15 +1,11 @@
-import { OrbitControls } from '@react-three/drei';
-import React from 'react';
-import CanvasLayout from '~components/CanvasLayout';
+import { FC } from "react";
 
-export default () => (
-    <CanvasLayout wrapperStyle={{ background: '#eee' }}>
-        <group>
-            <mesh>
-                <boxBufferGeometry args={[2, 2, 2]} />
-                <meshNormalMaterial />
-            </mesh>
-        </group>
-        <OrbitControls />
-    </CanvasLayout>
-);
+const ErrorPage: FC = () => {
+
+    return (
+        <p className="text-center">404</p>
+    )
+}
+
+
+export default ErrorPage;
