@@ -7,22 +7,23 @@ const Template = ({ data }) => {
     return (
         <Layout>
             <div>
-                <h1>{post.frontmatter.title}</h1>
-                <div dangerouslySetInnerHTML={{ __html: post.html }} />
+              <p>UNDER CONSTRUCTION</p>
+                {/* <h1>{post.frontmatter.title}</h1> */}
+                {/* <div dangerouslySetInnerHTML={{ __html: post.html }} /> */}
             </div>
         </Layout>
     )
 }
 
-export const query = graphql`
-  query($slug: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
-      html
-      frontmatter {
-        title
-      }
-    }
-  }
-`
+// export const query = graphql`
+//   query($slug: String!) {
+//     markdownRemark(fields: { slug: { eq: $slug } }) {
+//       html
+//       frontmatter {
+//         title
+//       }
+//     }
+//   }
+// `
 
 export default Template;

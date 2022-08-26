@@ -2,6 +2,10 @@ module.exports = {
     // flags: {
     //     DEV_SSR: false,
     // },
+    plugins: [
+        'gatsby-plugin-postcss',
+        // ...
+    ],
     siteMetadata: {
         title: "你好",
         about: "A develop & A named artist",
