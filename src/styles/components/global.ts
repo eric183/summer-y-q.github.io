@@ -1,9 +1,10 @@
 /** @jsx jsx */
 // import { css, jsx } from '@emotion/react'
 // import { css, jsx } from '@emotion/styled';
-import Styled from '@emotion/styled';
+import Styled from "@emotion/styled";
 
 export const GlobalStyle = Styled.main`
+
     @font-face {
         font-family: 'happylandle';  /* Project id 2655512 */
         src: url('//at.alicdn.com/t/font_2655512_tl9zru25kj.woff2?t=1625560964019') format('woff2'),
@@ -146,5 +147,4 @@ export const GlobalStyle = Styled.main`
         outline: none;
         transition: color 0.3s;
     }
-`
-
+`;

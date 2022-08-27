@@ -26,22 +26,21 @@ const Index: FC<IndexResponseData> = (props) => {
     }
   `);
   const { nodes } = data.allSanityLinks;
-  console.log(nodes);
   return (
-    <article>
-      <ul>
+    <main className="w-screen h-screen">
+      <ul className="">
         {nodes
           ? nodes.map((node, index) => (
               <li key={index}>
-                <i className={node.emoji}></i>
-                <a href={node.src} target="__blank">
+                <i className={node.emoji + " mx-6"}></i>
+                <a className="text-white" href={node.src} target="__blank">
                   {node.title}
                 </a>
               </li>
             ))
           : null}
       </ul>
-    </article>
+    </main>
   );
 };
 
