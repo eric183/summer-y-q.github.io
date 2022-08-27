@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-
+@import url('//at.alicdn.com/t/c/font_3614021_jwcng45rnn.css');
 
 html {
     overflow: hidden;

@@ -16,17 +16,19 @@
     "incremental": true,
     "baseUrl": ".",
 		"paths": {
-			"~components/*": ["src/components/*"],
+			"~components/*": ["src/save/components/*"],
 			"~static/*":  ["static/*"],
 			"~/*":  ["src/*"],
 			"@LocalType": ["types/index.d.ts"]
 		},
 	},
 	"include": [
-		"./src/**/*",
-		".eslintrc.js",
-		// ".eslintrc.js",
-		"types/**/*"
+		"**/*.d.ts", 
+    "**/*.ts", 
+    "**/*.tsx", 
+		"src/**/*",
+		"types/**/*",
+		".eslintrc.json"
 	],
 	"exclude": [
 		"node_modules",
