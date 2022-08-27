@@ -19,15 +19,16 @@ const Index: FC<IndexResponseData> = (props) => {
   return (
     <article>
       <ul>
-        {nodes &&
-          nodes.map((node, index) => (
-            <li key={index}>
-              <i className={node.emoji}></i>
-              <a href={node.src} target="__blank">
-                {node.title}
-              </a>
-            </li>
-          ))}
+        {nodes
+          ? nodes.map((node, index) => (
+              <li key={index}>
+                <i className={node.emoji}></i>
+                <a href={node.src} target="__blank">
+                  {node.title}
+                </a>
+              </li>
+            ))
+          : null}
       </ul>
     </article>
   );
