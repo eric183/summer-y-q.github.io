@@ -1,4 +1,4 @@
-import { graphql } from "gatsby";
+import { graphql, useStaticQuery } from "gatsby";
 import { FC } from "react";
 
 type IndexResponseData = {
@@ -14,7 +14,18 @@ type IndexResponseData = {
 };
 
 const Index: FC<IndexResponseData> = (props) => {
-  const { nodes } = props.data.allSanityLinks;
+  const data = useStaticQuery<GatsbyTypes.MyQueryQuery>(graphql`
+    query MyQuery {
+      allSanityLinks {
+        nodes {
+          title
+          src
+          emoji
+        }
+      }
+    }
+  `);
+  const { nodes } = data.allSanityLinks;
   console.log(nodes);
   return (
     <article>
@@ -33,17 +44,5 @@ const Index: FC<IndexResponseData> = (props) => {
     </article>
   );
 };
-
-export const query = graphql`
-  query MyQuery {
-    allSanityLinks {
-      nodes {
-        title
-        src
-        emoji
-      }
-    }
-  }
-`;
 
 export default Index;
