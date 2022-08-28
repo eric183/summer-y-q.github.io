@@ -2,14 +2,13 @@ require("dotenv").config({
     path: `.env.${process.env.NODE_ENV}`,
 })
 
-
-console.log('.................',  process.env.NODE_ENV);
-console.log('dddddddddddddd',   process.env.SANITY_PROJECT_ID);
-
 module.exports = {
-    // flags: {
-    //     DEV_SSR: false,
-    // },
+    flags: {
+        DEV_SSR: false,
+    },
+    flags: {
+      GRAPHQL_TYPEGEN: true,
+    },
     plugins: [
         'gatsby-plugin-postcss',
         `gatsby-plugin-transition-link`,
@@ -26,13 +25,12 @@ module.exports = {
             },
         },
         {
-            // resolve: `gatsby-plugin-graphql-codegen`,
             resolve: `gatsby-plugin-typegen`,
             options: {
                 outputPath: `types/gatsby-types.d.ts`,
                 emitSchema: {
                     '__generated__/gatsby-schema.graphql': true,
-                }
+                },
             }
         },
         {
@@ -62,16 +60,5 @@ module.exports = {
                 icon: `${__dirname}/src/images/head.jpg`
             }
         },
-        // {
-        //     resolve: 'gatsby-plugin-typescript',
-        //     options: {
-        //       transpileOnly: true, // default
-        //       compilerOptions: {
-        //         target: 'es5',
-        //         experimentalDecorators: true,
-        //         jsx: `react`
-        //       }, // default
-        //     }
-        //   },
     ],
 }

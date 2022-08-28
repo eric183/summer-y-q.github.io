@@ -28,7 +28,12 @@
     "**/*.tsx", 
 		"src/**/*",
 		"types/**/*",
-		".eslintrc.json"
+		".eslintrc.json",
+    "tailwind.config.js",
+    "postcss.config.js",
+    "gatsby-browser.js",
+    "gatsby-node.js",
+    "gatsby-config.js"
 	],
 	"exclude": [
 		"node_modules",

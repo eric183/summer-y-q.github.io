@@ -1,45 +1,13 @@
-import { graphql, useStaticQuery } from "gatsby";
 import { FC } from "react";
 
 type IndexResponseData = {
-  data: {
-    allSanityLinks: {
-      nodes: {
-        title: string;
-        src: string;
-        emoji: string;
-      }[];
-    };
-  };
+  data?: GatsbyTypes.SanityLinksConnection;
 };
 
-const Index: FC<IndexResponseData> = (props) => {
-  const data = useStaticQuery<GatsbyTypes.MyQueryQuery>(graphql`
-    query MyQuery {
-      allSanityLinks {
-        nodes {
-          title
-          src
-          emoji
-        }
-      }
-    }
-  `);
-  const { nodes } = data.allSanityLinks;
+const Index: FC<IndexResponseData> = () => {
   return (
-    <main className="w-screen h-screen">
-      <ul className="">
-        {nodes
-          ? nodes.map((node, index) => (
-              <li key={index}>
-                <i className={node.emoji + " mx-6"}></i>
-                <a className="text-white" href={node.src} target="__blank">
-                  {node.title}
-                </a>
-              </li>
-            ))
-          : null}
-      </ul>
+    <main className="w-screen h-screen text-center flex justify-center items-center">
+      UNDER CONSTRUCTION ...
     </main>
   );
 };
