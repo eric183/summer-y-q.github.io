@@ -16,7 +16,7 @@
     "incremental": true,
     "baseUrl": ".",
 		"paths": {
-			"~components/*": ["src/save/components/*"],
+			"~components/*": ["src/components/*"],
 			"~static/*":  ["static/*"],
 			"~/*":  ["src/*"],
 			"@LocalType": ["types/index.d.ts"]
