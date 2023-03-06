@@ -135,7 +135,7 @@ const Controls: FC<{
       <FlyControls
         rollSpeed={useRoll}
         dragToLook
-        movementSpeed={50}
+        movementSpeed={10}
         makeDefault
       />
     </group>

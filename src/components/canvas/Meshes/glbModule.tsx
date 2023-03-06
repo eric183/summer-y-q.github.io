@@ -238,7 +238,7 @@ const JumpCubeLoading = forwardRef<any, Props>(
         />
         {/* </PivotControls> */}
 
-        <Lights />
+        {/* <Lights /> */}
       </group>
     );
   }
@@ -334,18 +334,18 @@ const Luggage = forwardRef((props: any, ref: any) => {
         }
       );
 
-      setTimeout(() => {
-        mainAnimation.start({
-          // visibility: "visible",
-          opacity: 1,
-          visible: true,
-        });
+      // setTimeout(() => {
+      //   mainAnimation.start({
+      //     // visibility: "visible",
+      //     opacity: 1,
+      //     visible: true,
+      //   });
 
-        animationControls.start({
-          visible: false,
-          opacity: 0,
-        });
-      }, 3500);
+      //   animationControls.start({
+      //     visible: false,
+      //     opacity: 0,
+      //   });
+      // }, 3500);
     }
 
     // const jumpCube = loadingRef.current.getObjectByName("JumpCube");

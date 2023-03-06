@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import {
   BakeShadows,
   CatmullRomLine,
+  Environment,
   Hud,
   PerspectiveCamera,
   Preload,
@@ -30,6 +31,9 @@ import ScrollBinder, { useScrollStore } from "~/components/base/scrollBinder";
 import shallow from "zustand/shallow";
 import Meshes from "~/components/canvas/Meshes";
 import { cameraStore } from "~/components/base/Stores/cameraStore";
+import Lights from "~/components/canvas/Lights";
+import { useControls } from "leva";
+import { KernelSize } from "postprocessing";
 
 const IndexLayout = styled.div`
   section {
@@ -86,7 +90,7 @@ const Me = () => {
         antialias: true,
         stencil: true,
         // logarithmicDepthBuffer: true,
-        depth: false,
+        // depth: false,
       }}
       shadows
       dpr={[1, 1.5]}
@@ -94,14 +98,12 @@ const Me = () => {
       // eventSource={containerRef}
       camera={{
         position: [-0.5, 0.8, 3],
-        fov: 45,
+        fov: 60,
         near: 1,
         far: 1000,
       }}
     >
-      {/* <Environment preset="city" /> */}
-
-      {/* <color attach="background" args={["black"]} /> */}
+      <color attach="background" args={["black"]} />
       {/* <fog attach="fog" args={["#202020", 5, 20]} /> */}
       {/* <Lights /> */}
       {/* <Stage
@@ -133,7 +135,7 @@ const Me = () => {
       <Controls target={target} />
       <Preload all />
       <SceneRig />
-      <Effects />
+      <EffectsWithEnv />
       <BakeShadows />
 
       {/* <Viewcube /> */}
@@ -163,24 +165,24 @@ const SceneRig = () => {
   const { position, positionCurve } = cameraStore();
   const { data } = useScrollStore();
   useFrame((state) => {
-    // if (data && positionCurve) {
-    //   const vector_s = positionCurve.getPointAt(data.offset);
+    if (data && positionCurve) {
+      const vector_s = positionCurve.getPointAt(data.offset);
 
-    //   camera.position.copy(vector_s);
-    //   // camera.updateMatrix();
-    // }
+      camera.position.copy(vector_s);
+      // camera.updateMatrix();
+    }
 
-    state.camera.position.lerp(
-      {
-        x: 3.7825550072676912,
-        y: 2.0113850435809417,
-        z: 8.689434161127473,
-        // x: 3.7825550072676912 * 5,
-        // y: 2.0113850435809417 * 5,
-        // z: 8.689434161127473 * 5,
-      } as THREE.Vector3,
-      0.1
-    );
+    // state.camera.position.lerp(
+    //   {
+    //     x: 13.782555007212,
+    //     y: 2.0113850435809417,
+    //     z: 18.689434161127473,
+    //     // x: 3.7825550072676912 * 5,
+    //     // y: 2.0113850435809417 * 5,
+    //     // z: 8.689434161127473 * 5,
+    //   } as THREE.Vector3,
+    //   0.1
+    // );
     if (position) {
       state.camera.lookAt(position[0], position[1], position[2]);
       return;
@@ -191,35 +193,80 @@ const SceneRig = () => {
   return <></>;
 };
 
-const Effects = () => {
+const EffectsWithEnv = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       // Run the effect only on the client
     }
   }, []);
+
+  const controlState = useControls({
+    luminanceThreshold: {
+      value: 0.46,
+      min: 0,
+      max: 1,
+    },
+    luminanceSmoothing: {
+      value: 0.025,
+      min: 0,
+      max: 1,
+    },
+    intensity: {
+      value: 1,
+      min: 0,
+      max: 1,
+    },
+    kernelSize: {
+      value: "LARGE",
+      options: ["VERY_SMALL", "SMALL", "MEDIUM", "LARGE", "VERY_LARGE", "HUGE"],
+    },
+    openCamerationRotation: false,
+  });
+
+  const envControl = useControls({
+    preset: {
+      value: "night",
+      options: [
+        "sunset",
+        "dawn",
+        "night",
+        "warehouse",
+        "forest",
+        "apartment",
+        "studio",
+        "city",
+        "park",
+        "lobby",
+      ],
+      // If onChange is present the value will not be reactive, see https://github.com/pmndrs/leva/blob/main/docs/advanced/controlled-inputs.md#onchange
+      // Instead we transition the preset value, which will prevents the suspense bound from triggering its fallback
+      // That way we can hang onto the current environment until the new one has finished loading ...
+    },
+  });
+
   return (
-    <EffectComposer disableNormalPass>
-      <DepthOfField
-        // target={[0, 0, 13]}
-        target={[1.3198989629745483, 0.8544199466705322, 0.9169659614562988]}
-        focalLength={0.3}
-        bokehScale={1.2}
-        height={4000}
-      />
-      {/* <Bloom
+    <group>
+      <EffectComposer disableNormalPass>
+        <DepthOfField
+          // target={[0, 0, 13]}
+          target={[1.3198989629745483, 0.8544199466705322, 0.9169659614562988]}
+          focalLength={0.3}
+          bokehScale={1.2}
+          height={4000}
+        />
+        {/* <Bloom
         luminanceThreshold={0}
         mipmapBlur
         luminanceSmoothing={0.0}
         intensity={4}
       /> */}
-      <Bloom
-        luminanceThreshold={0.1}
-        luminanceSmoothing={0.1}
-        intensity={1}
-        mipmapBlur
-      />
+        <Bloom
+          {...controlState}
+          kernelSize={KernelSize[controlState.kernelSize as any]}
+          mipmapBlur
+        />
 
-      {/* <Glitch
+        {/* <Glitch
         delay={new Vector2().fromArray([3.5, 7.5])} // min and max glitch delay
         // duration={new Vector2().fromArray([0.6, 1.0])} // min and max glitch duration
         duration={new Vector2().fromArray([1, 2])} // min and max glitch duration
@@ -229,8 +276,10 @@ const Effects = () => {
         active // turn on/off the effect (switches between "mode" prop and GlitchMode.DISABLED)
         ratio={0.85} //
       /> */}
-      {/* <LUT lut={}/> */}
-    </EffectComposer>
+        {/* <LUT lut={}/> */}
+      </EffectComposer>
+      <Environment background blur={1} {...envControl} />
+    </group>
   );
 };
 

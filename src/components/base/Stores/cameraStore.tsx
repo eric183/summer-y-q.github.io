@@ -24,15 +24,20 @@ const cameraStore = create<CameraInterface>()((set) => ({
     }),
   setPositionCurve: (poses) =>
     set((state) => {
-      const pointArray = [
-        [1, 1, 1],
-        [1, 2, 3],
-        [2, 4, 6],
-        [6, 2, 4],
-      ] as any;
+      const first = [-0.4671012312738144, 5.965293367938277, 9.155353854694976];
+      const second = [2.168653092698698, 5.055879646594498, 8.564008176709065];
+      const third = [-11.983141473589574, 5.717719015825802, 9.986156990946114];
 
+      const forth = [-0.4671012312738144, 5.965293367938277, 9.155353854694976];
+      const fifth = [17.211206016252515, 9.927127814183928, 16.7631504158383];
+
+      const pointArray = [first, second, third, forth, fifth] as any;
+
+      // const curve = new CatmullRomCurve3(
+      //   [...pointArray, ...poses].map((x) => new Vector3().fromArray(x))
+      // );
       const curve = new CatmullRomCurve3(
-        [...pointArray, ...poses].map((x) => new Vector3().fromArray(x))
+        pointArray.map((x: number[]) => new Vector3().fromArray(x))
       );
 
       state.setPoints(curve);
