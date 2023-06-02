@@ -20,8 +20,11 @@
     "incremental": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "~/*": [
-        "app/*"
+      "app*": [
+        "./app/*"
+      ],
+      "pages*": [
+        "./pages/*"
       ],
       "types/*": [
         "./types/*"
