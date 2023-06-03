@@ -4,6 +4,8 @@ export const metadata: Metadata = {
   title: "My Page Title",
 };
 
-export default function Page() {
-  return <div>hello</div>;
-}
+const Page = ({ children }) => {
+  return <div className="ml-2">hello {children} </div>;
+};
+
+export default Page;
