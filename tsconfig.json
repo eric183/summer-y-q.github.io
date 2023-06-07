@@ -20,17 +20,26 @@
     "incremental": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "app*": [
+      "~app/*": [
         "./app/*"
       ],
-      "pages*": [
-        "./pages/*"
+      "~base/*": [
+        "./base/*"
       ],
-      "types/*": [
+      "~stores/*": [
+        "./stores/*"
+      ],
+      "~hooks/*": [
+        "./hooks/*"
+      ],
+      "~types/*": [
         "./types/*"
       ],
-      "public/*": [
+      "~public/*": [
         "./public/*"
+      ],
+      "~components/*": [
+        "./components/*"
       ]
     },
     "typeRoots": [],

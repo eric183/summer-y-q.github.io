@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.10",
+    "@heroicons/react": "^2.0.18",
     "@react-three/cannon": "^6.5.2",
     "@react-three/drei": "9.54.2",
     "@react-three/fiber": "^8.10.1",
