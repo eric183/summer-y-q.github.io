@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { useEffect } from "react";
 import Avatar from "~components/Layout/Avatar";
-import SideNav from "~components/Layout/SideNav";
+// import SideNav from "~components/Layout/SideNav";
 const PageContainer = ({ children }: { children: React.ReactNode }) => {
   // console.log("reRender");
 

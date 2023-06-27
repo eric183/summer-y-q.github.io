@@ -138,9 +138,9 @@ interface Dog {
   bark(): void;
 }
 
-type EmailMessageContents = MessageOf<Email>;
+// type EmailMessageContents = MessageOf<Email>;
 
-type EmailMessageContents = string;
+// type EmailMessageContents = string;
 
 type DogMessageContents = MessageOf<Dog>;
 

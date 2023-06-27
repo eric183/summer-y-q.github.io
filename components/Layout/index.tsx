@@ -1,5 +1,4 @@
 import React, { FC, Fragment } from "react";
-import SideNav from "./SideNav";
 import Avatar from "./Avatar";
 
 interface LayoutProps {
@@ -28,9 +27,10 @@ const Layout: FC<LayoutProps> = ({ children, path, pageKeys }) => {
       {/* Main Content */}
       <section className="main-content flex flex-1 w-full bg-slate-200 px-4 py-5">
         {/* Sidebar */}
-        <aside role="complementary" className="w-64 flex-shrink-0 flex-.5 mr-4">
-          <SideNav />
-        </aside>
+        <aside
+          role="complementary"
+          className="w-64 flex-shrink-0 flex-.5 mr-4"
+        ></aside>
 
         {/* Content */}
         <section className="router-enter flex-1 flex-shrink-0">
