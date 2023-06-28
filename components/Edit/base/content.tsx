@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useMemo } from "react";
 import { ChangeEvent, useRef, useState } from "react";
-import { fetchPosts } from "../../hooks";
+import { fetchPosts } from "../../../app/hooks";
 // import { fetchPosts, useData } from "../../hooks";
 
 type FormDataType = {

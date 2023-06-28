@@ -1,9 +1,13 @@
+import { SessionProvider } from "next-auth/react";
 import DarKThemeProvider from "./darkTheme";
 import ReactQuery from "./reactQuery";
+import NextAuth from "./next-auth";
 
 const InjectProviders = ({ children }: { children: React.ReactNode }) => (
   <DarKThemeProvider>
-    <ReactQuery>{children}</ReactQuery>
+    <NextAuth>
+      <ReactQuery>{children}</ReactQuery>
+    </NextAuth>
   </DarKThemeProvider>
 );
 

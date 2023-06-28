@@ -1,5 +1,5 @@
 import { useAddress, useMetamask } from "@thirdweb-dev/react";
-import { dieRool, getRandomInt } from "../../utils";
+import { dieRool, getRandomInt } from "../../../app/utils";
 import { Contract, ethers } from "ethers";
 import { useEffect } from "react";
 

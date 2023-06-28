@@ -42,7 +42,6 @@
         "./components/*"
       ]
     },
-    "typeRoots": [],
     "plugins": [
       {
         "name": "next"

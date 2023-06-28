@@ -25,12 +25,12 @@ import {
   EffectComposer,
 } from "@react-three/postprocessing";
 
-import { FloatText } from "../components/base/Overlays/floatText";
+import { FloatText } from "../../components/Edit/base/Overlays/floatText";
 import { CatmullRomCurve3, Matrix4, Mesh, Vector3 } from "three";
-import ScrollBinder, { useScrollStore } from "../components/base/scrollBinder";
+import ScrollBinder, { useScrollStore } from "../../components/Edit/base/scrollBinder";
 import shallow from "zustand/shallow";
 import Meshes from "../components/canvas/Meshes";
-import { cameraStore } from "../components/base/Stores/cameraStore";
+import { cameraStore } from "../../components/Edit/base/Stores/cameraStore";
 import Lights from "../components/canvas/Lights";
 import { useControls } from "leva";
 import { KernelSize } from "postprocessing";

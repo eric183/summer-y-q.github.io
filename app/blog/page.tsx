@@ -1,6 +1,6 @@
 "use client";
 
-import ThemeSwitcher from "~components/UI/themeSwitcher";
+import ThemeSwitcher from "../../components/themeSwitcher";
 
 const Page = () => {
   return (

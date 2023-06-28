@@ -17,7 +17,7 @@ const Page = async () => {
   const responseData = await data.json();
 
   return (
-    <div className="ml-2">
+    <div className="ml-2 bg-purple-600">
       <article>
         <h1>hello {responseData.utc_datetime}</h1>
       </article>
