@@ -4,6 +4,9 @@ import GoogleProvider from "next-auth/providers/google";
 import EmailProvider from "next-auth/providers/email";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { sendVerificationRequest } from "../../../../utils/helpers/mailRequest";
+import { compare, hash } from "bcryptjs";
+import { PrismaClient } from "@prisma/client";
+import { prismaClient } from "../../../../prisma/client";
 
 export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
@@ -18,16 +21,16 @@ export const authOptions: NextAuthOptions = {
     //   from: process.env.EMAIL_SENDER,
     //   sendVerificationRequest,
     // }),
-    GithubProvider({
-      clientId: process.env.NEXT_PUBLIC_GITHUB_ID!,
-      clientSecret: process.env.NEXT_PUBLIC_GITHUB_SECRET!,
-    }),
+    // GithubProvider({
+    //   clientId: process.env.NEXT_PUBLIC_GITHUB_ID!,
+    //   clientSecret: process.env.NEXT_PUBLIC_GITHUB_SECRET!,
+    // }),
     // GoogleProvider({
     //   clientId: process.env.GOOGLE_ID!,
     //   clientSecret: process.env.GOOGLE_SECRET!,
     // }),
     CredentialsProvider({
-      name: "Credentials",
+      name: "credentials",
       credentials: {
         email: {
           label: "Email",
@@ -39,16 +42,6 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials) return null;
         const { email, password } = credentials;
-        // const user = await sanityClient.fetch(authGROQ, {
-        //   email,
-        //   password,
-        // });
-
-        // console.log(user, "......");
-
-        // if (user.length > 0) {
-        //   return user[0];
-        // }
 
         return null;
       },
@@ -59,7 +52,6 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     async jwt({ token, user }) {
-      debugger
       // console.log(token, "...response token");
       // console.log("...response user begin", user, "...response user end");
       if (user) {
@@ -68,7 +60,6 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     session: ({ session, token }) => {
-      debugger
       if (token) {
         session.user = token.user as any;
         // session.id = token.id;
