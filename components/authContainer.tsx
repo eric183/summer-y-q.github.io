@@ -7,33 +7,36 @@ const AuthContainer = () => {
 
   const loginHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSubmitting(true);
 
     const email = e.currentTarget.email.value;
     const password = e.currentTarget.password.value;
-    const confirm_password = e.currentTarget.confirm_password.value;
 
-    setSubmitting(true);
-    if (password !== confirm_password) {
-      alert("Passwords do not match");
+    if (!isLogin) {
+      const confirm_password = e.currentTarget.confirm_password.value;
+
+      if (password !== confirm_password) {
+        alert("Passwords do not match");
+        return;
+      }
+
+      const response = await fetch("/api/signup", {
+        method: "POST",
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
       return;
     }
 
-    const response = await fetch("/api/signup", {
-      method: "POST",
-      body: JSON.stringify({
-        email,
-        password,
-      }),
+    signIn("credentials", {
+      email,
+      password,
+      redirect: false,
     });
-
-    const data = await response.json();
-
-    debugger;
-    // signIn("credentials", {
-    //   email,
-    //   password,
-    //   redirect: false,
-    // });
   };
 
   return (
