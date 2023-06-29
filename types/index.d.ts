@@ -1,4 +1,5 @@
 /// <reference types="next-auth/react" />
+/// <reference types="@lexical/react" />
 export {};
 
 declare global {

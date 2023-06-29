@@ -11,6 +11,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.10",
     "@heroicons/react": "^2.0.18",
+    "@lexical/react": "^0.11.1",
     "@prisma/client": "4.13.0",
     "@react-three/cannon": "^6.5.2",
     "@react-three/drei": "9.54.2",
@@ -41,6 +42,7 @@
     "gsap": "^3.11.4",
     "idb": "^7.1.1",
     "leva": "0.9.29",
+    "lexical": "^0.11.1",
     "next": "^13.4.4",
     "next-auth": "^4.22.1",
     "postcss": "^8.4.20",

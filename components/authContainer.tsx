@@ -32,11 +32,13 @@ const AuthContainer = () => {
       return;
     }
 
-    signIn("credentials", {
+    const data = await signIn("credentials", {
       email,
       password,
       redirect: false,
     });
+
+    console.log(data, "..");
   };
 
   return (
