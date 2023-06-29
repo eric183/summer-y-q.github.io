@@ -1,10 +1,11 @@
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const AuthContainer = () => {
   const [submitting, setSubmitting] = React.useState(false);
   const [isLogin, setIsLogin] = React.useState(true);
-
+  const router = useRouter();
   const loginHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
@@ -20,24 +21,33 @@ const AuthContainer = () => {
         return;
       }
 
+      ("use client");
       const response = await fetch("/api/signup", {
         method: "POST",
         body: JSON.stringify({
           email,
           password,
         }),
+      }).catch((error) => {
+        setSubmitting(false);
       });
 
-      const data = await response.json();
+      const data = await response?.json();
       return;
     }
 
+    ("use client");
     const data = await signIn("credentials", {
       email,
       password,
       redirect: false,
+    }).catch((error) => {
+      setSubmitting(false);
     });
 
+    setSubmitting(false);
+
+    router.replace("/poster");
     console.log(data, "..");
   };
 

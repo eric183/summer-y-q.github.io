@@ -21,10 +21,10 @@ model User {
 model Blog {
   id        String    @id @default(cuid())
   title     String
-  content   String
-  imageUrl  String
   authorId  String
-  tags      Tag
+  htmlString String
+  richTextJSON String
+  tag      Tag
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   author    User      @relation(fields: [authorId], references: [id])

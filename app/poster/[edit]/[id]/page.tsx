@@ -1,9 +1,10 @@
 import React from "react";
 import PosterContainer from "~components/posterContainer";
-import RichEditor from "./editor";
-import "./index.css";
+import RichEditor from "../../editor";
+import "../../index.css";
 
-const page = async ({ params }: any) => {
+const page = ({ params }: any) => {
+  console.log(params, ".dsa.f.as");
   return (
     <PosterContainer>
       <RichEditor></RichEditor>

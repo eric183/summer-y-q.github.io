@@ -40,6 +40,12 @@
       ],
       "~components/*": [
         "./components/*"
+      ],
+      "~ui/*": [
+        "./ui/*"
+      ],
+      "~utils/*": [
+        "./utils/*"
       ]
     },
     "plugins": [

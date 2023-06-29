@@ -8,10 +8,10 @@ const IS_DEV = process.env.NODE_ENV === "development";
 
 const PosterContainer = ({ children }: { children: React.ReactNode }) => {
   const { status } = useSession();
+  console.log(status);
+  if (status === "loading") return <div>Loading...</div>;
 
-  if (!IS_DEV && status === "loading") return <div>Loading...</div>;
-
-  if (!IS_DEV && status === "unauthenticated") return <AuthContainer />;
+  if (status === "unauthenticated") return <AuthContainer />;
 
   return <PageContainer>{children}</PageContainer>;
 };

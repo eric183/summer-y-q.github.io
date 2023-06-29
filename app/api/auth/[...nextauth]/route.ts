@@ -30,9 +30,11 @@ export const authOptions: NextAuthOptions = {
             email,
           },
         });
+
+        console.log(email, password, user, ".....isPwdCorrect");
+
         if (!user) return null;
         const isPwdCorrect = await compare(password, user.password!);
-
         if (!isPwdCorrect) return null;
 
         const { password: _, ...rest } = user;
