@@ -1,4 +1,6 @@
-import { BakeShadows, MeshReflectorMaterial, Preload } from "@react-three/drei";
+"use client";
+
+import { BakeShadows, Preload } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import create from "zustand";
 // import { Physics, RigidBody, CuboidCollider, Debug } from "@react-three/rapier";
@@ -11,7 +13,6 @@ import { Physics } from "@react-three/cannon";
 import { instancedGeometry } from "./Meshes/instanceBoxes";
 import { useMemo, useState } from "react";
 import { Color } from "three";
-import { SceneRig } from "./SceneRig";
 
 export const useStore = create((set: any) => ({
   target: null,

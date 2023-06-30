@@ -26,7 +26,7 @@ const Page = async () => {
   const data = await getArticleList();
 
   return (
-    <div
+    <article
       className={clsx({
         "bg-gray-900 w-full h-full flex items-center justify-center": true,
         "bg-gradient-to-b from-transparent from-10% to-gray-800": true,
@@ -47,7 +47,7 @@ const Page = async () => {
           ))}
         </ul>
       )}
-    </div>
+    </article>
   );
 };
 

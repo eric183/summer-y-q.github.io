@@ -98,14 +98,14 @@ const VisionHeader = () => {
         </motion.li>
         <motion.li
           variants={item}
-          className="mr-5 hover:text-white transition-colors"
+          className="mr-5 transition focus-visible:outline-none line-through cursor-not-allowed"
         >
-          <Link
-            className="focus-visible:outline-none hover:underline underline-offset-8"
+          {/* <Link
+            className="focus-visible:outline-none line-through cursor-not-allowed"
             href="/vision"
-          >
-            Vision
-          </Link>
+          > */}
+          Vision
+          {/* </Link> */}
         </motion.li>
       </motion.ul>
     </div>

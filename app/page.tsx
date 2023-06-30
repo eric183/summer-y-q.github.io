@@ -1,12 +1,10 @@
-import { Metadata } from "next";
 import React from "react";
-import { YMD_Format } from "../utils/timeformat";
+import { YMD_DOT_Format } from "../utils/timeformat";
 import clsx from "clsx";
 import { lobster } from "../ui/Fonts";
 import Link from "next/link";
 
 const Page = async () => {
-  // fetch("https://jsonplaceholder.typicode.com/todos/1");
   const data = await fetch(
     "https://worldtimeapi.org/api/timezone/Asia/Kolkata",
     {
@@ -29,7 +27,7 @@ const Page = async () => {
         </h1>
 
         <p className="font-semibold text-xl">
-          {YMD_Format(responseData.utc_datetime)}
+          {YMD_DOT_Format(responseData.utc_datetime)}
         </p>
       </article>
     </div>
