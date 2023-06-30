@@ -2,7 +2,7 @@
 
 import { ArrowLeftCircleIcon } from "@heroicons/react/20/solid";
 import clsx from "clsx";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -37,25 +37,34 @@ const VisionHeader = () => {
 
   return (
     <div className="vision-header absolute left-0 top-0">
-      <motion.div
-        layout
-        initial="hidden"
-        animate={hasBack ? "visible" : "hidden"}
-        variants={{
-          hidden: { opacity: 0, x: -10, transition: { duration: 0.2 } },
-          visible: {
-            opacity: 1,
-            transition: { duration: 0.2, staggerChildren: 0.1 },
-          },
-        }}
-      >
-        {hasBack && (
-          <ArrowLeftCircleIcon
-            className="absolute z-20 w-8 h-8 text-gray-400 cursor-pointer hover:text-white transition left-8 top-5"
-            onClick={() => router.back()}
-          ></ArrowLeftCircleIcon>
-        )}
-      </motion.div>
+      {hasBack && (
+        <AnimatePresence>
+          <motion.div
+            layout
+            initial="hidden"
+            className="w-20 h-20 absolute z-30 cursor-pointer"
+            onClick={(event) => {
+              event.preventDefault();
+              router.back();
+            }}
+            animate={hasBack ? "visible" : "hidden"}
+            variants={{
+              hidden: { opacity: 0, x: -10, transition: { duration: 0.2 } },
+              visible: {
+                opacity: 1,
+                transition: { duration: 0.2, staggerChildren: 0.1 },
+              },
+            }}
+          >
+            {hasBack && (
+              <AnimatePresence>
+                <ArrowLeftCircleIcon className="absolute z-20 w-8 h-8 text-gray-400 hover:text-white transition left-8 top-5"></ArrowLeftCircleIcon>
+              </AnimatePresence>
+            )}
+          </motion.div>
+        </AnimatePresence>
+      )}
+
       <motion.ul
         initial="hidden"
         animate={!hasBack ? "visible" : "hidden"}
@@ -69,19 +78,32 @@ const VisionHeader = () => {
           variants={item}
           className="mr-5 hover:text-white transition-colors"
         >
-          <Link href="/">Home</Link>
+          <Link
+            className="focus-visible:outline-none hover:underline underline-offset-8"
+            href="/"
+          >
+            Home
+          </Link>
         </motion.li>
         <motion.li
           variants={item}
           className="mr-5 hover:text-white transition-colors"
         >
-          <Link href="/article">Article</Link>
+          <Link
+            className="focus-visible:outline-none hover:underline underline-offset-8"
+            href="/article"
+          >
+            Article
+          </Link>
         </motion.li>
         <motion.li
           variants={item}
           className="mr-5 hover:text-white transition-colors"
         >
-          <Link href=""></Link>
+          <Link
+            className="focus-visible:outline-none hover:underline underline-offset-8"
+            href=""
+          ></Link>
         </motion.li>
       </motion.ul>
     </div>
