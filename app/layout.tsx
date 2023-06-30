@@ -23,7 +23,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         </InjectProviders>
 
         <footer className="fixed bottom-5 z-10 w-full text-center">
-          <span className="text-white italic font-semibold ">
+          <span className="text-white italic font-semibold text-shadow-md shadow-white">
             Driven by Prisma
           </span>
         </footer>

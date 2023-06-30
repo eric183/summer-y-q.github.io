@@ -1,10 +1,8 @@
 import React from "react";
-import ThemeSwitcher from "~components/themeSwitcher";
 import { prismaClient } from "../../../prisma/client";
 import clsx from "clsx";
-import { kanit, lobster } from "../../../ui/Fonts";
+import { kanit } from "../../../ui/Fonts";
 import { YMD_DOT_Format } from "~utils/timeformat";
-import { useBackStore } from "~components/Layout/VisionHeader";
 
 const getCurrentArticle = (id: string) => {
   return prismaClient.blog.findUnique({
@@ -24,8 +22,6 @@ const getCurrentArticle = (id: string) => {
 
 const page = async ({ params }: any) => {
   const articleData = await getCurrentArticle(params.slug);
-  console.log(articleData, "blogResponse");
-
   const { createdAt, id, htmlString, tag, title, updatedAt } = articleData!;
   return (
     <article

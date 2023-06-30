@@ -102,8 +102,10 @@ const VisionHeader = () => {
         >
           <Link
             className="focus-visible:outline-none hover:underline underline-offset-8"
-            href=""
-          ></Link>
+            href="/vision"
+          >
+            Vision
+          </Link>
         </motion.li>
       </motion.ul>
     </div>
