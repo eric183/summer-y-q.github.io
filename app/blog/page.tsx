@@ -5,6 +5,7 @@ import { lobster } from "../../ui/Fonts";
 import clsx from "clsx";
 import { YMD_Format } from "~utils/timeformat";
 import { prismaClient } from "../../prisma/client";
+import Empty from "~components/Layout/Empty";
 
 export const revalidate = 60; // revalidate this segment every 60 seconds
 
@@ -31,17 +32,21 @@ const Page = async () => {
         [lobster.className]: true,
       })}
     >
-      <ul className="h-2/3 w-full max-w-6xl divide-y">
-        {data.map((item: any) => (
-          <li key={item.id} className="w-96 mx-auto my-12 pt-10">
-            <h1 className="text-white font-extrabold text-5xl mb-5">
-              <Link href={`/blog/${item.id}`}>{item.title}</Link>
-            </h1>
+      {data.length === 0 ? (
+        <Empty></Empty>
+      ) : (
+        <ul className="h-2/3 w-full max-w-6xl divide-y">
+          {data.map((item: any) => (
+            <li key={item.id} className="w-96 mx-auto my-12 pt-10">
+              <h1 className="text-white font-extrabold text-5xl mb-5">
+                <Link href={`/blog/${item.id}`}>{item.title}</Link>
+              </h1>
 
-            <p className="text-white">{YMD_Format(item.createdAt)}</p>
-          </li>
-        ))}
-      </ul>
+              <p className="text-white">{YMD_Format(item.createdAt)}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
