@@ -38,17 +38,23 @@ const VisionHeader = () => {
   return (
     <div className="vision-header absolute left-0 top-0">
       <motion.div
+        layout
         initial="hidden"
         animate={hasBack ? "visible" : "hidden"}
         variants={{
           hidden: { opacity: 0, x: -10, transition: { duration: 0.2 } },
-          visible: { opacity: 1, transition: { duration: 0.2 } },
+          visible: {
+            opacity: 1,
+            transition: { duration: 0.2, staggerChildren: 0.1 },
+          },
         }}
       >
-        <ArrowLeftCircleIcon
-          className="absolute z-20 w-8 h-8 text-gray-400 cursor-pointer hover:text-white transition left-8 top-5"
-          onClick={() => router.back()}
-        ></ArrowLeftCircleIcon>
+        {hasBack && (
+          <ArrowLeftCircleIcon
+            className="absolute z-20 w-8 h-8 text-gray-400 cursor-pointer hover:text-white transition left-8 top-5"
+            onClick={() => router.back()}
+          ></ArrowLeftCircleIcon>
+        )}
       </motion.div>
       <motion.ul
         initial="hidden"

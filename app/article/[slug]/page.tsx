@@ -4,6 +4,7 @@ import { prismaClient } from "../../../prisma/client";
 import clsx from "clsx";
 import { kanit, lobster } from "../../../ui/Fonts";
 import { YMD_DOT_Format } from "~utils/timeformat";
+import { useBackStore } from "~components/Layout/VisionHeader";
 
 const getCurrentArticle = (id: string) => {
   return prismaClient.blog.findUnique({
