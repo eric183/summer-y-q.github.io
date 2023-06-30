@@ -23,10 +23,10 @@ import AutoLinkPlugin from "./plugins/AutoLinkPlugin";
 import themeConfig from "./theme/config";
 import ToolbarPlugin from "./Toobar";
 import React, { useEffect } from "react";
-import DropDown from "./Menu";
-import Example from "./Menu";
+import DropDown from "./TagList";
+import Example from "./TagList";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import ArticleSubmiterPlugin from "./Footer";
+import ArticleSubmiterPlugin from "./plugins/ArticleSubmiterPlugin";
 
 function Placeholder() {
   return <div className="editor-placeholder">Enter some rich text...</div>;

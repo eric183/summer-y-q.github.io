@@ -2,14 +2,24 @@
 
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $generateHtmlFromNodes } from "@lexical/html";
-import Example from "./Menu";
+import Example from "../TagList";
 import { useEffect, useState } from "react";
 import ThemeSwitcher from "~components/themeSwitcher";
-import { prismaClient } from "../../prisma/client";
+import { prismaClient } from "../../../prisma/client";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import TagList from "../TagList";
 
-const ArticleSubmiter = () => {
+const Tags = [
+  { name: "MOOD", label: "情绪" },
+  { name: "STACK", label: "技术" },
+  { name: "SHARE", label: "分享" },
+  { name: "ME", label: "我" },
+] as const;
+
+const ArticleSubmiterPlugin = () => {
+  const [selected, setSelected] = useState(Tags[0]);
+
   const { data } = useSession();
   const [editor] = useLexicalComposerContext();
   const [submitting, setSubmitting] = useState(false);
@@ -59,6 +69,7 @@ const ArticleSubmiter = () => {
         body: JSON.stringify({
           ...formJSON,
           ...data!.user,
+          tag: selected.name,
         }),
       });
       setSubmitting(false);
@@ -90,7 +101,7 @@ const ArticleSubmiter = () => {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
         </div>
-        <Example />
+        <TagList Tags={Tags} selected={selected} setSelected={setSelected} />
       </div>
 
       <button
@@ -123,4 +134,4 @@ const ArticleSubmiter = () => {
   );
 };
 
-export default ArticleSubmiter;
+export default ArticleSubmiterPlugin;
