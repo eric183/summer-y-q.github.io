@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import ThemeSwitcher from "../../components/themeSwitcher";
 import Link from "next/link";
-import { lobster } from "../../ui/Fonts";
+import { kanit, lobster } from "../../ui/Fonts";
 import clsx from "clsx";
 import { YMD_Format } from "~utils/timeformat";
 import { prismaClient } from "../../prisma/client";
@@ -29,7 +29,7 @@ const Page = async () => {
     <div
       className={clsx({
         "bg-gray-900 w-full h-full flex items-center justify-center": true,
-        [lobster.className]: true,
+        [kanit.className]: true,
       })}
     >
       {data.length === 0 ? (
@@ -37,7 +37,7 @@ const Page = async () => {
       ) : (
         <ul className="h-2/3 w-full max-w-6xl divide-y">
           {data.map((item: any) => (
-            <li key={item.id} className="w-96 mx-auto my-12 pt-10">
+            <li key={item.id} className="mx-auto my-12 pt-10">
               <h1 className="text-white font-extrabold text-5xl mb-5">
                 <Link href={`/blog/${item.id}`}>{item.title}</Link>
               </h1>

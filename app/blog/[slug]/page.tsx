@@ -2,7 +2,7 @@ import React from "react";
 import ThemeSwitcher from "~components/themeSwitcher";
 import { prismaClient } from "../../../prisma/client";
 import clsx from "clsx";
-import { lobster } from "../../../ui/Fonts";
+import { kanit, lobster } from "../../../ui/Fonts";
 import { YMD_DOT_Format } from "~utils/timeformat";
 
 const getCurrentArticle = (id: string) => {
@@ -29,7 +29,7 @@ const page = async ({ params }: any) => {
   return (
     <article
       className={clsx({
-        [lobster.className]: true,
+        [kanit.className]: true,
         "text-white px-10 pt-16 pb-7 h-full flex flex-col justify-between":
           true,
       })}
