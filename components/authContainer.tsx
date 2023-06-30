@@ -42,10 +42,9 @@ const AuthContainer = () => {
       password,
       redirect: false,
     }).catch((error) => {
-      debugger
       setSubmitting(false);
     });
-    debugger;
+
     setSubmitting(false);
 
     router.replace("/poster");

@@ -5,10 +5,6 @@ import clsx from "clsx";
 import { lobster } from "../ui/Fonts";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "My Page Title",
-};
-
 const Page = async () => {
   // fetch("https://jsonplaceholder.typicode.com/todos/1");
   const data = await fetch(
@@ -29,7 +25,7 @@ const Page = async () => {
         })}
       >
         <h1 className="font-extrabold text-7xl mb-24">
-          <Link href="/blog">Aloha</Link>
+          <Link href="/article">Aloha</Link>
         </h1>
 
         <p className="font-semibold text-xl">

@@ -30,7 +30,7 @@ const page = async ({ params }: any) => {
     <article
       className={clsx({
         [kanit.className]: true,
-        "text-white px-10 pt-16 pb-7 h-full flex flex-col justify-between":
+        "text-white px-10 pt-16 pb-7 h-full flex flex-col justify-between mb-10":
           true,
       })}
     >
@@ -42,12 +42,12 @@ const page = async ({ params }: any) => {
         >
           {title}
         </h1>
-        <p
+        <div
           className="text-xl font-semibold mt-6 ml-2"
           dangerouslySetInnerHTML={{
             __html: htmlString ?? "",
           }}
-        ></p>
+        ></div>
       </div>
 
       <p>{YMD_DOT_Format(createdAt as unknown as string)}</p>

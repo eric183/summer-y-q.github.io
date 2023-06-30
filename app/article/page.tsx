@@ -39,7 +39,7 @@ const Page = async () => {
           {data.map((item: any) => (
             <li key={item.id} className="mx-auto my-12 pt-10">
               <h1 className="text-white font-extrabold text-5xl mb-5">
-                <Link href={`/blog/${item.id}`}>{item.title}</Link>
+                <Link href={`/article/${item.id}`}>{item.title}</Link>
               </h1>
 
               <p className="text-white">{YMD_Format(item.createdAt)}</p>
