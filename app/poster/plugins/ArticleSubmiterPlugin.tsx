@@ -73,7 +73,7 @@ const ArticleSubmiterPlugin = () => {
         }),
       });
       setSubmitting(false);
-      router.replace("/blog");
+      router.replace("/article");
     });
   };
 
