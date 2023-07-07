@@ -12,6 +12,9 @@ export const revalidate = 60; // revalidate this segment every 60 seconds
 const getArticleList = async () => {
   return prismaClient.blog.findMany({
     take: 20,
+    orderBy: {
+      createdAt: "desc",
+    },
     select: {
       id: true,
       title: true,
