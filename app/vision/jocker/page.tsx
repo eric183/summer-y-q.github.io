@@ -1,5 +1,5 @@
 import React from "react";
-import CoinApp from "~components/Edit/canvas";
+import CoinApp from "../components";
 
 const page = () => {
   return (
