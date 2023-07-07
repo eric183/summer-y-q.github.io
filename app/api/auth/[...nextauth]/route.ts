@@ -29,9 +29,14 @@ export const authOptions: NextAuthOptions = {
           where: {
             email,
           },
+          select: {
+            role: true,
+            email: true,
+            password: true,
+            id: true,
+            name: true,
+          },
         });
-
-        console.log(email, password, user, ".....isPwdCorrect");
 
         if (!user) return null;
         const isPwdCorrect = await compare(password, user.password!);

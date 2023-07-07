@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -5,8 +6,10 @@ import React from "react";
 const AuthContainer = () => {
   const [submitting, setSubmitting] = React.useState(false);
   const [isLogin, setIsLogin] = React.useState(true);
+  const [error, setError] = React.useState(false);
   const router = useRouter();
   const loginHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    setError(false);
     e.preventDefault();
     setSubmitting(true);
 
@@ -45,6 +48,13 @@ const AuthContainer = () => {
       setSubmitting(false);
     });
 
+    if (data?.error) {
+      setError(true);
+      setSubmitting(false);
+
+      return;
+    }
+
     setSubmitting(false);
 
     router.replace("/poster");
@@ -52,7 +62,23 @@ const AuthContainer = () => {
   };
 
   return (
-    <div className="w-screen h-screen bg-gray-900 overflow-hidden">
+    // shake
+    <motion.div
+      animate={error ? "shake" : "none"}
+      transition={{
+        duration: 1,
+        config: { stiff: 0.1 },
+      }}
+      variants={{
+        none: {
+          x: 0,
+        },
+        shake: {
+          x: [-30, 30, -30, 30, 0],
+        },
+      }}
+      className="w-screen h-screen bg-gray-900 overflow-hidden"
+    >
       <h2 className="text-center text-white my-10">
         {isLogin ? "Login" : "Create an account"}
       </h2>
@@ -158,7 +184,7 @@ const AuthContainer = () => {
               )}
               Login
             </button>
-            <button
+            {/* <button
               onClick={(e) => {
                 e.preventDefault();
                 setIsLogin(false);
@@ -166,7 +192,7 @@ const AuthContainer = () => {
               className="ml-10 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Sign Up
-            </button>
+            </button> */}
           </>
         ) : (
           <>
@@ -207,7 +233,7 @@ const AuthContainer = () => {
           </>
         )}
       </form>
-    </div>
+    </motion.div>
   );
 };
 

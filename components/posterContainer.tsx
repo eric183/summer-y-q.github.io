@@ -13,7 +13,7 @@ const PosterContainer = ({ children }: { children: React.ReactNode }) => {
 
   if (status === "unauthenticated") return <AuthContainer />;
 
-  return <PageContainer>{children}</PageContainer>;
+  return <>{children}</>;
 };
 
 export default PosterContainer;

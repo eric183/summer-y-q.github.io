@@ -57,7 +57,7 @@ const editorConfig = {
 
 export default function Editor() {
   return (
-    <div className="editor-wrapper h-full w-full flex">
+    <div className="editor-wrapper h-full w-full flex overflow-y-auto pb-8">
       <LexicalComposer initialConfig={editorConfig as any}>
         <div className="editor-container min-w-[800px] !h-[776px] flex flex-col !mt-40">
           <ToolbarPlugin />

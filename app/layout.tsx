@@ -17,8 +17,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html>
       <body>
-        <VisionHeader></VisionHeader>
         <InjectProviders>
+          <VisionHeader></VisionHeader>
           <MainConainer>{children}</MainConainer>
         </InjectProviders>
 

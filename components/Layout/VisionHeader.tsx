@@ -3,6 +3,7 @@
 import { ArrowLeftCircleIcon } from "@heroicons/react/20/solid";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -20,6 +21,9 @@ export const useBackStore = create<{
 const VisionHeader = () => {
   const router = useRouter();
   const hasBack = useBackStore((state) => state.hasBack);
+
+  const { data } = useSession();
+
   const list = {
     hidden: { opacity: 0 },
     visible: {
@@ -106,6 +110,18 @@ const VisionHeader = () => {
           > */}
           Vision
           {/* </Link> */}
+        </motion.li>
+
+        <motion.li
+          variants={item}
+          className="mr-5 hover:text-white transition-colors"
+        >
+          <Link
+            className="focus-visible:outline-none hover:underline underline-offset-8"
+            href="/poster"
+          >
+            Poster
+          </Link>
         </motion.li>
       </motion.ul>
     </div>
