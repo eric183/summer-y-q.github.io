@@ -1,7 +1,7 @@
 "use client";
 
 import { BakeShadows, Preload } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import create from "zustand";
 // import { Physics, RigidBody, CuboidCollider, Debug } from "@react-three/rapier";
 import Lights from "./Lights";
@@ -12,7 +12,7 @@ import ReflectorPlane from "./Meshes/plane";
 import { Physics } from "@react-three/cannon";
 import { instancedGeometry } from "./Meshes/instanceBoxes";
 import { useMemo, useState } from "react";
-import { Color } from "three";
+import { Color, Vector3 } from "three";
 
 export const useStore = create((set: any) => ({
   target: null,
@@ -91,8 +91,8 @@ const CoinApp = ({ containerRef }: any) => {
 
       <Preload all />
 
-      {/* <SceneRig /> */}
-      <Effects />
+      <SceneRig />
+      {/* <Effects /> */}
 
       <BakeShadows />
     </Canvas>
@@ -100,3 +100,13 @@ const CoinApp = ({ containerRef }: any) => {
 };
 
 export default CoinApp;
+
+// const SceneRig = () => {
+//   return useFrame((state, delta) => {
+//     state.camera.position.lerp(new Vector3(), 0.1);
+//     state.camera.lookAt(0, 0, 0);
+//   });
+// };
+
+// function CameraRig() {
+// }
