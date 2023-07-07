@@ -13,6 +13,7 @@ import { Physics } from "@react-three/cannon";
 import { instancedGeometry } from "./Meshes/instanceBoxes";
 import { useMemo, useState } from "react";
 import { Color, Vector3 } from "three";
+import { SceneRig } from "./SceneRig";
 
 export const useStore = create((set: any) => ({
   target: null,

@@ -48,8 +48,9 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { motion } from "framer-motion-3d";
 import { useAnimationControls } from "framer-motion";
 import gsap from "gsap";
-import { cameraStore } from "../../base/Stores/cameraStore";
+
 import { fragmentShader, vertexShader } from "../Shader";
+import { cameraStore } from "~components/Edit/base/Stores/cameraStore";
 
 const Probe = ({ ...props }) => {
   const { scene, materials } = useGLTF("/probe-transformed.glb");
