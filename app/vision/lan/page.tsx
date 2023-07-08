@@ -29,13 +29,13 @@ const page = () => {
         </Box>
         <Physics>
           <ReflectorPlane
-            position={[0, -1, 0]}
+            position={[0, -0.5, 0]}
             rotation={[-Math.PI / 2, 0, 0]}
           />
           {/* <InstancedGeometry {...{ colors, number, size }} />
           <InstancedGeometryController {...{ colors, number, size }} /> */}
         </Physics>
-        <SceneRig />
+        {/* <SceneRig /> */}
         {/* <Effects /> */}
         {/* <ReflectorPlane position={[0, -2, 0]} rotation={[-Math.PI / 2, 0, 0]} /> */}
         <OrbitControls />
