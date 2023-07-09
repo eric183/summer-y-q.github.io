@@ -42,12 +42,14 @@ const ReflectorPlane = (props: any) => {
     // );
     // sin(modelPosition.x * uFrequency.x + uTime * 3.0) * 0.1;
   });
-
-  console.log(testMesh);
+  if (testMesh.current) {
+    console.log(testMesh.current);
+  }
   return (
     <mesh receiveShadow ref={testMesh} {...props}>
       {/* <planeGeometry args={[1, 1, 16, 16]} /> */}
-      <planeGeometry args={[5, 5, 64, 64]} />
+      <planeGeometry args={[10, 10, 64, 64]} />
+      {/* <planeGeometry args={[1, 1]} /> */}
       {/* <planeGeometry args={[2, 2, 5, 5]} /> */}
       {/* <rawShaderMaterial */}
       <shaderMaterial
