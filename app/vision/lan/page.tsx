@@ -17,7 +17,7 @@ const page = () => {
           // gl.shadowMap.enabled = true;
           // gl.shadowMap.type = THREE.PCFSoftShadowMap;
           // camera.position.lerp(new Vector3(0, 0, 1), 0.1);
-          camera.position.set(0, 0, 10);
+          camera.position.set(0, 0, 15);
         }}
       >
         <ambientLight intensity={0.5} />
@@ -32,9 +32,9 @@ const page = () => {
           shadow-mapSize={1024}
         />
 
-        <Box position={[0, 0, 0]}>
+        {/* <Box position={[0, 0, 0]}>
           <meshStandardMaterial color="hotpink" />
-        </Box>
+        </Box> */}
         <Physics>
           <ReflectorPlane
             position={[0, -0.5, 0]}
@@ -59,7 +59,7 @@ const SceneRig = () => {
       {
         x: 0,
         y: 0,
-        z: -8.689434161127473,
+        z: -4,
       } as THREE.Vector3,
       0.1
     );

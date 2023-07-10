@@ -28,8 +28,8 @@ void main() {
   // vElevation = elevation;
   // modelPos.y += 50.0;
   // modelPosition.y += sin(modelPosition.y * uFrequency.y + uTime * 3.0) * 0.1;
-  modelPosition.y += sin(modelPosition.x * uFrequency.x + uTime * 3.0) * 0.1;
-  modelPosition.y += sin(modelPosition.z * uFrequency.z + uTime * 2.0) * 0.1;
+  // modelPosition.y += sin(modelPosition.x * uFrequency.x + uTime * 3.0) * 0.1;
+  // modelPosition.y += sin(modelPosition.z * uFrequency.z + uTime * 2.0) * 0.1;
 
   // modelPosition.y = uTime;
   vec4 viewPosition = viewMatrix * modelPosition;
