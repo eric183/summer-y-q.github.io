@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { prismaClient } from "../../../prisma/client";
 import { Tag } from "@prisma/client";
-import LoadingCube from "./LoadingCube";
+import LoadingCube from "../../loading";
 import Article from "./article";
 
 type TArticle = {

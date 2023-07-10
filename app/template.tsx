@@ -16,10 +16,25 @@ const Template = ({ children }: { children: React.ReactNode }) => {
       setHasBack(false);
     }
   };
+
   React.useLayoutEffect(() => {
     checkPathnameHasBack();
+    console.log(pathname);
   }, [pathname]);
-  return children;
+
+  return (
+    <>
+      {children}
+      {pathname === "/" && (
+        <footer className="fixed bottom-5 z-10 w-full text-center">
+          <span className="text-white italic text-sm mr-2">
+            Driven by Prisma with
+          </span>
+          <span>❤️</span>
+        </footer>
+      )}
+    </>
+  );
 };
 
 export default Template;

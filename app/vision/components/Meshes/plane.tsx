@@ -36,11 +36,6 @@ const ReflectorPlane = (props: any) => {
 
   useFrame(({ clock }) => {
     testMat.current.uniforms.uTime.value = clock.getElapsedTime();
-    // console.log(
-    //   Math.sin(testMesh.current.position.x + clock.getElapsedTime() * 0.5),
-    //   1111
-    // );
-    // sin(modelPosition.x * uFrequency.x + uTime * 3.0) * 0.1;
   });
   if (testMesh.current) {
     console.log(testMesh.current);

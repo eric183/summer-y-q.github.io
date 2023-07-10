@@ -7,26 +7,21 @@ import clsx from "clsx";
 import InjectProviders from "./providers";
 import MainConainer from "~components/mainContainer";
 import VisionHeader from "~components/Layout/VisionHeader";
+import { useRouter } from "next/router";
 
 export const metadata: Metadata = {
   title: "🦊 Aloha 🦊",
   description: "Aloha",
 };
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = (props: { children: React.ReactNode }) => {
   return (
     <html>
       <body>
         <InjectProviders>
           <VisionHeader></VisionHeader>
-          <MainConainer>{children}</MainConainer>
+          <MainConainer>{props.children}</MainConainer>
         </InjectProviders>
-
-        <footer className="fixed bottom-5 z-10 w-full text-center">
-          <span className="text-white italic text-sm">
-            Driven by Prisma with ❤️
-          </span>
-        </footer>
       </body>
     </html>
   );
