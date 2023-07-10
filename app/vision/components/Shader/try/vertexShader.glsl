@@ -12,12 +12,14 @@ varying vec3 vPosition;
 varying vec3 vNormal;
 varying vec2 vUv;
 varying float vElevation;
+varying float vTime;
 
 void main() {
   
   vPosition = position;
+  vNormal = normal;
   vUv = uv;
-  
+  vTime = uTime;
 
   
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);
@@ -25,7 +27,7 @@ void main() {
   // elevation = sin(modelPosition.y * uFrequency.y + uTime * 3.0) * 0.1;
   // vElevation = elevation;
   // modelPos.y += 50.0;
-  modelPosition.y += sin(modelPosition.y * uFrequency.y + uTime * 3.0) * 0.1;
+  // modelPosition.y += sin(modelPosition.y * uFrequency.y + uTime * 3.0) * 0.1;
   modelPosition.y += sin(modelPosition.x * uFrequency.x + uTime * 3.0) * 0.1;
   modelPosition.y += sin(modelPosition.z * uFrequency.z + uTime * 2.0) * 0.1;
 

@@ -48,7 +48,9 @@ const ReflectorPlane = (props: any) => {
   return (
     <mesh receiveShadow ref={testMesh} {...props}>
       {/* <planeGeometry args={[1, 1, 16, 16]} /> */}
-      <planeGeometry args={[10, 10, 64, 64]} />
+      <sphereGeometry args={[3]} />
+      {/* <sphereGeometry args={[10, 10, 64]} /> */}
+      {/* <planeGeometry args={[10, 10, 64, 64]} /> */}
       {/* <planeGeometry args={[1, 1]} /> */}
       {/* <planeGeometry args={[2, 2, 5, 5]} /> */}
       {/* <rawShaderMaterial */}

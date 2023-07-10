@@ -19,7 +19,8 @@ const Page = async () => {
       <article
         className={clsx({
           [lobster.className]: true,
-          "text-white pt-16 pb-7 h-full flex flex-col text-center mt-72": true,
+          "text-white pb-7 h-full flex flex-col text-center items-center justify-center":
+            true,
         })}
       >
         <h1 className="font-extrabold text-7xl mb-24">
