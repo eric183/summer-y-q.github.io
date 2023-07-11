@@ -3,6 +3,8 @@ import * as path from "path";
 import * as fs from "fs";
 import { kanit } from "~ui/Fonts";
 import clsx from "clsx";
+import { AnimatePresence, motion } from "framer-motion";
+import Footer from "./components/Footer";
 const dir = path.join(__dirname);
 const filenames = fs.readdirSync(dir);
 
@@ -28,6 +30,7 @@ const page = () => {
           </li>
         ))}
       </ul>
+      <Footer />
     </div>
   );
 };
