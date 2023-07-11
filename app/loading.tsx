@@ -1,7 +1,7 @@
 "use client";
 
 import { Physics } from "@react-three/cannon";
-import { Preload, BakeShadows, Box } from "@react-three/drei";
+import { Preload, BakeShadows, Box, Loader } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import React, { useMemo, useRef, useState } from "react";
 import { Color, Mesh } from "three";
@@ -50,6 +50,7 @@ const Loading = () => {
       {/* <Effects /> */}
 
       <BakeShadows />
+      <Loader />
     </Canvas>
   );
 };
