@@ -6,6 +6,8 @@ import React from "react";
 import { kanit } from "~ui/Fonts";
 import { YMD_DOT_Format } from "~utils/timeformat";
 import { AnimatePresence, motion } from "framer-motion";
+import { debug } from "console";
+// import { prismaClient } from "../../../prisma/client";
 
 type TArticle = {
   id: string;
@@ -16,9 +18,32 @@ type TArticle = {
   htmlString: string;
 };
 
-const Article = ({ promise }: { promise: Promise<TArticle> }) => {
-  const articleData = React.use(promise);
-  console.log("loaded", articleData, "....");
+// const getCurrentArticle = (id: string): Promise<TArticle> => {
+//   const reponseData = prismaClient.blog.findUnique({
+//     where: {
+//       id,
+//     },
+//     select: {
+//       id: true,
+//       title: true,
+//       createdAt: true,
+//       updatedAt: true,
+//       tag: true,
+//       htmlString: true,
+//     },
+//   });
+
+//   return new Promise((resolve) =>
+//     setTimeout(() => resolve(reponseData as Promise<TArticle>), 1500)
+//   ); // simulate network delay
+// };
+const getCurrentArticle = async (slug: string) => {
+  const reponseData = await fetch(`/api/article/${slug}`);
+  return await reponseData.json();
+};
+
+const Article = ({ slug }: any) => {
+  const articleData = React.use(getCurrentArticle(slug));
   const { createdAt, id, htmlString, tag, title, updatedAt } = articleData!;
   return (
     <AnimatePresence>

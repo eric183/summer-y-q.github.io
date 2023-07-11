@@ -18,43 +18,40 @@ import { useControls } from "leva";
 
 const Loading = () => {
   return (
-    <div className="w-full h-full flex justify-center items-center">
-      <p className="text-white">loading...</p>
-    </div>
-    // <Canvas
-    //   // gl={{
-    //   //   antialias: true,
-    //   //   stencil: true,
-    //   //   depth: false,
-    //   // }}
-    //   shadows
-    //   dpr={[1, 1.5]}
-    //   eventPrefix="client"
-    //   camera={{ position: [1.5, 5, -18.5], fov: 45, near: 1, far: 1000 }}
-    //   onCreated={({ gl, camera }) => {
-    //     const cameraHistory = {
-    //       position: [-37.2050893151137, 4.398785004874994, 28.413967317544703],
-    //       rotation: [
-    //         -0.1535913960038849, -0.912856335057397, -0.12188727308899551,
-    //       ],
-    //     };
-    //   }}
-    // >
-    //   {/* <Lights /> */}
-    //   {/* <ambientLight intensity={10} />
-    //   <pointLight position={[0, 1, 0]} intensity={20} /> */}
-    //   <ambientLight />
-    //   <pointLight position={[10, 10, 10]} />
-    //   <LoadingBox />
+    <Canvas
+      // gl={{
+      //   antialias: true,
+      //   stencil: true,
+      //   depth: false,
+      // }}
+      shadows
+      dpr={[1, 1.5]}
+      eventPrefix="client"
+      camera={{ position: [1.5, 5, -18.5], fov: 45, near: 1, far: 1000 }}
+      onCreated={({ gl, camera }) => {
+        const cameraHistory = {
+          position: [-37.2050893151137, 4.398785004874994, 28.413967317544703],
+          rotation: [
+            -0.1535913960038849, -0.912856335057397, -0.12188727308899551,
+          ],
+        };
+      }}
+    >
+      {/* <Lights /> */}
+      {/* <ambientLight intensity={10} />
+      <pointLight position={[0, 1, 0]} intensity={20} /> */}
+      <ambientLight />
+      <pointLight position={[10, 10, 10]} />
+      <LoadingBox />
 
-    //   <Preload all />
+      <Preload all />
 
-    //   <SceneRig />
-    //   {/* <Effects /> */}
+      <SceneRig />
+      {/* <Effects /> */}
 
-    //   <BakeShadows />
-    //   <Loader />
-    // </Canvas>
+      <BakeShadows />
+      <Loader />
+    </Canvas>
   );
 };
 

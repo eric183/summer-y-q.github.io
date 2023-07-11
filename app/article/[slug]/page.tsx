@@ -13,31 +13,10 @@ type TArticle = {
   htmlString: string;
 };
 
-const getCurrentArticle = (id: string): Promise<TArticle> => {
-  const reponseData = prismaClient.blog.findUnique({
-    where: {
-      id,
-    },
-    select: {
-      id: true,
-      title: true,
-      createdAt: true,
-      updatedAt: true,
-      tag: true,
-      htmlString: true,
-    },
-  });
-
-  return new Promise((resolve) =>
-    setTimeout(() => resolve(reponseData as Promise<TArticle>), 1500)
-  ); // simulate network delay
-};
-
 const page = async ({ params }: any) => {
-  const articleData = getCurrentArticle(params.slug);
   return (
     <Suspense fallback={<LoadingCube />}>
-      <Article promise={articleData} />
+      <Article slug={params.slug} />
     </Suspense>
   );
 };
