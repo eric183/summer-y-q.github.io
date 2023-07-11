@@ -7,6 +7,9 @@ import { kanit } from "~ui/Fonts";
 import { YMD_DOT_Format } from "~utils/timeformat";
 import { AnimatePresence, motion } from "framer-motion";
 import { debug } from "console";
+import { useQuery } from "@tanstack/react-query";
+import LoadingCube from "../../loading";
+
 // import { prismaClient } from "../../../prisma/client";
 
 type TArticle = {
@@ -38,13 +41,20 @@ type TArticle = {
 //   ); // simulate network delay
 // };
 const getCurrentArticle = async (slug: string) => {
+  console.log("slugdsafklasdfjlaslkj", slug);
   const reponseData = await fetch(`/api/article/${slug}`);
   return await reponseData.json();
 };
 
 const Article = ({ slug }: any) => {
-  const articleData = React.use(getCurrentArticle(slug));
-  const { createdAt, id, htmlString, tag, title, updatedAt } = articleData!;
+  const { status, data } = useQuery({
+    queryKey: ["article", slug],
+    queryFn: async () => await getCurrentArticle(slug),
+    refetchOnWindowFocus: false,
+  });
+
+  if (status === "loading") return <LoadingCube />;
+  const { createdAt, id, htmlString, tag, title, updatedAt } = data! as any;
   return (
     <AnimatePresence>
       <motion.article

@@ -14,11 +14,7 @@ type TArticle = {
 };
 
 const page = async ({ params }: any) => {
-  return (
-    <Suspense fallback={<LoadingCube />}>
-      <Article slug={params.slug} />
-    </Suspense>
-  );
+  return <Article slug={params.slug} />;
 };
 
 export default page;

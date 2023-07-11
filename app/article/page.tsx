@@ -42,10 +42,10 @@ const Page = async () => {
           {data.map((item: any, key: number) => (
             <li key={key} className="mx-auto my-12 pt-10">
               <h1 className="text-white font-extrabold mb-5 lg:text-5xl md:text-2xl transition-all">
-                <ArticleLinkButton id={item.id} title={item.title} />
-                {/* <Link href={`/article/${item.id}`} prefetch={false}>
+                {/* <ArticleLinkButton id={item.id} title={item.title} /> */}
+                <Link href={`/article/${item.id}`} prefetch={false}>
                   {item.title}
-                </Link> */}
+                </Link>
               </h1>
               <p className="text-white">{YMD_Format(item.createdAt)}</p>
             </li>
