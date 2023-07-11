@@ -18,9 +18,7 @@ const Page = async () => {
           <Link href="/article">Aloha</Link>
         </h1>
 
-        <p className="font-semibold text-xl">
-          {YMD_DOT_Format(new Date().getTime().toString())}
-        </p>
+        <p className="font-semibold text-xl">{YMD_DOT_Format(new Date())}</p>
       </article>
     </div>
   );

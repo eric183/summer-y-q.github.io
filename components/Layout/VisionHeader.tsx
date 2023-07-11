@@ -40,7 +40,7 @@ const VisionHeader = () => {
   };
 
   return (
-    <div className="vision-header absolute left-0 top-0">
+    <div className="vision-header absolute left-0 top-0 z-50">
       {hasBack && (
         <AnimatePresence>
           <motion.div
@@ -100,17 +100,25 @@ const VisionHeader = () => {
             Article
           </Link>
         </motion.li>
+        {/* npx update-browserslist-db@latest */}
         <motion.li
+          variants={item}
+          className="mr-5 hover:text-white transition-colors"
+        >
+          <Link
+            className="focus-visible:outline-none hover:underline underline-offset-8"
+            href="/vision"
+          >
+            Vision
+          </Link>
+        </motion.li>
+        {/* <motion.li
           variants={item}
           className="mr-5 transition focus-visible:outline-none line-through cursor-not-allowed"
         >
-          {/* <Link
-            className="focus-visible:outline-none line-through cursor-not-allowed"
-            href="/vision"
-          > */}
+         
           Vision
-          {/* </Link> */}
-        </motion.li>
+        </motion.li> */}
 
         <motion.li
           variants={item}

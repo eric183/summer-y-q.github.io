@@ -1,13 +1,21 @@
 "use client";
 
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import React from "react";
+import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
+import React, { useMemo, useRef } from "react";
 import Lights from "../components/Lights";
 import { BakeShadows, Box, OrbitControls } from "@react-three/drei";
-import ReflectorPlane from "../components/Meshes/plane";
-import { Physics } from "@react-three/cannon";
+import { Physics, usePlane } from "@react-three/cannon";
 import { Effects } from "../components/Effects";
-import { Vector3 } from "three";
+import {
+  Color,
+  DoubleSide,
+  Mesh,
+  ShaderMaterial,
+  TextureLoader,
+  Vector3,
+} from "three";
+import FragmentShader from "./shader/fragmentShader.glsl";
+import VertexShader from "./shader/vertexShader.glsl";
 
 const page = () => {
   return (
@@ -43,7 +51,7 @@ const page = () => {
           {/* <InstancedGeometry {...{ colors, number, size }} />
           <InstancedGeometryController {...{ colors, number, size }} /> */}
         </Physics>
-        {/* <SceneRig /> */}
+        <SceneRig />
         {/* <Effects /> */}
         {/* <ReflectorPlane position={[0, -2, 0]} rotation={[-Math.PI / 2, 0, 0]} /> */}
         <OrbitControls />
@@ -53,13 +61,51 @@ const page = () => {
   );
 };
 
+const ReflectorPlane = (props: any) => {
+  const [ref] = usePlane(() => ({ ...props }), useRef<Mesh>(null));
+  const testMesh = useRef<Mesh>(null!);
+  const testMat = useRef<ShaderMaterial>(null!);
+  const { clock } = useThree();
+  const colorMap = useLoader(TextureLoader, "/empty.jpg");
+
+  const uniforms = useMemo(
+    () => ({
+      uFrequency: { value: new Vector3(10, 5, 5) },
+      uTime: { value: 0.0 },
+      uColor: { value: new Color("hotpink") },
+      uTexture: { value: colorMap },
+    }),
+    []
+  );
+
+  useFrame(({ clock }) => {
+    testMat.current.uniforms.uTime.value = clock.getElapsedTime();
+  });
+  if (testMesh.current) {
+    console.log(testMesh.current);
+  }
+  return (
+    <mesh receiveShadow ref={testMesh} {...props}>
+      <planeGeometry args={[10, 10, 10, 10]} />
+
+      <shaderMaterial
+        ref={testMat}
+        fragmentShader={FragmentShader}
+        vertexShader={VertexShader}
+        side={DoubleSide}
+        uniforms={uniforms}
+      />
+    </mesh>
+  );
+};
+
 const SceneRig = () => {
   return useFrame(({ camera }) => {
     camera.position.lerp(
       {
         x: 0,
         y: 0,
-        z: -4,
+        z: 35,
       } as THREE.Vector3,
       0.1
     );

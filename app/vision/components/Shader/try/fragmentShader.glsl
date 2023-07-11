@@ -13,36 +13,40 @@ varying float vTime;
 void main() 
 {
   
-  vec3 color = vec3(0.0);
+    // vec2 uv = fragCoord/iResolution.xy;
+    // uv -= 0.5;
+    // uv.x *= iResolution.x/iResolution.y;
 
-  // // Each result will return 1.0 (white) or 0.0 (black).
-  // // float left = step(0.1,vPosition.x);   // Similar to ( X greater than 0.1 )
-  // // float bottom = step(0.1,vPosition.y); // Similar to ( Y greater than 0.1 )
-  // vec3 borders = smoothstep(vec3(0.1), vec3(0.9), vPosition);
-  // // The multiplication of left*bottom will be similar to the logical AND.
-  // color = borders;
+    // float freq = (sin(iTime* 4.) + 1.0)/2.;
+    // vec2 R = vec2(freq/8.0 + 0.2, freq/9.0 + 0.12);
+    
+    // float sdf = length(max(abs(uv) - R,vec2(0)));
+    // float waves = smoothstep(0.0, 0.16,sin(sdf*100.0));
+    
+    // // Output to screen
+    // fragColor = vec4(vec3(waves),1.0);
+  vec2 uv = vUv;
+  uv -= 0.5;
+  uv.x *= 1.0;
 
-   float pct = 0.0;
-
-    // a. The DISTANCE from the pixel to the center
-    pct = distance(vPosition,vec3(0.5));
-
-    // b. The LENGTH of the vector
-    //    from the pixel to the center
-    // vec2 toCenter = vec2(0.5)-st;
-    // pct = length(toCenter);
-
-    // c. The SQUARE ROOT of the vector
-    //    from the pixel to the center
-    // vec2 tC = vec2(0.5)-st;
-    // pct = sqrt(tC.x*tC.x+tC.y*tC.y);
-
-   color = vec3(pct);
-
-
-  gl_FragColor = vec4(color,1.0);
+  float freq = (sin(vTime* 4.) + 1.0)/2.;
+  vec2 R = vec2(freq/8.0 + 0.2, freq/9.0 + 0.12);
+  float sdf = length(max(abs(uv) - R,vec2(0)));
+  float waves = smoothstep(0.0, 0.16,sin(sdf*100.0));
+  gl_FragColor = vec4(vec3(waves), 1.0);
 }
 
+
+
+// y = mod(x,0.5); // 返回 x 对 0.5 取模的值
+//y = fract(x); // 仅仅返回数的小数部分
+//y = ceil(x);  // 向正无穷取整
+//y = floor(x); // 向负无穷取整
+//y = sign(x);  // 提取 x 的正负号
+//y = abs(x);   // 返回 x 的绝对值
+//y = clamp(x,0.0,1.0); // 把 x 的值限制在 0.0 到 1.0
+//y = min(0.0,x);   // 返回 x 和 0.0 中的较小值
+//y = max(0.0,x);   // 返回 x 和 0.0 中的较大值  
 
 // void main() 
 // {
@@ -71,3 +75,22 @@ void main()
 //   gl_FragColor = vec4(mix(magenta, yellow, abs(sin(fractTime))), 1.0);
 //   // gl_FragColor = vec4(vec3(dot(colorA, colorB)), 1.0);
 // }
+
+
+// float step(float edge, float x)  
+// vec2 step(vec2 edge, vec2 x)  
+// vec3 step(vec3 edge, vec3 x)  
+// vec4 step(vec4 edge, vec4 x)
+
+// vec2 step(float edge, vec2 x)  
+// vec3 step(float edge, vec3 x)  
+// vec4 step(float edge, vec4 x)
+
+// float step(float edge, float x)  
+// vec2 step(vec2 edge, vec2 x)  
+// vec3 step(vec3 edge, vec3 x)  
+// vec4 step(vec4 edge, vec4 x)
+
+// vec2 step(float edge, vec2 x)  
+// vec3 step(float edge, vec3 x)  
+// vec4 step(float edge, vec4 x)
