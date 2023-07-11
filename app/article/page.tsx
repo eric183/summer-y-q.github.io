@@ -42,7 +42,6 @@ const Page = async () => {
           {data.map((item: any, key: number) => (
             <li key={key} className="mx-auto my-12 pt-10">
               <h1 className="text-white font-extrabold mb-5 lg:text-5xl md:text-2xl transition-all">
-                {/* <ArticleLinkButton id={item.id} title={item.title} /> */}
                 <Link href={`/article/${item.id}`} shallow prefetch={false}>
                   {item.title}
                 </Link>
@@ -55,5 +54,6 @@ const Page = async () => {
     </article>
   );
 };
+// {/* <ArticleLinkButton id={item.id} title={item.title} /> */}
 
 export default Page;
