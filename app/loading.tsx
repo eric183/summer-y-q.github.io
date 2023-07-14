@@ -55,7 +55,11 @@ import { useControls } from "leva";
 //   );
 // };
 const Loading = () => {
-  return <div>loading...</div>;
+  return (
+    <div className="w-full h-full flex items-center justify-center">
+      <p className="text-center text-white">loading...</p>
+    </div>
+  );
 };
 
 const LoadingBox = () => {

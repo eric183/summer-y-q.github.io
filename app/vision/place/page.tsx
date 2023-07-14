@@ -23,15 +23,11 @@ const page = () => {
     <div className="w-full h-full relative z-10">
       <Canvas
         onCreated={({ gl, camera }) => {
-          // gl.shadowMap.enabled = true;
-          // gl.shadowMap.type = THREE.PCFSoftShadowMap;
-          // camera.position.lerp(new Vector3(0, 0, 1), 0.1);
           camera.position.set(0, 0, 15);
         }}
       >
         <ambientLight intensity={0.5} />
-        {/* <pointLight position={[1, 1, 1]} /> */}
-        {/* <directionalLight position={[1, 0, 1]} intensity={20} /> */}
+
         <spotLight
           position={[10, 20, 10]}
           angle={0.12}
@@ -41,20 +37,11 @@ const page = () => {
           shadow-mapSize={1024}
         />
 
-        {/* <Box position={[0, 0, 0]}>
-          <meshStandardMaterial color="hotpink" />
-        </Box> */}
         <Physics>
-          <ReflectorPlane
-            position={[0, -0.5, 0]}
-            // rotation={[-Math.PI / 2, 0, 0]}
-          />
-          {/* <InstancedGeometry {...{ colors, number, size }} />
-          <InstancedGeometryController {...{ colors, number, size }} /> */}
+          <ReflectorPlane position={[0, -0.5, 0]} />
         </Physics>
         <SceneRig />
-        {/* <Effects /> */}
-        {/* <ReflectorPlane position={[0, -2, 0]} rotation={[-Math.PI / 2, 0, 0]} /> */}
+
         <OrbitControls />
         <BakeShadows />
       </Canvas>

@@ -24,14 +24,24 @@ const page = () => {
         camera.position.set(0, 0, 15);
       }}
     >
-      {/* <Physics>
-          <ReflectorPlane position={[0, -0.5, 0]} />
-        </Physics> */}
+      <ambientLight intensity={0.5} />
 
-      {/* <SceneRig />
+      <spotLight
+        position={[10, 20, 10]}
+        angle={0.12}
+        penumbra={1}
+        intensity={1}
+        castShadow
+        shadow-mapSize={1024}
+      />
+      <Physics>
+        <ReflectorPlane position={[0, -0.5, 0]} />
+      </Physics>
 
-        <OrbitControls />
-        <BakeShadows /> */}
+      <SceneRig />
+
+      <OrbitControls />
+      <BakeShadows />
     </Canvas>
   );
 };
