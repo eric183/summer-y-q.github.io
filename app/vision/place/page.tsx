@@ -82,9 +82,11 @@ const ReflectorPlane = (props: any) => {
   useFrame(({ clock }) => {
     testMat.current.uniforms.uTime.value = clock.getElapsedTime();
   });
+
   if (testMesh.current) {
     console.log(testMesh.current);
   }
+
   return (
     <mesh receiveShadow ref={testMesh} {...props}>
       <icosahedronBufferGeometry args={[6, 100]} />
