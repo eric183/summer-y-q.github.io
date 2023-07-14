@@ -19,24 +19,42 @@ import VertexShader from "./shader/vertexShader.glsl";
 
 const page = () => {
   return (
-    <div className="w-full h-full relative z-10">
-      <Canvas
-        onCreated={({ gl, camera }) => {
-          camera.position.set(0, 0, 15);
-        }}
-      >
-        <Physics>
+    <Canvas
+      onCreated={({ gl, camera }) => {
+        camera.position.set(0, 0, 15);
+      }}
+    >
+      {/* <Physics>
           <ReflectorPlane position={[0, -0.5, 0]} />
-        </Physics>
+        </Physics> */}
 
-        {/* <SceneRig />
+      {/* <SceneRig />
 
         <OrbitControls />
         <BakeShadows /> */}
-      </Canvas>
-    </div>
+    </Canvas>
   );
 };
+// const page = () => {
+//   return (
+//     <div className="w-full h-full relative z-10">
+//       <Canvas
+//         onCreated={({ gl, camera }) => {
+//           camera.position.set(0, 0, 15);
+//         }}
+//       >
+//         {/* <Physics>
+//           <ReflectorPlane position={[0, -0.5, 0]} />
+//         </Physics> */}
+
+//         {/* <SceneRig />
+
+//         <OrbitControls />
+//         <BakeShadows /> */}
+//       </Canvas>
+//     </div>
+//   );
+// };
 
 const ReflectorPlane = (props: any) => {
   const [ref] = usePlane(() => ({ ...props }), useRef<Mesh>(null));
