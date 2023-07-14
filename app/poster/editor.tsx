@@ -6,7 +6,6 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
-import TreeViewPlugin from "./plugins/TreeViewPlugin";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 import { TableCellNode, TableNode, TableRowNode } from "@lexical/table";
 import { ListItemNode, ListNode } from "@lexical/list";
@@ -22,10 +21,7 @@ import CodeHighlightPlugin from "./plugins/CodeHighlightPlugin";
 import AutoLinkPlugin from "./plugins/AutoLinkPlugin";
 import themeConfig from "./theme/config";
 import ToolbarPlugin from "./Toobar";
-import React, { useEffect } from "react";
-import DropDown from "./TagList";
-import Example from "./TagList";
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import React from "react";
 import ArticleSubmiterPlugin from "./plugins/ArticleSubmiterPlugin";
 
 function Placeholder() {
