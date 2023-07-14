@@ -107,7 +107,7 @@ const SceneRig = () => {
         x: 0,
         y: 0,
         z: 35,
-      } as THREE.Vector3,
+      } as Vector3,
       0.1
     );
     camera.lookAt(0, 0, 0);
