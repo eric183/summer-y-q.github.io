@@ -10,11 +10,11 @@ import { debug } from "console";
 import { useQuery } from "@tanstack/react-query";
 import LoadingCube from "../../loading";
 import { prismaClient } from "../../../prisma/client";
+import { getCurrentArticle } from "./articleRequest";
 
-// import { prismaClient } from "../../../prisma/client";
-export const revalidate = "force-cache";
+export const revalidate = 0; // disable cache
 
-type TArticle = {
+export type TArticle = {
   id: string;
   title: string;
   createdAt: Date;
@@ -23,43 +23,8 @@ type TArticle = {
   htmlString: string;
 };
 
-const getCurrentArticle = (id: string): Promise<TArticle> => {
-  console.log(id, "...........");
-
-  const reponseData = prismaClient.blog.findUnique({
-    where: {
-      id,
-    },
-    select: {
-      id: true,
-      title: true,
-      createdAt: true,
-      updatedAt: true,
-      tag: true,
-      htmlString: true,
-    },
-  });
-
-  return reponseData as Promise<TArticle>;
-  // return new Promise((resolve) =>
-  //   setTimeout(() => resolve(reponseData as Promise<TArticle>), 1500)
-  // ); // simulate network delay
-};
-// const getCurrentArticle = async (slug: string) => {
-//   console.log("slugdsafklasdfjlaslkj", slug);
-//   const reponseData = await fetch(`/api/article/${slug}`);
-//   return await reponseData.json();
-// };
-
 const Article = async ({ slug }: any) => {
-  // const { status, data } = useQuery({
-  //   queryKey: ["article", slug],
-  //   queryFn: async () => await getCurrentArticle(slug),
-  //   refetchOnWindowFocus: false,
-  // });
-
   const data = await getCurrentArticle(slug);
-  // if (status === "loading") return <LoadingCube />;
   const { createdAt, id, htmlString, tag, title, updatedAt } = data! as any;
   return (
     // <AnimatePresence>
