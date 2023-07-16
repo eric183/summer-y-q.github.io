@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import { Tag } from "@prisma/client";
 import clsx from "clsx";
@@ -9,8 +9,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { debug } from "console";
 import { useQuery } from "@tanstack/react-query";
 import LoadingCube from "../../loading";
+import { prismaClient } from "../../../prisma/client";
 
 // import { prismaClient } from "../../../prisma/client";
+export const revalidate = "force-cache";
 
 type TArticle = {
   id: string;
@@ -21,71 +23,75 @@ type TArticle = {
   htmlString: string;
 };
 
-// const getCurrentArticle = (id: string): Promise<TArticle> => {
-//   const reponseData = prismaClient.blog.findUnique({
-//     where: {
-//       id,
-//     },
-//     select: {
-//       id: true,
-//       title: true,
-//       createdAt: true,
-//       updatedAt: true,
-//       tag: true,
-//       htmlString: true,
-//     },
-//   });
+const getCurrentArticle = (id: string): Promise<TArticle> => {
+  console.log(id, "...........");
 
-//   return new Promise((resolve) =>
-//     setTimeout(() => resolve(reponseData as Promise<TArticle>), 1500)
-//   ); // simulate network delay
-// };
-const getCurrentArticle = async (slug: string) => {
-  console.log("slugdsafklasdfjlaslkj", slug);
-  const reponseData = await fetch(`/api/article/${slug}`);
-  return await reponseData.json();
-};
-
-const Article = ({ slug }: any) => {
-  const { status, data } = useQuery({
-    queryKey: ["article", slug],
-    queryFn: async () => await getCurrentArticle(slug),
-    refetchOnWindowFocus: false,
+  const reponseData = prismaClient.blog.findUnique({
+    where: {
+      id,
+    },
+    select: {
+      id: true,
+      title: true,
+      createdAt: true,
+      updatedAt: true,
+      tag: true,
+      htmlString: true,
+    },
   });
 
-  if (status === "loading") return <LoadingCube />;
+  return reponseData as Promise<TArticle>;
+  // return new Promise((resolve) =>
+  //   setTimeout(() => resolve(reponseData as Promise<TArticle>), 1500)
+  // ); // simulate network delay
+};
+// const getCurrentArticle = async (slug: string) => {
+//   console.log("slugdsafklasdfjlaslkj", slug);
+//   const reponseData = await fetch(`/api/article/${slug}`);
+//   return await reponseData.json();
+// };
+
+const Article = async ({ slug }: any) => {
+  // const { status, data } = useQuery({
+  //   queryKey: ["article", slug],
+  //   queryFn: async () => await getCurrentArticle(slug),
+  //   refetchOnWindowFocus: false,
+  // });
+
+  const data = await getCurrentArticle(slug);
+  // if (status === "loading") return <LoadingCube />;
   const { createdAt, id, htmlString, tag, title, updatedAt } = data! as any;
   return (
-    <AnimatePresence>
-      <motion.article
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className={clsx({
-          [kanit.className]: true,
-          "text-white px-10 pt-16 pb-7 h-full flex flex-col justify-between mb-10":
-            true,
-        })}
-      >
-        <div className="flex flex-col overflow-auto h-3/4 shadow-2xl hover:shadow-md hover:shadow-black rounded-2xl py-3 px-6 transition-shadow">
-          <h1
-            className={clsx({
-              "text-5xl font-extrabold mb-5": true,
-            })}
-          >
-            {title}
-          </h1>
-          <div
-            className="text-xl font-semibold mt-6 ml-2"
-            dangerouslySetInnerHTML={{
-              __html: htmlString ?? "",
-            }}
-          ></div>
-        </div>
+    // <AnimatePresence>
+    <article
+      // initial={{ opacity: 0 }}
+      // animate={{ opacity: 1 }}
+      // exit={{ opacity: 0 }}
+      className={clsx({
+        [kanit.className]: true,
+        "text-white px-10 pt-16 pb-7 h-full flex flex-col justify-between mb-10":
+          true,
+      })}
+    >
+      <div className="flex flex-col overflow-auto h-3/4 shadow-2xl hover:shadow-md hover:shadow-black rounded-2xl py-3 px-6 transition-shadow">
+        <h1
+          className={clsx({
+            "text-5xl font-extrabold mb-5": true,
+          })}
+        >
+          {title}
+        </h1>
+        <div
+          className="text-xl font-semibold mt-6 ml-2"
+          dangerouslySetInnerHTML={{
+            __html: htmlString ?? "",
+          }}
+        ></div>
+      </div>
 
-        <p>{YMD_DOT_Format(createdAt as unknown as string)}</p>
-      </motion.article>
-    </AnimatePresence>
+      <p>{YMD_DOT_Format(createdAt as unknown as string)}</p>
+    </article>
+    // </AnimatePresence>
   );
 };
 
