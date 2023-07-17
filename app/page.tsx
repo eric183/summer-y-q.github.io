@@ -3,10 +3,12 @@ import { YMD_DOT_Format } from "../utils/timeformat";
 import clsx from "clsx";
 import { lobster } from "../ui/Fonts";
 import Link from "next/link";
+import Github from "~components/Layout/github";
 
 const Page = async () => {
   return (
     <div className="ml-2 h-full overflow-hidden">
+      <Github />
       <article
         className={clsx({
           [lobster.className]: true,
