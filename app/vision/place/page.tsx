@@ -10,22 +10,28 @@ import {
   Center,
   ContactShadows,
   Gltf,
+  MeshTransmissionMaterial,
   OrbitControls,
   PivotControls,
   RandomizedLight,
   useGLTF,
+  useMask,
 } from "@react-three/drei";
 import { Physics, usePlane } from "@react-three/cannon";
 import { Effects } from "../components/Effects";
 import {
+  CanvasTexture,
   Color,
   DoubleSide,
   Euler,
+  FrontSide,
   Matrix4,
   Mesh,
   Quaternion,
+  RepeatWrapping,
   ShaderMaterial,
   TextureLoader,
+  UVMapping,
   Vector3,
 } from "three";
 import FragmentShader from "./shader/fragmentShader.glsl";
@@ -48,7 +54,7 @@ const Page = () => {
           camera.position.set(0, 0, 15);
         }}
       >
-        <color attach="background" args={["#fff"]} />
+        <color attach="background" args={["goldenrod"]} />
         {/* <color attach="background" args={["#000"]} /> */}
         {/* <fog attach="fog" args={["#17171b", 30, 40]} /> */}
         {/* <fog attach="fog" args={["#000", 8, 35]} /> */}
@@ -64,6 +70,9 @@ const Page = () => {
           shadow-mapSize={1024 * 2}
         />
         <Light lightPosition={lightPosition} />
+        <Center top>
+          <Suzi rotation={[-0.63, 0, 0]} scale={2} />
+        </Center>
         <Center top position={[2, 0, 2]}>
           <mesh castShadow>
             <sphereGeometry args={[0.25, 64, 64]} />
@@ -97,6 +106,196 @@ const Page = () => {
   );
 };
 
+function Suzi(props) {
+  // const { scene, materials } = useGLTF(
+  //   "https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/suzanne-high-poly/model.gltf"
+  // );
+
+  const config = useControls({
+    meshPhysicalMaterial: false,
+    transmissionSampler: false,
+    backside: false,
+    samples: { value: 10, min: 1, max: 32, step: 1 },
+    resolution: { value: 2048, min: 256, max: 2048, step: 256 },
+    transmission: { value: 1, min: 0, max: 1 },
+    roughness: { value: 0.0, min: 0, max: 1, step: 0.01 },
+    thickness: { value: 3.5, min: 0, max: 10, step: 0.01 },
+    ior: { value: 1.5, min: 1, max: 5, step: 0.01 },
+    chromaticAberration: { value: 0.06, min: 0, max: 1 },
+    anisotropy: { value: 0.1, min: 0, max: 1, step: 0.01 },
+    distortion: { value: 0.0, min: 0, max: 1, step: 0.01 },
+    distortionScale: { value: 0.3, min: 0.01, max: 1, step: 0.01 },
+    temporalDistortion: { value: 0.5, min: 0, max: 1, step: 0.01 },
+    clearcoat: { value: 1, min: 0, max: 1 },
+    attenuationDistance: { value: 0.5, min: 0, max: 10, step: 0.01 },
+    attenuationColor: "#ffffff",
+    color: "#c9ffa1",
+    bg: "#839681",
+  });
+
+  const { nodes, materials } = useGLTF("/transformed.glb") as any;
+
+  // useLayoutEffect(() => {
+  //   scene.traverse((obj) => (obj.receiveShadow = obj.castShadow = true));
+  //   (materials.default as any).color.set("orange");
+  //   (materials.default as any).roughness = 0;
+  //   (materials.default as any).normalMap = new CanvasTexture(
+  //     new FlakesTexture(),
+  //     UVMapping,
+  //     RepeatWrapping,
+  //     RepeatWrapping
+  //   );
+  //   (materials.default as any).normalMap.repeat.set(40, 40);
+  //   (materials.default as any).normalScale.set(0.1, 0.1);
+  // });
+  return (
+    // <Aquarium position={[0, 0.25, 0]}>
+    <group dispose={null} scale={0.5}>
+      <mesh geometry={nodes.cube1.geometry} position={[0, 0.38, 0]}>
+        {config.meshPhysicalMaterial ? (
+          <meshPhysicalMaterial {...config} />
+        ) : (
+          <MeshTransmissionMaterial
+            background={new Color(config.bg)}
+            {...config}
+          />
+        )}
+      </mesh>
+      <mesh
+        castShadow
+        renderOrder={-100}
+        geometry={nodes.cube2.geometry}
+        material={materials.cube_mat}
+        material-side={FrontSide}
+        position={[-0.56, 0.38, -0.11]}
+      />
+      <mesh
+        geometry={nodes.bubbles.geometry}
+        material={materials.cube_bubbles_mat}
+        position={[-0.56, 0.38, -0.11]}
+      />
+      <group position={[-0.56, 0.38, -0.41]}>
+        <mesh
+          geometry={nodes.arrows.geometry}
+          material={materials.weapons_mat}
+        />
+        <mesh
+          geometry={nodes.skeleton_1.geometry}
+          material={materials.skele_mat}
+        />
+        <mesh
+          geometry={nodes.skeleton_2.geometry}
+          material={materials.weapons_mat}
+          material-side={FrontSide}
+        />
+      </group>
+    </group>
+    // </Aquarium>
+  );
+}
+
+function Aquarium({ children, ...props }) {
+  const ref = useRef<any>();
+  const { nodes } = useGLTF("/transformed.glb") as any;
+  const stencil = useMask(1, false);
+  useLayoutEffect(() => {
+    // Apply stencil to all contents
+    ref.current.traverse(
+      (child) => child.material && Object.assign(child.material, { ...stencil })
+    );
+  }, []);
+  return (
+    <group {...props} dispose={null}>
+      <mesh
+        castShadow
+        scale={[0.61 * 6, 0.8 * 6, 1 * 6]}
+        geometry={nodes.Cube.geometry}
+      >
+        <MeshTransmissionMaterial
+          // backside
+          // iridescence={1}
+          // iridescenceIOR={1}
+          // iridescenceThicknessRange={[0, 1400]}
+          samples={4}
+          thickness={3}
+          chromaticAberration={0.025}
+          anisotropy={0.1}
+          distortion={0.1}
+          distortionScale={0.1}
+          temporalDistortion={0.2}
+        />
+      </mesh>
+      <group ref={ref}>{children}</group>
+    </group>
+  );
+}
+
+function GelatinousCube(props) {
+  const config = useControls({
+    meshPhysicalMaterial: false,
+    transmissionSampler: false,
+    backside: false,
+    samples: { value: 10, min: 1, max: 32, step: 1 },
+    resolution: { value: 2048, min: 256, max: 2048, step: 256 },
+    transmission: { value: 1, min: 0, max: 1 },
+    roughness: { value: 0.0, min: 0, max: 1, step: 0.01 },
+    thickness: { value: 3.5, min: 0, max: 10, step: 0.01 },
+    ior: { value: 1.5, min: 1, max: 5, step: 0.01 },
+    chromaticAberration: { value: 0.06, min: 0, max: 1 },
+    anisotropy: { value: 0.1, min: 0, max: 1, step: 0.01 },
+    distortion: { value: 0.0, min: 0, max: 1, step: 0.01 },
+    distortionScale: { value: 0.3, min: 0.01, max: 1, step: 0.01 },
+    temporalDistortion: { value: 0.5, min: 0, max: 1, step: 0.01 },
+    clearcoat: { value: 1, min: 0, max: 1 },
+    attenuationDistance: { value: 0.5, min: 0, max: 10, step: 0.01 },
+    attenuationColor: "#ffffff",
+    color: "#c9ffa1",
+    bg: "#839681",
+  });
+  const { nodes, materials } = useGLTF("/transformed.glb") as any;
+  return (
+    <group dispose={null} scale={0.5}>
+      <mesh geometry={nodes.cube1.geometry} position={[0, 0.38, 0]}>
+        {config.meshPhysicalMaterial ? (
+          <meshPhysicalMaterial {...config} />
+        ) : (
+          <MeshTransmissionMaterial
+            background={new Color(config.bg)}
+            {...config}
+          />
+        )}
+      </mesh>
+      <mesh
+        castShadow
+        renderOrder={-100}
+        geometry={nodes.cube2.geometry}
+        material={materials.cube_mat}
+        material-side={FrontSide}
+        position={[-0.56, 0.38, -0.11]}
+      />
+      <mesh
+        geometry={nodes.bubbles.geometry}
+        material={materials.cube_bubbles_mat}
+        position={[-0.56, 0.38, -0.11]}
+      />
+      <group position={[-0.56, 0.38, -0.41]}>
+        <mesh
+          geometry={nodes.arrows.geometry}
+          material={materials.weapons_mat}
+        />
+        <mesh
+          geometry={nodes.skeleton_1.geometry}
+          material={materials.skele_mat}
+        />
+        <mesh
+          geometry={nodes.skeleton_2.geometry}
+          material={materials.weapons_mat}
+          material-side={FrontSide}
+        />
+      </group>
+    </group>
+  );
+}
 const Light = (props: any) => {
   const ref = useRef<any>();
   const threeInstance = useThree();
