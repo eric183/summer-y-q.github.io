@@ -9,6 +9,7 @@ import {
   Box,
   Center,
   ContactShadows,
+  Float,
   Gltf,
   MeshTransmissionMaterial,
   OrbitControls,
@@ -37,6 +38,7 @@ import {
 import FragmentShader from "./shader/fragmentShader.glsl";
 import VertexShader from "./shader/vertexShader.glsl";
 import { button, useControls } from "leva";
+import { config } from "process";
 
 const Page = () => {
   // const props = useControls({
@@ -90,7 +92,7 @@ const Page = () => {
           castShadow
           position={[-2, 0.22, -2.8]}
         />
-        <SceneRig />
+        {/* <SceneRig /> */}
         {/* <ContactShadows
           smooth={true}
           scale={100}
@@ -131,66 +133,49 @@ function Suzi(props) {
     attenuationColor: "#ffffff",
     color: "#c9ffa1",
     bg: "#839681",
+    rotation: {
+      value: {
+        x: 0,
+        y: -1.25,
+        z: 0,
+      },
+    },
+    position: {
+      value: {
+        x: 0,
+        y: -1.25,
+        z: 0,
+      },
+    },
   });
 
-  const { nodes, materials } = useGLTF("/transformed.glb") as any;
-
-  // useLayoutEffect(() => {
-  //   scene.traverse((obj) => (obj.receiveShadow = obj.castShadow = true));
-  //   (materials.default as any).color.set("orange");
-  //   (materials.default as any).roughness = 0;
-  //   (materials.default as any).normalMap = new CanvasTexture(
-  //     new FlakesTexture(),
-  //     UVMapping,
-  //     RepeatWrapping,
-  //     RepeatWrapping
-  //   );
-  //   (materials.default as any).normalMap.repeat.set(40, 40);
-  //   (materials.default as any).normalScale.set(0.1, 0.1);
-  // });
   return (
-    // <Aquarium position={[0, 0.25, 0]}>
-    <group dispose={null} scale={0.5}>
-      <mesh geometry={nodes.cube1.geometry} position={[0, 0.38, 0]}>
-        {config.meshPhysicalMaterial ? (
-          <meshPhysicalMaterial {...config} />
-        ) : (
-          <MeshTransmissionMaterial
-            background={new Color(config.bg)}
-            {...config}
-          />
-        )}
-      </mesh>
-      <mesh
-        castShadow
-        renderOrder={-100}
-        geometry={nodes.cube2.geometry}
-        material={materials.cube_mat}
-        material-side={FrontSide}
-        position={[-0.56, 0.38, -0.11]}
-      />
-      <mesh
-        geometry={nodes.bubbles.geometry}
-        material={materials.cube_bubbles_mat}
-        position={[-0.56, 0.38, -0.11]}
-      />
-      <group position={[-0.56, 0.38, -0.41]}>
-        <mesh
-          geometry={nodes.arrows.geometry}
-          material={materials.weapons_mat}
-        />
-        <mesh
-          geometry={nodes.skeleton_1.geometry}
-          material={materials.skele_mat}
-        />
-        <mesh
-          geometry={nodes.skeleton_2.geometry}
-          material={materials.weapons_mat}
-          material-side={FrontSide}
-        />
+    <Aquarium
+      {...config}
+      position={[0, 0.25, 0]}
+      scale={0.2}
+      rotation={[config.rotation.x, config.rotation.y, config.rotation.z]}
+    >
+      <group dispose={null}>
+        <Float>
+          <Center top>
+            <Building
+              position={[
+                config.position.x,
+                config.position.y,
+                config.position.z,
+              ]}
+              rotation={[
+                config.rotation.x,
+                config.rotation.y,
+                config.rotation.z,
+              ]}
+              s
+            />
+          </Center>
+        </Float>
       </group>
-    </group>
-    // </Aquarium>
+    </Aquarium>
   );
 }
 
@@ -212,10 +197,6 @@ function Aquarium({ children, ...props }) {
         geometry={nodes.Cube.geometry}
       >
         <MeshTransmissionMaterial
-          // backside
-          // iridescence={1}
-          // iridescenceIOR={1}
-          // iridescenceThicknessRange={[0, 1400]}
           samples={4}
           thickness={3}
           chromaticAberration={0.025}
@@ -223,6 +204,7 @@ function Aquarium({ children, ...props }) {
           distortion={0.1}
           distortionScale={0.1}
           temporalDistortion={0.2}
+          {...props}
         />
       </mesh>
       <group ref={ref}>{children}</group>
@@ -255,7 +237,7 @@ function GelatinousCube(props) {
   const { nodes, materials } = useGLTF("/transformed.glb") as any;
   return (
     <group dispose={null} scale={0.5}>
-      <mesh geometry={nodes.cube1.geometry} position={[0, 0.38, 0]}>
+      {/* <mesh geometry={nodes.cube1.geometry} position={[0, 0.38, 0]}>
         {config.meshPhysicalMaterial ? (
           <meshPhysicalMaterial {...config} />
         ) : (
@@ -292,7 +274,7 @@ function GelatinousCube(props) {
           material={materials.weapons_mat}
           material-side={FrontSide}
         />
-      </group>
+      </group> */}
     </group>
   );
 }
@@ -318,11 +300,85 @@ const Light = (props: any) => {
 
   return (
     <group ref={ref}>
-      <AccumulativeShadows
+      {/* <AccumulativeShadows
         temporal
         toneMapped
         frames={100}
-        color="purple"
+        color="lightblue"
+        // color="white"
+        colorBlend={2}
+        opacity={0.7}
+        scale={60}
+        // position={[0, 0, 0]}
+        alphaTest={0.9}
+      >
+        <RandomizedLight
+          amount={8}
+          radius={5}
+          ambient={0.5}
+          position={props.lightPosition}
+          bias={0.001}
+
+          // amount={8}
+          // radius={15}
+          // ambient={0.5}
+          // intensity={1}
+          // position={[-5, 10, -5]}
+          // size={20}
+        />
+      </AccumulativeShadows> */}
+
+      {/* <AccumulativeShadows
+        temporal
+        frames={100}
+        alphaTest={0.85}
+        opacity={0.85}
+        scale={12}
+      >
+        <RandomizedLight
+          amount={8}
+          radius={5}
+          ambient={0.5}
+          intensity={1}
+          position={[5, 5, -5]}
+          bias={0.001}
+        />
+      </AccumulativeShadows> */}
+      <AccumulativeShadows
+        temporal
+        frames={100}
+        alphaTest={0.8}
+        opacity={0.75}
+        scale={12}
+      >
+        <RandomizedLight
+          amount={8}
+          radius={4}
+          ambient={0.5}
+          intensity={1}
+          // position={[2.5, 5, -10]}
+          position={props.lightPosition}
+        />
+      </AccumulativeShadows>
+      {/* <AccumulativeShadows
+        position={[0, -1.16, 0]}
+        frames={100}
+        alphaTest={0.9}
+        scale={10}
+      >
+        <RandomizedLight
+          amount={8}
+          radius={10}
+          ambient={0.5}
+          position={[1, 5, -1]}
+        />
+      </AccumulativeShadows> */}
+
+      {/* <AccumulativeShadows
+        temporal
+        toneMapped
+        frames={100}
+        color="lightblue"
         colorBlend={2}
         opacity={2}
         scale={10}
@@ -335,7 +391,7 @@ const Light = (props: any) => {
           position={props.lightPosition}
           bias={0.001}
         />
-      </AccumulativeShadows>
+      </AccumulativeShadows> */}
       {/* <PivotControls annotations>
         <directionalLight
           position={[5, 5, -8]}
