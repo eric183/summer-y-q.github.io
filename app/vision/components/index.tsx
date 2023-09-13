@@ -76,17 +76,10 @@ const CoinApp = ({ containerRef }: any) => {
         }
       }}
     >
-      {/* <color attach="background" args={["black"]} /> */}
-      {/* <fog attach="fog" args={["#000", 5, 100]} /> */}
-
       <Lights />
 
+      {/* <PhysicComponent></PhysicComponent> */}
       <Meshes portal={containerRef} />
-      <Physics>
-        <ReflectorPlane position={[0, -2, 0]} rotation={[-Math.PI / 2, 0, 0]} />
-        <InstancedGeometry {...{ colors, number, size }} />
-        <InstancedGeometryController {...{ colors, number, size }} />
-      </Physics>
 
       <Controls target={target} />
 
@@ -100,14 +93,14 @@ const CoinApp = ({ containerRef }: any) => {
   );
 };
 
+const PhysicComponent = () => {
+  return (
+    <Physics>
+      <ReflectorPlane position={[0, -2, 0]} rotation={[-Math.PI / 2, 0, 0]} />
+      {/* <InstancedGeometry {...{ colors, number, size }} />
+      <InstancedGeometryController {...{ colors, number, size }} /> */}
+    </Physics>
+  );
+};
+
 export default CoinApp;
-
-// const SceneRig = () => {
-//   return useFrame((state, delta) => {
-//     state.camera.position.lerp(new Vector3(), 0.1);
-//     state.camera.lookAt(0, 0, 0);
-//   });
-// };
-
-// function CameraRig() {
-// }
