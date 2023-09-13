@@ -1,10 +1,10 @@
 import React from "react";
-import CoinApp from "../components";
+import Joker from "./webgl/me";
 
 const page = () => {
   return (
     <div className="w-full h-full">
-      <CoinApp />
+      <Joker />
     </div>
   );
 };

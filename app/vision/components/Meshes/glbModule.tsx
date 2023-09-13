@@ -1,55 +1,25 @@
 import {
-  Box,
   Clone,
-  Float,
   Html,
-  Mask,
-  MeshDistortMaterial,
-  PivotControls,
   useAnimations,
-  useCursor,
   useGLTF,
   useMask,
-  useScroll,
 } from "@react-three/drei";
 
 import { useControls } from "leva";
+import { forwardRef, useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import {
-  ChangeEvent,
-  FC,
-  forwardRef,
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import THREE, {
-  AdditiveBlending,
   Color,
-  DoubleSide,
-  FrontSide,
   LoopPingPong,
-  MathUtils,
   Mesh,
-  MeshBasicMaterial,
-  MeshPhongMaterial,
   MeshStandardMaterial,
   RawShaderMaterial,
-  ShaderMaterial,
-  Vector2,
-  Vector3,
 } from "three";
-import { useStore } from "..";
 import Lights from "../Lights";
-import { CelShader } from "../Shader/CelShader";
 import { useFrame, useThree } from "@react-three/fiber";
 import { motion } from "framer-motion-3d";
 import { useAnimationControls } from "framer-motion";
-import gsap from "gsap";
 
-import { fragmentShader, vertexShader } from "../Shader";
 import { cameraStore } from "~components/Edit/base/Stores/cameraStore";
 
 const Probe = ({ ...props }) => {
