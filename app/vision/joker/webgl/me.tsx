@@ -12,18 +12,17 @@ import {
   DepthOfField,
   EffectComposer,
 } from "@react-three/postprocessing";
+import Meshes from "~app/vision/components/Meshes";
+import Controls from "~app/vision/components/Controls";
 
 import { useControls } from "leva";
 import { KernelSize } from "postprocessing";
-
-import Meshes from "~app/vision/components/Meshes";
 import { FloatText } from "~components/Edit/base/Overlays/floatText";
+import { JumpCubeLoading } from "~app/vision/components/Meshes/glbModule";
+import { cameraStore } from "~components/Edit/base/Stores/cameraStore";
 import ScrollBinder, {
   useScrollStore,
 } from "~components/Edit/base/scrollBinder";
-import Controls from "~app/vision/components/Controls";
-import { JumpCubeLoading } from "~app/vision/components/Meshes/glbModule";
-import { cameraStore } from "~components/Edit/base/Stores/cameraStore";
 
 const IndexLayout = styled.div`
   section {
@@ -96,11 +95,11 @@ const Me = () => {
         </ScrollControls>
       </Suspense>
 
-      <Controls target={target} />
-      <Preload all />
+      {/* <Controls target={target} /> */}
+      {/* <Preload all /> */}
       <SceneRig />
-      <EffectsWithEnv />
-      <BakeShadows />
+      {/* <EffectsWithEnv /> */}
+      {/* <BakeShadows /> */}
     </Canvas>
   );
 };
@@ -123,20 +122,24 @@ const LoadingLayout = (props: any) => {
 
 const SceneRig = () => {
   const { camera } = useThree();
-  const { position, positionCurve } = cameraStore();
+  const { position, positionCurve, scene } = cameraStore();
   const { data } = useScrollStore();
   useFrame((state) => {
     if (data && positionCurve) {
-      const vector_s = positionCurve.getPointAt(data.offset);
+      // console.log(data.offset, "data.offset");
+      // scene / 5
+      // 1
+      // const vector_s = positionCurve.getPointAt(data.offset);
+      const vector_s = positionCurve.getPointAt(scene / 5);
 
-      camera.position.copy(vector_s);
+      camera.position.lerp(vector_s, 0.4);
     }
 
     if (position) {
       state.camera.lookAt(position[0], position[1], position[2]);
       return;
     }
-    state.camera.lookAt(-1, 0.8, -1);
+    // state.camera.lookAt(-1, 0.8, -1);
   });
 
   return <></>;

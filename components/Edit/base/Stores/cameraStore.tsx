@@ -5,15 +5,25 @@ interface CameraInterface {
   position?: number[];
   positionCurve?: CatmullRomCurve3;
   points: Vector3[];
+  scene: number;
   setPoints: (value: CatmullRomCurve3) => void;
   setPositionCurve: (value: [number, number, number][]) => void;
   setPosition: (value: number[]) => void;
+  setScene: (value: number) => void;
 }
 
 const cameraStore = create<CameraInterface>()((set) => ({
   position: [0, 0, 0],
   positionCurve: undefined,
   points: [],
+  scene: 1,
+  setScene: (value) =>
+    set(() => {
+      console.log(value, "value");
+      return {
+        scene: value,
+      };
+    }),
   setPoints: (positionCurve) =>
     set(() => {
       const points = positionCurve.getPoints(50);
