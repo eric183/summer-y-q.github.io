@@ -66,7 +66,7 @@ const JokerGl = ({ containerRef }: any) => {
         };
 
         if (cameraHistory) {
-          // camera.position.fromArray(cameraHistory.position);
+          camera.position.fromArray(cameraHistory.position);
           // camera.rotation.fromArray(cameraHistory.rotation);
         }
       }}

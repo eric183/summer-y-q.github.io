@@ -28,6 +28,7 @@ const SceneRig = () => {
   const { data } = useScrollStore();
   useFrame((state) => {
     if (data && positionCurve) {
+      // console.log(data.offset);
       const vector_s = positionCurve.getPointAt(data.offset);
 
       camera.position.copy(vector_s);

@@ -41,7 +41,7 @@ const cameraStore = create<CameraInterface>()((set) => ({
       const forth = [-0.4671012312738144, 5.965293367938277, 9.155353854694976];
       const fifth = [17.211206016252515, 9.927127814183928, 16.7631504158383];
 
-      const pointArray = [first, second, third, forth, fifth] as any;
+      const pointArray = [first, second, third, forth, fifth] as any[];
 
       // const curve = new CatmullRomCurve3(
       //   [...pointArray, ...poses].map((x) => new Vector3().fromArray(x))

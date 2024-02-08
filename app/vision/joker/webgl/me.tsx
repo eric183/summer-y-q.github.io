@@ -23,6 +23,8 @@ import { cameraStore } from "~components/Edit/base/Stores/cameraStore";
 import ScrollBinder, {
   useScrollStore,
 } from "~components/Edit/base/scrollBinder";
+import CameraAnim from "./CameraAnim";
+import { Vector3Tuple } from "three";
 
 const IndexLayout = styled.div`
   section {
@@ -64,6 +66,15 @@ const Me = () => {
     setLoading(false);
   };
 
+  const points = [
+    [0, 0, 0],
+    [1, 2, 1],
+    [5, 3, 1],
+    [0.2, 0.3, 21],
+    [1.2, 3.3, 5.2],
+    [0.5, 0.31, 0.21],
+  ] as unknown as Vector3Tuple[];
+
   const pageSize = 5;
   return (
     <Canvas
@@ -94,6 +105,7 @@ const Me = () => {
           <ScrollBinder />
         </ScrollControls>
       </Suspense>
+      <CameraAnim points={points}></CameraAnim>
 
       {/* <Controls target={target} /> */}
       {/* <Preload all /> */}
@@ -132,7 +144,7 @@ const SceneRig = () => {
       // const vector_s = positionCurve.getPointAt(data.offset);
       const vector_s = positionCurve.getPointAt(scene / 5);
 
-      camera.position.lerp(vector_s, 0.4);
+      camera.position.lerp(vector_s, 0.05);
     }
 
     if (position) {

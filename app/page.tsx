@@ -17,7 +17,8 @@ const Page = async () => {
         })}
       >
         <h1 className="font-extrabold text-7xl mb-24">
-          <Link href="/article">Aloha</Link>
+          {/* <Link href="/article">Aloha</Link> */}
+          <Link href="/kini_reshape_Rig_02.usdz">Aloha</Link>
         </h1>
 
         <p className="font-semibold text-xl">{YMD_DOT_Format(new Date())}</p>
