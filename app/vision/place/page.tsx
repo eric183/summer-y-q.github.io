@@ -108,7 +108,7 @@ const Page = () => {
   );
 };
 
-function Suzi(props) {
+function Suzi(props: any) {
   // const { scene, materials } = useGLTF(
   //   "https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/suzanne-high-poly/model.gltf"
   // );
@@ -179,14 +179,15 @@ function Suzi(props) {
   );
 }
 
-function Aquarium({ children, ...props }) {
+function Aquarium({ children, ...props }: any) {
   const ref = useRef<any>();
   const { nodes } = useGLTF("/transformed.glb") as any;
   const stencil = useMask(1, false);
   useLayoutEffect(() => {
     // Apply stencil to all contents
     ref.current.traverse(
-      (child) => child.material && Object.assign(child.material, { ...stencil })
+      (child: any) =>
+        child.material && Object.assign(child.material, { ...stencil })
     );
   }, []);
   return (
@@ -212,7 +213,7 @@ function Aquarium({ children, ...props }) {
   );
 }
 
-function GelatinousCube(props) {
+function GelatinousCube(props: any) {
   const config = useControls({
     meshPhysicalMaterial: false,
     transmissionSampler: false,
@@ -411,7 +412,7 @@ const Light = (props: any) => {
 };
 
 const Building = (props: any) => {
-  const { scene, materials } = useGLTF("/controller.glb");
+  const { scene } = useGLTF("/controller.glb");
   useLayoutEffect(() => {
     console.log(scene, "!!");
     // Object.values(materials).forEach(

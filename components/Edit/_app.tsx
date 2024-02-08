@@ -22,14 +22,14 @@ const queryClient = new QueryClient({
 export default function MyApp({ Component, pageProps }: any) {
   // console.log(ChainId.Mainnet);
   return (
-    <ThirdwebProvider desiredChainId={ChainId.Mainnet}>
-      <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <Component {...pageProps} />
-        </Hydrate>
-        <ReactQueryDevtools />
-      </QueryClientProvider>
-    </ThirdwebProvider>
+    // <ThirdwebProvider desiredChainId={ChainId.Mainnet}>
+    <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState}>
+        <Component {...pageProps} />
+      </Hydrate>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
+    // </ThirdwebProvider>
   );
 }
 

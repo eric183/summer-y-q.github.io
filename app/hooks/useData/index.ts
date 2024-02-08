@@ -20,7 +20,7 @@ const fetchPosts = async (limit = 10) => {
 };
 
 const useData = async (limit?: number) => {
-  return useQuery(["posts", limit], await fetchPosts(limit));
+  // return useQuery(["posts", limit], await fetchPosts(limit));
 };
 
 export { useData, fetchPosts };

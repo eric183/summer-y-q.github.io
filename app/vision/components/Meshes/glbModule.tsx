@@ -23,24 +23,24 @@ import { useAnimationControls } from "framer-motion";
 import { cameraStore } from "~components/Edit/base/Stores/cameraStore";
 
 const Probe = ({ ...props }) => {
-  const { scene, materials } = useGLTF("/probe-transformed.glb");
+  const { scene } = useGLTF("/probe-transformed.glb");
   useLayoutEffect(() => {
-    Object.values(materials).forEach(
-      (material: any) => (material.roughness = 0)
-    );
-    Object.assign(materials.light, {
-      color: new Color("#ff2060"),
-      emissive: new Color(1, 0, 0),
-      emissiveIntensity: 2,
-      toneMapped: false,
-    });
+    // Object.values(materials).forEach(
+    //   (material: any) => (material.roughness = 0)
+    // );
+    // Object.assign(materials.light, {
+    //   color: new Color("#ff2060"),
+    //   emissive: new Color(1, 0, 0),
+    //   emissiveIntensity: 2,
+    //   toneMapped: false,
+    // });
   }, []);
   return <primitive object={scene} {...props} />;
 };
 
 const CoinMachine = (props: any) => {
   // const { scene, materials } = useGLTF("/coin-pusher.glb");
-  const { scene, materials } = useGLTF("/pusher-toon.glb");
+  const { scene } = useGLTF("/pusher-toon.glb");
 
   // useLayoutEffect(() => {}, []);
   return (
@@ -56,7 +56,7 @@ const CoinMachine = (props: any) => {
 
 const NesController = (props: any) => {
   // const { scene, materials } = useGLTF("/coin-pusher.glb");
-  const { scene, materials } = useGLTF("/controller.glb");
+  const { scene } = useGLTF("/controller.glb");
 
   // useLayoutEffect(() => {}, []);
   return (
@@ -178,7 +178,7 @@ const JumpCubeLoading = forwardRef<any, Props>(
       // });
     };
     useEffect(() => {
-      console.log(sitmod.nodes, "sitAniactions");
+      // console.log(sitmod.nodes, "sitAniactions");
 
       actions.jump?.fadeIn(0.2).setLoop(1, Infinity)?.setDuration(3.5)?.play();
 
@@ -234,7 +234,7 @@ const Luggage = forwardRef((props: any, ref: any) => {
 
   const sitmod = useGLTF("/sit.glb");
 
-  const { scene, nodes, scenes, animations } = useGLTF("/sci-luggage.glb");
+  const { scene, scenes, animations } = useGLTF("/sci-luggage.glb");
 
   const luggageAni = useAnimations(animations, ref);
 
@@ -280,14 +280,13 @@ const Luggage = forwardRef((props: any, ref: any) => {
   }, [scene]);
 
   useLayoutEffect(() => {
-    console.log(nodes, "...");
-
-    Object.entries(nodes).forEach((node) => {
-      if (node[0].includes("luggage")) {
-        nodes[node[0]].receiveShadow = true;
-        nodes[node[0]].castShadow = true;
-      }
-    });
+    // console.log(nodes, "...");
+    // Object.entries(nodes).forEach((node) => {
+    //   if (node[0].includes("luggage")) {
+    //     nodes[node[0]].receiveShadow = true;
+    //     nodes[node[0]].castShadow = true;
+    //   }
+    // });
   }, []);
 
   useEffect(() => {
@@ -335,7 +334,7 @@ const Luggage = forwardRef((props: any, ref: any) => {
   useFrame(() => {
     // console.log(scrollContent);
   });
-  nodes["back_plane"].receiveShadow = true;
+  // nodes["back_plane"].receiveShadow = true;
   return (
     <group>
       <JumpCubeLoading
@@ -387,74 +386,75 @@ const Eric = forwardRef((props: any, ref: any) => {
 
   const { loading } = props;
 
-  const { scene, nodes, scenes, animations, materials } = useGLTF("/eric.glb");
+  // const { scene, nodes, scenes, animations, materials } = useGLTF("/eric.glb");
+  const { scene, scenes, animations } = useGLTF("/eric.glb");
 
   const ericAnim = useAnimations(animations, ref);
 
-  useControls({
-    color: {
-      value: "#ff9e9e",
-      onChange: (v) => {
-        shaderInject(v);
-      },
-      transient: false,
-    },
-  });
+  // useControls({
+  //   color: {
+  //     value: "#ff9e9e",
+  //     onChange: (v) => {
+  //       shaderInject(v);
+  //     },
+  //     transient: false,
+  //   },
+  // });
 
-  const posInject = () => {
-    const positions: any = [];
-    Object.entries(nodes).forEach((node) => {
-      if (node[0].includes("cameraPlaceholder")) {
-        positions.push(nodes[node[0]].position.toArray());
-        // nodes[node[0]].receiveShadow = true;
-        // nodes[node[0]].castShadow = true;
-      }
-    });
-    setPosition(nodes.cubeHead.position.toArray());
-    setPositionCurve(positions);
-  };
+  // const posInject = () => {
+  //   const positions: any = [];
+  //   Object.entries(nodes).forEach((node) => {
+  //     if (node[0].includes("cameraPlaceholder")) {
+  //       positions.push(nodes[node[0]].position.toArray());
+  //       // nodes[node[0]].receiveShadow = true;
+  //       // nodes[node[0]].castShadow = true;
+  //     }
+  //   });
+  //   setPosition(nodes.cubeHead.position.toArray());
+  //   setPositionCurve(positions);
+  // };
 
-  const shaderInject = (color: string) => {
-    const material = materials.cubefacefront as MeshStandardMaterial;
-    // material.color.setHex(Number(color.replace("#", "0x")));
-  };
+  // const shaderInject = (color: string) => {
+  //   const material = materials.cubefacefront as MeshStandardMaterial;
+  //   // material.color.setHex(Number(color.replace("#", "0x")));
+  // };
 
-  useLayoutEffect(() => {
-    const cubeFront = nodes.cubefacefront as Mesh;
-    Object.entries(nodes).forEach((node) => {
-      if (node[0].includes("luggage")) {
-        nodes[node[0]].receiveShadow = true;
-        nodes[node[0]].castShadow = true;
-      }
-    });
+  // useLayoutEffect(() => {
+  //   const cubeFront = nodes.cubefacefront as Mesh;
+  //   Object.entries(nodes).forEach((node) => {
+  //     if (node[0].includes("luggage")) {
+  //       nodes[node[0]].receiveShadow = true;
+  //       nodes[node[0]].castShadow = true;
+  //     }
+  //   });
 
-    const material = new RawShaderMaterial({
-      vertexShader: `
-        uniform mat4 projectionMatrix;
-        uniform mat4 viewMatrix;
-        uniform mat4 modelMatrix;
+  //   const material = new RawShaderMaterial({
+  //     vertexShader: `
+  //       uniform mat4 projectionMatrix;
+  //       uniform mat4 viewMatrix;
+  //       uniform mat4 modelMatrix;
 
-        attribute vec3 position;
+  //       attribute vec3 position;
 
-        void main() 
-        {
-          gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        precision mediump float;
-        void main()
-        {
-          gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-        }
-      `,
-    });
+  //       void main()
+  //       {
+  //         gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
+  //       }
+  //     `,
+  //     fragmentShader: `
+  //       precision mediump float;
+  //       void main()
+  //       {
+  //         gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+  //       }
+  //     `,
+  //   });
 
-    // cubeFront.material = material;
-    // // materials.cubefacefront.needsUpdate = true;
-    // console.log(materials.cubefacefront, "material");
-    posInject();
-  }, []);
+  //   // cubeFront.material = material;
+  //   // // materials.cubefacefront.needsUpdate = true;
+  //   // console.log(materials.cubefacefront, "material");
+  //   posInject();
+  // }, []);
 
   useEffect(() => {
     ericAnim.actions["retopo_bodyAction"]?.play();
@@ -492,7 +492,8 @@ const Eric = forwardRef((props: any, ref: any) => {
 Eric.displayName = "Eric";
 
 const Theatre = (props: any) => {
-  const { scene, materials } = useGLTF("/theatre.glb");
+  // const { scene, materials } = useGLTF("/theatre.glb");
+  const { scene } = useGLTF("/theatre.glb");
 
   return <primitive object={scene} {...props} />;
 };
